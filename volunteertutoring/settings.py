@@ -26,7 +26,7 @@ load_dotenv()
 SECRET_KEY = os.getenv('SECRET_KEY')
 DEBUG = os.getenv('DEBUG', False)
 ALLOWED_HOSTS = [
-    'https://volunteertutoring.herokuapp.com/'
+    'volunteertutoring.herokuapp.com'
 ]
 
 
