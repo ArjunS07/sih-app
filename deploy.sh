@@ -5,4 +5,4 @@ git push heroku master
 heroku run python3 manage.py makemigrations
 heroku run python3 manage.py migrate
 heroku open
-git push origin master
+git push origin main
