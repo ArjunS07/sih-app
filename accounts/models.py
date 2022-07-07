@@ -1,0 +1,16 @@
+from django.db import models
+from django.contrib.auth.models import AbstractUser
+
+class User(AbstractUser):
+    pass
+
+
+class School(User):
+    pass
+
+class Student(User):
+    pass
+    
+
+class Tutor(User):
+    pass

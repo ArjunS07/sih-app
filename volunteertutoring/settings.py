@@ -25,7 +25,7 @@ load_dotenv()
 
 SECRET_KEY = os.getenv('SECRET_KEY')
 DEBUG = os.getenv('DEBUG', False)
-ALLOWED_HOSTS =[]
+ALLOWED_HOSTS = []
 
 if DEBUG:
     ALLOWED_HOSTS += '*'
@@ -44,6 +44,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
+    'api',
+    'core',
+    'accounts'
 ]
 
 MIDDLEWARE = [
@@ -142,4 +146,4 @@ WHITENOISE_MANIFEST_STRICT = False
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
+AUTH_USER_MODEL = 'accounts.User'
