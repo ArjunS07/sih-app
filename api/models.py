@@ -6,8 +6,8 @@ from accounts.models import School, Student, Tutor
 
 class Tutorship(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    tutor = models.OneToOneField(Tutor, null=True, on_delete=models.SET_NULL)
-    student = models.OneToOneField(Student, null=True, on_delete=models.SET_NULL)
+    tutor = models.ForeignKey(Tutor, null=True, on_delete=models.SET_NULL)
+    student = models.ForeignKey(Student, null=True, on_delete=models.SET_NULL)
 
     @property
     def tutorship_s3_folder_path(self):
@@ -27,7 +27,7 @@ class Message(models.Model):
 
 class Meeting(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    tutorship = models.ForeignKey(Tutorship, on_delete=models.SET_NULL)
+    tutorship = models.ForeignKey(Tutorship, null=True, on_delete=models.SET_NULL)
     scheduled_time = models.DateTimeField()
 
     zoom_invite = models.TextField()

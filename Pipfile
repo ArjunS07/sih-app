@@ -12,6 +12,7 @@ whitenoise = "*"
 django-environ = "*"
 python-dotenv = '*'
 jwt = "*"
+django-multiselectfield = "*"
 
 [dev-packages]
 
