@@ -3,7 +3,6 @@ import uuid
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 import django.contrib.postgres.fields
-from django.contrib.postgres.fields import ArrayField
 
 from multiselectfield import MultiSelectField
 
@@ -17,7 +16,7 @@ class User(AbstractUser):
 class PlatformUser(User):
     name_id = models.TextField(primary_key=True, editable=False)
     language_medium = MultiSelectField(choices=LANGUAGE_MEDIUM_CHOICES, null=True, blank=True)
-    city = models.charfield(choices=CITY_CHOICES, null=True, blank=True)
+    city = models.CharField(choices=CITY_CHOICES, null=True, blank=True, max_length=32)
 
     def save(self, *args, **kwargs):
         # Object hasn't been created in the DB yet
@@ -34,7 +33,7 @@ class Student(models.Model):
     school = models.ForeignKey(School, on_delete=models.CASCADE) 
 
     # Personal info
-    board = models.CharField(max_length=16, choices=BOARD_CHOICES)
+    board = models.CharField(max_length=16, choices=BOARD_CHOICES, null=True, blank=True)
     grade = models.CharField(max_length=2, choices=GRADE_CHOICES)
     subjects = MultiSelectField(choices=SUBJECT_CHOICES, max_length=8)
 
@@ -43,4 +42,4 @@ class Tutor(models.Model):
     
     # Personal info
     subjects = MultiSelectField(choices=SUBJECT_CHOICES, max_length=8)
-    grade_range = ArrayField(models.CharField(max_length=2, choices=GRADE_CHOICES), size=2)
+    grade_range = MultiSelectField(choices=GRADE_CHOICES, max_length=12)

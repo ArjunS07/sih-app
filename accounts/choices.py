@@ -5,14 +5,14 @@ import os
 base_path = pathlib.Path().resolve()
 
 LANGUAGE_MEDIUM_CHOICES = []
-language_path = os.path.join(base_path, 'resources', 'languages.csv')
+language_path = os.path.join(base_path, 'api', 'resources', 'languages.csv')
 
 with open(language_path, 'r') as f:
     csv_reader = reader(f)
     LANGUAGE_MEDIUM_CHOICES = tuple(csv_reader)
 
 CITY_CHOICES = []
-city_path = os.path.join(base_path, 'resources', 'cities.csv')
+city_path = os.path.join(base_path, 'api', 'resources', 'cities.csv')
 
 with open(city_path, 'r') as f:
     csv_reader = reader(f)
