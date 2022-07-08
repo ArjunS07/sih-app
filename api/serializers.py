@@ -25,7 +25,7 @@ class PlatformUserSerializer(serializers.Serializer):
     city = serializers.CharField(choices=CITY_CHOICES, max_length=32)
 
 class SchoolSerializer(serializers.Serializer):
-    account
+    pass
 
 class StudentSerializer(serializers.Serializer):
     subjects = fields.MultipleChoiceField(choices=SUBJECT_CHOICES)

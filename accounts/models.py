@@ -7,7 +7,7 @@ import django.contrib.postgres.fields
 from multiselectfield import MultiSelectField
 
 from api.models import Tutorship
-from ..api.choices import LANGUAGE_MEDIUM_CHOICES, GRADE_CHOICES, CITY_CHOICES, BOARD_CHOICES, SUBJECT_CHOICES
+from api.choices import LANGUAGE_MEDIUM_CHOICES, GRADE_CHOICES, CITY_CHOICES, BOARD_CHOICES, SUBJECT_CHOICES
 
 class User(AbstractUser):
     # Must have the same email as their zoom account
@@ -23,6 +23,7 @@ class PlatformUser(User):
         self.name_id = uuid.uuid5(uuid.NAMESPACE_DNS, self.username)
         self.language_medium = language_medium
         self.city = city    
+
 class School(models.Model):
     account = models.OneToOneField(User, on_delete=models.CASCADE)
     name = models.TextField(default=None, null=True)
