@@ -54,6 +54,20 @@ class Tutorship(models.Model):
     tutor = models.ForeignKey(Tutor, null=True, on_delete=models.SET_NULL)
     student = models.ForeignKey(Student, null=True, on_delete=models.SET_NULL)
 
+    # Zoom stuff
+    # TODO: @ayati add whatever fields you want here
+
+    # Need something that automatically generates these when the model is initialised. add code that directly interacts with zoom in utils/zoom_utils and 
+    meeting_link = models.TextField(default=None, null=True)
+    invite = models.TextField(default=None, null=True)
+
+    @property
+    def tutorship_zoom_link(self):
+        # You can turn functions into variables like this. we need them to be variables so that we can directly show them in the frontend HTML as tutorship.zoom_link, even if zoom_link() is a function
+        return self.meeting_link # TODO: CHANGE
+    
+    #TODO: Add S3 stuff here
+    # We need to make a folder on S3 for this tutorship with subfolders, be able to save / get the folder link (we can manually assemble it with this function each time)
     @property
     def tutorship_s3_folder_path(self):
         pass
@@ -69,23 +83,3 @@ class Message(models.Model):
     @property
     def has_attachment(self) -> bool:
         return self.attachments_key_prefix != None
-
-class Meeting(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    tutorship = models.ForeignKey(Tutorship, null=True, on_delete=models.SET_NULL)
-    scheduled_time = models.DateTimeField()
-
-    zoom_invite = models.TextField()
-
-    # TODO: Generate and store zoom invite on being created
-    def generate_zoom_invite(self):
-        pass
-
-    # TODO: Upload recording to S3 once invite done
-    def upload_recording(self):
-        pass
-
-    @property
-    def s3_record_path(self) -> str:
-        # Returns the absolute root path in the format {constants.TUTORSHIP_ROOT}/{tutorshipfolder}/{recordings}/{recordingID}
-        path = f'{self.tutorship.tutorship_s3_folder_path}/recordings/{self.id}.mp4' #TODO: Filetypes
