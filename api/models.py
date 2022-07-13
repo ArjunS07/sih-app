@@ -7,7 +7,7 @@ from django.db import models
 from multiselectfield import MultiSelectField
 
 from accounts.models import User, PlatformUser
-from .choices import LANGUAGE_MEDIUM_CHOICES, GRADE_CHOICES, CITY_CHOICES, BOARD_CHOICES, SUBJECT_CHOICES
+from .choices import LANGUAGE_MEDIUM_CHOICES, GRADE_CHOICES, CITY_CHOICES, BOARD_CHOICES, SUBJECT_CHOICES, TUTORSHIP_STATUS_CHOICES
 
 class School(models.Model):
     account = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -47,6 +47,7 @@ class Tutor(PlatformUser):
         return Tutorship.objects.filter(tutor=self)
 
 class Tutorship(models.Model):
+    status = models.CharField(choices=TUTORSHIP_STATUS_CHOICES, max_length=12, default=None, null=True)
     tutor = models.ForeignKey(Tutor, null=True, on_delete=models.SET_NULL)
     student = models.ForeignKey(Student, null=True, on_delete=models.SET_NULL)
 
