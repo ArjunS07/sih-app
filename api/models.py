@@ -7,7 +7,7 @@ from django.utils.translation import gettext_lazy as _
 from multiselectfield import MultiSelectField
 
 from accounts.models import User, PlatformUser
-from .choices import LANGUAGE_MEDIUM_CHOICES, GRADE_CHOICES, CITY_CHOICES, BOARD_CHOICES, SUBJECT_CHOICES, TUTORSHIP_STATUS_CHOICES
+from .choices import LANGUAGE_MEDIUM_CHOICES, GRADE_CHOICES, CITY_CHOICES, BOARD_CHOICES, SUBJECT_CHOICES
 
 
 class School(models.Model):
