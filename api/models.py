@@ -4,53 +4,47 @@ from django.db import models
 
 from multiselectfield import MultiSelectField
 
-from accounts.models import PlatformUser
+from accounts.models import User, PlatformUser
 from .choices import LANGUAGE_MEDIUM_CHOICES, GRADE_CHOICES, CITY_CHOICES, BOARD_CHOICES, SUBJECT_CHOICES
 
 class School(models.Model):
-    account = models.OneToOneField(PlatformUser, on_delete=models.CASCADE)
-    name = models.TextField(default=None, null=True)
+    account = models.OneToOneField(User, on_delete=models.CASCADE)
+    name = models.CharField(default=None, null=True, max_length=128)
+    join_code = models.CharField(default=None, null=True, max_length=10)
+
+    def __str__(self) -> str:
+        return self.name
+
+    @property
+    def num_school_students(self) -> int:
+        return (Student.objects.filter(school=self, is_active=True).count())
 
     @property
     def school_students(self) -> int:
         return (Student.objects.filter(school=self, is_active=True))
     
     @property
-    def name_id(self) -> str:
-        return self.account.name_id
-    
-    @property
     def email(self) -> str:
         return self.account.email
-    
-    
 
-class Student(models.Model):
-    account = models.OneToOneField(PlatformUser, on_delete=models.CASCADE)
+class Student(PlatformUser):
     school = models.ForeignKey(School, on_delete=models.CASCADE) 
+    board = models.CharField(choices=BOARD_CHOICES, max_length=8, default=None, null=True, blank=True)
+    grade = models.CharField(choices=GRADE_CHOICES, max_length=8, default=None, null=True)
 
-    # Personal info
-    board = models.CharField(max_length=16, choices=BOARD_CHOICES, null=True, blank=True)
-    grade = models.CharField(max_length=2, choices=GRADE_CHOICES)
-    subjects = MultiSelectField(choices=SUBJECT_CHOICES, max_length=8)
+    def __str__(self) -> str:
+        return self.name_id
 
-    @property
-    def is_active(self) -> bool:
-        return self.account.is_active
 
-class Tutor(models.Model):
-    account = models.OneToOneField(PlatformUser, on_delete=models.CASCADE)
-    
-    # Personal info
-    subjects = MultiSelectField(choices=SUBJECT_CHOICES, max_length=8)
-    grade_range = MultiSelectField(choices=GRADE_CHOICES, max_length=12)
+class Tutor(PlatformUser):   
+    grades = MultiSelectField(choices=GRADE_CHOICES, max_length=128, default=None, null=True)
+    boards = MultiSelectField(choices=BOARD_CHOICES, max_length=128, default=None, null=True, blank=True)
 
     @property
     def get_tutor_active_mentorships(self) -> int:
-        return Tutorship.objects.get(tutor=self)
+        return Tutorship.objects.filter(tutor=self)
 
 class Tutorship(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     tutor = models.ForeignKey(Tutor, null=True, on_delete=models.SET_NULL)
     student = models.ForeignKey(Student, null=True, on_delete=models.SET_NULL)
 

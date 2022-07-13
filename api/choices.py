@@ -18,23 +18,27 @@ with open(city_path, 'r') as f:
     csv_reader = reader(f)
     CITY_CHOICES = list(map(tuple, csv_reader))
 
+def all_choices(choice_set):
+    ids = [choice[0] for choice in choice_set]
+    return ids
 
 GRADE_CHOICES = [
-    ('NS', 'Nursey'),
+    ('NS', 'Nursery'),
     ('KG', 'Kindergarten'),
-    ('1', 'First grade'),
-    ('2', 'Second grade'),
-    ('3', 'Third grade'),
-    ('4', 'Fourth grade'),
-    ('5', 'Fifth grade'),
-    ('6', 'SIXTH grade'),
-    ('7', 'Seventh grade'),
-    ('8', 'Eighth grade'),
-    ('9', 'Ninth grade'),
-    ('10', 'Tenth grade'),
-    ('11', 'Eleventh grade'),
-    ('12', 'Twelfth grade'),
+    ('1G', 'First grade'),
+    ('2G', 'Second grade'),
+    ('3G', 'Third grade'),
+    ('4G', 'Fourth grade'),
+    ('5G', 'Fifth grade'),
+    ('6G', 'SIXTH grade'),
+    ('7G', 'Seventh grade'),
+    ('8G', 'Eighth grade'),
+    ('9G', 'Ninth grade'),
+    ('10G', 'Tenth grade'),
+    ('11G', 'Eleventh grade'),
+    ('12G', 'Twelfth grade'),
 ]
+
 
 BOARD_CHOICES = [
     ('CBSE', 'CBSE'),
