@@ -60,9 +60,9 @@ class PlatformUser(models.Model):
     account = models.OneToOneField(
         User, on_delete=models.CASCADE, default=None, null=True)
     name_id = models.CharField(editable=False, max_length=128, default="")
+
     city = models.CharField(choices=CITY_CHOICES,
                             max_length=8, default=None, null=True, blank=True)
-
     languages = MultiSelectField(
         choices=LANGUAGE_MEDIUM_CHOICES, max_length=1024, default=None, null=True, blank=True)
 
@@ -74,6 +74,10 @@ class PlatformUser(models.Model):
         super(PlatformUser, self).save(*args, **kwargs)
 
     # Personal info
+    @property
+    def profile_image_s3_path(self):
+        # TODO: Do whatever here
+        return f"s3_url/profile_images/{self.name_id}.jpg"
 
     def __str__(self) -> str:
         return self.name_id
