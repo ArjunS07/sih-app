@@ -1,3 +1,5 @@
+from contextlib import nullcontext
+from email.policy import default
 import uuid
 
 from django.db import models
@@ -39,7 +41,7 @@ class Student(PlatformUser):
 class Tutor(PlatformUser):   
     grades = MultiSelectField(choices=GRADE_CHOICES, max_length=128, default=None, null=True)
     boards = MultiSelectField(choices=BOARD_CHOICES, max_length=128, default=None, null=True, blank=True)
-
+    subjects = MultiSelectField(choices=SUBJECT_CHOICES, max_length=1024, default=None, null=True)
     @property
     def get_tutor_active_mentorships(self) -> int:
         return Tutorship.objects.filter(tutor=self)

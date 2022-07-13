@@ -22,28 +22,30 @@ class TutorList(APIView):
             q = []
             if 'languages' in data:
                 languages = data['languages'].split(',')
-                print(languages)
-                q.append(Q(languages=languages))
+                for language in languages:
+                    q.append(Q(languages__contains=language))
             if 'boards' in data:
                 boards = data['boards'].split(',')
-                print(boards)
-                q.append(Q(boards=boards))
+                for board in boards:
+                    q.append(Q(boards__contains=board))
             if 'subjects' in data: 
                 subjects = data['subjects'].split(',')
-                print(subjects)
-                query = Q(subjects=subjects)
-                q.append(query)
-                print(query)
+                for subject in subjects:
+                    print(subject)
+                    q.append(Q(subjects__contains=subject))
             if 'grades' in data: 
                 grades = data['grades'].split(',')
-                print(grades)
-                query = Q(grades=grades)
-                print(query)
-                q.append(Q(grades=grades))
+                for grade in grades:
+                    q.append(Q(grades__contains=grade))
 
-            matching_tutors = Tutor.objects.filter(
-                reduce(operator.and_, q)
-            )
+            if len(q) > 0:
+                matching_tutors = Tutor.objects.filter(
+                    reduce(operator.and_, q)
+                )
+            else:
+                matching_tutors = Tutor.objects.all()
+
+            print(matching_tutors)
 
             serialized_tutors = serializers.TutorSerializer(matching_tutors, many=True)
             res = JSONRenderer().render(serialized_tutors.data)
