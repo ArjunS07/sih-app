@@ -81,8 +81,4 @@ SUBJECT_CHOICES = [
     ('ART', 'Art'),
 ]
 
-TUTORSHIP_STATUS_CHOICES = [
-    ('PNDG', 'Pending'),
-    ('ACPTD', 'Accepted'),
-    ('RJCTD', 'Rejected'),
-]
+
