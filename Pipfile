@@ -13,6 +13,7 @@ django-environ = "*"
 python-dotenv = '*'
 jwt = "*"
 django-multiselectfield = "*"
+djangorestframework = "*"
 
 [dev-packages]
 
