@@ -64,7 +64,7 @@ class Tutorship(models.Model):
         ACCEPTED = 'ACPT', _('Accepted')
         REJECTED = 'RJCT', _('Rejected')
 
-    status = models.CharField(choices=TutorshipStatus.choices, default=TutorshipStatus.PENDING, max_length=8, default=None, null=True)
+    status = models.CharField(choices=TutorshipStatus.choices, default=TutorshipStatus.PENDING, max_length=8)
 
     # Zoom stuff
     # TODO: @ayati add whatever fields you want here
