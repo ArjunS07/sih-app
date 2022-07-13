@@ -23,27 +23,5 @@ def generate_jwt_token() -> str:
 def format_datetime(date) -> str:
     return date.strftime("%Y-%m-%dT%H:%M:%SZ")
 
-def create_meeting(title: str, minutes_duration: int, start_time: datetime.datetime, timezone: str, emails: list[str]) -> dict:
-
-    formatted_emails = '; '.join(emails)
-    formatted_start_time = format_datetime(start_time)
-
-    meetingdetails = {
-        "topic": title,
-        "type": "1",
-        # "start_time": formatted_start_time,
-        "duration": str(minutes_duration),
-        # "timezone": timezone,
-        "settings": {
-            "participant_video": "true",
-            "join_before_host": "true",
-            "watermark": "False",
-            "auto_recording": "cloud",
-            'alternative_hosts': formatted_emails
-        }
-    }
-
-    res = {}
-    join_url = res['join_url']
-    password = res['password']
-    return res
+def create_meeting(title: str, minutes_duration: int, timezone: str, emails: list[str]) -> dict:
+    pass
