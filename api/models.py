@@ -54,6 +54,15 @@ class Tutor(PlatformUser):
     def get_tutor_active_mentorships(self) -> int:
         return Tutorship.objects.filter(tutor=self)
 
+class ZoomMeeting(models.Model):
+    link = models.CharField(max_length=1024, default=None, null=True)
+    meeting_id = models.CharField(max_length=32, default=None, null=True)
+    meeting_password = models.CharField(max_length=1024, default=None, null=True)
+    num_occurences = models.PositiveSmallIntegerField(default=1)
+
+    def __str__(self) -> str:
+        return self.link
+
 
 class Tutorship(models.Model):
     tutor = models.ForeignKey(Tutor, null=True, on_delete=models.SET_NULL)
@@ -65,21 +74,8 @@ class Tutorship(models.Model):
         REJECTED = 'RJCT', _('Rejected')
 
     status = models.CharField(choices=TutorshipStatus.choices, default=TutorshipStatus.PENDING, max_length=8)
-
-    # Zoom stuff
-    # TODO: @ayati add whatever fields you want here
-
-    # Need something that automatically generates these when the model is initialised. add code that directly interacts with zoom in utils/zoom_utils and
-    meeting_link = models.TextField(default=None, null=True)
-    invite = models.TextField(default=None, null=True)
-
-    @property
-    def tutorship_zoom_link(self):
-        # You can turn functions into variables like this. we need them to be variables so that we can directly show them in the frontend HTML as tutorship.zoom_link, even if zoom_link() is a function
-        return self.meeting_link  # TODO: CHANGE
-
-    # TODO: Add S3 stuff here
-    # We need to make a folder on S3 for this tutorship with subfolders, be able to save / get the folder link (we can manually assemble it with this function each time)
+    zoom_meeting = models.ForeignKey(ZoomMeeting, null=True, on_delete=models.SET_NULL)
+   
     @property
     def tutorship_s3_folder_path(self):
         pass
