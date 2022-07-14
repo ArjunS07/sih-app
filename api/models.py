@@ -13,10 +13,16 @@ from .choices import LANGUAGE_MEDIUM_CHOICES, GRADE_CHOICES, CITY_CHOICES, BOARD
 class School(models.Model):
     account = models.OneToOneField(User, on_delete=models.CASCADE)
     name = models.CharField(default=None, null=True, max_length=128)
-    join_code = models.CharField(default=None, null=True, max_length=10)
+    join_code = models.CharField(default=None, null=True, max_length=10, editable=False)
 
     def __str__(self) -> str:
         return self.name
+    
+    def save(self, *args, **kwargs):
+        if not self.join_code:
+            code = uuid.uuid4().hex.upper()[0:8]
+            self.join_code = code
+        super(School, self).save(*args, **kwargs)
 
     @property
     def num_school_students(self) -> int:
@@ -32,7 +38,7 @@ class School(models.Model):
 
 
 class Student(PlatformUser):
-    school = models.ForeignKey(School, on_delete=models.CASCADE)
+    school = models.ForeignKey(School, on_delete=models.CASCADE, null=True, default=None, blank=True)
     board = models.CharField(choices=BOARD_CHOICES,
                              max_length=8, default=None, null=True, blank=True)
     grade = models.CharField(choices=GRADE_CHOICES,
@@ -56,7 +62,7 @@ class Tutor(PlatformUser):
 
 class ZoomMeeting(models.Model):
     link = models.CharField(max_length=1024, default=None, null=True)
-    meeting_id = models.CharField(max_length=32, default=None, null=True)
+    meeting_id = models.CharField(primary_key=True, max_length=32)
     meeting_password = models.CharField(max_length=1024, default=None, null=True)
     num_occurences = models.PositiveSmallIntegerField(default=1)
 
@@ -67,6 +73,7 @@ class ZoomMeeting(models.Model):
 class Tutorship(models.Model):
     tutor = models.ForeignKey(Tutor, null=True, on_delete=models.SET_NULL)
     student = models.ForeignKey(Student, null=True, on_delete=models.SET_NULL)
+    zoom_meeting = models.ForeignKey(ZoomMeeting, null=True, on_delete=models.SET_NULL)
 
     class TutorshipStatus(models.TextChoices):
         PENDING = 'PNDG', _('Pending')
@@ -74,21 +81,38 @@ class Tutorship(models.Model):
         REJECTED = 'RJCT', _('Rejected')
 
     status = models.CharField(choices=TutorshipStatus.choices, default=TutorshipStatus.PENDING, max_length=8)
-    zoom_meeting = models.ForeignKey(ZoomMeeting, null=True, on_delete=models.SET_NULL)
    
     @property
     def tutorship_s3_folder_path(self):
         pass
 
+    def __str__(self) -> str:
+        return f'Room with {self.tutor} and {self.student}'
 
 class Message(models.Model):
-    room = models.ForeignKey(Tutorship, on_delete=models.CASCADE)
+    text = models.CharField(max_length=2048, default=None, null=True)
     time_sent = models.DateTimeField(auto_now=True)
-    text = models.CharField(max_length=2048)
 
+    tutorship_id = models.IntegerField(default=None, null=True)
+    sent_by_student = models.BooleanField(default=False)
+
+    @property
+    def tutorship(self):
+        return Tutorship.objects.get(id=self.tutorship_id)
+    
+    @property
+    def sender(self):
+        if self.sent_by_student:
+            return self.tutorship.student
+        else:
+            return self.tutorship.tutor
+        
     # Link to prefix on S3 for attachments. This will allow us to store the folder URL directly and download all keys from that folder
-    attachments_key_prefix = models.CharField(max_length=256)
+    attachments_folder_prefix = models.CharField(max_length=1024, null=True, default=None, blank=True)
 
-    @ property
+    @property
     def has_attachment(self) -> bool:
         return self.attachments_key_prefix != None
+
+    def __str__(self) -> str:
+        return f'{self.text}'
