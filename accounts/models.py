@@ -59,7 +59,7 @@ class User(AbstractUser):
 class PlatformUser(models.Model):
     account = models.OneToOneField(
         User, on_delete=models.CASCADE, default=None, null=True)
-    name_id = models.CharField(editable=False, max_length=128, default="")
+    name_id = models.CharField(primary_key=True, editable=False, max_length=128, default="")
 
     city = models.CharField(choices=CITY_CHOICES,
                             max_length=8, default=None, null=True, blank=True)
