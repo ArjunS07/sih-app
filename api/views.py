@@ -1,5 +1,7 @@
 from functools import reduce
 import operator
+import io
+import json
 
 from django.http import HttpResponse
 from django.shortcuts import render
@@ -9,12 +11,14 @@ from rest_framework.decorators import api_view
 from rest_framework.renderers import JSONRenderer
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.parsers import JSONParser
 
-from .models import School, Tutor
+from .models import School, Student, Tutor, Tutorship, Message
 from . import serializers
 from .choices import SUBJECT_CHOICES, LANGUAGE_MEDIUM_CHOICES, GRADE_CHOICES, BOARD_CHOICES, all_choices
 
-class TutorList(APIView):
+
+class TutorListView(APIView):
     def get(self, request, format=None):
         data = request.query_params
         print(request)
@@ -27,12 +31,12 @@ class TutorList(APIView):
             boards = data['boards'].split(',')
             for board in boards:
                 q.append(Q(boards__contains=board))
-        if 'subjects' in data: 
+        if 'subjects' in data:
             subjects = data['subjects'].split(',')
             for subject in subjects:
                 print(subject)
                 q.append(Q(subjects__contains=subject))
-        if 'grades' in data: 
+        if 'grades' in data:
             grades = data['grades'].split(',')
             for grade in grades:
                 q.append(Q(grades__contains=grade))
@@ -46,16 +50,28 @@ class TutorList(APIView):
 
         print(matching_tutors)
 
-        serialized_tutors = serializers.TutorSerializer(matching_tutors, many=True)
+        serialized_tutors = serializers.TutorSerializer(
+            matching_tutors, many=True)
         res = JSONRenderer().render(serialized_tutors.data)
         return HttpResponse(res, status=status.HTTP_200_OK)
 
-class Tutorship(APIView):
+
+class TutorshipView(APIView):
     def get(self, request, format=None):
-        data = request.query_
+        data = request.query_params
+        print(request)
+        tutorship_id = data['id']
+        try:
+            tutorship = Tutorship.objects.get(id=tutorship_id)
+        except:
+            return HttpResponse(status=status.HTTP_404_NOT_FOUND)
+
+        serialized_tutorship = serializers.TutorshipSerializer(tutorship)
+        res = JSONRenderer().render(serialized_tutorship.data)
+        return HttpResponse(res, status=status.HTTP_200_OK)
 
 
-def JoinSchool(APIView):
+class JoinSchoolView(APIView):
     def post(self, request, format=None):
         data = request.POST
         school_join_code = data['join_code']
@@ -64,7 +80,42 @@ def JoinSchool(APIView):
         if not matching_school:
             return HttpResponse('No matching school for join code', school_join_code)
 
-        student = student.objects.get(name_id=student_name_id)
+        student = Student.objects.get(name_id=student_name_id)
         student.school = matching_school
         student.save()
-        return Response('Created student', status=status.HTTP_201_CREATED)
+        return Response('Updated student', status=status.HTTP_200_OK)
+
+
+class MessageView(APIView):
+    def get(self, request, format=None):
+        data = request.query_params
+        print(request)
+        try:
+            id = data['id']
+        except:
+            return HttpResponse('Missing message id', status=status.HTTP_400_BAD_REQUEST)
+        try:
+            message = Message.objects.get(id=id)
+            print('Got message', message)
+            serialized_message = serializers.MessageSerializer(message)
+            print('serialized message to', serialized_message)
+            res = JSONRenderer().render(serialized_message.data)
+            print('rendered', res)
+            return HttpResponse(res, status=status.HTTP_200_OK)
+        except:
+            return HttpResponse(status=status.HTTP_404_NOT_FOUND)
+
+    def post(self, request, format=None):
+        data = request.POST
+        json_data = json.dumps(data.dict()).encode('utf-8')
+        stream = io.BytesIO(json_data)
+        data = JSONParser().parse(stream)
+        print(data)
+        serializer = serializers.MessageSerializer(data=data)
+        print(serializer)
+        if serializer.is_valid():
+            print(serializer.validated_data)
+            message = serializer.save()
+            print(message)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
