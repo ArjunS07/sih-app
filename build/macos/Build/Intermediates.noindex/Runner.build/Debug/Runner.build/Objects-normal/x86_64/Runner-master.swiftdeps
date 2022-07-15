@@ -1,0 +1,8 @@
+version: "Apple Swift version 5.5.2 (swiftlang-1300.0.47.5 clang-1300.0.29.30)"
+options: "9a1a92567da5ba281853eeb8aa848932366c22d4c906cd6a3183548b7eafb970"
+build_start_time: [1657906739, 993093967]
+build_end_time: [1657906741, 192839145]
+inputs:
+  "/Users/arjunsharma/Dropbox/development/SIH/sih_app/macos/Flutter/GeneratedPluginRegistrant.swift": [1657906712, 347394943]
+  "/Users/arjunsharma/Dropbox/development/SIH/sih_app/macos/Runner/AppDelegate.swift": [1657544959, 900841236]
+  "/Users/arjunsharma/Dropbox/development/SIH/sih_app/macos/Runner/MainFlutterWindow.swift": [1657544959, 903621673]
