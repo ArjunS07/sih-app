@@ -13,6 +13,7 @@ from .choices import LANGUAGE_MEDIUM_CHOICES, GRADE_CHOICES, CITY_CHOICES, BOARD
 class School(models.Model):
     account = models.OneToOneField(User, on_delete=models.CASCADE)
     name = models.CharField(default=None, null=True, max_length=128)
+    city = models.CharField(default=None, null=True, max_length=16, choices=CITY_CHOICES)
     join_code = models.CharField(default=None, null=True, max_length=10, editable=False)
 
     def __str__(self) -> str:

@@ -13,19 +13,34 @@ class TutorSerializer(serializers.Serializer):
 
     class Meta:
         model = models.Tutor
-        fields = ('account', 'name_id', 'city', 'languages', 'boards', 'subjects', 'grades')
+        fields = ('account_id', 'name_id', 'city', 'languages', 'boards', 'subjects', 'grades')
+    
+    def create(self, validated_data):
+        return models.Tutor.objects.create(**validated_data)
 
 class StudentSerializer(serializers.Serializer):
-    account_id = serializers.PrimaryKeyRelatedField(read_only=True)
+    account = serializers.PrimaryKeyRelatedField(read_only=True)
     name_id = serializers.CharField(max_length=128)
     city = serializers.CharField(max_length=8)
     languages = serializers.ListField(child=serializers.CharField(max_length=1024))
     board = serializers.CharField(max_length=8)
-    # subjects = serializers.ListField(child=serializers.CharField(max_length=1024))
     grade = serializers.CharField(max_length=8)
     class Meta:
         model = models.Student
         fields = ('account', 'name_id', 'city', 'languages', 'board', 'grade')
+    
+    def create(self, validated_data):
+        return models.Student.objects.create(**validated_data)
+
+class SchoolSerializer(serializers.Serializer):
+    account = serializers.PrimaryKeyRelatedField(read_only=True)
+    name = serializers.CharField(max_length=128)
+    city = serializers.CharField(max_length=8)
+    join_code = serializers.CharField(max_length=10)
+    class Meta:
+        model = models.School
+        fields = ('account', 'name', 'city', 'join_code')
+
 
 class ZoomMeetingSerializer(serializers.Serializer):
     link = serializers.CharField(max_length=1024)
@@ -36,6 +51,9 @@ class ZoomMeetingSerializer(serializers.Serializer):
     class Meta:
         model = models.ZoomMeeting
         fields = ('link', 'meeting_id', 'meeting_password', 'num_occurences')
+    
+    def create(self, validated_data):
+        return models.ZoomMeeting.objects.create(**validated_data)
 
 class TutorshipSerializer(serializers.Serializer):
     tutor_id = serializers.CharField(source='tutor.name_id', read_only=True)
@@ -45,7 +63,10 @@ class TutorshipSerializer(serializers.Serializer):
 
     class Meta:
         model = models.Tutorship
-        fields = ('tutor_name_id', 'student_name_id', 'status', 'zoom_meeting_meeting_id')
+        fields = ('tutor_id', 'student_id', 'status', 'zoom_meeting_meeting_id')
+    
+    # def create(self, validated_data):
+        # return models.Tutorship.objects.create(**validated_data)
 
 class MessageSerializer(serializers.Serializer):
     text = serializers.CharField()
