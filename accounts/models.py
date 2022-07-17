@@ -68,8 +68,7 @@ class PlatformUser(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.name_id:
-            name = self.account.email.split('@')[0]
-            name = re.sub("[!@#$%^&*()[]{};:,./<>?\|`~-=_+]", " ", name)
+            name = self.account.first_name + self.account.last_name
             self.name_id = name + str(uuid.uuid4())[:16].replace('-', '')
         super(PlatformUser, self).save(*args, **kwargs)
 

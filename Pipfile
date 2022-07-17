@@ -14,6 +14,7 @@ python-dotenv = '*'
 jwt = "*"
 django-multiselectfield = "*"
 djangorestframework = "*"
+djoser = "*"
 
 [dev-packages]
 

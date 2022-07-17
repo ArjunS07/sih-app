@@ -18,6 +18,12 @@ from . import serializers
 from .choices import SUBJECT_CHOICES, LANGUAGE_MEDIUM_CHOICES, GRADE_CHOICES, BOARD_CHOICES, all_choices
 
 
+class CreateAccountView(APIView):
+    pass
+
+class LoginView(APIView):
+    pass
+
 class TutorView(APIView):
     def get(self, request, format=None):
         name_id = request.query_params.get('name_id', None)
