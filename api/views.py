@@ -18,11 +18,6 @@ from . import serializers
 from .choices import SUBJECT_CHOICES, LANGUAGE_MEDIUM_CHOICES, GRADE_CHOICES, BOARD_CHOICES, all_choices
 
 
-class CreateAccountView(APIView):
-    pass
-
-class LoginView(APIView):
-    pass
 
 class TutorView(APIView):
     def get(self, request, format=None):
@@ -39,6 +34,17 @@ class TutorView(APIView):
         json_data = json.dumps(data.dict()).encode('utf-8')
         stream = io.BytesIO(json_data)
         data = JSONParser().parse(stream)
+        try:
+            languages = data['languages'].split(',')
+            data['languages'] = languages
+            boards = data['boards'].split(',')
+            data['boards'] = boards
+            subjects = data['subjects'].split(',')
+            data['subjects'] = subjects
+            grades = data['grades'].split(',')
+            data['grades'] = grades
+        except:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
         serializer = serializers.TutorSerializer(data=data)
         if serializer.is_valid():
             serializer.save()
@@ -60,10 +66,19 @@ class StudentView(APIView):
         json_data = json.dumps(data.dict()).encode('utf-8')
         stream = io.BytesIO(json_data)
         data = JSONParser().parse(stream)
+        try:
+            languages = data['languages'].split(',')
+        except:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+        data['languages'] = languages
+
+        print(data)
         serializer = serializers.StudentSerializer(data=data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class TutorListView(APIView):

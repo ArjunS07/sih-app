@@ -1,9 +1,9 @@
 from rest_framework import serializers
 
 from . import models
-
+from accounts import models as accounts_models
 class TutorSerializer(serializers.Serializer):
-    account_id = serializers.PrimaryKeyRelatedField(read_only=True)
+    account__id = serializers.IntegerField()
     name_id = serializers.CharField(max_length=128)
     city = serializers.CharField(max_length=8)
     languages = serializers.ListField(child=serializers.CharField(max_length=1024))
@@ -13,33 +13,49 @@ class TutorSerializer(serializers.Serializer):
 
     class Meta:
         model = models.Tutor
-        fields = ('account_id', 'name_id', 'city', 'languages', 'boards', 'subjects', 'grades')
+        fields = ('id', 'name_id', 'city', 'languages', 'boards', 'subjects', 'grades')
     
     def create(self, validated_data):
-        return models.Tutor.objects.create(**validated_data)
+        account_id = int(self.data['account__id'])
+        account = accounts_models.User.objects.get(id=account_id)
+        if not account:
+            raise serializers.ValidationError("Account not found")
+        if len(models.Student.objects.filter(account=account)) > 0:
+            raise serializers.ValidationError("Account already exists")
+        del validated_data['account__id']
+        return models.Tutor.objects.create(account=account, **validated_data)
 
 class StudentSerializer(serializers.Serializer):
-    account = serializers.PrimaryKeyRelatedField(read_only=True)
-    name_id = serializers.CharField(max_length=128)
+    account__id = serializers.IntegerField()
+    name_id = serializers.CharField(read_only=True, max_length=128)
     city = serializers.CharField(max_length=8)
     languages = serializers.ListField(child=serializers.CharField(max_length=1024))
     board = serializers.CharField(max_length=8)
     grade = serializers.CharField(max_length=8)
     class Meta:
         model = models.Student
-        fields = ('account', 'name_id', 'city', 'languages', 'board', 'grade')
+        fields = ('account__id', 'name_id', 'city', 'languages', 'board', 'grade')
     
     def create(self, validated_data):
-        return models.Student.objects.create(**validated_data)
+        print(self.data)
+        account_id = int(self.data['account__id'])
+        print(account_id)
+        account = accounts_models.User.objects.get(id=account_id)
+        if not account:
+            raise serializers.ValidationError("Account not found")
+        if len(models.Student.objects.filter(account=account)) > 0:
+            raise serializers.ValidationError("Account already exists")
+        del validated_data['account__id']
+        return models.Student.objects.create(account=account, **validated_data)
 
 class SchoolSerializer(serializers.Serializer):
-    account = serializers.PrimaryKeyRelatedField(read_only=True)
+    account__id = serializers.IntegerField()
     name = serializers.CharField(max_length=128)
     city = serializers.CharField(max_length=8)
     join_code = serializers.CharField(max_length=10)
     class Meta:
         model = models.School
-        fields = ('account', 'name', 'city', 'join_code')
+        fields = ('account__id', 'name', 'city', 'join_code')
 
 
 class ZoomMeetingSerializer(serializers.Serializer):
