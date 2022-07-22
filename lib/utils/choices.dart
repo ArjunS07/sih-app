@@ -1,60 +1,28 @@
-import 'dart:io';
+
 import 'dart:convert';
-
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:sih_app/models/choice.dart';
 
-Future<String> _mapBoardFromId(String boardId) async {
-  final String res = await rootBundle.loadString('assets/choices/boards.json');
-  final Map<String, String> data = await json.decode(res);
-  final language = data[boardId];
-  if (language == null) {
-    return 'Unknown';
-  }
-  return language;
+readJson(String fileName) async {
+    final String response = await rootBundle.loadString(fileName);
+    print('Loaded response $response');
+    final data = await json.decode(response);
+    print('Decoded data into $data');
+    return data;
 }
 
-
-Future<String> _mapCityFromId(String cityId) async {
-  final String res = await rootBundle.loadString('assets/choices/cities.json');
-  final Map<String, String> data = await json.decode(res);
-  final language = data[cityId];
-  if (language == null) {
-    return 'Unknown';
-  }
-  return language;
+jsonToChoices(data) async {
+    List<Choice> choices = [];
+    for (var choice in data) {
+        choices.add(Choice.fromJson(choice));
+    }
+    print('Converted json to choices $choices');
+    return choices;
 }
 
-
-
-Future<String> _mapGradeFromId(String gradeId) async {
-  final String res = await rootBundle.loadString('assets/choices/grades.json');
-  final Map<String, String> data = await json.decode(res);
-  final language = data[gradeId];
-  if (language == null) {
-    return 'Unknown';
-  }
-  return language;
-}
-
-
-
-Future<String> _mapLanguageFromId(String languageId) async {
-  final String res = await rootBundle.loadString('assets/choices/languages.json');
-  final Map<String, String> data = await json.decode(res);
-  final language = data[languageId];
-  if (language == null) {
-    return 'Unknown';
-  }
-  return language;
-}
-
-Future<String> _mapSubjectFromId(String cityId) async {
-  final String res = await rootBundle.loadString('assets/choices/subjects.json');
-  final Map<String, String> data = await json.decode(res);
-  final language = data[cityId];
-  if (language == null) {
-    return 'Unknown';
-  }
-  return language;
+loadChoices(String choiceType) async {
+  print('Loading choices for $choiceType');
+    final data = await readJson('assets/choices/$choiceType.json');
+    print('Read data $data');
+    return jsonToChoices(data);
 }

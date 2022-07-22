@@ -36,6 +36,10 @@ dependencies:
   cupertino_icons: ^1.0.2
   http: ^0.13.4
   dio: ^4.0.6
+  uuid: ^3.0.6
+  multi_select_flutter: ^4.1.2
+  dropdown_button2: ^1.6.3
+  search_choices: ^2.0.21
 
 dev_dependencies:
   flutter_test:
@@ -61,11 +65,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/choices/boards.json
-    - assets/choices/cities.json
-    - assets/choices/grades.json
-    - assets/choices/languages.json
-    - assets/choices/subjects.json
+    - assets/choices/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

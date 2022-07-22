@@ -1,0 +1,9 @@
+{
+    "CBSE": "CBSE",
+    "STATE": "State board",
+    "ICSE": "ICSE",
+    "ISC": "ISC",
+    "IGCSE": "IGCSE",
+    "IB": "IB",
+    "OTHER": "Other"
+}
