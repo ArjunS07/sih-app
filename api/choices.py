@@ -26,8 +26,8 @@ with open(grade_path, 'r') as f:
     GRADE_CHOICES = list(map(tuple, csv_reader))
 
 BOARD_CHOICES = []
-subject_path = os.path.join(base_path, 'api', 'resources', 'boards.csv')
-with open(subject_path, 'r') as f:
+board_path = os.path.join(base_path, 'api', 'resources', 'boards.csv')
+with open(board_path, 'r') as f:
     csv_reader = reader(f)
     BOARD_CHOICES = list(map(tuple, csv_reader))
 
