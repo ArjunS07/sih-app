@@ -18,8 +18,8 @@ AMRAV,Amravati
 AMREL,Amreli district
 AMRIT,Amritsar
 ANAND,Anand
-ANANT,Anantapur
-ANANT,Anantnag
+ANANTP,Anantapur
+ANANTG,Anantnag
 ANGUL,Angul
 ANJAW,Anjaw
 ANUPP,Anuppur
@@ -28,7 +28,6 @@ ARIYA,Ariyalur
 ARWAL,Arwal
 ASHOK,Ashok Nagar
 AURAI,Auraiya
-AURAN,Aurangabad
 AURAN,Aurangabad
 AZAMG,Azamgarh
 BADGA,Badgam
@@ -45,8 +44,7 @@ BALRA,Balrampur
 BANAS,Banaskantha
 BANDA,Banda
 BANDI,Bandipora
-BANGA,Bangalore Rural
-BANGA,Bangalore Urban
+BANGA,Bangalore
 BANKA,Banka
 BANKU,Bankura
 BANSW,Banswara
@@ -81,10 +79,8 @@ BHOJP,Bhojpur
 BHOPA,Bhopal
 BIDAR,Bidar
 BIJAP,Bijapur
-BIJAP,Bijapur
 BIJNO,Bijnor
 BIKAN,Bikaner
-BILAS,Bilaspur
 BILAS,Bilaspur
 BIRBH,Birbhum
 BISHN,Bishnupur
@@ -102,25 +98,24 @@ CENTR,Central Delhi
 CHAMA,Chamarajnagar
 CHAMB,Chamba
 CHAMO,Chamoli
-CHAMP,Champawat
-CHAMP,Champhai
-CHAND,Chandauli
-CHAND,Chandel
-CHAND,Chandigarh
-CHAND,Chandrapur
+CHAMPA,Champawat
+CHAMPH,Champhai
+CHANDAU,Chandauli
+CHANDEL,Chandel
+CHANDI,Chandigarh
+CHANDRA,Chandrapur
 CHANG,Changlang
 CHATR,Chatra
 CHENN,Chennai
 CHHAT,Chhatarpur
-CHHAT,Chhatrapati Shahuji Maharaj Nagar
 CHHIN,Chhindwara
 CHIKK,Chikkaballapur
 CHIKK,Chikkamagaluru
 CHIRA,Chirang
-CHITR,Chitradurga
-CHITR,Chitrakoot
-CHITT,Chittoor
-CHITT,Chittorgarh
+CHITRDR,Chitradurga
+CHITRKO,Chitrakoot
+CHITTOOR,Chittoor
+CHITTGR,Chittorgarh
 CHURA,Churachandpur
 CHURU,Churu
 COIMB,Coimbatore
@@ -129,8 +124,8 @@ CUDDA,Cuddalore
 CUTTA,Cuttack
 DADRA,Dadra and Nagar Haveli
 DAHOD,Dahod
-DAKSH,Dakshin Dinajpur
-DAKSH,Dakshina Kannada
+DAKSHDINA,Dakshin Dinajpur
+DAKSHKANNA,Dakshina Kannada
 DAMAN,Daman
 DAMOH,Damoh
 DANTE,Dantewada
@@ -167,28 +162,28 @@ DODA,Doda
 DUMKA,Dumka
 DUNGA,Dungapur
 DURG,Durg
-EAST ,East Champaran
-EAST ,East Delhi
-EAST ,East Garo Hills
-EAST ,East Khasi Hills
-EAST ,East Siang
-EAST ,East Sikkim
-EAST ,East Singhbhum
+ECHAMPA,East Champaran
+EDEL,East Delhi
+EGARO,East Garo Hills
+EKHASI,East Khasi Hills
+ESIANG,East Siang
+ESIKKIM,East Sikkim
+ESINGH,East Singhbhum
 ELURU,Eluru
 ERNAK,Ernakulam
 ERODE,Erode
 ETAH,Etah
 ETAWA,Etawah
 FAIZA,Faizabad
-FARID,Faridabad
-FARID,Faridkot
+FARIDBD,Faridabad
+FARIDKT,Faridkot
 FARRU,Farrukhabad
 FATEH,Fatehabad
 FATEH,Fatehgarh Sahib
 FATEH,Fatehpur
 FAZIL,Fazilka
-FIROZ,Firozabad
-FIROZ,Firozpur
+FIROZBD,Firozabad
+FIROZPR,Firozpur
 GADAG,Gadag
 GADCH,Gadchiroli
 GAJAP,Gajapati
@@ -199,8 +194,8 @@ GANJA,Ganjam
 GARHW,Garhwa
 GAUTA,Gautam Buddh Nagar
 GAYA,Gaya
-GHAZI,Ghaziabad
-GHAZI,Ghazipur
+GHAZIA,Ghaziabad
+GHAZIPR,Ghazipur
 GIRID,Giridih
 GOALP,Goalpara
 GODDA,Godda
@@ -232,7 +227,6 @@ HOOGH,Hooghly
 HOSHA,Hoshangabad
 HOSHI,Hoshiarpur
 HOWRA,Howrah
-HYDER,Hyderabad
 HYDER,Hyderabad
 IDUKK,Idukki
 IMPHA,Imphal East
@@ -276,7 +270,6 @@ KAITH,Kaithal
 KAKIN,Kakinada
 KALAH,Kalahandi
 KAMRU,Kamrup
-KAMRU,Kamrup Metropolitan
 KANCH,Kanchipuram
 KANDH,Kandhamal
 KANGR,Kangra
@@ -291,8 +284,8 @@ KARAI,Karaikal
 KARAU,Karauli
 KARBI,Karbi Anglong
 KARGI,Kargil
-KARIM,Karimganj
-KARIM,Karimnagar
+KARIMGN,Karimganj
+KARIMNG,Karimnagar
 KARNA,Karnal
 KARUR,Karur
 KASAR,Kasaragod
@@ -340,8 +333,7 @@ KUSHI,Kushinagar
 KUTCH,Kutch
 LAHAU,Lahaul and Spiti
 LAKHI,Lakhimpur
-LAKHI,Lakhimpur Kheri
-LAKHI,Lakhisarai
+LAKHISR,Lakhisarai
 LALIT,Lalitpur
 LATEH,Latehar
 LATUR,Latur
@@ -388,12 +380,11 @@ MOKOK,Mokokchung
 MON,Mon
 MORAD,Moradabad
 MOREN,Morena
-MUMBA,Mumbai City
-MUMBA,Mumbai suburban
+MUMBA,Mumbai
 MUNGE,Munger
 MURSH,Murshidabad
-MUZAF,Muzaffarnagar
-MUZAF,Muzaffarpur
+MUZAFNG,Muzaffarnagar
+MUZAFPR,Muzaffarpur
 MYSOR,Mysore
 NABAR,Nabarangpur
 NADIA,Nadia
@@ -418,16 +409,9 @@ NAWAN,Nawanshahr
 NAYAG,Nayagarh
 NEEMU,Neemuch
 NELLO,Nellore
-NEW D,New Delhi
+NEWD,New Delhi
 NILGI,Nilgiris
 NIZAM,Nizamabad
-NORTH,North 24 Parganas
-NORTH,North Delhi
-NORTH,North East Delhi
-NORTH,North Goa
-NORTH,North Sikkim
-NORTH,North Tripura
-NORTH,North West Delhi
 NUAPA,Nuapada
 ONGOL,Ongole
 OSMAN,Osmanabad
@@ -445,8 +429,8 @@ PAPUM,Papum Pare
 PARBH,Parbhani
 PASCH,Paschim Medinipur
 PATAN,Patan
-PATHA,Pathanamthitta
-PATHA,Pathankot
+PATHANM,Pathanamthitta
+PATHANK,Pathankot
 PATIA,Patiala
 PATNA,Patna
 PAURI,Pauri Garhwal
@@ -468,8 +452,8 @@ PURNI,Purnia
 PURUL,Purulia
 RAEBA,Raebareli
 RAICH,Raichur
-RAIGA,Raigad
-RAIGA,Raigarh
+RAIGAD,Raigad
+RAIGAR,Raigarh
 RAIPU,Raipur
 RAISE,Raisen
 RAJAU,Rajauri
@@ -478,8 +462,8 @@ RAJKO,Rajkot
 RAJNA,Rajnandgaon
 RAJSA,Rajsamand
 RAMAB,Ramabai Nagar (Kanpur Dehat)
-RAMAN,Ramanagara
-RAMAN,Ramanathapuram
+RAMANGR,Ramanagara
+RAMANTHA,Ramanathapuram
 RAMBA,Ramban
 RAMGA,Ramgarh
 RAMPU,Rampur
@@ -491,8 +475,8 @@ REASI,Reasi
 REWA,Rewa
 REWAR,Rewari
 RI BH,Ri Bhoi
-ROHTA,Rohtak
-ROHTA,Rohtas
+ROHTAK,Rohtak
+ROHTAS,Rohtas
 RUDRA,Rudraprayag
 RUPNA,Rupnagar
 SABAR,Sabarkantha
@@ -504,11 +488,11 @@ SAIHA,Saiha
 SALEM,Salem
 SAMAS,Samastipur
 SAMBA,Samba
-SAMBA,Sambalpur
+SAMBLPR,Sambalpur
 SANGL,Sangli
 SANGR,Sangrur
-SANT ,Sant Kabir Nagar
-SANT ,Sant Ravidas Nagar
+SNTKBRNGR,Sant Kabir Nagar
+SANTRVNG ,Sant Ravidas Nagar
 SARAN,Saran
 SATAR,Satara
 SATNA,Satna
@@ -549,13 +533,6 @@ SOLAP,Solapur
 SONBH,Sonbhadra
 SONIP,Sonipat
 SONIT,Sonitpur
-SOUTH,South 24 Parganas
-SOUTH,South Delhi
-SOUTH,South Garo Hills
-SOUTH,South Goa
-SOUTH,South Sikkim
-SOUTH,South Tripura
-SOUTH,South West Delhi
 SRI M,Sri Muktsar Sahib
 SRIKA,Srikakulam
 SRINA,Srinagar
@@ -584,9 +561,9 @@ TIRAP,Tirap
 TIRUC,Tiruchirappalli
 TIRUN,Tirunelveli
 TIRUP,Tirupur
-TIRUV,Tiruvallur
-TIRUV,Tiruvannamalai
-TIRUV,Tiruvarur
+TIRUVLL,Tiruvallur
+TIRUVNN,Tiruvannamalai
+TIRUVARU,Tiruvarur
 TONK,Tonk
 TUENS,Tuensang
 TUMKU,Tumkur
@@ -600,9 +577,6 @@ UKHRU,Ukhrul
 UMARI,Umaria
 UNA,Una
 UNNAO,Unnao
-UPPER,Upper Siang
-UPPER,Upper Subansiri
-UTTAR,Uttar Dinajpur
 UTTAR,Uttara Kannada
 UTTAR,Uttarkashi
 VADOD,Vadodara
@@ -620,15 +594,6 @@ WARAN,Warangal
 WARDH,Wardha
 WASHI,Washim
 WAYAN,Wayanad
-WEST ,West Champaran
-WEST ,West Delhi
-WEST ,West Garo Hills
-WEST ,West Kameng
-WEST ,West Khasi Hills
-WEST ,West Siang
-WEST ,West Sikkim
-WEST ,West Singhbhum
-WEST ,West Tripura
 WOKHA,Wokha
 YADGI,Yadgir
 YAMUN,Yamuna Nagar

@@ -62,7 +62,7 @@ class PlatformUser(models.Model):
     name_id = models.CharField(primary_key=True, editable=False, max_length=128, default="")
 
     city = models.CharField(choices=CITY_CHOICES,
-                            max_length=8, default=None, null=True, blank=True)
+                            max_length=12, default=None, null=True, blank=True)
     languages = MultiSelectField(
         choices=LANGUAGE_MEDIUM_CHOICES, max_length=1024, default=None, null=True, blank=True)
 
