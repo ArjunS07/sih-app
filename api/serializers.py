@@ -11,10 +11,11 @@ class PlatformUserSerializer(serializers.ModelSerializer):
     city = serializers.CharField(max_length=8)
     languages = serializers.ListField(
         child=serializers.CharField(max_length=12))
+    profile_image_s3_path = serializers.CharField(read_only=True, max_length=255)
     
     class Meta:
         model = accounts_models.PlatformUser
-        fields = ('account__id', 'uuid', 'city', 'languages')
+        fields = ('account__id', 'uuid', 'city', 'languages', 'profile_image_s3_path')
         abstract = True
 
 class TutorSerializer(PlatformUserSerializer):
@@ -26,7 +27,7 @@ class TutorSerializer(PlatformUserSerializer):
 
     class Meta:
         model = models.Tutor
-        fields = ('account__id', 'uuid', 'city', 'languages',
+        fields = ('account__id', 'uuid', 'city', 'languages', 'profile_image_s3_path',
                   'boards', 'subjects', 'grades')
 
     def create(self, validated_data):
@@ -51,7 +52,8 @@ class StudentSerializer(PlatformUserSerializer):
 
     class Meta:
         model = models.Student
-        fields = ('uuid', 'account__id', 'city', 'languages', 'board', 'grade')
+        fields = ('uuid', 'account__id', 'city', 'languages', 'profile_image_s3_path', 
+        'board', 'grade')
 
     def create(self, validated_data):
         account_id = int(validated_data['account']['id'])
@@ -68,7 +70,7 @@ class StudentSerializer(PlatformUserSerializer):
         return models.Student.objects.create(account=account, **validated_data)
 
 class SchoolSerializer(serializers.Serializer):
-    account__id = serializers.IntegerField()
+    account__id = serializers.IntegerField(source='account.id')
     name = serializers.CharField(max_length=128)
     city = serializers.CharField(max_length=8)
     join_code = serializers.CharField(max_length=10)

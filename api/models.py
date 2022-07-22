@@ -14,14 +14,14 @@ class School(models.Model):
     account = models.OneToOneField(User, on_delete=models.CASCADE)
     name = models.CharField(default=None, null=True, max_length=128)
     city = models.CharField(default=None, null=True, max_length=16, choices=CITY_CHOICES)
-    join_code = models.CharField(default=None, null=True, max_length=10, editable=False)
+    join_code = models.CharField(default=None, null=True, max_length=6, editable=False)
 
     def __str__(self) -> str:
         return self.name
     
     def save(self, *args, **kwargs):
         if not self.join_code:
-            code = uuid.uuid4().hex.upper()[0:8]
+            code = uuid.uuid4().hex.upper()[0:6]
             self.join_code = code
         super(School, self).save(*args, **kwargs)
 

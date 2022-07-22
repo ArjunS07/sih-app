@@ -154,6 +154,7 @@ class JoinSchoolView(APIView):
             return HttpResponse(status=status.HTTP_400_BAD_REQUEST)
         try:
             school = School.objects.get(join_code=join_code)
+            print('Got school')
             serialized_school = serializers.SchoolSerializer(school)
             res = JSONRenderer().render(serialized_school.data)
             return HttpResponse(res, content_type='application/json', status=status.HTTP_200_OK)
