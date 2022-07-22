@@ -170,9 +170,11 @@ class JoinSchoolView(APIView):
             student = Student.objects.get(uuid=student_uuid)
             student.school = matching_school
             student.save()
-            return HttpResponse('Updated student', status=status.HTTP_200_OK)
+            serialized_student = serializers.StudentSerializer(student)
+            res = JSONRenderer().render(serialized_student.data)
+            return HttpResponse(res, content_type='application/json', status=status.HTTP_200_OK)
         except:
-            return HttpResponse('No matching school for join code', school_join_code)
+            return HttpResponse(status=status.HTTP_404_NOT_FOUND)
 
 
 class MessageView(APIView):
