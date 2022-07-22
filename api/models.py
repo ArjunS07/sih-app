@@ -45,10 +45,6 @@ class Student(PlatformUser):
     grade = models.CharField(choices=GRADE_CHOICES,
                              max_length=8, default=None, null=True)
 
-    def __str__(self) -> str:
-        return self.name_id
-
-
 class Tutor(PlatformUser):
     grades = MultiSelectField(choices=GRADE_CHOICES,
                               max_length=128, default=None, null=True)

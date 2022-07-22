@@ -59,27 +59,24 @@ class User(AbstractUser):
 class PlatformUser(models.Model):
     account = models.OneToOneField(
         User, on_delete=models.CASCADE, default=None, null=True)
-    name_id = models.CharField(primary_key=True, editable=False, max_length=128, default="")
 
     city = models.CharField(choices=CITY_CHOICES,
                             max_length=12, default=None, null=True, blank=True)
     languages = MultiSelectField(
         choices=LANGUAGE_MEDIUM_CHOICES, max_length=1024, default=None, null=True, blank=True)
+    
 
-    def save(self, *args, **kwargs):
-        if not self.name_id:
-            name = self.account.first_name + self.account.last_name
-            self.name_id = name + str(uuid.uuid4())[:16].replace('-', '')
-        super(PlatformUser, self).save(*args, **kwargs)
+    # UUID created on client 
+    uuid = models.UUIDField(primary_key=True, auto_created=True, default=uuid.uuid4, editable=False)
 
     # Personal info
     @property
     def profile_image_s3_path(self):
         # TODO: Do whatever here
-        return f"s3_url/profile_images/{self.name_id}.jpg"
+        return f"s3_url/profile_images/{self.uuid}.jpg"
 
     def __str__(self) -> str:
-        return self.name_id
+        return str(self.uuid)
 
     class Meta:
         abstract = True

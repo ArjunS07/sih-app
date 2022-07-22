@@ -21,10 +21,10 @@ from .choices import SUBJECT_CHOICES, LANGUAGE_MEDIUM_CHOICES, GRADE_CHOICES, BO
 
 class TutorView(APIView):
     def get(self, request, format=None):
-        name_id = request.query_params.get('name_id', None)
-        if name_id is None:
+        uuid = request.query_params.get('uuid', None)
+        if uuid is None:
             return Response(status=status.HTTP_400_BAD_REQUEST)
-        tutor = Tutor.objects.get(name_id=name_id)
+        tutor = Tutor.objects.get(uuid=uuid)
         serialized_tutor = serializers.TutorSerializer(tutor)
         res = JSONRenderer().render(serialized_tutor.data)
         return HttpResponse(res, content_type='application/json', status=status.HTTP_200_OK)
@@ -53,10 +53,10 @@ class TutorView(APIView):
 
 class StudentView(APIView):
     def get(self, request, format=None):
-        name_id = request.query_params.get('name_id', None)
-        if name_id is None:
+        uuid = request.query_params.get('uuid', None)
+        if uuid is None:
             return Response(status=status.HTTP_400_BAD_REQUEST)
-        student = Student.objects.get(name_id=name_id)
+        student = Student.objects.get(uuid=uuid)
         serialized_student = serializers.StudentSerializer(student)
         res = JSONRenderer().render(serialized_student.data)
         return HttpResponse(res, content_type='application/json', status=status.HTTP_200_OK)
@@ -163,10 +163,10 @@ class JoinSchoolView(APIView):
     def post(self, request, format=None):
         data = request.POST
         school_join_code = data['join_code']
-        student_name_id = data['student_name_id']
+        student_uuid = data['student_uuid']
         try:
             matching_school = School.objects.get(join_code=school_join_code)
-            student = Student.objects.get(name_id=student_name_id)
+            student = Student.objects.get(uuid=student_uuid)
             student.school = matching_school
             student.save()
             return HttpResponse('Updated student', status=status.HTTP_200_OK)
@@ -239,10 +239,10 @@ class ZoomMeetingView(APIView):
 
 """
     def get(self, request, format=None):
-        name_id = request.query_params.get('name_id', None)
-        if name_id is None:
+        uuid = request.query_params.get('uuid', None)
+        if uuid is None:
             return Response(status=status.HTTP_400_BAD_REQUEST)
-        tutor = Tutor.objects.get(name_id=name_id)
+        tutor = Tutor.objects.get(uuid=uuid)
         serialized_tutor = serializers.TutorSerializer(tutor)
         res = JSONRenderer().render(serialized_tutor.data)
         return HttpResponse(res, content_type='application/json', status=status.HTTP_200_OK)
