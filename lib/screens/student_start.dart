@@ -211,6 +211,7 @@ class _StudentSignUpState extends State<StudentSignUp> {
                     SizedBox(height: 25.0),
                     TextFormField(
                       textCapitalization: TextCapitalization.none,
+                      autocorrect: false,
                       controller: _emailController,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
@@ -364,6 +365,7 @@ class StudentDetailsState extends State<StudentDetails> {
       var student = await createStudent(
               account, _selectedCityId!, _selectedLanguagesIds, widget.school, _selectedBoardId!, _selectedGradeId!)
           .catchError((error) {
+            print(error);
         showDialog(
             context: context,
             builder: (BuildContext context) => AlertDialog(
