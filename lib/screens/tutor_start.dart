@@ -105,6 +105,7 @@ class _TutorDetailsState extends State<TutorDetails> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
+                  Spacer(),
                   const Text('What languages do you speak?'),
                   MultiSelectDialogField(
                       items: _languageChoices
@@ -171,6 +172,7 @@ class _TutorDetailsState extends State<TutorDetails> {
                         }
                       }),
                   SizedBox(height: 25.0),
+                  Spacer(),
                   ElevatedButton(
                       onPressed: () => {_submitRegistration(context)},
                       child: Text('Complete registration')),
