@@ -32,7 +32,7 @@ class _TutorDetailsState extends State<TutorDetails> {
   late List<String> _selectedBoardIds = [];
 
   late List<Choice> _cityChoices = [];
-  late String? _selectedCityId;
+  late String? _selectedCityId = null;
 
   late List<Choice> _gradeChoices = [];
   late List<String> _selectedGradeIds = [];
