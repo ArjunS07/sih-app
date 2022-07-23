@@ -8,11 +8,11 @@ import 'package:multi_select_flutter/multi_select_flutter.dart';
 import 'package:search_choices/search_choices.dart';
 
 import 'package:sih_app/models/School.dart';
-import 'package:sih_app/models/Account.dart';
-import 'package:sih_app/models/Student.dart';
-import 'package:sih_app/utils/api_utils.dart';
+import 'package:sih_app/utils/auth_api_utils.dart';
 import 'package:sih_app/utils/choices.dart';
 import 'package:sih_app/models/choice.dart';
+
+import 'package:sih_app/screens/signup.dart';
 
 class JoinSchool extends StatefulWidget {
   JoinSchool({Key? key}) : super(key: key);
@@ -119,7 +119,7 @@ class ConfirmSchool extends StatelessWidget {
                               context,
                               MaterialPageRoute(
                                 builder: (context) =>
-                                    StudentSignUp(school: school),
+                                    AccountSignup(isStudent: true, school: school),
                               ))
                         },
                     child: Text('Yes')),
@@ -130,159 +130,6 @@ class ConfirmSchool extends StatelessWidget {
   }
 }
 
-class StudentSignUp extends StatefulWidget {
-  final School school;
-  StudentSignUp({Key? key, required this.school}) : super(key: key);
-
-  @override
-  State<StudentSignUp> createState() => _StudentSignUpState();
-}
-
-class _StudentSignUpState extends State<StudentSignUp> {
-  final _formKey = GlobalKey<FormState>();
-
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _firstNameController = TextEditingController();
-  final TextEditingController _lastNameController = TextEditingController();
-  final TextEditingController _passController = TextEditingController();
-  final TextEditingController _passConfirmController = TextEditingController();
-
-  _submitRegistration(context) async {
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => StudentDetails(
-              school: widget.school,
-              email: _emailController.text,
-              firstName: _firstNameController.text,
-              lastName: _lastNameController.text,
-              password: _passController.text),
-        ));
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Student Sign Up'),
-      ),
-      body: Center(
-        child: Expanded(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Form(
-              key: _formKey,
-              child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Spacer(),
-                    const Text(
-                      'Sign up as a student',
-                      style: TextStyle(fontSize: 24),
-                    ),
-                    Spacer(),
-                    TextFormField(
-                      controller: _firstNameController,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: 'First name',
-                      ),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter your first name';
-                        }
-                        return null;
-                      },
-                    ),
-                    SizedBox(height: 25.0),
-                    TextFormField(
-                      controller: _lastNameController,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: 'Last name',
-                      ),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter your last name';
-                        }
-                        return null;
-                      },
-                    ),
-                    SizedBox(height: 25.0),
-                    TextFormField(
-                      textCapitalization: TextCapitalization.none,
-                      autocorrect: false,
-                      controller: _emailController,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: 'Enter your email',
-                      ),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter your email';
-                        }
-                        return null;
-                      },
-                    ),
-                    SizedBox(height: 25.0),
-                    TextFormField(
-                      obscureText: true,
-                      enableSuggestions: false,
-                      autocorrect: false,
-                      textCapitalization: TextCapitalization.none,
-                      controller: _passController,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: 'Enter your password',
-                      ),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter your password';
-                        }
-                        return value.length < 8
-                            ? 'Password length must be greater than 8 characters'
-                            : null;
-                      },
-                    ),
-                    SizedBox(height: 25.0),
-                    TextFormField(
-                        obscureText: true,
-                        enableSuggestions: false,
-                        autocorrect: false,
-                        textCapitalization: TextCapitalization.none,
-                        controller: _passConfirmController,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                          labelText: 'Verify your password',
-                        ),
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please verify your password';
-                          }
-                          if (value != _passController.text) {
-                            return 'Passwords do not match';
-                          }
-                        }),
-                    Spacer(),
-                    ElevatedButton(
-                        onPressed: () {
-                          if (_formKey.currentState!.validate()) {
-                            // If the form is valid, display a snackbar. In the real world,
-                            // you'd often call a server or save the information in a database.
-                            print('Submitting...');
-                            _submitRegistration(context);
-                          }
-                        },
-                        child: Text('Sign up')),
-                    Spacer(),
-                  ]),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
 
 class StudentDetails extends StatefulWidget {
   final School school;
@@ -340,7 +187,7 @@ class StudentDetailsState extends State<StudentDetails> {
   }
 
   void _submitRegistration(context) async {
-    var account = await createAccount(
+    var account = await registerNewAccount(
             widget.email, widget.password, widget.firstName, widget.lastName)
         .catchError((error) {
       showDialog(
