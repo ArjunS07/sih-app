@@ -27,8 +27,6 @@ urlpatterns = [
     path('accounts/', include('accounts.urls')),
     
     path('', TemplateView.as_view(template_name='index.html'), name='index'),
-    # path('api-auth/', include('rest_framework.urls'))
-    path('api-auth/', include('djoser.urls.authtoken'))
 
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
