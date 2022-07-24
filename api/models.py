@@ -61,7 +61,6 @@ class ZoomMeeting(models.Model):
     link = models.CharField(max_length=1024, default=None, null=True)
     meeting_id = models.CharField(primary_key=True, max_length=32)
     meeting_password = models.CharField(max_length=1024, default=None, null=True)
-    num_occurences = models.PositiveSmallIntegerField(default=1)
 
     def __str__(self) -> str:
         return self.link
@@ -85,6 +84,12 @@ class Tutorship(models.Model):
 
     def __str__(self) -> str:
         return f'Room with {self.tutor} and {self.student}'
+    
+    def save(self, *args, **kwargs):
+        super(Tutorship, self).save(*args, **kwargs)
+        if self.status == 'ACPT' and self.zoom_meeting is None:
+            # TODO: Create Zoom Meeting and save it to the database. Then assign self.zoom_meeting
+            pass
 
 class Message(models.Model):
     text = models.CharField(max_length=2048, default=None, null=True)
