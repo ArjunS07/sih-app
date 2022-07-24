@@ -13,7 +13,7 @@ import 'package:sih_app/models/School.dart';
 import 'package:sih_app/utils/auth_api_utils.dart';
 import 'package:sih_app/utils/choices.dart';
 import 'package:sih_app/models/choice.dart';
-
+import 'package:sih_app/screens/home_page.dart';
 import 'package:sih_app/screens/signup.dart';
 
 class JoinSchool extends StatefulWidget {
@@ -215,6 +215,9 @@ class StudentDetailsState extends State<StudentDetails> {
 
       var student = await createStudent(
               account, _selectedCityId!, _selectedLanguagesIds, widget.school, _selectedBoardId!, _selectedGradeId!)
+              .then((tutor) => {
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage()))
+          })
           .catchError((error) {
             print(error);
         showDialog(

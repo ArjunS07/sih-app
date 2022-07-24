@@ -8,6 +8,9 @@ import 'package:sih_app/utils/choices.dart';
 import 'package:sih_app/models/choice.dart';
 import 'package:sih_app/utils/persistence_utils.dart' as persistence_utils;
 
+import 'package:sih_app/screens/home_page.dart';
+
+
 class TutorDetails extends StatefulWidget {
   final String email;
   final String firstName;
@@ -92,7 +95,9 @@ class _TutorDetailsState extends State<TutorDetails> {
       print('Creating tutor account');
       createTutor(account, _selectedCityId, _selectedLanguagesIds,
               _selectedBoardIds, _selectedGradeIds, _selectedSubjectIds)
-          .then((tutor) => {});
+          .then((tutor) => {
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage()))
+          });
     }
   }
 

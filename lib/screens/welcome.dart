@@ -1,12 +1,27 @@
+
 import 'package:flutter/material.dart';
+import 'package:sih_app/screens/home_page.dart';
 import 'package:sih_app/screens/signup.dart';
 import 'package:sih_app/screens/student_start.dart';
 import 'package:sih_app/screens/tutor_start.dart';
 import 'package:sih_app/screens/login.dart';
+import 'package:sih_app/utils/persistence_utils.dart' as persistence_utils;
 
-class WelcomePage extends StatelessWidget {
+
+class WelcomePage extends StatefulWidget {
+  WelcomePage({Key? key}) : super(key: key);
+
   @override
-  Widget build(BuildContext context) {
+  State<WelcomePage> createState() => _WelcomePageState();
+}
+
+class _WelcomePageState extends State<WelcomePage> {
+
+  @override
+  void initState() {
+    super.initState();
+  }
+  Widget _welcomePage(context) {
     return Scaffold(
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
@@ -32,7 +47,9 @@ class WelcomePage extends StatelessWidget {
                 onPressed: () => {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => AccountSignup(isStudent: false)),
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                AccountSignup(isStudent: false)),
                       ),
                     },
                 child: Text('Tutor')),
@@ -48,5 +65,11 @@ class WelcomePage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+
+  @override
+  Widget build(BuildContext context) {
+    return _welcomePage(context);
   }
 }

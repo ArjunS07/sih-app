@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sih_app/utils/auth_api_utils.dart';
 import 'package:sih_app/utils/persistence_utils.dart' as persistence_utils;
 
+import 'package:sih_app/screens/home_page.dart';
 class Login extends StatefulWidget {
   Login({Key? key}) : super(key: key);
 
@@ -25,6 +26,7 @@ class _LoginState extends State<Login> {
           print('Found account');
           persistence_utils.upDateSharedPreferences(account.authToken!, account.accountId);
           // TODO: Remove dialog and redirect to home screen instead
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage()));
           showDialog(
               context: context,
               builder: (BuildContext context) => AlertDialog(
