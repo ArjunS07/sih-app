@@ -33,14 +33,14 @@ class TutorSerializer(PlatformUserSerializer):
     def create(self, validated_data):
         account_id = int(validated_data['account']['id'])
         account = accounts_models.User.objects.get(id=account_id)
-        print(validated_data)
+        print(account)
         del validated_data['account']
 
         if not account:
             raise serializers.ValidationError("Account not found")
 
-        if len(models.Student.objects.filter(account=account)) > 0:
-            raise serializers.ValidationError("Account already exists")
+        if len(models.Student.objects.filter(account=account)) > 0 or len(models.Tutor.objects.filter(account=account)) > 0:
+            raise serializers.ValidationError("Platform user linked to given account already exists")
         
         return models.Tutor.objects.create(account=account, **validated_data)
 
@@ -64,9 +64,9 @@ class StudentSerializer(PlatformUserSerializer):
         if not account:
             raise serializers.ValidationError("Account not found")
 
-        if len(models.Student.objects.filter(account=account)) > 0:
-            raise serializers.ValidationError("Account already exists")
-
+        if len(models.Student.objects.filter(account=account)) > 0 or len(models.Tutor.objects.filter(account=account)) > 0:
+            raise serializers.ValidationError("Platform user linked to given account already exists")
+        
         return models.Student.objects.create(account=account, **validated_data)
 
 class SchoolSerializer(serializers.Serializer):

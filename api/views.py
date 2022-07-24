@@ -17,8 +17,6 @@ from .models import School, Student, Tutor, Tutorship, Message, ZoomMeeting
 from . import serializers
 from .choices import SUBJECT_CHOICES, LANGUAGE_MEDIUM_CHOICES, GRADE_CHOICES, BOARD_CHOICES, all_choices
 
-
-
 class TutorView(APIView):
     def get(self, request, format=None):
         uuid = request.query_params.get('uuid', None)
@@ -31,6 +29,7 @@ class TutorView(APIView):
 
     def post(self, request, format=None):
         data = request.POST
+        print(f"Recieved {data} for a post request to tutors ")
         json_data = json.dumps(data.dict()).encode('utf-8')
         stream = io.BytesIO(json_data)
         data = JSONParser().parse(stream)
@@ -49,6 +48,8 @@ class TutorView(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class StudentView(APIView):

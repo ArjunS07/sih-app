@@ -16,3 +16,12 @@ class CustomRegisterSerializer(RegisterSerializer):
             'first_name': self.validated_data.get('first_name', ''),
             'last_name': self.validated_data.get('last_name', '')
         }
+
+from django.contrib.auth import get_user_model
+User = get_user_model()
+
+class UserModelSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('id', 'username', 'email', 'first_name', 'last_name', 'auth_token')
+        read_only_fields = ('id',)
