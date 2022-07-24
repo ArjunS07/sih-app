@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sih_app/utils/auth_api_utils.dart';
+import 'package:sih_app/utils/persistence_utils.dart' as persistence_utils;
 
 class Login extends StatefulWidget {
   Login({Key? key}) : super(key: key);
@@ -22,7 +23,8 @@ class _LoginState extends State<Login> {
       login(_emailController.text, _passController.text).then((account) {
         if (account != null) {
           print('Found account');
-          // TODO: Remove
+          persistence_utils.upDateSharedPreferences(account.authToken!, account.accountId);
+          // TODO: Remove dialog and redirect to home screen instead
           showDialog(
               context: context,
               builder: (BuildContext context) => AlertDialog(

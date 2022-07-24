@@ -6,6 +6,7 @@ import 'package:search_choices/search_choices.dart';
 import 'package:sih_app/utils/auth_api_utils.dart';
 import 'package:sih_app/utils/choices.dart';
 import 'package:sih_app/models/choice.dart';
+import 'package:sih_app/utils/persistence_utils.dart' as persistence_utils;
 
 class TutorDetails extends StatefulWidget {
   final String email;
@@ -86,8 +87,12 @@ class _TutorDetailsState extends State<TutorDetails> {
       print('Error creating account');
     });
     if (account != null) {
+      persistence_utils.upDateSharedPreferences(
+          account.authToken!, account.accountId);
       print('Creating tutor account');
-      createTutor(account, _selectedCityId!, _selectedLanguagesIds, _selectedBoardIds, _selectedGradeIds, _selectedSubjectIds);
+      createTutor(account, _selectedCityId, _selectedLanguagesIds,
+              _selectedBoardIds, _selectedGradeIds, _selectedSubjectIds)
+          .then((tutor) => {});
     }
   }
 
@@ -164,7 +169,8 @@ class _TutorDetailsState extends State<TutorDetails> {
                   const Text('What subjects can you teach?'),
                   MultiSelectDialogField(
                       items: _subjectChoices
-                          .map((subject) => MultiSelectItem(subject.id,subject.name))
+                          .map((subject) =>
+                              MultiSelectItem(subject.id, subject.name))
                           .toList(),
                       listType: MultiSelectListType.CHIP,
                       onConfirm: (values) {

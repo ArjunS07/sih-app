@@ -7,6 +7,8 @@ import 'package:dio/dio.dart' as dio;
 import 'package:multi_select_flutter/multi_select_flutter.dart';
 import 'package:search_choices/search_choices.dart';
 
+import 'package:sih_app/utils/persistence_utils.dart' as persistence_utils;
+
 import 'package:sih_app/models/School.dart';
 import 'package:sih_app/utils/auth_api_utils.dart';
 import 'package:sih_app/utils/choices.dart';
@@ -208,6 +210,8 @@ class StudentDetailsState extends State<StudentDetails> {
     });
     if (account != null) {
       print('Creating student account');
+        persistence_utils.upDateSharedPreferences(
+          account.authToken!, account.accountId);
 
       var student = await createStudent(
               account, _selectedCityId!, _selectedLanguagesIds, widget.school, _selectedBoardId!, _selectedGradeId!)
