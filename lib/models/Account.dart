@@ -3,12 +3,14 @@ class Account {
   final String firstName;
   final String lastName;
   final int accountId;
+  String? authToken = '';
 
-  const Account({
+  Account({
     required this.email,
     required this.firstName,
     required this.lastName,
-    required this.accountId
+    required this.accountId,
+    this.authToken
   });
 
   factory Account.fromJson(Map<String, dynamic> json) {

@@ -5,9 +5,34 @@ import 'package:uuid/uuid.dart';
 import 'package:sih_app/models/Account.dart';
 import 'package:sih_app/models/School.dart';
 import 'package:sih_app/models/Student.dart';
+import 'package:sih_app/models/Tutor.dart';
 
 final String ROOT_URL = 'http://localhost:8000';
 final uuid = Uuid();
+
+Future<String> getAccountAuthToken(String email, String password) async {
+  var headers = {
+    'Content-Type': 'application/x-www-form-urlencoded',
+  };
+  var request =
+      http.Request('POST', Uri.parse('$ROOT_URL/accounts/api-token-auth/'));
+  request.bodyFields = {
+    'username':
+        email, //the api requires a username field but we're using an email so it works
+    'password': password
+  };
+  request.headers.addAll(headers);
+
+  http.StreamedResponse response = await request.send();
+  Map<String, dynamic> body =
+      json.decode(await response.stream.bytesToString());
+
+  if (response.statusCode == 200) {
+    return body['token'];
+  } else {
+    throw Exception('Failed to get token');
+  }
+}
 
 Future<Account?> login(String email, String password) async {
   final loginUri = Uri.parse('$ROOT_URL/accounts/login/');
@@ -28,6 +53,7 @@ Future<Account?> login(String email, String password) async {
 
   var accountInfo = body['user'];
   var account = Account.fromJson(accountInfo);
+  account.authToken = await getAccountAuthToken(email, password);
   return account;
 }
 
@@ -54,7 +80,9 @@ Future<Account?> registerNewAccount(
 
   if (response.statusCode == 201) {
     var accountData = body['user'];
-    return Account.fromJson(accountData);
+    var account = Account.fromJson(accountData);
+    account.authToken = await getAccountAuthToken(email, password);
+    return account;
   } else {
     print(response.reasonPhrase);
     throw Exception(body);
@@ -127,4 +155,49 @@ Future<Student?> createStudent(Account account, String city,
       uuid: studentUuid);
 
   return student;
+}
+
+Future<Tutor> createTutor(Account account, String city, List<String> languages,
+    List<String> boards, List<String> grades, List<String> subjects) async {
+  final String parsedLanguages = languages.join(',');
+  final String parsedBoards = boards.join(',');
+  final String parsedGrades = grades.join(',');
+  final String parsedSubjects = subjects.join(',');
+  final String tutorUuid = uuid.v4();
+
+  final Uri tutorCreationUri = Uri.parse('$ROOT_URL/api/tutor');
+  var headers = {
+    'Authorization':
+        'Token ${account.authToken}', // authorization header requires this formatting
+    'Content-Type': 'application/x-www-form-urlencoded',
+  };
+  var request = http.Request('POST', tutorCreationUri);
+  request.bodyFields = {
+    'uuid': tutorUuid,
+    'city': city,
+    'languages': parsedLanguages,
+    'boards': parsedBoards,
+    'subjects': parsedSubjects,
+    'grades': parsedGrades,
+    'account__id': account.accountId.toString()
+  };
+  request.headers.addAll(headers);
+
+  http.StreamedResponse response = await request.send();
+  Map<String, dynamic> body =
+      json.decode(await response.stream.bytesToString());
+  if (response.statusCode != 201) {
+    print(response.reasonPhrase);
+    throw Exception(body);
+  }
+
+  Tutor tutor = Tutor(
+      account: account,
+      city: city,
+      languages: languages,
+      boards: boards,
+      grades: grades,
+      subjects: subjects,
+      uuid: tutorUuid);
+  return tutor;
 }

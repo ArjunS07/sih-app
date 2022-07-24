@@ -32,7 +32,7 @@ class _TutorDetailsState extends State<TutorDetails> {
   late List<String> _selectedBoardIds = [];
 
   late List<Choice> _cityChoices = [];
-  late String? _selectedCityId = null;
+  String _selectedCityId = '';
 
   late List<Choice> _gradeChoices = [];
   late List<String> _selectedGradeIds = [];
@@ -87,6 +87,7 @@ class _TutorDetailsState extends State<TutorDetails> {
     });
     if (account != null) {
       print('Creating tutor account');
+      createTutor(account, _selectedCityId!, _selectedLanguagesIds, _selectedBoardIds, _selectedGradeIds, _selectedSubjectIds);
     }
   }
 
@@ -168,7 +169,7 @@ class _TutorDetailsState extends State<TutorDetails> {
                       listType: MultiSelectListType.CHIP,
                       onConfirm: (values) {
                         for (var value in values) {
-                          _selectedGradeIds.add(value.toString());
+                          _selectedSubjectIds.add(value.toString());
                         }
                       }),
                   SizedBox(height: 25.0),
