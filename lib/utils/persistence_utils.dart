@@ -2,13 +2,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 void upDateSharedPreferences(String token, int id) async {
   print('Updating shared preferences');
-  SharedPreferences _prefs = await SharedPreferences.getInstance();
-  _prefs.setString('token', token);
-  _prefs.setInt('id', id);
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  prefs.setString('token', token);
+  prefs.setInt('id', id);
 
-  _prefs = await SharedPreferences.getInstance();
-  var tokenNew = _prefs.get('token');
-  var idNew = _prefs.get('id');
+  prefs = await SharedPreferences.getInstance();
+  var tokenNew = prefs.get('token');
+  var idNew = prefs.get('id');
   print('New values: $tokenNew, $idNew');
 }
 

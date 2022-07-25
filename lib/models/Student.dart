@@ -1,5 +1,5 @@
 import 'School.dart';
-import 'PlatformUser.dart';
+import 'platform_user.dart';
 
 class Student extends PlatformUser {
   final School school;

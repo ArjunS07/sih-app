@@ -2,10 +2,10 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:uuid/uuid.dart';
 
-import 'package:sih_app/models/Account.dart';
+import 'package:sih_app/models/account.dart';
 import 'package:sih_app/models/School.dart';
-import 'package:sih_app/models/Student.dart';
-import 'package:sih_app/models/Tutor.dart';
+import 'package:sih_app/models/student.dart';
+import 'package:sih_app/models/tutor.dart';
 
 final String ROOT_URL = 'http://localhost:8000';
 final uuid = Uuid();
@@ -90,7 +90,7 @@ Future<Account?> registerNewAccount(
 }
 
 Future<Student?> createStudent(Account account, String city,
-    List<String> languages, School school, String board, String grade) async {
+    List<String> languages, School studentSchool, String board, String grade) async {
   // 1. Make an API call to create a student account
   final String parsedLanguages = languages.join(',');
   final String studentUuid = uuid.v4();
@@ -128,9 +128,10 @@ Future<Student?> createStudent(Account account, String city,
 
   var joinSchoolheaders = {'Content-Type': 'application/x-www-form-urlencoded'};
   joinSchoolRequest.bodyFields = {
-    'join_code': school.joinCode,
+    'join_code': studentSchool.joinCode,
     'student_uuid': studentUuid
   };
+  joinSchoolRequest.headers.addAll(joinSchoolheaders);
 
   http.StreamedResponse joinSchoolResponse = await joinSchoolRequest.send();
   Map<String, dynamic> joinSchoolBody =
@@ -149,7 +150,7 @@ Future<Student?> createStudent(Account account, String city,
       account: account,
       city: city,
       languages: languages,
-      school: school,
+      school: studentSchool,
       board: board,
       grade: grade,
       uuid: studentUuid);

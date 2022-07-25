@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sih_app/screens/welcome.dart';
-import 'package:sih_app/screens/home_page.dart';
+import 'package:sih_app/screens/bottom_tab_controller.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
 
   _decideMainPage() {
     if (prefs.get('token') != null && prefs.get('id') != null) {
-      return HomePage();
+      return BottomTabController();
     } else {
       return WelcomePage();
     }

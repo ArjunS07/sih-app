@@ -1,6 +1,6 @@
-import 'Account.dart';
-import 'Meeting.dart';
+import 'account.dart';
+import 'meeting.dart';
 import 'School.dart';
-import 'Student.dart';
-import 'Tutor.dart';
-import 'Tutorship.dart';
+import 'student.dart';
+import 'tutor.dart';
+import 'tutorship.dart';

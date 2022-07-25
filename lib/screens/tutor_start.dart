@@ -8,7 +8,7 @@ import 'package:sih_app/utils/choices.dart';
 import 'package:sih_app/models/choice.dart';
 import 'package:sih_app/utils/persistence_utils.dart' as persistence_utils;
 
-import 'package:sih_app/screens/home_page.dart';
+import 'package:sih_app/screens/bottom_tab_controller.dart';
 
 
 class TutorDetails extends StatefulWidget {
@@ -16,7 +16,7 @@ class TutorDetails extends StatefulWidget {
   final String firstName;
   final String lastName;
   final String password;
-  TutorDetails(
+  const TutorDetails(
       {Key? key,
       required this.email,
       required this.firstName,
@@ -96,7 +96,7 @@ class _TutorDetailsState extends State<TutorDetails> {
       createTutor(account, _selectedCityId, _selectedLanguagesIds,
               _selectedBoardIds, _selectedGradeIds, _selectedSubjectIds)
           .then((tutor) => {
-              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage()))
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => BottomTabController()))
           });
     }
   }
@@ -183,8 +183,8 @@ class _TutorDetailsState extends State<TutorDetails> {
                           _selectedSubjectIds.add(value.toString());
                         }
                       }),
-                  SizedBox(height: 25.0),
-                  Spacer(),
+                  const SizedBox(height: 25.0),
+                  const Spacer(),
                   ElevatedButton(
                       onPressed: () => {_submitRegistration(context)},
                       child: Text('Complete registration')),

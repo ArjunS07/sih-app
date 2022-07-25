@@ -1,12 +1,10 @@
 
 import 'package:flutter/material.dart';
-import 'package:sih_app/screens/home_page.dart';
+
 import 'package:sih_app/screens/signup.dart';
 import 'package:sih_app/screens/student_start.dart';
-import 'package:sih_app/screens/tutor_start.dart';
-import 'package:sih_app/screens/login.dart';
-import 'package:sih_app/utils/persistence_utils.dart' as persistence_utils;
 
+import 'package:sih_app/screens/login.dart';
 
 class WelcomePage extends StatefulWidget {
   WelcomePage({Key? key}) : super(key: key);
@@ -60,7 +58,7 @@ class _WelcomePageState extends State<WelcomePage> {
                         MaterialPageRoute(builder: (context) => Login()),
                       ),
                     },
-                child: Text('Log in'))
+                child: const Text('Log in'))
           ],
         ),
       ),

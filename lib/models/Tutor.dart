@@ -1,4 +1,4 @@
-import 'PlatformUser.dart';
+import 'platform_user.dart';
 
 class Tutor extends PlatformUser {
 
