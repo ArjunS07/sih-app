@@ -18,6 +18,21 @@ class _LoginState extends State<Login> {
   final TextEditingController _passController = TextEditingController();
 
   String _errorText = '';
+  bool _obscurePassword = true;
+
+  void _togglePasswordVisibility() {
+    setState(() {
+      _obscurePassword = !_obscurePassword;
+    });
+  }
+
+  Widget _decideIcon() {
+    if (_obscurePassword) {
+      return const Icon(Icons.visibility);
+    } else {
+      return const Icon(Icons.visibility_off);
+    }
+  }
 
   void _login(context) async {
     if (_formKey.currentState!.validate()) {
@@ -97,14 +112,21 @@ class _LoginState extends State<Login> {
                     ),
                     SizedBox(height: 25.0),
                     TextFormField(
-                        obscureText: true,
+                        obscureText: _obscurePassword,
                         enableSuggestions: false,
                         autocorrect: false,
                         textCapitalization: TextCapitalization.none,
                         controller: _passController,
                         decoration: InputDecoration(
-                          border: OutlineInputBorder(),
+                          border: const OutlineInputBorder(),
                           labelText: 'Enter your password',
+                          suffixIcon: _obscurePassword ? Padding(
+                            padding: const EdgeInsets.all(0.0),
+                            child: GestureDetector(onTap: _togglePasswordVisibility, child: const Icon(Icons.visibility)),
+                          ) : Padding(
+                            padding: const EdgeInsets.all(0.0),
+                            child: GestureDetector(onTap: _togglePasswordVisibility, child: const Icon(Icons.visibility_off)),
+                          )
                         ),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
