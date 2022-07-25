@@ -13,7 +13,7 @@ import 'package:sih_app/models/School.dart';
 import 'package:sih_app/utils/auth_api_utils.dart';
 import 'package:sih_app/utils/choices.dart';
 import 'package:sih_app/models/choice.dart';
-import 'package:sih_app/screens/home_page.dart';
+import 'package:sih_app/screens/bottom_tab_controller.dart';
 import 'package:sih_app/screens/signup.dart';
 
 class JoinSchool extends StatefulWidget {
@@ -120,8 +120,8 @@ class ConfirmSchool extends StatelessWidget {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) =>
-                                    AccountSignup(isStudent: true, school: school),
+                                builder: (context) => AccountSignup(
+                                    isStudent: true, school: school),
                               ))
                         },
                     child: Text('Yes')),
@@ -131,7 +131,6 @@ class ConfirmSchool extends StatelessWidget {
     );
   }
 }
-
 
 class StudentDetails extends StatefulWidget {
   final School school;
@@ -154,7 +153,7 @@ class StudentDetails extends StatefulWidget {
 
 class StudentDetailsState extends State<StudentDetails> {
   late List<Choice> _languageChoices = [];
-  late List<String> _selectedLanguagesIds = []; 
+  late List<String> _selectedLanguagesIds = [];
 
   late List<Choice> _boardChoices = [];
   late String? _selectedBoardId = null;
@@ -210,16 +209,24 @@ class StudentDetailsState extends State<StudentDetails> {
     });
     if (account != null) {
       print('Creating student account');
-        persistence_utils.upDateSharedPreferences(
+      persistence_utils.upDateSharedPreferences(
           account.authToken!, account.accountId);
 
       var student = await createStudent(
-              account, _selectedCityId!, _selectedLanguagesIds, widget.school, _selectedBoardId!, _selectedGradeId!)
-              .then((tutor) => {
-              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage()))
-          })
+              account,
+              _selectedCityId!,
+              _selectedLanguagesIds,
+              widget.school,
+              _selectedBoardId!,
+              _selectedGradeId!)
+          .then((tutor) => {
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => BottomTabController()))
+              })
           .catchError((error) {
-            print(error);
+        print(error);
         showDialog(
             context: context,
             builder: (BuildContext context) => AlertDialog(
@@ -246,86 +253,93 @@ class StudentDetailsState extends State<StudentDetails> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Expanded(
+        child: CustomScrollView(slivers: [
+          SliverFillRemaining(
+            hasScrollBody: false,
             child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Expanded(
-                child: Column(children: [
-              const Text('What languages do you speak?'),
-              MultiSelectDialogField(
-                items:
-                    _languageChoices.map((language) => MultiSelectItem(language.id, language.name)).toList(),
-                listType: MultiSelectListType.CHIP,
-                onConfirm: (values) {
-                  for (var value in values) {
-                    _selectedLanguagesIds.add(value.toString());
-                  }
-                }
-              ),
-            ])),
-            Expanded(
-                child: Column(children: [
-              const Text('What city do you live in?'),
-              SearchChoices.single(
-                items: _cityChoices
-                    .map((city) => DropdownMenuItem(value: city.id, child: Text(city.name)))
-                    .toList(),
-                value: _selectedCityId,
-                hint: "Select one",
-                searchHint: "Select one",
-                onChanged: (value) {
-                  setState(() {
-                    _selectedCityId = value;
-                  });
-                },
-                isExpanded: true,
-              )
-            ])),
-            Expanded(
-                child: Column(children: [
-              const Text('What board do you study in?'),
-              SearchChoices.single(
-                items: _boardChoices
-                    .map((board) => DropdownMenuItem(value: board.id, child: Text(board.name)))
-                    .toList(),
-                value: _selectedBoardId,
-                hint: "Select one",
-                searchHint: "Select one",
-                onChanged: (value) {
-                  print(value);
-                  setState(() {
-                    _selectedBoardId = value;
-                  });
-                },
-                isExpanded: true,
-              )
-            ])),
-            Expanded(
-                child: Column(children: [
-              const Text('What grade do you study in?'),
-              SearchChoices.single(
-                items: _gradeChoices
-                    .map((grade) => DropdownMenuItem(value: grade.id, child: Text(grade.name)))
-                    .toList(),
-                value: _selectedGradeId,
-                hint: "Select one",
-                searchHint: "Select one",
-                onChanged: (value) {
-                  print(value);
-                  setState(() {
-                    _selectedGradeId = value;
-                  });
-                },
-                isExpanded: true,
-              )
-            ])),
-            
-            ElevatedButton(
-                onPressed: () => {_submitRegistration(context)},
-                child: Text('Complete registration')),
-          ],
-        )),
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Expanded(
+                    child: Column(children: [
+                  const Text('What languages do you speak?'),
+                  MultiSelectDialogField(
+                      items: _languageChoices
+                          .map((language) =>
+                              MultiSelectItem(language.id, language.name))
+                          .toList(),
+                      listType: MultiSelectListType.CHIP,
+                      onConfirm: (values) {
+                        for (var value in values) {
+                          _selectedLanguagesIds.add(value.toString());
+                        }
+                      }),
+                ])),
+                Expanded(
+                    child: Column(children: [
+                  const Text('What city do you live in?'),
+                  SearchChoices.single(
+                    items: _cityChoices
+                        .map((city) => DropdownMenuItem(
+                            value: city.id, child: Text(city.name)))
+                        .toList(),
+                    value: _selectedCityId,
+                    hint: "Select one",
+                    searchHint: "Select one",
+                    onChanged: (value) {
+                      setState(() {
+                        _selectedCityId = value;
+                      });
+                    },
+                    isExpanded: true,
+                  )
+                ])),
+                Expanded(
+                    child: Column(children: [
+                  const Text('What board do you study in?'),
+                  SearchChoices.single(
+                    items: _boardChoices
+                        .map((board) => DropdownMenuItem(
+                            value: board.id, child: Text(board.name)))
+                        .toList(),
+                    value: _selectedBoardId,
+                    hint: "Select one",
+                    searchHint: "Select one",
+                    onChanged: (value) {
+                      print(value);
+                      setState(() {
+                        _selectedBoardId = value;
+                      });
+                    },
+                    isExpanded: true,
+                  )
+                ])),
+                Expanded(
+                    child: Column(children: [
+                  const Text('What grade do you study in?'),
+                  SearchChoices.single(
+                    items: _gradeChoices
+                        .map((grade) => DropdownMenuItem(
+                            value: grade.id, child: Text(grade.name)))
+                        .toList(),
+                    value: _selectedGradeId,
+                    hint: "Select one",
+                    searchHint: "Select one",
+                    onChanged: (value) {
+                      print(value);
+                      setState(() {
+                        _selectedGradeId = value;
+                      });
+                    },
+                    isExpanded: true,
+                  )
+                ])),
+                ElevatedButton(
+                    onPressed: () => {_submitRegistration(context)},
+                    child: Text('Complete registration')),
+              ],
+            ),
+          )
+        ]),
       ),
     );
   }
