@@ -3,6 +3,7 @@ import 'package:sih_app/utils/auth_api_utils.dart';
 import 'package:sih_app/utils/persistence_utils.dart' as persistence_utils;
 
 import 'package:sih_app/screens/bottom_tab_controller.dart';
+
 class Login extends StatefulWidget {
   Login({Key? key}) : super(key: key);
 
@@ -18,28 +19,36 @@ class _LoginState extends State<Login> {
 
   String _errorText = '';
 
-  void _login(context) {
+  void _login(context) async {
     if (_formKey.currentState!.validate()) {
       print('valid form state');
       login(_emailController.text, _passController.text).then((account) {
         if (account != null) {
           print('Found account');
-          persistence_utils.upDateSharedPreferences(account.authToken!, account.accountId);
+          persistence_utils.upDateSharedPreferences(
+              account.authToken!, account.accountId);
+          persistence_utils.getPrefs().then((prefs) => {
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            BottomTabController(prefs: prefs))),
+                showDialog(
+                    context: context,
+                    builder: (BuildContext context) => AlertDialog(
+                          title: Text('Success'),
+                          actions: <Widget>[
+                            TextButton(
+                              child: Text('OK'),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                          ],
+                        ))
+              });
           // TODO: Remove dialog and redirect to home screen instead
-          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => BottomTabController()));
-          showDialog(
-              context: context,
-              builder: (BuildContext context) => AlertDialog(
-                    title: Text('Success'),
-                    actions: <Widget>[
-                      TextButton(
-                        child: Text('OK'),
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                      ),
-                    ],
-                  ));
+
         } else {
           print('No account found');
           setState(() {

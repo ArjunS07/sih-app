@@ -220,10 +220,13 @@ class StudentDetailsState extends State<StudentDetails> {
               _selectedBoardId!,
               _selectedGradeId!)
           .then((tutor) => {
-                Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => BottomTabController()))
+                persistence_utils.getPrefs().then((prefs) => {
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  BottomTabController(prefs: prefs)))
+                    })
               })
           .catchError((error) {
         print(error);

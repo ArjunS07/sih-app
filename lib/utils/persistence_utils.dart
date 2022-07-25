@@ -12,6 +12,11 @@ void upDateSharedPreferences(String token, int id) async {
   print('New values: $tokenNew, $idNew');
 }
 
+Future<SharedPreferences> getPrefs() async {
+  var prefs = await SharedPreferences.getInstance();
+  return prefs;
+}
+
 // Future<bool> isLoggedIn() {
 //   SharedPreferences.getInstance().then((prefs) {
 //     var token = prefs.getString('token');

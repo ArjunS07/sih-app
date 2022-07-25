@@ -96,7 +96,9 @@ class _TutorDetailsState extends State<TutorDetails> {
       createTutor(account, _selectedCityId, _selectedLanguagesIds,
               _selectedBoardIds, _selectedGradeIds, _selectedSubjectIds)
           .then((tutor) => {
-              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => BottomTabController()))
+            persistence_utils.getPrefs().then((prefs) => {
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => BottomTabController(prefs: prefs)))
+            })
           });
     }
   }

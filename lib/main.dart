@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
 
   _decideMainPage() {
     if (prefs.get('token') != null && prefs.get('id') != null) {
-      return BottomTabController();
+      return BottomTabController(prefs: prefs,);
     } else {
       return WelcomePage();
     }
