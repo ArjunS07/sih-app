@@ -36,12 +36,12 @@ class _BottomTabControllerState extends State<BottomTabController> {
             offstage: index != 0,
             child: TickerMode(
                 enabled: index == 0,
-                child: new MaterialApp(home: TutorshipChats()))),
+                child: MaterialApp(home: TutorshipChats()))),
         Offstage(
             offstage: index != 1,
             child: TickerMode(
               enabled: index == 1,
-              child: new MaterialApp(home: TutorSearch()),
+              child: MaterialApp(home: TutorSearch()),
             )),
         Offstage(
             offstage: index != 2,
@@ -56,10 +56,10 @@ class _BottomTabControllerState extends State<BottomTabController> {
               this.index = index;
             });
           },
-          items: <BottomNavigationBarItem>[
-            const BottomNavigationBarItem(icon: const Icon(Icons.home), label: 'Tutors'),
-            const BottomNavigationBarItem(icon: const Icon(Icons.search), label: 'Find'),
-            const BottomNavigationBarItem(icon: const Icon(Icons.settings), label: 'Settings'),
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Tutors'),
+            BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Find'),
+            BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'Settings'),
           ]),
     );
   }
