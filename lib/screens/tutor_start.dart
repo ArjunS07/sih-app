@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
 import 'package:search_choices/search_choices.dart';
 
-import 'package:sih_app/utils/auth_api_utils.dart';
+import 'package:sih_app/utils/accounts_api_utils.dart';
 import 'package:sih_app/utils/choices.dart';
 import 'package:sih_app/models/choice.dart';
 import 'package:sih_app/utils/persistence_utils.dart' as persistence_utils;

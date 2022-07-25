@@ -18,7 +18,7 @@ class Account {
       email: json['email'] as String,
       firstName: json['first_name'] as String,
       lastName: json['last_name'] as String,
-      accountId: json['pk'] as int
+      accountId: json['id'] as int
     );
   }
 }

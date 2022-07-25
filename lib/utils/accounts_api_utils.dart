@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:sih_app/models/platform_user.dart';
 import 'package:uuid/uuid.dart';
 
 import 'package:sih_app/models/account.dart';
@@ -51,7 +52,11 @@ Future<Account?> login(String email, String password) async {
     throw Exception(body);
   }
 
-  var accountInfo = body['user'];
+  Map<String, dynamic> accountInfo = body['user'];
+  if (accountInfo.containsKey('pk')) {
+    accountInfo['id'] = accountInfo['pk'];
+  }
+  ;
   var account = Account.fromJson(accountInfo);
   account.authToken = await getAccountAuthToken(email, password);
   return account;
@@ -89,8 +94,13 @@ Future<Account?> registerNewAccount(
   }
 }
 
-Future<Student?> createStudent(Account account, String city,
-    List<String> languages, School studentSchool, String board, String grade) async {
+Future<Student?> createStudent(
+    Account account,
+    String city,
+    List<String> languages,
+    School studentSchool,
+    String board,
+    String grade) async {
   // 1. Make an API call to create a student account
   final String parsedLanguages = languages.join(',');
   final String studentUuid = uuid.v4();
@@ -201,4 +211,66 @@ Future<Tutor> createTutor(Account account, String city, List<String> languages,
       subjects: subjects,
       uuid: tutorUuid);
   return tutor;
+}
+
+Future<Account> getAccountFromId(int id) async {
+  final Uri getAccountUri = Uri.parse('$ROOT_URL/accounts/users?id=$id');
+  var request = http.Request('GET', getAccountUri);
+
+  http.StreamedResponse response = await request.send();
+  Map<String, dynamic> body =
+      json.decode(await response.stream.bytesToString());
+
+  if (response.statusCode == 200) {
+    Account account = Account.fromJson(body);
+    return account;
+  } else {
+    throw (response.reasonPhrase.toString());
+  }
+}
+
+Future<PlatformUser> getUserFromAccount(Account account) async {
+  int id = account.accountId;
+  var request = http.Request(
+      'GET', Uri.parse('$ROOT_URL/api/userfromaccount?account_id=$id'));
+
+  http.StreamedResponse response = await request.send();
+  Map<String, dynamic> body =
+      json.decode(await response.stream.bytesToString());
+
+  if (response.statusCode == 200) {
+    bool isStudent = body['type'] == 'student';
+    print(body);
+    Map<String, dynamic> userDetails = body['user'];
+    if (isStudent) {
+      List<String> languages = userDetails['languages'].cast<String>();
+      Student student = Student(
+        account: account,
+        city: userDetails['city'],
+        languages: languages,
+        school: School.fromJson(userDetails['school']),
+        grade: userDetails['grade'],
+        board: userDetails['board'],
+        uuid: userDetails['uuid'],
+      );
+      return student;
+    } else {
+      List<String> languages = userDetails['languages'].cast<String>();
+      List<String> boards = userDetails['boards'].cast<String>();
+      List<String> grades = userDetails['grades'].cast<String>();
+      List<String> subjects = userDetails['subjects'].cast<String>();
+      Tutor tutor = Tutor(
+        account: account,
+        city: userDetails['city'],
+        languages: languages,
+        boards: boards,
+        grades: grades,
+        subjects: subjects,
+        uuid: userDetails['uuid'],
+      );
+      return tutor;
+    }
+  } else {
+    throw (response.reasonPhrase.toString());
+  }
 }
