@@ -17,6 +17,27 @@ from .models import School, Student, Tutor, Tutorship, Message, ZoomMeeting
 from . import serializers
 from .choices import SUBJECT_CHOICES, LANGUAGE_MEDIUM_CHOICES, GRADE_CHOICES, BOARD_CHOICES, all_choices
 
+class UserFromAccount(APIView):
+    def get(self, request):
+        account_id = request.query_params.get('account_id')
+        if not account_id:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+        try:
+            student = Student.objects.get(account__id=account_id)
+            serialized = serializers.StudentSerializer(student)
+            res = {'type': 'student', 'user': serialized.data}
+            res = JSONRenderer().render(res)
+            return HttpResponse(res, content_type='application/json', status=status.HTTP_200_OK)
+        except Student.DoesNotExist:
+            try:
+                tutor = Tutor.objects.get(account__id=account_id)
+                serialized = serializers.TutorSerializer(tutor)
+                res = {'type': 'tutor', 'user': serialized.data}
+                res = JSONRenderer().render(res)
+                return HttpResponse(res, content_type='application/json', status=status.HTTP_200_OK)
+            except Tutor.DoesNotExist:
+                return HttpResponse(status=status.HTTP_404_NOT_FOUND)
+
 class TutorView(APIView):
     def get(self, request, format=None):
         uuid = request.query_params.get('uuid', None)
@@ -150,6 +171,7 @@ class TutorshipView(APIView):
 class JoinSchoolView(APIView):
     def get(self, request, format=None):
         data = request.query_params
+        print(f'Got data {data}')
         join_code = data.get('join_code', None)
         if not join_code:
             return HttpResponse(status=status.HTTP_400_BAD_REQUEST)
@@ -159,7 +181,8 @@ class JoinSchoolView(APIView):
             serialized_school = serializers.SchoolSerializer(school)
             res = JSONRenderer().render(serialized_school.data)
             return HttpResponse(res, content_type='application/json', status=status.HTTP_200_OK)
-        except:
+        except Exception as e:
+            print(f"Error {e}")
             return HttpResponse(status=status.HTTP_404_NOT_FOUND)
 
     def post(self, request, format=None):

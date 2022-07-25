@@ -43,17 +43,29 @@ class TutorSerializer(PlatformUserSerializer):
             raise serializers.ValidationError("Platform user linked to given account already exists")
         
         return models.Tutor.objects.create(account=account, **validated_data)
+class SchoolSerializer(serializers.Serializer):
+    account__id = serializers.IntegerField(source='account.id')
+    name = serializers.CharField(max_length=128)
+
+    city = serializers.CharField(max_length=8)
+    join_code = serializers.CharField(max_length=10)
+
+
+    class Meta:
+        model = models.School
+        fields = ('account__id', 'name', 'city', 'join_code')
+
 
 
 class StudentSerializer(PlatformUserSerializer):
 
     board = serializers.CharField(max_length=8)
     grade = serializers.CharField(max_length=8)
-
+    school = SchoolSerializer(read_only=True)
     class Meta:
         model = models.Student
         fields = ('uuid', 'account__id', 'city', 'languages', 'profile_image_s3_path', 
-        'board', 'grade')
+        'board', 'grade', 'school')
 
     def create(self, validated_data):
         account_id = int(validated_data['account']['id'])
@@ -68,16 +80,6 @@ class StudentSerializer(PlatformUserSerializer):
             raise serializers.ValidationError("Platform user linked to given account already exists")
         
         return models.Student.objects.create(account=account, **validated_data)
-
-class SchoolSerializer(serializers.Serializer):
-    account__id = serializers.IntegerField(source='account.id')
-    name = serializers.CharField(max_length=128)
-    city = serializers.CharField(max_length=8)
-    join_code = serializers.CharField(max_length=10)
-
-    class Meta:
-        model = models.School
-        fields = ('account__id', 'name', 'city', 'join_code')
 
 
 class ZoomMeetingSerializer(serializers.Serializer):
