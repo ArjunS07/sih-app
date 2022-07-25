@@ -53,10 +53,6 @@ Future<Account?> login(String email, String password) async {
   }
 
   Map<String, dynamic> accountInfo = body['user'];
-  if (accountInfo.containsKey('pk')) {
-    accountInfo['id'] = accountInfo['pk'];
-  }
-  ;
   var account = Account.fromJson(accountInfo);
   account.authToken = await getAccountAuthToken(email, password);
   return account;
