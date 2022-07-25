@@ -42,7 +42,12 @@ class _BottomTabControllerState extends State<BottomTabController> {
             child: TickerMode(
               enabled: index == 1,
               child: new MaterialApp(home: TutorSearch()),
-            ))
+            )),
+        Offstage(
+            offstage: index != 2,
+            child: TickerMode(
+                enabled: index == 2,
+                child: new MaterialApp(home: Settings()))),
       ]),
       bottomNavigationBar: BottomNavigationBar(
           currentIndex: index,
@@ -54,6 +59,7 @@ class _BottomTabControllerState extends State<BottomTabController> {
           items: <BottomNavigationBarItem>[
             const BottomNavigationBarItem(icon: const Icon(Icons.home), label: 'Tutors'),
             const BottomNavigationBarItem(icon: const Icon(Icons.search), label: 'Find'),
+            const BottomNavigationBarItem(icon: const Icon(Icons.settings), label: 'Settings'),
           ]),
     );
   }
