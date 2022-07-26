@@ -14,7 +14,7 @@ class PlatformUser {
   });
 
   String get profileImageS3Path {
-    return 's3_url/profile_images/${uuid}.jpg';
+    return 's3_url/profile_images/$uuid.jpg';
   }
 
 }

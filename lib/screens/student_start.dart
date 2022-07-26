@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'dart:convert';
@@ -63,7 +65,7 @@ class _JoinSchoolState extends State<JoinSchool> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Join as a student'),
+        title: const Text('Join as a student'),
       ),
       body: Center(
         child: Padding(
@@ -74,13 +76,13 @@ class _JoinSchoolState extends State<JoinSchool> {
                 TextField(
                   controller: formController,
                   onSubmitted: (code) => _submitSchoolJoinCode(code, context),
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
+                  decoration: const InputDecoration(
+                    border: const OutlineInputBorder(),
                     labelText: 'Enter your school join code',
                   ),
                 ),
                 ElevatedButton(
-                  child: Text('Join'),
+                  child: const Text('Join'),
                   onPressed: () =>
                       _submitSchoolJoinCode(formController.text, context),
                 ),
@@ -99,7 +101,7 @@ class ConfirmSchool extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Join as a student'),
+        title: const Text('Join as a student'),
       ),
       body: Center(
         child: Padding(
@@ -107,13 +109,13 @@ class ConfirmSchool extends StatelessWidget {
           child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Text(
+                const Text(
                   'Is this your school?',
-                  style: TextStyle(fontSize: 24),
+                  style: const TextStyle(fontSize: 24),
                 ),
                 Text(
                   '${school.name}',
-                  style: TextStyle(fontSize: 24),
+                  style: const TextStyle(fontSize: 24),
                 ),
                 ElevatedButton(
                     onPressed: () => {
@@ -124,7 +126,7 @@ class ConfirmSchool extends StatelessWidget {
                                     isStudent: true, school: school),
                               ))
                         },
-                    child: Text('Yes')),
+                    child: const Text('Yes')),
               ]),
         ),
       ),
@@ -252,7 +254,7 @@ class StudentDetailsState extends State<StudentDetails> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Student Sign Up'),
+        title: const Text('Student Sign Up'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -338,7 +340,7 @@ class StudentDetailsState extends State<StudentDetails> {
                 ])),
                 ElevatedButton(
                     onPressed: () => {_submitRegistration(context)},
-                    child: Text('Complete registration')),
+                    child: const Text('Complete registration')),
               ],
             ),
           )

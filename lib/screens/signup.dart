@@ -53,7 +53,7 @@ class _AccountSignupState extends State<AccountSignup> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Student Sign Up'),
+        title: widget.isStudent ? const Text('Student Sign Up') : const Text('Tutor sign up'),
       ),
       body: Center(
         child: Expanded(
@@ -64,16 +64,16 @@ class _AccountSignupState extends State<AccountSignup> {
               child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Spacer(),
+                    const Spacer(),
                     Text(
                       widget.isStudent ? 'Sign up as a student' : 'Sign up as a tutor',
-                      style: TextStyle(fontSize: 24),
+                      style: const TextStyle(fontSize: 24),
                     ),
-                    Spacer(),
+                    const Spacer(),
                     TextFormField(
                       controller: _firstNameController,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
+                      decoration: const InputDecoration(
+                        border: const OutlineInputBorder(),
                         labelText: 'First name',
                       ),
                       validator: (value) {
@@ -83,10 +83,10 @@ class _AccountSignupState extends State<AccountSignup> {
                         return null;
                       },
                     ),
-                    SizedBox(height: 25.0),
+                    const SizedBox(height: 25.0),
                     TextFormField(
                       controller: _lastNameController,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         border: OutlineInputBorder(),
                         labelText: 'Last name',
                       ),
@@ -97,12 +97,12 @@ class _AccountSignupState extends State<AccountSignup> {
                         return null;
                       },
                     ),
-                    SizedBox(height: 25.0),
+                    const SizedBox(height: 25.0),
                     TextFormField(
                       textCapitalization: TextCapitalization.none,
                       autocorrect: false,
                       controller: _emailController,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         border: OutlineInputBorder(),
                         labelText: 'Enter your email',
                       ),
@@ -113,14 +113,14 @@ class _AccountSignupState extends State<AccountSignup> {
                         return null;
                       },
                     ),
-                    SizedBox(height: 25.0),
+                    const SizedBox(height: 25.0),
                     TextFormField(
                       obscureText: true,
                       enableSuggestions: false,
                       autocorrect: false,
                       textCapitalization: TextCapitalization.none,
                       controller: _passController,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         border: OutlineInputBorder(),
                         labelText: 'Enter your password',
                       ),
@@ -133,14 +133,14 @@ class _AccountSignupState extends State<AccountSignup> {
                             : null;
                       },
                     ),
-                    SizedBox(height: 25.0),
+                    const SizedBox(height: 25.0),
                     TextFormField(
                         obscureText: true,
                         enableSuggestions: false,
                         autocorrect: false,
                         textCapitalization: TextCapitalization.none,
                         controller: _passConfirmController,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           border: OutlineInputBorder(),
                           labelText: 'Verify your password',
                         ),
@@ -152,7 +152,7 @@ class _AccountSignupState extends State<AccountSignup> {
                             return 'Passwords do not match';
                           }
                         }),
-                    Spacer(),
+                    const Spacer(),
                     ElevatedButton(
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
@@ -162,8 +162,8 @@ class _AccountSignupState extends State<AccountSignup> {
                             _submitRegistration(context);
                           }
                         },
-                        child: Text('Sign up')),
-                    Spacer(),
+                        child: const Text('Sign up')),
+                    const Spacer(),
                   ]),
             ),
           ),

@@ -10,6 +10,19 @@ class TutorSearch extends StatefulWidget {
 class _TutorSearchState extends State<TutorSearch> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Find tutors')
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget> [
+            
+          ],
+        )
+        )
+    );
   }
 }

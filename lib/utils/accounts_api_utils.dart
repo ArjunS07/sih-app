@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:sih_app/models/platform_user.dart';
@@ -9,7 +11,7 @@ import 'package:sih_app/models/student.dart';
 import 'package:sih_app/models/tutor.dart';
 
 final String ROOT_URL = 'http://localhost:8000';
-final uuid = Uuid();
+Uuid uuid = const Uuid();
 
 Future<String> getAccountAuthToken(String email, String password) async {
   var headers = {

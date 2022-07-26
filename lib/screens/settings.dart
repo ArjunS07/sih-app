@@ -1,11 +1,11 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sih_app/main.dart';
 import 'package:sih_app/utils/persistence_utils.dart' as persistence_utils;
 
-import 'welcome.dart';
-import 'bottom_tab_controller.dart';
 
 class Settings extends StatefulWidget {
   Settings({Key? key}) : super(key: key);

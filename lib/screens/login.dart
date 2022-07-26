@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:sih_app/utils/accounts_api_utils.dart';
 import 'package:sih_app/utils/persistence_utils.dart' as persistence_utils;
@@ -51,10 +53,10 @@ class _LoginState extends State<Login> {
                 showDialog(
                     context: context,
                     builder: (BuildContext context) => AlertDialog(
-                          title: Text('Success'),
+                          title: const Text('Success'),
                           actions: <Widget>[
                             TextButton(
-                              child: Text('OK'),
+                              child: const Text('OK'),
                               onPressed: () {
                                 Navigator.of(context).pop();
                               },
@@ -78,7 +80,7 @@ class _LoginState extends State<Login> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Log in'),
+        title: const Text('Log in'),
       ),
       body: Center(
         child: Expanded(
@@ -89,17 +91,17 @@ class _LoginState extends State<Login> {
               child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Spacer(),
+                    const Spacer(),
                     const Text(
                       'Log in',
                       style: TextStyle(fontSize: 24),
                     ),
-                    Spacer(),
+                    const Spacer(),
                     TextFormField(
                       textCapitalization: TextCapitalization.none,
                       autocorrect: false,
                       controller: _emailController,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         border: OutlineInputBorder(),
                         labelText: 'Email',
                       ),
@@ -110,7 +112,7 @@ class _LoginState extends State<Login> {
                         return null;
                       },
                     ),
-                    SizedBox(height: 25.0),
+                    const SizedBox(height: 25.0),
                     TextFormField(
                         obscureText: _obscurePassword,
                         enableSuggestions: false,
@@ -136,9 +138,9 @@ class _LoginState extends State<Login> {
                         }),
                     Text(
                       _errorText,
-                      style: TextStyle(color: Colors.red),
+                      style: const TextStyle(color: Colors.red),
                     ),
-                    Spacer(),
+                    const Spacer(),
                     ElevatedButton(
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
@@ -148,8 +150,8 @@ class _LoginState extends State<Login> {
                             _login(context);
                           }
                         },
-                        child: Text('Log in')),
-                    Spacer(),
+                        child: const Text('Log in')),
+                    const Spacer(),
                   ]),
             ),
           ),

@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
 
 import 'package:multi_select_flutter/multi_select_flutter.dart';
@@ -107,7 +109,7 @@ class _TutorDetailsState extends State<TutorDetails> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Tutor Sign Up'),
+        title: const Text('Tutor Sign Up'),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 32.0, vertical: 32.0),
@@ -118,7 +120,7 @@ class _TutorDetailsState extends State<TutorDetails> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Spacer(),
+                  const Spacer(),
                   const Text('What languages do you speak?'),
                   MultiSelectDialogField(
                       items: _languageChoices
@@ -189,7 +191,7 @@ class _TutorDetailsState extends State<TutorDetails> {
                   const Spacer(),
                   ElevatedButton(
                       onPressed: () => {_submitRegistration(context)},
-                      child: Text('Complete registration')),
+                      child: const Text('Complete registration')),
                 ],
               ),
             )

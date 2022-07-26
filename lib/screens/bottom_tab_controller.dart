@@ -1,14 +1,13 @@
-import 'dart:io';
+// ignore_for_file: avoid_print
 
 import 'package:flutter/material.dart';
-import 'package:sih_app/models/platform_user.dart';
 
 import 'package:sih_app/utils/accounts_api_utils.dart' as auth_api_utils;
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'package:sih_app/models/platform_user.dart';
 import 'package:sih_app/models/account.dart';
 import 'package:sih_app/models/student.dart';
-import 'package:sih_app/models/tutor.dart';
 
 import 'tutorship_charts.dart';
 import 'settings.dart';
@@ -18,7 +17,7 @@ import 'tutor_requests.dart';
 class BottomTabController extends StatefulWidget {
   final SharedPreferences prefs;
 
-  BottomTabController({Key? key, required this.prefs}) : super(key: key);
+  const BottomTabController({Key? key, required this.prefs}) : super(key: key);
 
   @override
   State<BottomTabController> createState() => _BottomTabControllerState();
@@ -89,18 +88,18 @@ class _BottomTabControllerState extends State<BottomTabController> {
           break;
       }
       return Scaffold(
-      body: SizedBox.expand(child: child),
-      bottomNavigationBar: BottomNavigationBar(
-        onTap: (newIndex) => setState(() => _index = newIndex),
-        currentIndex: _index,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(icon: Icon(Icons.school), label: "Tutors"),
-          BottomNavigationBarItem(icon: Icon(Icons.search), label: "Find"),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.settings), label: "Settings"),
-        ],
-      ),
-    );
+        body: SizedBox.expand(child: child),
+        bottomNavigationBar: BottomNavigationBar(
+          onTap: (newIndex) => setState(() => _index = newIndex),
+          currentIndex: _index,
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(icon: Icon(Icons.school), label: "Tutors"),
+            BottomNavigationBarItem(icon: Icon(Icons.search), label: "Find"),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.settings), label: "Settings"),
+          ],
+        ),
+      );
     } else {
       switch (_index) {
         case 0:
@@ -114,21 +113,20 @@ class _BottomTabControllerState extends State<BottomTabController> {
           break;
       }
       return Scaffold(
-      body: SizedBox.expand(child: child),
-      bottomNavigationBar: BottomNavigationBar(
-        onTap: (newIndex) => setState(() => _index = newIndex),
-        currentIndex: _index,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(icon: Icon(Icons.school), label: "Students"),
-          BottomNavigationBarItem(icon: Icon(Icons.notifications), label: "Requests"),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.settings), label: "Settings"),
-        ],
-      ),
-    );
+        body: SizedBox.expand(child: child),
+        bottomNavigationBar: BottomNavigationBar(
+          onTap: (newIndex) => setState(() => _index = newIndex),
+          currentIndex: _index,
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+                icon: Icon(Icons.school), label: "Students"),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.notifications), label: "Requests"),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.settings), label: "Settings"),
+          ],
+        ),
+      );
     }
-
-
-    
   }
 }

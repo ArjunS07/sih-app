@@ -24,7 +24,7 @@ class _WelcomePageState extends State<WelcomePage> {
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
-        title: Text('Hello'),
+        title: const Text('Hello'),
       ),
       body: Center(
         child: Column(
@@ -40,7 +40,7 @@ class _WelcomePageState extends State<WelcomePage> {
                         MaterialPageRoute(builder: (context) => JoinSchool()),
                       ),
                     },
-                child: Text('Student')),
+                child: const Text('Student')),
             ElevatedButton(
                 onPressed: () => {
                       Navigator.push(
@@ -50,7 +50,7 @@ class _WelcomePageState extends State<WelcomePage> {
                                 AccountSignup(isStudent: false)),
                       ),
                     },
-                child: Text('Tutor')),
+                child: const Text('Tutor')),
             ElevatedButton(
                 onPressed: () => {
                       Navigator.push(
