@@ -166,7 +166,8 @@ class TutorshipView(APIView):
         serializer = serializers.TutorshipSerializer(data=data)
         if (serializer.is_valid()):
             serializer.save()
-            return HttpResponse(serializer.data, content_type='application/json', status=status.HTTP_201_CREATED)
+            res = JSONRenderer().render(serializer.data)
+            return HttpResponse(res, content_type='application/json', status=status.HTTP_201_CREATED)
         else:
             print(serializer.errors)
             return HttpResponse(serializer.errors, content_type='application/json', status=status.HTTP_400_BAD_REQUEST)
