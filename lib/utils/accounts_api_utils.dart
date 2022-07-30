@@ -229,7 +229,7 @@ Future<Account> getAccountFromId(int id) async {
   }
 }
 
-Future<PlatformUser> getUserFromAccount(Account account) async {
+getUserFromAccount(Account account) async {
   int id = account.accountId;
   var request = http.Request(
       'GET', Uri.parse('$ROOT_URL/api/userfromaccount?account_id=$id'));
@@ -249,7 +249,7 @@ Future<PlatformUser> getUserFromAccount(Account account) async {
       List<String> boards = userDetails['boards'].cast<String>();
       List<String> grades = userDetails['grades'].cast<String>();
       List<String> subjects = userDetails['subjects'].cast<String>();
-      return Tutor.fromJson(json.decode(json.encode(userDetails)));
+      return Tutor.fromJson(userDetails);
     }
   } else {
     throw (response.reasonPhrase.toString());

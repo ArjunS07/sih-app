@@ -13,8 +13,8 @@ import 'package:sih_app/models/tutorship.dart';
 import 'base_api_utils.dart';
 import 'accounts_api_utils.dart' as accounts_api_utils;
 
-Future<Tutorship> createTutorship(
-    Tutor tutor, Student student, String status) async {
+Future<Tutorship> createTutorship(Tutor tutor, Student student,
+    {String status = 'PNDG'}) async {
   var headers = {'Content-Type': 'application/x-www-form-urlencoded'};
   var request = http.Request('POST', Uri.parse('$ROOT_URL/api/tutorships'));
   request.bodyFields = {
@@ -65,8 +65,30 @@ Future<Tutorship> getTutorshipFromId(int id) async {
 
   if (response.statusCode != 200) {
     print(response.reasonPhrase);
-    throw Exception(body);    
+    throw Exception(body);
   }
 
   return Tutorship.fromJson(body);
+}
+
+Future<List<Tutorship>> getMyTutorshipRequests(Tutor tutor) async {
+  var request = http.Request('GET',
+      Uri.parse('$ROOT_URL/api/mytutorshipslist?tutor_uuid=${tutor.uuid}'));
+
+  http.StreamedResponse response = await request.send();
+  Map<String, dynamic> body =
+      json.decode(await response.stream.bytesToString());
+
+  if (response.statusCode != 200) {
+    print(response.reasonPhrase);
+    throw Exception(body);
+  }
+
+  int numResults = body['num_results'];
+
+  List<Tutorship> tutorships = (body['tutorships'] as List).map( (tutorship) {
+    return Tutorship.fromJson(tutorship);
+  }).toList();
+
+  return tutorships;
 }

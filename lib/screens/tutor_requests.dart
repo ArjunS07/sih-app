@@ -1,13 +1,36 @@
 import 'package:flutter/material.dart';
 
-class TutorRequests extends StatefulWidget {
-  TutorRequests({Key? key}) : super(key: key);
+import 'package:sih_app/models/tutor.dart';
+import 'package:sih_app/utils/tutor_api_utils.dart';
+import 'package:sih_app/utils/tutorship_api_utils.dart';
+
+class MyTutorRequests extends StatefulWidget {
+  Tutor loggedInTutor;
+  MyTutorRequests({Key? key, required this.loggedInTutor}) : super(key: key);
 
   @override
-  State<TutorRequests> createState() => _TutorRequestsState();
+  State<MyTutorRequests> createState() => _MyTutorRequestsState();
 }
 
-class _TutorRequestsState extends State<TutorRequests> {
+class _MyTutorRequestsState extends State<MyTutorRequests> {
+  var requests = <dynamic>[];
+
+  // api stuff
+  Future<void> _loadRequests() async {
+    final tutorshipRequests =
+        await getMyTutorshipRequests(widget.loggedInTutor);
+    setState(() {
+      requests = tutorshipRequests;
+    });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _loadRequests();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container();

@@ -31,7 +31,6 @@ Future<List<Tutor>> loadTutorsFromParams(
     queryParams = {'subjects': subjects.join(',')};
   }
 
-  // TODO: Remove call to local server
   var headers = {'Content-Type': 'application/json'};
   final tutorSearchUri =
       Uri.parse('$ROOT_URL/api/tutorslist').replace(queryParameters: queryParams);

@@ -8,8 +8,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sih_app/models/platform_user.dart';
 import 'package:sih_app/models/account.dart';
 import 'package:sih_app/models/student.dart';
+import 'package:sih_app/models/tutor.dart';
 
-import 'tutorship_charts.dart';
+import 'tutorship_chats.dart';
 import 'settings.dart';
 import 'tutor_search.dart';
 import 'tutor_requests.dart';
@@ -26,7 +27,7 @@ class BottomTabController extends StatefulWidget {
 class _BottomTabControllerState extends State<BottomTabController> {
   int _index = 0;
 
-  PlatformUser? loggedInUser;
+  var loggedInUser;
   bool isStudent = false;
 
   Future<Account?> _loadLoggedinAccountFromPrefs() async {
@@ -81,7 +82,7 @@ class _BottomTabControllerState extends State<BottomTabController> {
           child = TutorshipChats();
           break;
         case 1:
-          child = TutorSearch();
+          child = TutorSearch(student: loggedInUser!);
           break;
         case 2:
           child = Settings();
@@ -106,7 +107,7 @@ class _BottomTabControllerState extends State<BottomTabController> {
           child = TutorshipChats();
           break;
         case 1:
-          child = TutorRequests();
+          child = MyTutorRequests();
           break;
         case 2:
           child = Settings();

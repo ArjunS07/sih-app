@@ -16,8 +16,8 @@ class Tutorship {
   factory Tutorship.fromJson(Map<String, dynamic> json) {
     return Tutorship(
       id: json['id'],
-      studentUuid: json['student_uuid'],
-      tutorUuid: json['tutor_uuid'],
+      studentUuid: json['student']['uuid'],
+      tutorUuid: json['tutor']['uuid'],
       status: json['status'],
     );
   }
