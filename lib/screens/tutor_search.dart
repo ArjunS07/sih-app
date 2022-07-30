@@ -48,26 +48,17 @@ class _TutorSearchState extends State<TutorSearch> {
 
 
   _tutorsList() {
-    return FutureBuilder<List<Tutor>>(
-        future: tutors,
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            List<Tutor> tutors = snapshot.data!;
-            return ListView.builder(
-                itemCount: tutors.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return Container(
-                    height: 75,
-                    color: Colors.white,
-                    child: Center(
-                      child: Text(tutors[index].name),
-                    ),
-                  );
-                });
-          } else if (snapshot.hasError) {
-            return Text("${snapshot.error}");
-          }
-        });
+    return ListView.separated(
+    
+    padding: const EdgeInsets.all(16.0),
+    itemCount: _tutors.length,
+    itemBuilder: (BuildContext context, int position) {
+      return _buildRow(position);
+    },
+    separatorBuilder: (context, index) {
+      return const Divider();
+    });    
+
   }
 
   @override
