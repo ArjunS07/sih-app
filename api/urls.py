@@ -7,7 +7,8 @@ urlpatterns = [
     path('students', views.StudentView.as_view(), name='student'),
     path('tutorslist', views.TutorListView.as_view(), name='tutors'),
     path('joinschool', views.JoinSchoolView.as_view(), name='joinschool'),
-    path('tutorships', views.TutorshipView.as_view(), name='tutorship'),
+    path('tutorships', views.TutorshipView.as_view(), name='tutorships'),
+    path('mytutorshipslist', views.MyTutorshipsView.as_view(), name='mytutorshipslist'),
     path('messages', views.MessageView.as_view(), name='messages'),
     path('zoommeeting', views.ZoomMeetingView.as_view(), name='zoommeeting'),
 

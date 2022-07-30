@@ -71,6 +71,8 @@ class Tutorship(models.Model):
     student = models.ForeignKey(Student, null=True, on_delete=models.SET_NULL)
     zoom_meeting = models.ForeignKey(ZoomMeeting, editable=False, null=True, default = None, on_delete=models.SET_NULL)
 
+
+    created = models.DateTimeField(auto_created=True, default=None, null=True)
     class TutorshipStatus(models.TextChoices):
         PENDING = 'PNDG', _('Pending')
         ACCEPTED = 'ACPT', _('Accepted')
