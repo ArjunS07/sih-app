@@ -17,6 +17,7 @@ from .models import School, Student, Tutor, Tutorship, Message, ZoomMeeting
 from . import serializers
 from .choices import SUBJECT_CHOICES, LANGUAGE_MEDIUM_CHOICES, GRADE_CHOICES, BOARD_CHOICES, all_choices
 
+
 class UserFromAccount(APIView):
     def get(self, request):
         account_id = request.query_params.get('account_id')
@@ -37,6 +38,7 @@ class UserFromAccount(APIView):
                 return HttpResponse(res, content_type='application/json', status=status.HTTP_200_OK)
             except Tutor.DoesNotExist:
                 return HttpResponse(status=status.HTTP_404_NOT_FOUND)
+
 
 class TutorView(APIView):
     def get(self, request, format=None):
@@ -109,22 +111,35 @@ class TutorListView(APIView):
         print(f'Got request to tutor list {request}')
         q = []
         if 'languages' in data:
+            # A student may speak 5 languages and upload all 5. We need to find tutors who just speak any 1 of those 5, so we use the or operator
             languages = data['languages'].split(',')
+            q_objects = []
             for language in languages:
-                q.append(Q(languages__contains=language))
+                q_objects.append(Q(languages__contains=language))
+            combined = reduce(operator.or_, q_objects)
+            q.append(combined)
         if 'boards' in data:
             boards = data['boards'].split(',')
+            q_objects = []
             for board in boards:
-                q.append(Q(boards__contains=board))
+                q_objects.append(Q(boards__contains=board))
+            combined = reduce(operator.or_, q_objects)
+            q.append(combined)
         if 'subjects' in data:
             subjects = data['subjects'].split(',')
+            q_objects = []
             for subject in subjects:
                 print(subject)
-                q.append(Q(subjects__contains=subject))
+                q_objects.apend(Q(subjects__contains=subject))
+            combined = reduce(operator.or_, q_objects)
+            q.append(combined)
         if 'grades' in data:
             grades = data['grades'].split(',')
+            q_objects = []
             for grade in grades:
-                q.append(Q(grades__contains=grade))
+                q_objects.append(Q(grades__contains=grade))
+            combined = reduce(operator.or_, q_objects)
+            q.append(combined)
 
         if len(q) > 0:
             matching_tutors = Tutor.objects.filter(
@@ -170,7 +185,7 @@ class TutorshipView(APIView):
             return HttpResponse(res, content_type='application/json', status=status.HTTP_201_CREATED)
         else:
             print(serializer.errors)
-            return HttpResponse(serializer.errors, content_type='application/json', status=status.HTTP_400_BAD_REQUEST)    
+            return HttpResponse(serializer.errors, content_type='application/json', status=status.HTTP_400_BAD_REQUEST)
 
     def patch(self, request, *args, **kwargs):
         data = request.data
@@ -182,13 +197,15 @@ class TutorshipView(APIView):
             tutorship = Tutorship.objects.get(id=tutorship_id)
         except:
             return HttpResponse(status=status.HTTP_404_NOT_FOUND)
-        serializer = serializers.TutorshipSerializer(tutorship, data=data, partial=True)
+        serializer = serializers.TutorshipSerializer(
+            tutorship, data=data, partial=True)
         if serializer.is_valid():
             serializer.save()
             res = JSONRenderer().render(serializer.data)
             return HttpResponse(res, content_type='application/json', status=status.HTTP_200_OK)
         else:
             return HttpResponse(serializer.errors, content_type='application/json', status=status.HTTP_400_BAD_REQUEST)
+
 
 class JoinSchoolView(APIView):
     def get(self, request, format=None):
