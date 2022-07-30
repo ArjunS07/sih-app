@@ -1,5 +1,4 @@
 // ignore_for_file: avoid_print
-
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:sih_app/models/platform_user.dart';
@@ -10,8 +9,7 @@ import 'package:sih_app/models/School.dart';
 import 'package:sih_app/models/student.dart';
 import 'package:sih_app/models/tutor.dart';
 
-final String ROOT_URL = 'http://localhost:8000';
-Uuid uuid = const Uuid();
+import 'base_api_utils.dart';
 
 Future<String> getAccountAuthToken(String email, String password) async {
   var headers = {
@@ -155,7 +153,9 @@ Future<Student?> createStudent(
   print('Joined student to school');
 
   Student student = Student(
-      account: account,
+      firstName: account.firstName,
+      lastName: account.lastName,
+      accountId: account.accountId,
       city: city,
       languages: languages,
       school: studentSchool,
@@ -201,7 +201,9 @@ Future<Tutor> createTutor(Account account, String city, List<String> languages,
   }
 
   Tutor tutor = Tutor(
-      account: account,
+      firstName: account.firstName,
+      lastName: account.lastName,
+      accountId: account.accountId,
       city: city,
       languages: languages,
       boards: boards,
@@ -241,32 +243,13 @@ Future<PlatformUser> getUserFromAccount(Account account) async {
     print(body);
     Map<String, dynamic> userDetails = body['user'];
     if (isStudent) {
-      List<String> languages = userDetails['languages'].cast<String>();
-      Student student = Student(
-        account: account,
-        city: userDetails['city'],
-        languages: languages,
-        school: School.fromJson(userDetails['school']),
-        grade: userDetails['grade'],
-        board: userDetails['board'],
-        uuid: userDetails['uuid'],
-      );
-      return student;
+      return Student.fromJson(userDetails);
     } else {
       List<String> languages = userDetails['languages'].cast<String>();
       List<String> boards = userDetails['boards'].cast<String>();
       List<String> grades = userDetails['grades'].cast<String>();
       List<String> subjects = userDetails['subjects'].cast<String>();
-      Tutor tutor = Tutor(
-        account: account,
-        city: userDetails['city'],
-        languages: languages,
-        boards: boards,
-        grades: grades,
-        subjects: subjects,
-        uuid: userDetails['uuid'],
-      );
-      return tutor;
+      return Tutor.fromJson(json.decode(json.encode(userDetails)));
     }
   } else {
     throw (response.reasonPhrase.toString());
