@@ -69,7 +69,7 @@ class ZoomMeeting(models.Model):
 class Tutorship(models.Model):
     tutor = models.ForeignKey(Tutor, null=True, on_delete=models.SET_NULL)
     student = models.ForeignKey(Student, null=True, on_delete=models.SET_NULL)
-    zoom_meeting = models.ForeignKey(ZoomMeeting, null=True, on_delete=models.SET_NULL)
+    zoom_meeting = models.ForeignKey(ZoomMeeting, editable=False, null=True, default = None, on_delete=models.SET_NULL)
 
     class TutorshipStatus(models.TextChoices):
         PENDING = 'PNDG', _('Pending')

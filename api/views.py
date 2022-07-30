@@ -106,7 +106,7 @@ class StudentView(APIView):
 class TutorListView(APIView):
     def get(self, request, format=None):
         data = request.query_params
-        print(request)
+        print(f'Got request to tutor list {request}')
         q = []
         if 'languages' in data:
             languages = data['languages'].split(',')
@@ -133,12 +133,14 @@ class TutorListView(APIView):
         else:
             matching_tutors = Tutor.objects.all()
 
-        print(matching_tutors)
-
         serialized_tutors = serializers.TutorSerializer(
             matching_tutors, many=True)
-        res = JSONRenderer().render(serialized_tutors.data)
-        return HttpResponse(res, content_type='application/json', status=status.HTTP_200_OK)
+        res = {
+            'num_results': len(matching_tutors),
+            'tutors': serialized_tutors.data,
+        }
+        print(f'Returning res {res}')
+        return HttpResponse(JSONRenderer().render(res), content_type='application/json', status=status.HTTP_200_OK)
 
 
 class TutorshipView(APIView):
@@ -160,11 +162,13 @@ class TutorshipView(APIView):
         json_data = json.dumps(data.dict()).encode('utf-8')
         stream = io.BytesIO(json_data)
         data = JSONParser().parse(stream)
+        print(data)
         serializer = serializers.TutorshipSerializer(data=data)
-        if serializer.is_valid():
+        if (serializer.is_valid()):
             serializer.save()
             return HttpResponse(serializer.data, content_type='application/json', status=status.HTTP_201_CREATED)
         else:
+            print(serializer.errors)
             return HttpResponse(serializer.errors, content_type='application/json', status=status.HTTP_400_BAD_REQUEST)
 
 

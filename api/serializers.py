@@ -4,19 +4,24 @@ from rest_framework import serializers
 
 from . import models
 from accounts import models as accounts_models
+from accounts import serializers as accounts_serializers
+
 
 class PlatformUserSerializer(serializers.ModelSerializer):
-    account__id = serializers.IntegerField(source='account.id')
+    account = accounts_serializers.UserModelSerializer(read_only=True)
     uuid = serializers.UUIDField()
     city = serializers.CharField(max_length=8)
     languages = serializers.ListField(
         child=serializers.CharField(max_length=12))
-    profile_image_s3_path = serializers.CharField(read_only=True, max_length=255)
-    
+    profile_image_s3_path = serializers.CharField(
+        read_only=True, max_length=255)
+
     class Meta:
         model = accounts_models.PlatformUser
-        fields = ('account__id', 'uuid', 'city', 'languages', 'profile_image_s3_path')
+        fields = ('account', 'uuid', 'city',
+                  'languages', 'profile_image_s3_path')
         abstract = True
+
 
 class TutorSerializer(PlatformUserSerializer):
 
@@ -27,7 +32,7 @@ class TutorSerializer(PlatformUserSerializer):
 
     class Meta:
         model = models.Tutor
-        fields = ('account__id', 'uuid', 'city', 'languages', 'profile_image_s3_path',
+        fields = ('account', 'uuid', 'city', 'languages', 'profile_image_s3_path',
                   'boards', 'subjects', 'grades')
 
     def create(self, validated_data):
@@ -40,9 +45,12 @@ class TutorSerializer(PlatformUserSerializer):
             raise serializers.ValidationError("Account not found")
 
         if len(models.Student.objects.filter(account=account)) > 0 or len(models.Tutor.objects.filter(account=account)) > 0:
-            raise serializers.ValidationError("Platform user linked to given account already exists")
-        
+            raise serializers.ValidationError(
+                "Platform user linked to given account already exists")
+
         return models.Tutor.objects.create(account=account, **validated_data)
+
+
 class SchoolSerializer(serializers.Serializer):
     account__id = serializers.IntegerField(source='account.id')
     name = serializers.CharField(max_length=128)
@@ -50,11 +58,9 @@ class SchoolSerializer(serializers.Serializer):
     city = serializers.CharField(max_length=8)
     join_code = serializers.CharField(max_length=10)
 
-
     class Meta:
         model = models.School
         fields = ('account__id', 'name', 'city', 'join_code')
-
 
 
 class StudentSerializer(PlatformUserSerializer):
@@ -62,10 +68,11 @@ class StudentSerializer(PlatformUserSerializer):
     board = serializers.CharField(max_length=8)
     grade = serializers.CharField(max_length=8)
     school = SchoolSerializer(read_only=True)
+
     class Meta:
         model = models.Student
-        fields = ('uuid', 'account__id', 'city', 'languages', 'profile_image_s3_path', 
-        'board', 'grade', 'school')
+        fields = ('uuid', 'account__id', 'city', 'languages', 'profile_image_s3_path',
+                  'board', 'grade', 'school')
 
     def create(self, validated_data):
         account_id = int(validated_data['account']['id'])
@@ -77,8 +84,9 @@ class StudentSerializer(PlatformUserSerializer):
             raise serializers.ValidationError("Account not found")
 
         if len(models.Student.objects.filter(account=account)) > 0 or len(models.Tutor.objects.filter(account=account)) > 0:
-            raise serializers.ValidationError("Platform user linked to given account already exists")
-        
+            raise serializers.ValidationError(
+                "Platform user linked to given account already exists")
+
         return models.Student.objects.create(account=account, **validated_data)
 
 
@@ -95,24 +103,26 @@ class ZoomMeetingSerializer(serializers.Serializer):
     def create(self, validated_data):
         return models.ZoomMeeting.objects.create(**validated_data)
 
-
 class TutorshipSerializer(serializers.Serializer):
-    tutor_id = serializers.CharField(source='tutor.uuid', read_only=True)
-    student_id = serializers.CharField(
-        source='student.uuid', read_only=True)
-    status = serializers.CharField(max_length=8)
-    zoom_meeting_id = serializers.CharField(
-        source='zoom_meeting.meeting_id', read_only=True)
+    student__uuid = serializers.CharField(source='student.uuid')
+    tutor__uuid = serializers.CharField(source='tutor.uuid')
+    zoom_meeting__meeting_id = serializers.CharField(read_only=True)
+    status = serializers.CharField(max_length=32)
 
     class Meta:
         model = models.Tutorship
-        fields = ('tutor_id', 'student_id', 'status',
-                  'zoom_meeting_meeting_id')
-
-    # def create(self, validated_data):
-        # return models.Tutorship.objects.create(**validated_data)
-
-
+        fields = ('student__uuid', 'tutor__uuid', 'zoom_meeting__meeting_id', 'status')
+        
+    def create(self, validated_data):
+        print(f'Data: {self.data}')
+        print(f'Validated data: {validated_data}')
+        student_uuid = validated_data['student']['uuid']
+        tutor_uuid = validated_data['tutor']['uuid']
+        student = models.Student.objects.get(uuid=student_uuid)
+        tutor = models.Tutor.objects.get(uuid=tutor_uuid)
+        del validated_data['student']
+        del validated_data['tutor']
+        return models.Tutorship.objects.create(student=student, tutor=tutor, **validated_data)
 class MessageSerializer(serializers.Serializer):
     text = serializers.CharField()
     timestamp = serializers.DateTimeField(read_only=True)
