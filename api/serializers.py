@@ -24,7 +24,7 @@ class PlatformUserSerializer(serializers.ModelSerializer):
 
 
 class TutorSerializer(PlatformUserSerializer):
-
+    account__id = serializers.IntegerField(source='account.id')
     boards = serializers.ListField(child=serializers.CharField(max_length=128))
     subjects = serializers.ListField(
         child=serializers.CharField(max_length=1024))
@@ -32,7 +32,7 @@ class TutorSerializer(PlatformUserSerializer):
 
     class Meta:
         model = models.Tutor
-        fields = ('account', 'uuid', 'city', 'languages', 'profile_image_s3_path',
+        fields = ('account__id', 'uuid', 'city', 'languages', 'profile_image_s3_path',
                   'boards', 'subjects', 'grades')
 
     def create(self, validated_data):
@@ -64,7 +64,7 @@ class SchoolSerializer(serializers.Serializer):
 
 
 class StudentSerializer(PlatformUserSerializer):
-
+    account__id = serializers.IntegerField(source='account.id')
     board = serializers.CharField(max_length=8)
     grade = serializers.CharField(max_length=8)
     school = SchoolSerializer(read_only=True)
@@ -103,26 +103,35 @@ class ZoomMeetingSerializer(serializers.Serializer):
     def create(self, validated_data):
         return models.ZoomMeeting.objects.create(**validated_data)
 
-class TutorshipSerializer(serializers.Serializer):
-    student__uuid = serializers.CharField(source='student.uuid')
-    tutor__uuid = serializers.CharField(source='tutor.uuid')
+
+class TutorshipSerializer(serializers.ModelSerializer):
+    # student__uuid = serializers.UUIDField(source='student.uuid', format='hex')
+    student = StudentSerializer(read_only=True)
+    # tutor__uuid = serializers.UUIDField(source='tutor.uuid', format='hex')
+    tutor = TutorSerializer(read_only=True)
     zoom_meeting__meeting_id = serializers.CharField(read_only=True)
     status = serializers.CharField(max_length=32)
 
     class Meta:
         model = models.Tutorship
-        fields = ('student__uuid', 'tutor__uuid', 'zoom_meeting__meeting_id', 'status')
-        
+        fields = ('id', 'student', 'tutor',
+                  'zoom_meeting__meeting_id', 'status')
+
     def create(self, validated_data):
-        print(f'Data: {self.data}')
-        print(f'Validated data: {validated_data}')
-        student_uuid = validated_data['student']['uuid']
-        tutor_uuid = validated_data['tutor']['uuid']
+        data = self.initial_data
+        print(f'Data: {data}')
+        student_uuid = data['student__uuid']
+        tutor_uuid = data['tutor__uuid']
         student = models.Student.objects.get(uuid=student_uuid)
         tutor = models.Tutor.objects.get(uuid=tutor_uuid)
-        del validated_data['student']
-        del validated_data['tutor']
         return models.Tutorship.objects.create(student=student, tutor=tutor, **validated_data)
+
+    def update(self, instance, validated_data):
+        print('Validated in serializer:', validated_data)
+        instance.status = validated_data['status']
+        instance.save()
+        return instance
+
 class MessageSerializer(serializers.Serializer):
     text = serializers.CharField()
     timestamp = serializers.DateTimeField(read_only=True)

@@ -170,8 +170,25 @@ class TutorshipView(APIView):
             return HttpResponse(res, content_type='application/json', status=status.HTTP_201_CREATED)
         else:
             print(serializer.errors)
-            return HttpResponse(serializer.errors, content_type='application/json', status=status.HTTP_400_BAD_REQUEST)
+            return HttpResponse(serializer.errors, content_type='application/json', status=status.HTTP_400_BAD_REQUEST)    
 
+    def patch(self, request, *args, **kwargs):
+        data = request.data
+        tutorship_id = data.get('id', None)
+        tutorship_status = data.get('status', None)
+        if not tutorship_id or not tutorship_status:
+            return HttpResponse(status=status.HTTP_400_BAD_REQUEST)
+        try:
+            tutorship = Tutorship.objects.get(id=tutorship_id)
+        except:
+            return HttpResponse(status=status.HTTP_404_NOT_FOUND)
+        serializer = serializers.TutorshipSerializer(tutorship, data=data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            res = JSONRenderer().render(serializer.data)
+            return HttpResponse(res, content_type='application/json', status=status.HTTP_201_CREATED)
+        else:
+            return HttpResponse(serializer.errors, content_type='application/json', status=status.HTTP_400_BAD_REQUEST)
 
 class JoinSchoolView(APIView):
     def get(self, request, format=None):
