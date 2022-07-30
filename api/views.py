@@ -110,6 +110,7 @@ class TutorListView(APIView):
         data = request.query_params
         print(f'Got request to tutor list {request}')
         q = []
+        # Within a category = or.
         if 'languages' in data:
             # A student may speak 5 languages and upload all 5. We need to find tutors who just speak any 1 of those 5, so we use the or operator
             languages = data['languages'].split(',')
@@ -207,6 +208,31 @@ class TutorshipView(APIView):
             return HttpResponse(serializer.errors, content_type='application/json', status=status.HTTP_400_BAD_REQUEST)
 
 
+class MyTutorshipsView(APIView):
+    def get(self, request, format=None):
+        data = request.query_params
+        print(data)
+        tutor_uuid = data.get('tutor_uuid', None)
+        print(tutor_uuid)
+        if not tutor_uuid:
+            return HttpResponse(status=status.HTTP_400_BAD_REQUEST)
+        try:
+            tutor = Tutor.objects.get(uuid=tutor_uuid)
+        except Exception as e:
+            print(e)
+            print('Could not find tutor')
+            return HttpResponse(status=status.HTTP_404_NOT_FOUND)
+        tutorships = Tutorship.objects.filter(
+            tutor=tutor,
+            status='PNDG'
+        )
+        serialized_tutorships = serializers.TutorshipSerializer(tutorships, many=True)
+        res = {
+            'num_results': len(tutorships),
+            'tutorships': serialized_tutorships.data
+        }        
+        return HttpResponse(JSONRenderer().render(res), content_type='application/json', status=status.HTTP_200_OK)
+        
 class JoinSchoolView(APIView):
     def get(self, request, format=None):
         data = request.query_params
