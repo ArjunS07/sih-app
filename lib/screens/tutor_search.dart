@@ -76,33 +76,55 @@ class _TutorSearchState extends State<TutorSearch> {
             } else {
               print(snapshot.data);
               Map data = snapshot.data as Map;
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text('${tutor.name}',
-                      textAlign: TextAlign.left,
-                      style: const TextStyle(
-                          fontSize: 24.0, fontWeight: FontWeight.bold)),
-                  const SizedBox(height: 5),
-                  Text('${data['city']}', textAlign: TextAlign.left),
-                  const SizedBox(height: 5),
-                  Text('Speaks ${data['languages']}',
-                      textAlign: TextAlign.left),
-                  Text('Teaches ${data['subjects']}',
-                      textAlign: TextAlign.left),
-                ],
-              );
+              return Card(
+                  child: Padding(
+                padding: const EdgeInsets.symmetric(vertical:16.0),
+                child: ListTile(
+                  title: Text('${tutor.name}',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 21.0)),
+                  isThreeLine: true,
+                  subtitle: Padding(
+                    padding: const EdgeInsets.only(top: 16.0),
+                    child: Text(
+                        'City: ${data['city']}\nSpeaks ${data['languages']}\n\nSubjects: ${data['subjects']}',
+                        style: TextStyle(fontSize: 16.0)),
+                  ),
+
+                  // leading: const CircleAvatar(
+                  //   //TODO
+                  //     backgroundImage: NetworkImage(
+                  //         "https://images.unsplash.com/photo-1547721064-da6cfb341d50")),
+                  trailing: IconButton(
+                      onPressed: () => {
+                            tutorship_api_utils.createTutorship(
+                                _tutors[index],
+                                widget.student,
+                                ['MATH', 'ENGLISH']) //TODO: Read subjects
+                          },
+                      icon: const Icon(Icons.person_add, color: Colors.indigo)),
+                ),
+              ));
+              // return Column(
+              //   crossAxisAlignment: CrossAxisAlignment.start,
+              //   children: <Widget>[
+              //     Text('${tutor.name}',
+              //         textAlign: TextAlign.left,
+              //         style: const TextStyle(
+              //             fontSize: 24.0, fontWeight: FontWeight.bold)),
+              //     const SizedBox(height: 5),
+              //     ,
+              //     const SizedBox(height: 5),
+              //     Text('Speaks ${data['languages']}',
+              //         textAlign: TextAlign.left),
+              //     Text('Teaches ${data['subjects']}',
+              //         textAlign: TextAlign.left),
+              //   ],
+              // );
             }
           },
         ),
       ),
-      const SizedBox(width: 15.0),
-      IconButton(
-          onPressed: () => {
-                tutorship_api_utils.createTutorship(_tutors[index],
-                    widget.student, ['MATH', 'ENGLISH']) //TODO: Read subjects
-              },
-          icon: const Icon(Icons.person_add, color: Colors.indigo)),
     ]);
   }
 
@@ -119,18 +141,16 @@ class _TutorSearchState extends State<TutorSearch> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             _infoLabel(),
+            const SizedBox(height: 10.0),
             _tutors.isEmpty
                 ? const Text('No tutors available')
                 : Expanded(
-                    child: ListView.separated(
-                        padding: const EdgeInsets.all(16.0),
-                        itemCount: _tutors.length,
-                        itemBuilder: (BuildContext context, int position) {
-                          return _buildRow(position);
-                        },
-                        separatorBuilder: (context, index) {
-                          return const Divider();
-                        })),
+                    child: ListView.builder(
+                    itemCount: _tutors.length,
+                    itemBuilder: (BuildContext context, int position) {
+                      return _buildRow(position);
+                    },
+                  )),
           ],
         ),
       ),
