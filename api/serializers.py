@@ -111,13 +111,15 @@ class TutorshipSerializer(serializers.ModelSerializer):
     student = StudentSerializer(read_only=True)
     # tutor__uuid = serializers.UUIDField(source='tutor.uuid', format='hex')
     tutor = TutorSerializer(read_only=True)
+    tutorship_subjects = serializers.ListField(
+        child=serializers.CharField(max_length=1024))
     zoom_meeting__meeting_id = serializers.CharField(read_only=True)
     status = serializers.CharField(max_length=32)
     created = serializers.DateTimeField()
 
     class Meta:
         model = models.Tutorship
-        fields = ('id', 'student', 'tutor',
+        fields = ('id', 'student', 'tutor', 'tutorship_subjects',
                   'zoom_meeting__meeting_id', 'status', 'created')
 
     def create(self, validated_data):

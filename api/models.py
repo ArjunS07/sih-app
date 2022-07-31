@@ -70,7 +70,8 @@ class Tutorship(models.Model):
     tutor = models.ForeignKey(Tutor, null=True, on_delete=models.SET_NULL)
     student = models.ForeignKey(Student, null=True, on_delete=models.SET_NULL)
     zoom_meeting = models.ForeignKey(ZoomMeeting, editable=False, null=True, default = None, on_delete=models.SET_NULL)
-
+    tutorship_subjects = MultiSelectField(
+        choices=SUBJECT_CHOICES, max_length=1024, default=None, null=True)
 
     created = models.DateTimeField(auto_created=True, default=None, null=True, editable=False)
     class TutorshipStatus(models.TextChoices):
