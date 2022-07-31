@@ -13,6 +13,7 @@ import 'base_api_utils.dart';
 import 'accounts_api_utils.dart' as accounts_api_utils;
 
 Future<List<Tutor>> loadTutorsFromParams(
+  String studentUuid,
     {List<String>? languages,
     List<String>? grades,
     List<String>? boards,
@@ -34,6 +35,8 @@ Future<List<Tutor>> loadTutorsFromParams(
     print('Joined subjects $joined');
     queryParams['subjects'] = joined;
   }
+
+  queryParams['student_uuid'] = studentUuid;
 
   var headers = {'Content-Type': 'application/json'};
   final tutorSearchUri =

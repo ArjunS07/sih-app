@@ -33,6 +33,7 @@ class _TutorSearchState extends State<TutorSearch> {
     print("loading tutors from params");
     print('Student grade: ${widget.student.grade}');
     final loadedTutors = await tutor_api_utils.loadTutorsFromParams(
+      widget.student.uuid,
         boards: [widget.student.board],
         grades: [widget.student.grade],
         languages: _selectedLanguagesIds,
