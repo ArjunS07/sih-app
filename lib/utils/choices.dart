@@ -5,8 +5,7 @@ import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:sih_app/models/choice.dart';
 
-
-decodeChoice(String choiceCode, String choiceType) async {
+Future<String?> decodeChoice(String choiceCode, String choiceType) async {
   final data = await readJson('assets/choices/$choiceType.json');
   for (var choiceData in data) {
     Choice choice = Choice.fromJson(choiceData);
@@ -15,6 +14,7 @@ decodeChoice(String choiceCode, String choiceType) async {
       return choice.name;
     }
   }
+  return null;
 }
 
 readJson(String fileName) async {

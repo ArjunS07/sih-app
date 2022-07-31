@@ -19,7 +19,6 @@ class Tutor extends PlatformUser {
     required super.languages,
   });
 
-
   factory Tutor.fromJson(Map<String, dynamic> json) {
     return Tutor(
       firstName: json['account__first_name'],
@@ -38,15 +37,15 @@ class Tutor extends PlatformUser {
     );
   }
 
-  Future<String> get decodedSubjectsList async {
-    return getDecodedListMessage(subjects, 'subjects');
+  Future<String?> get decodedGrades async {
+    return displayListProperty(grades, 'grades');
   }
 
-  Future<String> get decodedBoardsList async {
-    return getDecodedListMessage(boards, 'boards');
+  Future<String?> get decodedSubjects async {
+    return displayListProperty(subjects, 'subjects');
   }
 
-  Future<String> get decodedGradesList async {
-    return getDecodedListMessage(grades, 'grades');
+  Future<String?> get decodedBoards async {
+    return displayListProperty(boards, 'boards');
   }
 }

@@ -51,11 +51,11 @@ class _TutorSearchState extends State<TutorSearch> {
   Future<Map<String, dynamic>> tutorData(Tutor tutor) async {
     print('Calling tutordata function');
     var data = {
-      'languages': await tutor.decodedLanguagesList,
+      'languages': await tutor.decodedLanguagesDisplay,
       'city': await tutor.decodedCity,
-      'subjects': await tutor.decodedSubjectsList,
-      'grades': await tutor.decodedGradesList,
-      'boards': await tutor.decodedBoardsList
+      'subjects': await tutor.decodedSubjects,
+      'grades': await tutor.decodedGrades,
+      'boards': await tutor.decodedBoards
     };
     print('Data: $data');
     return data;
