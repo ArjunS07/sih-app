@@ -81,7 +81,7 @@ class _TutorSearchState extends State<TutorSearch> {
     return MultiSelectDialogField(
         title: const Text('Filter tutors by languages'),
         buttonText:
-            const Text('Tutor languages', style: TextStyle(color: Colors.grey)),
+            const Text('What language do you want your tutor to speak?', style: TextStyle(color: Colors.grey)),
         buttonIcon: Icon(Icons.language),
         separateSelectedItems: true,
         items: _languageChoices
@@ -101,7 +101,7 @@ class _TutorSearchState extends State<TutorSearch> {
   _subjectSelectionField() {
     return MultiSelectDialogField(
         buttonText:
-            const Text('Tutor subjects', style: TextStyle(color: Colors.grey)),
+            const Text('What do you want to learn?', style: TextStyle(color: Colors.grey)),
         title: const Text('Filter tutors by subjects'),
         buttonIcon: Icon(Icons.class_),
         separateSelectedItems: true,
