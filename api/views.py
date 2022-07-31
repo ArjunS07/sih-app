@@ -125,14 +125,15 @@ class TutorListView(APIView):
             for board in boards:
                 q_objects.append(Q(boards__contains=board))
             combined = reduce(operator.or_, q_objects)
+            print(combined)
             q.append(combined)
         if 'subjects' in data:
             subjects = data['subjects'].split(',')
             q_objects = []
             for subject in subjects:
-                print(subject)
-                q_objects.apend(Q(subjects__contains=subject))
+                q_objects.append(Q(subjects__contains=subject))
             combined = reduce(operator.or_, q_objects)
+            print(combined)
             q.append(combined)
         if 'grades' in data:
             grades = data['grades'].split(',')
@@ -140,7 +141,9 @@ class TutorListView(APIView):
             for grade in grades:
                 q_objects.append(Q(grades__contains=grade))
             combined = reduce(operator.or_, q_objects)
+            print(combined)
             q.append(combined)
+        print(q)
 
         if len(q) > 0:
             matching_tutors = Tutor.objects.filter(
@@ -179,7 +182,15 @@ class TutorshipView(APIView):
         stream = io.BytesIO(json_data)
         data = JSONParser().parse(stream)
         print(data)
+
+        try:
+            subjects = data['tutorship_subjects'].split(',')
+        except:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+        data['tutorship_subjects'] = subjects
+
         serializer = serializers.TutorshipSerializer(data=data)
+        
         if (serializer.is_valid()):
             serializer.save()
             res = JSONRenderer().render(serializer.data)
@@ -198,6 +209,13 @@ class TutorshipView(APIView):
             tutorship = Tutorship.objects.get(id=tutorship_id)
         except:
             return HttpResponse(status=status.HTTP_404_NOT_FOUND)
+
+        try:
+            subjects = data['tutorship_subjects'].split(',')
+        except:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+        data['tutorship_subjects'] = subjects
+
         serializer = serializers.TutorshipSerializer(
             tutorship, data=data, partial=True)
         if serializer.is_valid():

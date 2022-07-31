@@ -73,7 +73,7 @@ class Tutorship(models.Model):
     tutorship_subjects = MultiSelectField(
         choices=SUBJECT_CHOICES, max_length=1024, default=None, null=True)
 
-    created = models.DateTimeField(auto_created=True, default=None, null=True, editable=False)
+    created = models.DateTimeField(auto_now_add=True, null=True, editable=False)
     class TutorshipStatus(models.TextChoices):
         PENDING = 'PNDG', _('Pending')
         ACCEPTED = 'ACPT', _('Accepted')

@@ -115,7 +115,7 @@ class TutorshipSerializer(serializers.ModelSerializer):
         child=serializers.CharField(max_length=1024))
     zoom_meeting__meeting_id = serializers.CharField(read_only=True)
     status = serializers.CharField(max_length=32)
-    created = serializers.DateTimeField()
+    created = serializers.DateTimeField(read_only=True)
 
     class Meta:
         model = models.Tutorship
