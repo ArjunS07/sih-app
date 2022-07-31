@@ -54,12 +54,27 @@ class _TutorSearchState extends State<TutorSearch> {
     });
   }
 
+  Future<Map<String, dynamic>> tutorData(Tutor tutor) async {
+    print('Calling tutordata function');
+    var data = {
+      'languages': await tutor.decodedLanguagesDisplay,
+      'city': await tutor.decodedCity,
+      'subjects': await tutor.decodedSubjects,
+      'grades': await tutor.decodedGrades,
+      'boards': await tutor.decodedBoards
+    };
+    print('Data: $data');
+    return data;
+  }
+
   @override
   void initState() {
     super.initState();
     _loadTutors();
     _getChoices();
   }
+
+  // search widgets
 
   _languageSelectionField() {
     return MultiSelectDialogField(
@@ -113,19 +128,6 @@ class _TutorSearchState extends State<TutorSearch> {
         ));
   }
 
-  Future<Map<String, dynamic>> tutorData(Tutor tutor) async {
-    print('Calling tutordata function');
-    var data = {
-      'languages': await tutor.decodedLanguagesDisplay,
-      'city': await tutor.decodedCity,
-      'subjects': await tutor.decodedSubjects,
-      'grades': await tutor.decodedGrades,
-      'boards': await tutor.decodedBoards
-    };
-    print('Data: $data');
-    return data;
-  }
-
   // List view widgets
   _buildRow(int index) {
     var tutor = _tutors[index];
@@ -165,7 +167,8 @@ class _TutorSearchState extends State<TutorSearch> {
                             tutorship_api_utils.createTutorship(
                                 _tutors[index],
                                 widget.student,
-                                ['MATH', 'ENGLISH']) //TODO: Read subjects
+                                ['MATH', 'ENGLISH']),
+                                _showTutorRequestSnackBar(_tutors[index].name) //TODO: Read subjects
                           },
                       icon: const Icon(Icons.person_add, color: Colors.indigo)),
                 ),
@@ -175,6 +178,15 @@ class _TutorSearchState extends State<TutorSearch> {
         ),
       ),
     ]);
+  }
+
+  void _showTutorRequestSnackBar(String tutorName) {
+    String message = 'Sent request to $tutorName';
+    var snackBar = SnackBar(
+      content: Text(message),
+    );
+
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 
   @override
