@@ -1,4 +1,5 @@
 from functools import reduce
+from nis import match
 import operator
 import io
 import json
@@ -109,6 +110,16 @@ class TutorListView(APIView):
     def get(self, request, format=None):
         data = request.query_params
         print(f'Got request to tutor list {request}')
+
+        student_uuid = data.get('student_uuid', None)
+        if not student_uuid:
+            return HttpResponse(status=status.HTTP_400_BAD_REQUEST)
+
+        try:
+            matching_student = Student.objects.get(uuid=student_uuid)
+        except:
+            return HttpResponse(status=status.HTTP_404_NOT_FOUND)
+
         q = []
         # Within a category = or.
         if 'languages' in data:
@@ -129,6 +140,7 @@ class TutorListView(APIView):
             q.append(combined)
         if 'subjects' in data:
             subjects = data['subjects'].split(',')
+            print('Split subjects into', subjects)
             q_objects = []
             for subject in subjects:
                 q_objects.append(Q(subjects__contains=subject))
@@ -151,6 +163,8 @@ class TutorListView(APIView):
             )
         else:
             matching_tutors = Tutor.objects.all()
+
+        matching_tutors = [tutor for tutor in matching_tutors if matching_student not in tutor.active_tutorship_students]
 
         serialized_tutors = serializers.TutorSerializer(
             matching_tutors, many=True)
@@ -190,7 +204,7 @@ class TutorshipView(APIView):
         data['tutorship_subjects'] = subjects
 
         serializer = serializers.TutorshipSerializer(data=data)
-        
+
         if (serializer.is_valid()):
             serializer.save()
             res = JSONRenderer().render(serializer.data)
@@ -244,13 +258,15 @@ class MyTutorshipsView(APIView):
             tutor=tutor,
             status='PNDG'
         )
-        serialized_tutorships = serializers.TutorshipSerializer(tutorships, many=True)
+        serialized_tutorships = serializers.TutorshipSerializer(
+            tutorships, many=True)
         res = {
             'num_results': len(tutorships),
             'tutorships': serialized_tutorships.data
-        }        
+        }
         return HttpResponse(JSONRenderer().render(res), content_type='application/json', status=status.HTTP_200_OK)
-        
+
+
 class JoinSchoolView(APIView):
     def get(self, request, format=None):
         data = request.query_params
@@ -345,25 +361,3 @@ class ZoomMeetingView(APIView):
             return HttpResponse('Updated meeting', status=status.HTTP_200_OK)
         else:
             return HttpResponse('Missing meeting id or occurrence', status=status.HTTP_400_BAD_REQUEST)
-
-
-"""
-    def get(self, request, format=None):
-        uuid = request.query_params.get('uuid', None)
-        if uuid is None:
-            return Response(status=status.HTTP_400_BAD_REQUEST)
-        tutor = Tutor.objects.get(uuid=uuid)
-        serialized_tutor = serializers.TutorSerializer(tutor)
-        res = JSONRenderer().render(serialized_tutor.data)
-        return HttpResponse(res, content_type='application/json', status=status.HTTP_200_OK)
-
-    def post(self, request, format=None):
-        data = request.POST
-        json_data = json.dumps(data.dict()).encode('utf-8')
-        stream = io.BytesIO(json_data)
-        data = JSONParser().parse(stream)
-        serializer = serializers.TutorSerializer(data=data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-"""

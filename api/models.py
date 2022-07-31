@@ -54,8 +54,19 @@ class Tutor(PlatformUser):
         choices=SUBJECT_CHOICES, max_length=1024, default=None, null=True)
 
     @property
-    def get_tutor_active_mentorships(self) -> int:
+    def active_tutorships(self):
         return Tutorship.objects.filter(tutor=self)
+
+    @property
+    def num_active_tutorships(self) -> int:
+        return len(self.active_tutorships)
+    
+    @property
+    def active_tutorship_students(self):
+        students = []
+        for tutorship in self.active_tutorships:
+            students.append(tutorship.student)
+        return students
 
 class ZoomMeeting(models.Model):
     link = models.CharField(max_length=1024, default=None, null=True)
