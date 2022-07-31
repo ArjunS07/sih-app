@@ -5,11 +5,21 @@ import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:sih_app/models/choice.dart';
 
+
+decodeChoice(String choiceCode, String choiceType) async {
+  final data = await readJson('assets/choices/$choiceType.json');
+  for (var choiceData in data) {
+    Choice choice = Choice.fromJson(choiceData);
+    if (choice.id == choiceCode) {
+      print('Success finding matching choice');
+      return choice.name;
+    }
+  }
+}
+
 readJson(String fileName) async {
     final String response = await rootBundle.loadString(fileName);
-    print('Loaded response $response');
     final data = await json.decode(response);
-    print('Decoded data into $data');
     return data;
 }
 
@@ -18,7 +28,6 @@ jsonToChoices(data) async {
     for (var choice in data) {
         choices.add(Choice.fromJson(choice));
     }
-    print('Converted json to choices $choices');
     return choices;
 }
 

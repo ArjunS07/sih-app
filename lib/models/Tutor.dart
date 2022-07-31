@@ -2,8 +2,6 @@ import 'package:sih_app/utils/accounts_api_utils.dart';
 
 import 'platform_user.dart';
 
-import 'account.dart';
-
 class Tutor extends PlatformUser {
   List<String> grades = [];
   List<String> boards = [];
@@ -21,10 +19,11 @@ class Tutor extends PlatformUser {
     required super.languages,
   });
 
+
   factory Tutor.fromJson(Map<String, dynamic> json) {
     return Tutor(
-      firstName: json['first_name'],
-      lastName: json['last_name'],
+      firstName: json['account__first_name'],
+      lastName: json['account__last_name'],
       grades: (json['grades'] as List).map((grade) => grade as String).toList(),
       boards: (json['boards'] as List).map((board) => board as String).toList(),
       subjects: (json['subjects'] as List)
@@ -37,5 +36,17 @@ class Tutor extends PlatformUser {
           .map((language) => language as String)
           .toList(),
     );
+  }
+
+  Future<String> get decodedSubjectsList async {
+    return getDecodedListMessage(subjects, 'subjects');
+  }
+
+  Future<String> get decodedBoardsList async {
+    return getDecodedListMessage(boards, 'boards');
+  }
+
+  Future<String> get decodedGradesList async {
+    return getDecodedListMessage(grades, 'grades');
   }
 }

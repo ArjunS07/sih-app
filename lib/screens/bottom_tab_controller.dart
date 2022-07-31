@@ -107,7 +107,7 @@ class _BottomTabControllerState extends State<BottomTabController> {
           child = TutorshipChats();
           break;
         case 1:
-          child = MyTutorRequests();
+          child = MyTutorRequests(loggedInTutor: loggedInUser);
           break;
         case 2:
           child = Settings();

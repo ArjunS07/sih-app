@@ -13,14 +13,14 @@ class MyTutorRequests extends StatefulWidget {
 }
 
 class _MyTutorRequestsState extends State<MyTutorRequests> {
-  var requests = <dynamic>[];
+  var _requests = <dynamic>[];
 
   // api stuff
   Future<void> _loadRequests() async {
     final tutorshipRequests =
         await getMyTutorshipRequests(widget.loggedInTutor);
     setState(() {
-      requests = tutorshipRequests;
+      _requests = tutorshipRequests;
     });
   }
 
@@ -29,6 +29,18 @@ class _MyTutorRequestsState extends State<MyTutorRequests> {
     // TODO: implement initState
     super.initState();
     _loadRequests();
+  }
+
+  // ui stuff
+
+  Widget _buildRow(int index) {
+    var request = _requests[index];
+    return Row(children: <Widget>[
+      Text(request.name,
+          style: const TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold)),
+      Text(request.relativeTimeSinceCreated, style: const TextStyle(color: Colors.grey)),
+      Text('Wants to learn')
+    ]);
   }
 
   @override

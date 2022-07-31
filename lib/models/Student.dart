@@ -21,16 +21,19 @@ class Student extends PlatformUser {
   });
 
   factory Student.fromJson(Map<String, dynamic> json) {
+    print(json);
     return Student(
-      firstName: json['first_name'],
-      lastName: json['last_name'],
+      firstName: json['account__first_name'],
+      lastName: json['account__last_name'],
       school: School.fromJson(json['school']),
       board: json['board'],
       grade: json['grade'],
       accountId: json['account__id'],
       uuid: json['uuid'],
       city: json['city'],
-      languages: (json['languages'] as List).map((language) => language as String).toList(),
+      languages: (json['languages'] as List)
+          .map((language) => language as String)
+          .toList(),
     );
   }
 }

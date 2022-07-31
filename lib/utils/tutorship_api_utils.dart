@@ -13,13 +13,14 @@ import 'package:sih_app/models/tutorship.dart';
 import 'base_api_utils.dart';
 import 'accounts_api_utils.dart' as accounts_api_utils;
 
-Future<Tutorship> createTutorship(Tutor tutor, Student student,
+Future<Tutorship> createTutorship(Tutor tutor, Student student, List<String> subjects,
     {String status = 'PNDG'}) async {
   var headers = {'Content-Type': 'application/x-www-form-urlencoded'};
   var request = http.Request('POST', Uri.parse('$ROOT_URL/api/tutorships'));
   request.bodyFields = {
     'tutor__uuid': tutor.uuid,
     'student__uuid': student.uuid,
+    'tutorship_subjects': subjects.join(','), 
     'status': status
   };
   request.headers.addAll(headers);
