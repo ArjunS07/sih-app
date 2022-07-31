@@ -22,7 +22,11 @@ class _TutorSearchState extends State<TutorSearch> {
   //API interfacing
   Future<void> _loadTutors() async {
     print("loading tutors from params");
-    final loadedTutors = await tutor_api_utils.loadTutorsFromParams();
+    print('Student grade: ${widget.student.grade}');
+    final loadedTutors = await tutor_api_utils.loadTutorsFromParams(
+      boards: [widget.student.board],
+      grades: [widget.student.grade]
+    );
     setState(() {
       _tutors = loadedTutors;
     });
@@ -38,14 +42,11 @@ class _TutorSearchState extends State<TutorSearch> {
 
   // General Widgets
   _infoLabel() {
-    return Padding(
-      padding: const EdgeInsets.only(top: 8.0, left: 16.0),
-      child: Text('Automatically filtering by tutors who teach your grade',
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            color: Colors.grey.shade600,
-          )),
-    );
+    return Text('Automatically filtering by tutors who teach your grade and board',
+        textAlign: TextAlign.center,
+        style: TextStyle(
+          color: Colors.grey.shade600,
+        ));
   }
 
   Future<Map<String, dynamic>> tutorData(Tutor tutor) async {
@@ -135,7 +136,7 @@ class _TutorSearchState extends State<TutorSearch> {
         title: const Text('Search for tutors'),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -143,7 +144,7 @@ class _TutorSearchState extends State<TutorSearch> {
             _infoLabel(),
             const SizedBox(height: 10.0),
             _tutors.isEmpty
-                ? const Text('No tutors available')
+                ? const Text('No matching tutors found. Try reducing the number of search requirements you set.')
                 : Expanded(
                     child: ListView.builder(
                     itemCount: _tutors.length,

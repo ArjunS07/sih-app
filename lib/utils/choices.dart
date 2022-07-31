@@ -10,7 +10,6 @@ Future<String?> decodeChoice(String choiceCode, String choiceType) async {
   for (var choiceData in data) {
     Choice choice = Choice.fromJson(choiceData);
     if (choice.id == choiceCode) {
-      print('Success finding matching choice');
       return choice.name;
     }
   }

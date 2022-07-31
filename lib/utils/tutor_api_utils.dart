@@ -13,27 +13,29 @@ import 'base_api_utils.dart';
 import 'accounts_api_utils.dart' as accounts_api_utils;
 
 Future<List<Tutor>> loadTutorsFromParams(
-    [List<String>? languages,
+    {List<String>? languages,
     List<String>? grades,
     List<String>? boards,
-    List<String>? subjects]) async {
+    List<String>? subjects}) async {
   Map<String, String> queryParams = {};
   if (languages != null) {
-    queryParams = {'languages': languages.join(',')};
+    queryParams['languages'] = languages.join(',');
   }
   if (grades != null) {
-    queryParams = {'grades': grades.join(',')};
+    print('Sending grades $grades in get request...');
+    queryParams['grades'] = grades.join(',');
   }
   if (boards != null) {
-    queryParams = {'boards': boards.join(',')};
+    queryParams['boards'] = boards.join(',');
   }
   if (subjects != null) {
-    queryParams = {'subjects': subjects.join(',')};
+    queryParams['subjects'] = subjects.join(',');
   }
 
   var headers = {'Content-Type': 'application/json'};
   final tutorSearchUri =
       Uri.parse('$ROOT_URL/api/tutorslist').replace(queryParameters: queryParams);
+  print(tutorSearchUri);
 
   var request = http.Request('GET', tutorSearchUri);
   request.headers.addAll(headers);
