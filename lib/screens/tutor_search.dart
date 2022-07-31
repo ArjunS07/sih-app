@@ -1,9 +1,13 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
+
+import 'package:multi_select_flutter/multi_select_flutter.dart';
+import 'package:search_choices/search_choices.dart';
 
 import 'package:sih_app/models/tutor.dart';
 import 'package:sih_app/models/student.dart';
+
+import 'package:sih_app/utils/choices.dart';
+import 'package:sih_app/models/choice.dart';
 
 import 'package:sih_app/utils/tutor_api_utils.dart' as tutor_api_utils;
 import 'package:sih_app/utils/tutorship_api_utils.dart' as tutorship_api_utils;
@@ -19,14 +23,20 @@ class TutorSearch extends StatefulWidget {
 class _TutorSearchState extends State<TutorSearch> {
   var _tutors = <dynamic>[];
 
+  late List<Choice> _languageChoices = [];
+  late List<String> _selectedLanguagesIds = [];
+  late List<Choice> _subjectChoices = [];
+  late List<String> _selectedSubjectIds = [];
+
   //API interfacing
   Future<void> _loadTutors() async {
     print("loading tutors from params");
     print('Student grade: ${widget.student.grade}');
     final loadedTutors = await tutor_api_utils.loadTutorsFromParams(
-      boards: [widget.student.board],
-      grades: [widget.student.grade]
-    );
+        boards: [widget.student.board],
+        grades: [widget.student.grade],
+        languages: _selectedLanguagesIds,
+        subjects: _selectedSubjectIds);
     setState(() {
       _tutors = loadedTutors;
     });
@@ -34,16 +44,70 @@ class _TutorSearchState extends State<TutorSearch> {
     print('Got tutors');
   }
 
+  void _getChoices() async {
+    _languageChoices = await loadChoices('languages');
+    _subjectChoices = await loadChoices('subjects');
+
+    setState(() {
+      _languageChoices = _languageChoices;
+      _subjectChoices = _subjectChoices;
+    });
+  }
+
   @override
   void initState() {
     super.initState();
     _loadTutors();
+    _getChoices();
+  }
+
+  _languageSelectionField() {
+    return MultiSelectDialogField(
+        title: const Text('Filter tutors by languages'),
+        buttonText:
+            const Text('Tutor languages', style: TextStyle(color: Colors.grey)),
+        buttonIcon: Icon(Icons.language),
+        separateSelectedItems: true,
+        items: _languageChoices
+            .map((language) => MultiSelectItem(language.id, language.name))
+            .toList(),
+        listType: MultiSelectListType.CHIP,
+        onConfirm: (values) {
+          _selectedLanguagesIds = [];
+          for (var value in values) {
+            print(value);
+            _selectedLanguagesIds.add(value.toString());
+          }
+          _loadTutors();
+        });
+  }
+
+  _subjectSelectionField() {
+    return MultiSelectDialogField(
+        buttonText:
+            const Text('Tutor subjects', style: TextStyle(color: Colors.grey)),
+        title: const Text('Filter tutors by subjects'),
+        buttonIcon: Icon(Icons.class_),
+        separateSelectedItems: true,
+        items: _subjectChoices
+            .map((subject) => MultiSelectItem(subject.id, subject.name))
+            .toList(),
+        listType: MultiSelectListType.CHIP,
+        onConfirm: (values) {
+          _selectedSubjectIds = [];
+          for (var value in values) {
+            print(value);
+            _selectedSubjectIds.add(value.toString());
+          }
+          _loadTutors();
+        });
   }
 
   // General Widgets
-  _infoLabel() {
-    return Text('Automatically filtering by tutors who teach your grade and board',
-        textAlign: TextAlign.center,
+  _generalFilterInfoLabel() {
+    return Text(
+        'Automatically filtering by tutors who teach your grade and board',
+        textAlign: TextAlign.left,
         style: TextStyle(
           color: Colors.grey.shade600,
         ));
@@ -73,23 +137,23 @@ class _TutorSearchState extends State<TutorSearch> {
           initialData: 'Loading tutor data...',
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return new Text('Data is loading...');
+              return const Text('Data is loading...');
             } else {
               print(snapshot.data);
               Map data = snapshot.data as Map;
               return Card(
                   child: Padding(
-                padding: const EdgeInsets.symmetric(vertical:16.0),
+                padding: const EdgeInsets.symmetric(vertical: 16.0),
                 child: ListTile(
                   title: Text('${tutor.name}',
-                      style: TextStyle(
+                      style: const TextStyle(
                           fontWeight: FontWeight.bold, fontSize: 21.0)),
                   isThreeLine: true,
                   subtitle: Padding(
                     padding: const EdgeInsets.only(top: 16.0),
                     child: Text(
                         'City: ${data['city']}\nSpeaks ${data['languages']}\n\nSubjects: ${data['subjects']}',
-                        style: TextStyle(fontSize: 16.0)),
+                        style: const TextStyle(fontSize: 16.0)),
                   ),
 
                   // leading: const CircleAvatar(
@@ -106,22 +170,6 @@ class _TutorSearchState extends State<TutorSearch> {
                       icon: const Icon(Icons.person_add, color: Colors.indigo)),
                 ),
               ));
-              // return Column(
-              //   crossAxisAlignment: CrossAxisAlignment.start,
-              //   children: <Widget>[
-              //     Text('${tutor.name}',
-              //         textAlign: TextAlign.left,
-              //         style: const TextStyle(
-              //             fontSize: 24.0, fontWeight: FontWeight.bold)),
-              //     const SizedBox(height: 5),
-              //     ,
-              //     const SizedBox(height: 5),
-              //     Text('Speaks ${data['languages']}',
-              //         textAlign: TextAlign.left),
-              //     Text('Teaches ${data['subjects']}',
-              //         textAlign: TextAlign.left),
-              //   ],
-              // );
             }
           },
         ),
@@ -141,10 +189,23 @@ class _TutorSearchState extends State<TutorSearch> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            _infoLabel(),
+            const Text('Filter tutors',
+                style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w600)),
             const SizedBox(height: 10.0),
+            _languageSelectionField(),
+            const SizedBox(height: 5.0),
+            _subjectSelectionField(),
+            const SizedBox(height: 20),
+            _generalFilterInfoLabel(),
+            const SizedBox(height: 35.0),
+            const Text('Matching tutors',
+                style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w600)),
+            const SizedBox(height: 10),
             _tutors.isEmpty
-                ? const Text('No matching tutors found. Try reducing the number of search requirements you set.')
+                ? const Center(
+                    child: Text(
+                        'No matching tutors found. Try reducing the number of search requirements you set.'),
+                  )
                 : Expanded(
                     child: ListView.builder(
                     itemCount: _tutors.length,

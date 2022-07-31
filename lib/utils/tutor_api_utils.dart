@@ -18,18 +18,21 @@ Future<List<Tutor>> loadTutorsFromParams(
     List<String>? boards,
     List<String>? subjects}) async {
   Map<String, String> queryParams = {};
-  if (languages != null) {
+  if (languages != null && languages.isNotEmpty) {
     queryParams['languages'] = languages.join(',');
   }
-  if (grades != null) {
+  if (grades != null && grades.isNotEmpty) {
     print('Sending grades $grades in get request...');
     queryParams['grades'] = grades.join(',');
   }
-  if (boards != null) {
+  if (boards != null && boards.isNotEmpty) {
     queryParams['boards'] = boards.join(',');
   }
-  if (subjects != null) {
-    queryParams['subjects'] = subjects.join(',');
+  if (subjects != null && subjects.isNotEmpty) {
+    print('Received subjects $subjects');
+    String joined = subjects.join(',');
+    print('Joined subjects $joined');
+    queryParams['subjects'] = joined;
   }
 
   var headers = {'Content-Type': 'application/json'};
@@ -41,7 +44,7 @@ Future<List<Tutor>> loadTutorsFromParams(
   request.headers.addAll(headers);
 
   http.StreamedResponse response = await request.send();
-  print('Sending requeust...');
+  print('Sending request...');
   Map<String, dynamic> body =
       json.decode(await response.stream.bytesToString());
   print('Got body $body');
