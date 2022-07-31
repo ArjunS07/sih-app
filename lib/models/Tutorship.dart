@@ -19,11 +19,12 @@ class Tutorship {
       required this.createdTime});
 
   factory Tutorship.fromJson(Map<String, dynamic> json) {
+    print('Received json $json');
     return Tutorship(
         id: json['id'],
         student: Student.fromJson(json['student']),
         tutor: Tutor.fromJson(json['tutor']),
-        subjects: (json['subjects'] as List).map((subject) => subject as String).toList(),
+        subjects: (json['tutorship_subjects'] as List).map((subject) => subject as String).toList(),
         status: json['status'],
         createdTime: DateTime.parse(json['created']));
   }

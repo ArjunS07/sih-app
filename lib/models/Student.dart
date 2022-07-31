@@ -21,7 +21,6 @@ class Student extends PlatformUser {
   });
 
   factory Student.fromJson(Map<String, dynamic> json) {
-    print(json);
     return Student(
       firstName: json['account__first_name'],
       lastName: json['account__last_name'],
