@@ -243,21 +243,33 @@ class TutorshipView(APIView):
 class MyTutorshipsView(APIView):
     def get(self, request, format=None):
         data = request.query_params
-        print(data)
+
         tutor_uuid = data.get('tutor_uuid', None)
-        print(tutor_uuid)
         if not tutor_uuid:
             return HttpResponse(status=status.HTTP_400_BAD_REQUEST)
         try:
             tutor = Tutor.objects.get(uuid=tutor_uuid)
+            tutorships = Tutorship.objects.filer(tutor=tutor)
         except Exception as e:
             print(e)
             print('Could not find tutor')
             return HttpResponse(status=status.HTTP_404_NOT_FOUND)
-        tutorships = Tutorship.objects.filter(
-            tutor=tutor,
-            status='PNDG'
-        )
+        
+        student_uuid = data.get('student_uuid', None)
+        if not student_uuid:
+            return HttpResponse(status=status.HTTP_400_BAD_REQUEST)
+        try:
+            student = Student.objects.get(uuid=student_uuid)
+            tutorships = tutorships.filer(student=student)
+        except Exception as e:
+            print(e)
+            print('Could not find student')
+            return HttpResponse(status=status.HTTP_404_NOT_FOUND)
+        
+        status = data.get('status', None)
+        if status:
+            tutorships = tutorships.filter(status=status)
+        
         serialized_tutorships = serializers.TutorshipSerializer(
             tutorships, many=True)
         res = {
