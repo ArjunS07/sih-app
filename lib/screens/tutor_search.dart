@@ -82,28 +82,33 @@ class _TutorSearchState extends State<TutorSearch> {
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
-                Text(
-                    'Ask ${tutor.name} to you with $selectedSubjectsDisplay'),
+                Text('Ask ${tutor.name} to you with $selectedSubjectsDisplay'),
               ],
             ),
           ),
           actions: <Widget>[
-            TextButton(
-                child: const Text(
-                  'Yes',
-                ),
-                onPressed: () {
-                  tutorship_api_utils.createTutorship(
-                      tutor, widget.student, _selectedSubjectIds);
-                  _showTutorRequestSnackBar(
-                      tutor.name);
-                }),
             TextButton(
               child: const Text('No'),
               onPressed: () {
                 Navigator.of(context).pop();
               },
             ),
+            ElevatedButton(
+                child: const Text(
+                  'Yes',
+                ),
+                style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all<Color>(Colors.green)),
+                onPressed: () {
+                  tutorship_api_utils
+                      .createTutorship(
+                          tutor, widget.student, _selectedSubjectIds)
+                      .then((value) {
+                    Navigator.of(context).pop();
+                    _showTutorRequestSnackBar(tutor.name);
+                  });
+                }),
           ],
         );
       },
@@ -207,8 +212,9 @@ class _TutorSearchState extends State<TutorSearch> {
                   //         "https://images.unsplash.com/photo-1547721064-da6cfb341d50")),
                   trailing: IconButton(
                       onPressed: () => {
-                        confirmRequestToTutor(_tutors[index], widget.student)
-                      },
+                            confirmRequestToTutor(
+                                _tutors[index], widget.student)
+                          },
                       icon: const Icon(Icons.person_add, color: Colors.indigo)),
                 ),
               ));
