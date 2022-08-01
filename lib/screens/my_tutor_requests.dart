@@ -116,6 +116,7 @@ class _MyTutorRequestsState extends State<MyTutorRequests> {
                         ), children: <TextSpan> [
                           TextSpan(text: '${data['city']}', style: const TextStyle(fontWeight: FontWeight.bold)),
                           TextSpan(text: '\n\nSpeaks ${data['languages']}\n\nWants help with'), TextSpan(text: ' ${data['subjects']}', style: const TextStyle(fontWeight: FontWeight.bold)),
+                          TextSpan(text: '\n\n${request.relativeTimeSinceCreated.toUpperCase()}', style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.grey))
                         ]
                       )
                   )),

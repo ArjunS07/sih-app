@@ -33,7 +33,7 @@ class Tutorship {
   }
 
   String get relativeTimeSinceCreated {
-    return createdTime.timeAgo(numericDates: false);
+    return createdTime.timeAgo();
   }
 
   Future<String> displayListProperty(List property, String type) async {
