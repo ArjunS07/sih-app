@@ -33,7 +33,7 @@ class _TutorSearchState extends State<TutorSearch> {
     print("loading tutors from params");
     print('Student grade: ${widget.student.grade}');
     final loadedTutors = await tutor_api_utils.loadTutorsFromParams(
-      widget.student.uuid,
+        widget.student.uuid,
         boards: [widget.student.board],
         grades: [widget.student.grade],
         languages: _selectedLanguagesIds,
@@ -68,6 +68,48 @@ class _TutorSearchState extends State<TutorSearch> {
     return data;
   }
 
+  Future<void> confirmRequestToTutor(Tutor tutor, Student student) async {
+    var selectedSubjectsDisplay = _selectedSubjectIds.map((subjectId) async {
+      return await decodeChoice(subjectId, 'subjects');
+    }).toList();
+
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Send request to ${tutor.name}?'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text(
+                    'Ask ${tutor.name} to you with $selectedSubjectsDisplay'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+                child: const Text(
+                  'Yes',
+                ),
+                onPressed: () {
+                  tutorship_api_utils.createTutorship(
+                      tutor, widget.student, _selectedSubjectIds);
+                  _showTutorRequestSnackBar(
+                      tutor.name);
+                }),
+            TextButton(
+              child: const Text('No'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   void initState() {
     super.initState();
@@ -80,8 +122,8 @@ class _TutorSearchState extends State<TutorSearch> {
   _languageSelectionField() {
     return MultiSelectDialogField(
         title: const Text('Filter tutors by languages'),
-        buttonText:
-            const Text('What language do you want your tutor to speak?', style: TextStyle(color: Colors.grey)),
+        buttonText: const Text('What language do you want your tutor to speak?',
+            style: TextStyle(color: Colors.grey)),
         buttonIcon: Icon(Icons.language),
         separateSelectedItems: true,
         items: _languageChoices
@@ -100,8 +142,8 @@ class _TutorSearchState extends State<TutorSearch> {
 
   _subjectSelectionField() {
     return MultiSelectDialogField(
-        buttonText:
-            const Text('What do you want to learn?', style: TextStyle(color: Colors.grey)),
+        buttonText: const Text('What do you want to learn?',
+            style: TextStyle(color: Colors.grey)),
         title: const Text('Filter tutors by subjects'),
         buttonIcon: Icon(Icons.class_),
         separateSelectedItems: true,
@@ -165,12 +207,8 @@ class _TutorSearchState extends State<TutorSearch> {
                   //         "https://images.unsplash.com/photo-1547721064-da6cfb341d50")),
                   trailing: IconButton(
                       onPressed: () => {
-                            tutorship_api_utils.createTutorship(
-                                _tutors[index],
-                                widget.student,
-                                ['MATH', 'ENGLISH']),
-                                _showTutorRequestSnackBar(_tutors[index].name) //TODO: Read subjects
-                          },
+                        confirmRequestToTutor(_tutors[index], widget.student)
+                      },
                       icon: const Icon(Icons.person_add, color: Colors.indigo)),
                 ),
               ));
