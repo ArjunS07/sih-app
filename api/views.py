@@ -216,20 +216,17 @@ class TutorshipView(APIView):
 
     def patch(self, request, *args, **kwargs):
         data = request.data
+        print(request)
+        print(data)
         tutorship_id = data.get('id', None)
         tutorship_status = data.get('status', None)
-        if not tutorship_id or not tutorship_status:
+        print(tutorship_id, tutorship_status)
+        if not tutorship_id and not tutorship_status:
             return HttpResponse(status=status.HTTP_400_BAD_REQUEST)
         try:
             tutorship = Tutorship.objects.get(id=tutorship_id)
         except:
             return HttpResponse(status=status.HTTP_404_NOT_FOUND)
-
-        try:
-            subjects = data['tutorship_subjects'].split(',')
-        except:
-            return Response(status=status.HTTP_400_BAD_REQUEST)
-        data['tutorship_subjects'] = subjects
 
         serializer = serializers.TutorshipSerializer(
             tutorship, data=data, partial=True)
