@@ -49,7 +49,7 @@ class _MyTutorRequestsState extends State<MyTutorRequests> {
             child: ListBody(
               children: <Widget>[
                 Text(
-                    'Accept request from ${tutorship.student.name} to learn ${decodedData['subjects']}'),
+                    'Accept request from ${tutorship.student.name} to teach ${decodedData['subjects']}'),
               ],
             ),
           ),
@@ -102,16 +102,23 @@ class _MyTutorRequestsState extends State<MyTutorRequests> {
                   child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 16.0),
                 child: ListTile(
-                  title: Text('${request.student.name}',
+                  title:  Text('${request.student.name}',
                       style: const TextStyle(
                           fontWeight: FontWeight.bold, fontSize: 21.0)),
                   isThreeLine: true,
                   subtitle: Padding(
                     padding: const EdgeInsets.only(top: 16.0),
-                    child: Text(
-                        'City: ${data['city']}\nSpeaks ${data['languages']}\n\nWants help with ${data['subjects']}',
-                        style: const TextStyle(fontSize: 16.0)),
-                  ),
+                    child: RichText(
+                      text: TextSpan(
+                        style: const TextStyle(
+                          fontSize: 14.0,
+                          color: Colors.black
+                        ), children: <TextSpan> [
+                          TextSpan(text: '${data['city']}', style: const TextStyle(fontWeight: FontWeight.bold)),
+                          TextSpan(text: '\n\nSpeaks ${data['languages']}\n\nWants help with'), TextSpan(text: ' ${data['subjects']}', style: const TextStyle(fontWeight: FontWeight.bold)),
+                        ]
+                      )
+                  )),
 
                   // leading: const CircleAvatar(
                   //   //TODO
