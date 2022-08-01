@@ -107,6 +107,7 @@ class _TutorSearchState extends State<TutorSearch> {
                       .then((value) {
                     Navigator.of(context).pop();
                     _showTutorRequestSnackBar(tutor.name);
+                    _loadTutors(); // reload tutors list which will exclude tutors you already have a tutorship with
                   });
                 }),
           ],
