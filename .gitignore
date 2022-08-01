@@ -3,3 +3,4 @@
 testing.ipynb
 *.sqlite3
 staticfiles/
+db.sqlite3
