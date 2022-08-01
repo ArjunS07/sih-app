@@ -72,9 +72,9 @@ Future<Tutorship> getTutorshipFromId(int id) async {
   return Tutorship.fromJson(body);
 }
 
-Future<List<Tutorship>> getMyTutorshipRequests(Tutor tutor) async {
+Future<List<Tutorship>> getMyTutorshipRequests(Tutor tutor, String statusCodee) async {
   var request = http.Request('GET',
-      Uri.parse('$ROOT_URL/api/mytutorshipslist?tutor_uuid=${tutor.uuid}'));
+      Uri.parse('$ROOT_URL/api/mytutorshipslist?tutor_uuid=${tutor.uuid}&status=$statusCodee'));
 
   http.StreamedResponse response = await request.send();
   Map<String, dynamic> body =

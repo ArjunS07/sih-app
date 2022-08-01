@@ -122,3 +122,10 @@ app.*.symbols
 !**/ios/**/default.perspectivev3
 !/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
 !/dev/ci/**/Gemfile.lock
+.flutter-plugins-dependencies
+.dart_tool/flutter_build/6cc1aea9467c169242db32a439240662/.filecache
+.dart_tool/flutter_build/6cc1aea9467c169242db32a439240662/app.dill
+.dart_tool/flutter_build/6cc1aea9467c169242db32a439240662/debug_ios_bundle_flutter_assets.stamp
+.dart_tool/flutter_build/6cc1aea9467c169242db32a439240662/flutter_assets.d
+.dart_tool/flutter_build/6cc1aea9467c169242db32a439240662/kernel_snapshot.d
+.dart_tool/flutter_build/6cc1aea9467c169242db32a439240662/kernel_snapshot.stamp

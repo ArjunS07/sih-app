@@ -73,7 +73,7 @@ class _TutorSearchState extends State<TutorSearch> {
       return await decodeChoice(subjectId, 'subjects');
     }).toList();
 
-    return showDialog<void>(
+    showDialog<void>(
       context: context,
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
