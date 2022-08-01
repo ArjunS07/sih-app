@@ -246,30 +246,33 @@ class MyTutorshipsView(APIView):
         data = request.query_params
 
         tutor_uuid = data.get('tutor_uuid', None)
-        if not tutor_uuid:
-            return HttpResponse(status=status.HTTP_400_BAD_REQUEST)
-        try:
-            tutor = Tutor.objects.get(uuid=tutor_uuid)
-            tutorships = Tutorship.objects.filer(tutor=tutor)
-        except Exception as e:
-            print(e)
-            print('Could not find tutor')
-            return HttpResponse(status=status.HTTP_404_NOT_FOUND)
-        
         student_uuid = data.get('student_uuid', None)
-        if not student_uuid:
+        status_code = data.get('status', None)
+
+        if (not tutor_uuid and not student_uuid and not status_code):
+            # bad request
             return HttpResponse(status=status.HTTP_400_BAD_REQUEST)
-        try:
-            student = Student.objects.get(uuid=student_uuid)
-            tutorships = tutorships.filer(student=student)
-        except Exception as e:
-            print(e)
-            print('Could not find student')
-            return HttpResponse(status=status.HTTP_404_NOT_FOUND)
+
+        if tutor_uuid:
+            try:
+                tutor = Tutor.objects.get(uuid=tutor_uuid)
+                tutorships = Tutorship.objects.filter(tutor=tutor)
+            except Exception as e:
+                print(e)
+                print('Could not find tutor')
+                return HttpResponse(status=status.HTTP_404_NOT_FOUND)
         
-        status = data.get('status', None)
-        if status:
-            tutorships = tutorships.filter(status=status)
+        if student_uuid:
+            try:
+                student = Student.objects.get(uuid=student_uuid)
+                tutorships = tutorships.filter(student=student)
+            except Exception as e:
+                print(e)
+                print('Could not find student')
+                return HttpResponse(status=status.HTTP_404_NOT_FOUND)
+        
+        if status_code:
+            tutorships = tutorships.filter(status=status_code)
         
         serialized_tutorships = serializers.TutorshipSerializer(
             tutorships, many=True)
