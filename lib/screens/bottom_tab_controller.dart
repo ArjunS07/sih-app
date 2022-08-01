@@ -13,7 +13,7 @@ import 'package:sih_app/models/tutor.dart';
 import 'tutorship_chats.dart';
 import 'settings.dart';
 import 'tutor_search.dart';
-import 'tutor_requests.dart';
+import 'my_tutor_requests.dart';
 
 class BottomTabController extends StatefulWidget {
   final SharedPreferences prefs;
