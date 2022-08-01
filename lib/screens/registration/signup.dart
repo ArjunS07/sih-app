@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 
 import 'package:sih_app/models/School.dart';
 
-import 'package:sih_app/screens/student_start.dart';
-import 'package:sih_app/screens/tutor_start.dart';
+import 'package:sih_app/screens/registration/student_start.dart';
+import 'package:sih_app/screens/registration/tutor_start.dart';
 
 class AccountSignup extends StatefulWidget {
   final bool isStudent;
   School? school;
-  AccountSignup({Key? key, required this.isStudent, this.school}) : super(key: key);
+  AccountSignup({Key? key, required this.isStudent, this.school})
+      : super(key: key);
 
   @override
   State<AccountSignup> createState() => _AccountSignupState();
@@ -25,16 +26,16 @@ class _AccountSignupState extends State<AccountSignup> {
 
   _submitRegistration(context) async {
     if (widget.isStudent) {
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => StudentDetails(
-              school: widget.school!,
-              email: _emailController.text,
-              firstName: _firstNameController.text,
-              lastName: _lastNameController.text,
-              password: _passController.text),
-        ));
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => StudentDetails(
+                school: widget.school!,
+                email: _emailController.text,
+                firstName: _firstNameController.text,
+                lastName: _lastNameController.text,
+                password: _passController.text),
+          ));
     } else {
       Navigator.push(
           context,
@@ -46,14 +47,15 @@ class _AccountSignupState extends State<AccountSignup> {
                 password: _passController.text),
           ));
     }
-
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: widget.isStudent ? const Text('Student Sign Up') : const Text('Tutor sign up'),
+        title: widget.isStudent
+            ? const Text('Student Sign Up')
+            : const Text('Tutor sign up'),
       ),
       body: Center(
         child: Expanded(
@@ -66,7 +68,9 @@ class _AccountSignupState extends State<AccountSignup> {
                   children: <Widget>[
                     const Spacer(),
                     Text(
-                      widget.isStudent ? 'Sign up as a student' : 'Sign up as a tutor',
+                      widget.isStudent
+                          ? 'Sign up as a student'
+                          : 'Sign up as a tutor',
                       style: const TextStyle(fontSize: 24),
                     ),
                     const Spacer(),

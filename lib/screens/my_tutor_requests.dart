@@ -62,14 +62,17 @@ class _MyTutorRequestsState extends State<MyTutorRequests> {
             ),
             ElevatedButton(
                 onPressed: () async {
-                  updateTutorshipStatus('ACPT', tutorship.id).then((tutorship) => {
-                  Navigator.of(context).pop(),
-                  _showAcceptedRequestSnackBar(tutorship),
-                  _loadRequests()
-                  });
+                  updateTutorshipStatus('ACPT', tutorship.id)
+                      .then((tutorship) => {
+                            Navigator.of(context).pop(),
+                            _showAcceptedRequestSnackBar(tutorship),
+                            _loadRequests()
+                          });
                 },
                 child: const Text('Yes'),
-                style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(Colors.green)))
+                style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all<Color>(Colors.green)))
           ],
         );
       },
@@ -102,24 +105,35 @@ class _MyTutorRequestsState extends State<MyTutorRequests> {
                   child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 16.0),
                 child: ListTile(
-                  title:  Text('${request.student.name}',
+                  title: Text('${request.student.name}',
                       style: const TextStyle(
                           fontWeight: FontWeight.bold, fontSize: 21.0)),
                   isThreeLine: true,
                   subtitle: Padding(
-                    padding: const EdgeInsets.only(top: 16.0),
-                    child: RichText(
-                      text: TextSpan(
-                        style: const TextStyle(
-                          fontSize: 14.0,
-                          color: Colors.black
-                        ), children: <TextSpan> [
-                          TextSpan(text: '${data['city']}', style: const TextStyle(fontWeight: FontWeight.bold)),
-                          TextSpan(text: '\n\nSpeaks ${data['languages']}\n\nWants help with'), TextSpan(text: ' ${data['subjects']}', style: const TextStyle(fontWeight: FontWeight.bold)),
-                          TextSpan(text: '\n\n${request.relativeTimeSinceCreated.toUpperCase()}', style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.grey))
-                        ]
-                      )
-                  )),
+                      padding: const EdgeInsets.only(top: 16.0),
+                      child: RichText(
+                          text: TextSpan(
+                              style: const TextStyle(
+                                  fontSize: 14.0, color: Colors.black),
+                              children: <TextSpan>[
+                            TextSpan(
+                                text: '${data['city']}',
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold)),
+                            TextSpan(
+                                text:
+                                    '\n\nSpeaks ${data['languages']}\n\nWants help with'),
+                            TextSpan(
+                                text: ' ${data['subjects']}',
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold)),
+                            TextSpan(
+                                text:
+                                    '\n\n${request.relativeTimeSinceCreated.toUpperCase()}',
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.grey))
+                          ]))),
 
                   // leading: const CircleAvatar(
                   //   //TODO
@@ -151,6 +165,7 @@ class _MyTutorRequestsState extends State<MyTutorRequests> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Student requests'),
+        automaticallyImplyLeading: false,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -159,8 +174,10 @@ class _MyTutorRequestsState extends State<MyTutorRequests> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             _requests.isEmpty
-                ? const Center(
-                    child: Text('No incoming requests from students'),
+                ? const Expanded(
+                    child: Center(
+                      child: Text('No incoming requests from students'),
+                    ),
                   )
                 : Expanded(
                     child: ListView.builder(

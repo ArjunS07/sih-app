@@ -1,10 +1,9 @@
-
 import 'package:flutter/material.dart';
 
-import 'package:sih_app/screens/signup.dart';
-import 'package:sih_app/screens/student_start.dart';
+import 'package:sih_app/screens/registration/signup.dart';
+import 'package:sih_app/screens/registration/student_start.dart';
 
-import 'package:sih_app/screens/login.dart';
+import 'package:sih_app/screens/registration/login.dart';
 
 class WelcomePage extends StatefulWidget {
   WelcomePage({Key? key}) : super(key: key);
@@ -14,11 +13,11 @@ class WelcomePage extends StatefulWidget {
 }
 
 class _WelcomePageState extends State<WelcomePage> {
-
   @override
   void initState() {
     super.initState();
   }
+
   Widget _welcomePage(context) {
     return Scaffold(
       appBar: AppBar(
@@ -64,7 +63,6 @@ class _WelcomePageState extends State<WelcomePage> {
       ),
     );
   }
-
 
   @override
   Widget build(BuildContext context) {

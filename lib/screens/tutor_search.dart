@@ -128,9 +128,9 @@ class _TutorSearchState extends State<TutorSearch> {
   _languageSelectionField() {
     return MultiSelectDialogField(
         title: const Text('Filter tutors by languages'),
-        buttonText: const Text('What language do you want your tutor to speak?',
+        buttonText: const Text('What language do you speak?',
             style: TextStyle(color: Colors.grey)),
-        buttonIcon: Icon(Icons.language),
+        buttonIcon: const Icon(Icons.language),
         separateSelectedItems: true,
         items: _languageChoices
             .map((language) => MultiSelectItem(language.id, language.name))
@@ -240,6 +240,7 @@ class _TutorSearchState extends State<TutorSearch> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Search for tutors'),
+        automaticallyImplyLeading: false,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -260,9 +261,11 @@ class _TutorSearchState extends State<TutorSearch> {
                 style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w600)),
             const SizedBox(height: 10),
             _tutors.isEmpty
-                ? const Center(
-                    child: Text(
-                        'No matching tutors found. Try reducing the number of search requirements you set.'),
+                ? const Expanded(
+                    child: Center(
+                      child: Text(
+                          'No matching tutors found. Try reducing the number of search requirements you set.'),
+                    ),
                   )
                 : Expanded(
                     child: ListView.builder(
