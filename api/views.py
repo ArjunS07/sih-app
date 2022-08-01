@@ -144,7 +144,8 @@ class TutorListView(APIView):
             q_objects = []
             for subject in subjects:
                 q_objects.append(Q(subjects__contains=subject))
-            combined = reduce(operator.or_, q_objects)
+            # This is the only filter for which we want the tutors to teach _all_ of the subjects in the query
+            combined = reduce(operator.and_, q_objects)
             print(combined)
             q.append(combined)
         if 'grades' in data:
