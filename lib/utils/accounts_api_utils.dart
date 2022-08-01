@@ -101,7 +101,7 @@ Future<Student?> createStudent(
   final String parsedLanguages = languages.join(',');
   final String studentUuid = uuid.v4();
 
-  final Uri studentCreationUri = Uri.parse('$ROOT_URL/api/student');
+  final Uri studentCreationUri = Uri.parse('$ROOT_URL/api/students');
   var studentCreationHeaders = {
     'Content-Type': 'application/x-www-form-urlencoded'
   };
@@ -174,7 +174,7 @@ Future<Tutor> createTutor(Account account, String city, List<String> languages,
   final String parsedSubjects = subjects.join(',');
   final String tutorUuid = uuid.v4();
 
-  final Uri tutorCreationUri = Uri.parse('$ROOT_URL/api/tutor');
+  final Uri tutorCreationUri = Uri.parse('$ROOT_URL/api/tutors');
   var headers = {
     'Authorization':
         'Token ${account.authToken}', // authorization header requires this formatting
