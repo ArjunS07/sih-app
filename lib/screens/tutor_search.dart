@@ -94,9 +94,6 @@ class _TutorSearchState extends State<TutorSearch> {
               },
             ),
             ElevatedButton(
-                child: const Text(
-                  'Yes',
-                ),
                 style: ButtonStyle(
                     backgroundColor:
                         MaterialStateProperty.all<Color>(Colors.green)),
@@ -109,7 +106,10 @@ class _TutorSearchState extends State<TutorSearch> {
                     _showTutorRequestSnackBar(tutor.name);
                     _loadTutors(); // reload tutors list which will exclude tutors you already have a tutorship with
                   });
-                }),
+                },
+                child: const Text(
+                  'Yes',
+                )),
           ],
         );
       },
