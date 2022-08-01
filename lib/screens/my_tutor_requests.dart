@@ -55,7 +55,7 @@ class _MyTutorRequestsState extends State<MyTutorRequests> {
           ),
           actions: <Widget>[
             TextButton(
-              child: const Text('No'),
+              child: const Text('No', style: TextStyle(color: Colors.black)),
               onPressed: () {
                 Navigator.of(context).pop();
               },
