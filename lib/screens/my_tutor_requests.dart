@@ -49,7 +49,7 @@ class _MyTutorRequestsState extends State<MyTutorRequests> {
             child: ListBody(
               children: <Widget>[
                 Text(
-                    'Accept request from ${tutorship.student.name} to learn ${decodedData['languages']}'),
+                    'Accept request from ${tutorship.student.name} to learn ${decodedData['subjects']}'),
               ],
             ),
           ),
