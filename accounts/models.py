@@ -84,6 +84,10 @@ class PlatformUser(models.Model):
     def profile_image_s3_path(self):
         # TODO: Do whatever here
         return f"s3_url/profile_images/{self.uuid}.jpg"
+    
+    @property
+    def name(self):
+        return f"{self.account.first_name} {self.account.last_name}"
 
     def __str__(self) -> str:
         return str(self.uuid)

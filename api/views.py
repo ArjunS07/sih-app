@@ -14,7 +14,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.parsers import JSONParser
 
-from .models import School, Student, Tutor, Tutorship, Message, ZoomMeeting
+from .models import School, Student, Tutor, Tutorship, ZoomMeeting
 from . import serializers
 from .choices import SUBJECT_CHOICES, LANGUAGE_MEDIUM_CHOICES, GRADE_CHOICES, BOARD_CHOICES, all_choices
 
@@ -312,41 +312,6 @@ class JoinSchoolView(APIView):
         except:
             return HttpResponse(status=status.HTTP_404_NOT_FOUND)
 
-
-class MessageView(APIView):
-    def get(self, request, format=None):
-        data = request.query_params
-        print(request)
-        try:
-            id = data['id']
-        except:
-            return HttpResponse('Missing message id', status=status.HTTP_400_BAD_REQUEST)
-        try:
-            message = Message.objects.get(id=id)
-            print('Got message', message)
-            serialized_message = serializers.MessageSerializer(message)
-            print('serialized message to', serialized_message)
-            res = JSONRenderer().render(serialized_message.data)
-            print('rendered', res)
-            return HttpResponse(res, content_type='application/json', status=status.HTTP_200_OK)
-        except:
-            return HttpResponse(status=status.HTTP_404_NOT_FOUND)
-
-    def post(self, request, format=None):
-        data = request.POST
-        json_data = json.dumps(data.dict()).encode('utf-8')
-        stream = io.BytesIO(json_data)
-        data = JSONParser().parse(stream)
-        print(data)
-        serializer = serializers.MessageSerializer(data=data)
-        print(serializer)
-        if serializer.is_valid():
-            print(serializer.validated_data)
-            message = serializer.save()
-            print(message)
-            return HttpResponse(serializer.data, content_type='application/json',  status=status.HTTP_201_CREATED)
-
-        return HttpResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class ZoomMeetingView(APIView):

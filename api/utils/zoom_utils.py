@@ -1,27 +1,52 @@
-from tracemalloc import start
 import requests
-import json
-from time import time
-import datetime
-
 import jwt
+import json
+import os
+import time
 
-ZOOM_API_KEY = 'asaLyopgREOsrFaFDxG2nw'
-ZOOM_API_SECRET = 'D5To4y6ztyHjJE6Ihd8mnJPTG8a49F2n6eg0'
+ZOOM_API_KEY = os.getenv('ZOOM_API_KEY')
+ZOOM_API_SECRET = os.getenv('ZOOM_API_SECRET')
 
-
-def generate_jwt_token() -> str:
+def generate_jwt_token():
     token = jwt.encode(
-        # Create a payload of the token containing the API Key & expiration time
-        {'iss': ZOOM_API_KEY, 'exp': time() + 5000},
-        ZOOM_API_SECRET,  # Secret used to generate token signature
+        # Create a payload of the token containing API Key & expiration time
+        {'iss': ZOOM_API_KEY, 'exp': time.time() + 5000},
+        # Secret used to generate token signature
+        ZOOM_API_SECRET,
+        # Specify the hashing alg
         algorithm='HS256'
+        # Convert token to utf-8
     )
+    return token
+    # send a request with headers including a token
 
-    return token.decode('utf-8')
+# TODO: limited to 100 requests
+url = "https://api.zoom.us/v2/users/me/meetings"
 
-def format_datetime(date) -> str:
-    return date.strftime("%Y-%m-%dT%H:%M:%SZ")
+def generate_zoom_meeting(student_name, tutor_name):
 
-def create_meeting(title: str, minutes_duration: int, timezone: str, emails: list[str]) -> dict:
-    pass
+    payload = json.dumps({
+    "topic": "Volunteer tutor meeting",
+    "type": 3,
+    "timezone": "Asia/Kolkata",
+    "agenda": f"Meeting for {tutor_name} and {student_name} ", #TODO
+    "settings": {
+        "host_video": "true",
+        "participant_video": "true",
+        "join_before_host": "true",
+    }
+    })
+    headers = {
+    'authorization': f'Bearer {generate_jwt_token()}',
+    'Content-Type': 'application/json',
+    }
+    
+    response = requests.request("POST", url, headers=headers, data=payload)
+    data = json.loads(response.text)
+    return {
+        "meeting_id": data['id'],
+        "meeting_password": data['password'],
+        "meeting_encrypted_password": data['encrypted_password'],
+        "start_url": data['start_url'],
+        "join_url": data['join_url'],
+    }

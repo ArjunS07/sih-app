@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import School, Student, Tutor
-from .models import ZoomMeeting, Tutorship, Message
+from .models import ZoomMeeting, Tutorship
 
 class SchoolAdmin(admin.ModelAdmin):
     pass
@@ -18,10 +18,6 @@ admin.site.register(Tutor, TutorAdmin)
 class TutorshipAdmin(admin.ModelAdmin):
     pass
 admin.site.register(Tutorship, TutorshipAdmin)
-
-class MessageAdmin(admin.ModelAdmin):
-    pass
-admin.site.register(Message, MessageAdmin)
 
 class ZoomMeetingAdmin(admin.ModelAdmin):
     pass

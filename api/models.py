@@ -9,6 +9,7 @@ from multiselectfield import MultiSelectField
 from accounts.models import User, PlatformUser
 from .choices import LANGUAGE_MEDIUM_CHOICES, GRADE_CHOICES, CITY_CHOICES, BOARD_CHOICES, SUBJECT_CHOICES
 
+from .utils.zoom_utils import generate_zoom_meeting
 
 class School(models.Model):
     account = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -69,12 +70,16 @@ class Tutor(PlatformUser):
         return students
 
 class ZoomMeeting(models.Model):
-    link = models.CharField(max_length=1024, default=None, null=True)
+    start_url = models.CharField(max_length=1024, default=None, null=True)
+    join_url = models.CharField(max_length=1024, default=None, null=True)
+    is_started = models.BooleanField(default=False)
+
     meeting_id = models.CharField(primary_key=True, max_length=32)
     meeting_password = models.CharField(max_length=1024, default=None, null=True)
+    meeting_encrypted_password = models.CharField(max_length=1024, default=None, null=True)
 
     def __str__(self) -> str:
-        return self.link
+        return self.join_url
 
 
 class Tutorship(models.Model):
@@ -100,35 +105,15 @@ class Tutorship(models.Model):
         return f'Room with {self.tutor} and {self.student}'
     
     def save(self, *args, **kwargs):
-        super(Tutorship, self).save(*args, **kwargs)
         if self.status == 'ACPT' and self.zoom_meeting is None:
-            # TODO: Create Zoom Meeting and save it to the database. Then assign self.zoom_meeting
-            pass
-
-class Message(models.Model):
-    text = models.CharField(max_length=2048, default=None, null=True)
-    time_sent = models.DateTimeField(auto_now=True)
-
-    tutorship_id = models.IntegerField(default=None, null=True)
-    sent_by_student = models.BooleanField(default=False)
-
-    @property
-    def tutorship(self):
-        return Tutorship.objects.get(id=self.tutorship_id)
-    
-    @property
-    def sender(self):
-        if self.sent_by_student:
-            return self.tutorship.student
-        else:
-            return self.tutorship.tutor
-        
-    # Link to prefix on S3 for attachments. This will allow us to store the folder URL directly and download all keys from that folder
-    attachments_folder_prefix = models.CharField(max_length=1024, null=True, default=None, blank=True)
-
-    @property
-    def has_attachment(self) -> bool:
-        return self.attachments_key_prefix != None
-
-    def __str__(self) -> str:
-        return f'{self.text}'
+            generated_zoom_details = generate_zoom_meeting(tutor_name=self.tutor.name, student_name=self.student.name)
+            zoom_meeting = ZoomMeeting(
+                meeting_id=generated_zoom_details['meeting_id'],
+                meeting_password=generated_zoom_details['meeting_password'],
+                meeting_encrypted_password=generated_zoom_details['meeting_encrypted_password'],
+                start_url=generated_zoom_details['start_url'],
+                join_url=generated_zoom_details['join_url'],
+            )
+            zoom_meeting.save()
+            self.zoom_meeting = zoom_meeting
+        super(Tutorship, self).save(*args, **kwargs)

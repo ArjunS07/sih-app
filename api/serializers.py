@@ -136,23 +136,3 @@ class TutorshipSerializer(serializers.ModelSerializer):
         instance.status = validated_data['status']
         instance.save()
         return instance
-
-class MessageSerializer(serializers.Serializer):
-    text = serializers.CharField()
-    timestamp = serializers.DateTimeField(read_only=True)
-
-    tutorship_id = serializers.CharField(max_length=32)
-    sent_by_student = serializers.BooleanField()
-    # sender_id = serializers.CharField(read_only=True, max_length=32, source='sender.uuid')
-
-    # has_attachment = serializers.BooleanField(default=False)
-    attachments_folder_prefix = serializers.CharField(
-        max_length=1024, default=None)
-
-    class Meta:
-        model = models.Message
-        fields = ('text', 'timestamp', 'sent_by_student',
-                  'tutorship_id', 'sender_id', 'attachments_folder_prefix')
-
-    def create(self, validated_data):
-        return models.Message.objects.create(**validated_data)
