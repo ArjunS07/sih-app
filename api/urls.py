@@ -9,6 +9,6 @@ urlpatterns = [
     path('joinschool', views.JoinSchoolView.as_view(), name='joinschool'),
     path('tutorships', views.TutorshipView.as_view(), name='tutorships'),
     path('mytutorshipslist', views.MyTutorshipsView.as_view(), name='mytutorshipslist'),
-    path('zoommeeting', views.ZoomMeetingView.as_view(), name='zoommeeting'),
+    path('meetings', views.ZoomMeetingView.as_view(), name='zoommeeting'),
 
 ]

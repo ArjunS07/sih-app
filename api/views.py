@@ -317,7 +317,7 @@ class JoinSchoolView(APIView):
 class ZoomMeetingView(APIView):
     def get(self, request, format=None):
         data = request.query_params
-        meeting_id = data.get('meeting_id', None)
+        meeting_id = data.get('id', None)
         if not meeting_id:
             return HttpResponse('Missing meeting id', status=status.HTTP_400_BAD_REQUEST)
         meeting = ZoomMeeting.objects.get(meeting_id=meeting_id)
@@ -326,16 +326,5 @@ class ZoomMeetingView(APIView):
         return HttpResponse(res, content_type='application/json', status=status.HTTP_200_OK)
 
     # The only thing we want to change is the  num occurrences
-    def post(self, request, format=None):
-        meeting_id = request.POST.get('meeting_id', None)
-        new_occurrence = request.POST.get('occurence_changed', None)
-        if meeting_id and new_occurrence:
-            try:
-                meeting = ZoomMeeting.objects.get(meeting_id=meeting_id)
-            except:
-                return HttpResponse('No meeting found', status=status.HTTP_404_NOT_FOUND)
-            meeting.num_occurences += 1
-            meeting.save()
-            return HttpResponse('Updated meeting', status=status.HTTP_200_OK)
-        else:
-            return HttpResponse('Missing meeting id or occurrence', status=status.HTTP_400_BAD_REQUEST)
+    def patch(self, request, format=None):
+        pass

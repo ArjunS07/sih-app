@@ -92,17 +92,18 @@ class StudentSerializer(PlatformUserSerializer):
         return models.Student.objects.create(account=account, **validated_data)
 
 
-class ZoomMeetingSerializer(serializers.Serializer):
-    link = serializers.CharField(max_length=1024)
-    meeting_id = serializers.CharField(max_length=32)
-    meeting_password = serializers.CharField(max_length=1024)
-    num_occurences = serializers.IntegerField()
+class ZoomMeetingSerializer(serializers.ModelSerializer):
+    start_url = serializers.CharField(read_only=True)
+    join_url = serializers.CharField(read_only=True)
+    meeting_id = serializers.CharField(read_only=True)
+    meeting_password = serializers.CharField(read_only=True)
+
 
     class Meta:
         model = models.ZoomMeeting
-        fields = ('link', 'meeting_id', 'meeting_password', 'num_occurences')
+        fields = '__all__'
 
-    def create(self, validated_data):
+    def update(self, validated_data):
         return models.ZoomMeeting.objects.create(**validated_data)
 
 

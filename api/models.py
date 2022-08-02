@@ -70,9 +70,9 @@ class Tutor(PlatformUser):
         return students
 
 class ZoomMeeting(models.Model):
+    # start url for tutors, join_url for students. tutors always start the meeting
     start_url = models.CharField(max_length=1024, default=None, null=True)
     join_url = models.CharField(max_length=1024, default=None, null=True)
-    is_started = models.BooleanField(default=False)
 
     meeting_id = models.CharField(primary_key=True, max_length=32)
     meeting_password = models.CharField(max_length=1024, default=None, null=True)
