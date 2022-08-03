@@ -144,7 +144,7 @@ class MessageSerializer(serializers.ModelSerializer):
     time_sent = serializers.DateTimeField(read_only=True)
     sender_uuid = serializers.CharField()
     folder_path = serializers.CharField(max_length=128, read_only=True)
-    uuid = serializers.CharField(read_only=True)
+    uuid = serializers.CharField()
 
     class Meta:
         model = models.Message
