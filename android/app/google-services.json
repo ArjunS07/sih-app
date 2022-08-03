@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "489134100351",
+    "project_id": "volunteertutoring-37dfa",
+    "storage_bucket": "volunteertutoring-37dfa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:489134100351:android:bee5f1cfe8cf741fd2d44a",
+        "android_client_info": {
+          "package_name": "com.example.sih_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "489134100351-marlnvl6ttv4gv41fed4sdb04q384tj2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDPcRT13KuqQ_-EWTM63jbto0BQNmwUsAc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "489134100351-marlnvl6ttv4gv41fed4sdb04q384tj2.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "489134100351-7p4j9b5kciv1vqqsje2n1a99ipfu2p2a.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.sihApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

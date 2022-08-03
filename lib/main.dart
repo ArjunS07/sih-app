@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+
 import 'package:sih_app/screens/welcome.dart';
 import 'package:sih_app/screens/bottom_tab_controller.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -6,7 +10,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   SharedPreferences.getInstance().then((prefs) {
-    runApp(MyApp(prefs: prefs));
+    Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform)
+        .then((value) => {runApp(MyApp(prefs: prefs))});
   });
 }
 
@@ -17,7 +22,9 @@ class MyApp extends StatelessWidget {
 
   _decideMainPage() {
     if (prefs.get('token') != null && prefs.get('id') != null) {
-      return BottomTabController(prefs: prefs,);
+      return BottomTabController(
+        prefs: prefs,
+      );
     } else {
       return WelcomePage();
     }

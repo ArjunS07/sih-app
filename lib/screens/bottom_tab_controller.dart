@@ -82,7 +82,7 @@ class _BottomTabControllerState extends State<BottomTabController> {
           child = TutorshipChats(loggedinStudent: loggedInUser as Student);
           break;
         case 1:
-          child = TutorSearch(student: loggedInUser!);
+          child = TutorSearch(student: loggedInUser as Student);
           break;
         case 2:
           child = Settings();
@@ -107,7 +107,7 @@ class _BottomTabControllerState extends State<BottomTabController> {
           child = TutorshipChats(loggedinTutor: loggedInUser as Tutor);
           break;
         case 1:
-          child = MyTutorRequests(loggedInTutor: loggedInUser);
+          child = MyTutorRequests(loggedInTutor: loggedInUser as Tutor);
           break;
         case 2:
           child = Settings();

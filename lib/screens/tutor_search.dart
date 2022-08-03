@@ -217,7 +217,7 @@ class _TutorSearchState extends State<TutorSearch> {
                   //         "https://images.unsplash.com/photo-1547721064-da6cfb341d50")),
                   trailing: IconButton(
                     
-                      onPressed: _selectedSubjectIds.isEmpty ? null: () => {
+                      onPressed: _selectedSubjectIds.isEmpty || _selectedLanguagesIds.isEmpty ? null: () => {
                             confirmRequestToTutor(
                                 _tutors[index], widget.student)
                           },
