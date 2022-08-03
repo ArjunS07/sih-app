@@ -25,6 +25,7 @@ urlpatterns = [
     path('api/', include('api.urls')),
     path('app/', include('core.urls')),
     path('accounts/', include('accounts.urls')),
+    path('webhooks/', include('webhooks.urls')),
     
     path('', TemplateView.as_view(template_name='index.html'), name='index'),
 

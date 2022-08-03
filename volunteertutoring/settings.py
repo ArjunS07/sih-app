@@ -59,7 +59,8 @@ INSTALLED_APPS = [
 
     'api',
     'core',
-    'accounts'
+    'accounts',
+    'webhooks'
 ]
 
 MIDDLEWARE = [
