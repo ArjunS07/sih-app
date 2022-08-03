@@ -37,6 +37,12 @@ class Tutorship {
   }
 
   Future<String> displayListProperty(List property, String type) async {
+    if (property.length == 1) {
+      String? decodedProperty = await decodeChoice(property[0], type);
+      if (decodedProperty != null) {
+        return '${decodedProperty}';
+      }
+    }
     // https://stackoverflow.com/questions/38015671/asynchronous-iterable-mapping-in-dart
     List decodedProperty = await Future.wait(
         property.map((property) async => await decodeChoice(property, type)));
@@ -46,9 +52,7 @@ class Tutorship {
     return message;
   }
 
-
   Future<String?> get decodedSubjectsDisplay async {
     return displayListProperty(subjects, 'subjects');
   }
-
 }

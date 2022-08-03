@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_chat_types/flutter_chat_types.dart';
 
 import 'package:sih_app/models/tutor.dart';
 import 'package:sih_app/models/student.dart';
@@ -6,6 +7,8 @@ import 'package:sih_app/models/tutorship.dart';
 
 import 'package:sih_app/utils/tutor_api_utils.dart';
 import 'package:sih_app/utils/tutorship_api_utils.dart';
+import 'chat/chat_page.dart';
+
 
 class TutorshipChats extends StatefulWidget {
   Tutor? loggedinTutor;
@@ -67,6 +70,17 @@ class TutorshipChatsState extends State<TutorshipChats> {
             print(snapshot.data);
             Map data = snapshot.data as Map;
             return ListTile(
+              onTap: () {
+                Navigator.push(
+                  context, MaterialPageRoute(
+                    builder: (context) => ChatPage(
+                      tutorship: tutorship,
+                      loggedInUser: widget.loggedinStudent != null ? widget.loggedinStudent! : widget.loggedinTutor!,
+                      isLoggedInStudent: widget.loggedinStudent != null,
+                    ),
+                  )
+                );
+              },
               title: isLoggedInStudent
                   ? Text(tutorship.tutor.name)
                   : Text(tutorship.student.name),
