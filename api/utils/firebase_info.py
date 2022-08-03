@@ -1,0 +1,1 @@
+TUTORSHIP_ROOT_DIRNAME = 'tutorships'

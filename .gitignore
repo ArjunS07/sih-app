@@ -4,3 +4,5 @@ testing.ipynb
 *.sqlite3
 staticfiles/
 db.sqlite3
+
+firebase_config.json

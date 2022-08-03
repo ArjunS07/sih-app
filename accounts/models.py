@@ -8,6 +8,7 @@ from django.utils.translation import gettext_lazy as _
 from multiselectfield import MultiSelectField
 
 from api.choices import LANGUAGE_MEDIUM_CHOICES, GRADE_CHOICES, CITY_CHOICES, BOARD_CHOICES, SUBJECT_CHOICES
+from api.utils.firebase_info import TUTORSHIP_ROOT_DIRNAME
 
 
 class UserManager(BaseUserManager):
@@ -81,9 +82,9 @@ class PlatformUser(models.Model):
 
     # Personal info
     @property
-    def profile_image_s3_path(self):
+    def profile_image_firebase_path(self):
         # TODO: Do whatever here
-        return f"s3_url/profile_images/{self.uuid}.jpg"
+        return f"profile_images/{self.uuid}.jpg"
     
     @property
     def name(self):

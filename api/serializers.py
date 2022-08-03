@@ -15,13 +15,13 @@ class PlatformUserSerializer(serializers.ModelSerializer):
     city = serializers.CharField(max_length=8)
     languages = serializers.ListField(
         child=serializers.CharField(max_length=12))
-    profile_image_s3_path = serializers.CharField(
+    profile_image_firebase_path = serializers.CharField(
         read_only=True, max_length=255)
 
     class Meta:
         model = accounts_models.PlatformUser
         fields = ('account', 'account__first_name', 'account__last_name', 'uuid', 'city',
-                  'languages', 'profile_image_s3_path')
+                  'languages', 'profile_image_firebase_path')
         abstract = True
 
 
@@ -34,7 +34,7 @@ class TutorSerializer(PlatformUserSerializer):
 
     class Meta:
         model = models.Tutor
-        fields = ('account__id', 'account__first_name', 'account__last_name', 'uuid', 'city', 'languages', 'profile_image_s3_path',
+        fields = ('account__id', 'account__first_name', 'account__last_name', 'uuid', 'city', 'languages', 'profile_image_firebase_path',
                   'boards', 'subjects', 'grades')
 
     def create(self, validated_data):
@@ -73,7 +73,7 @@ class StudentSerializer(PlatformUserSerializer):
 
     class Meta:
         model = models.Student
-        fields = ('uuid', 'account__id', 'account__first_name', 'account__last_name', 'city', 'languages', 'profile_image_s3_path',
+        fields = ('uuid', 'account__id', 'account__first_name', 'account__last_name', 'city', 'languages', 'profile_image_firebase_path',
                   'board', 'grade', 'school')
 
     def create(self, validated_data):
@@ -137,3 +137,26 @@ class TutorshipSerializer(serializers.ModelSerializer):
         instance.status = validated_data['status']
         instance.save()
         return instance
+
+class MessageSerializer(serializers.ModelSerializer):
+    tutorship = TutorshipSerializer(read_only=True)
+    text = serializers.CharField(max_length=128)
+    time_sent = serializers.DateTimeField(read_only=True)
+    sender_uuid = serializers.CharField()
+    folder_path = serializers.CharField(max_length=128, read_only=True)
+    id = serializers.IntegerField(read_only=True)
+
+    class Meta:
+        model = models.Message
+        fields = ('tutorship', 'text', 'time_sent', 'sender_uuid', 'folder_path', 'id') # add id
+
+    def create(self, validated_data):
+        data = self.initial_data
+        print(f'Data: {data}')
+        tutorship_id = data['tutorship__id']
+        try:
+            tutorship = models.Tutorship.objects.get(id=tutorship_id)
+        except Exception as e:
+            print(e)
+            return None
+        return models.Message.objects.create(tutorship=tutorship, **validated_data)

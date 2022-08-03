@@ -14,7 +14,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.parsers import JSONParser
 
-from .models import School, Student, Tutor, Tutorship, ZoomMeeting
+from .models import School, Student, Tutor, Tutorship, ZoomMeeting, Message
 from . import serializers
 from .choices import SUBJECT_CHOICES, LANGUAGE_MEDIUM_CHOICES, GRADE_CHOICES, BOARD_CHOICES, all_choices
 
@@ -165,7 +165,8 @@ class TutorListView(APIView):
         else:
             matching_tutors = Tutor.objects.all()
 
-        matching_tutors = [tutor for tutor in matching_tutors if matching_student not in tutor.active_tutorship_students]
+        matching_tutors = [
+            tutor for tutor in matching_tutors if matching_student not in tutor.active_tutorship_students]
 
         serialized_tutors = serializers.TutorSerializer(
             matching_tutors, many=True)
@@ -258,7 +259,7 @@ class MyTutorshipsView(APIView):
                 print(e)
                 print('Could not find tutor')
                 return HttpResponse(status=status.HTTP_404_NOT_FOUND)
-        
+
         if student_uuid:
             try:
                 student = Student.objects.get(uuid=student_uuid)
@@ -267,10 +268,10 @@ class MyTutorshipsView(APIView):
                 print(e)
                 print('Could not find student')
                 return HttpResponse(status=status.HTTP_404_NOT_FOUND)
-        
+
         if status_code:
             tutorships = tutorships.filter(status=status_code)
-        
+
         serialized_tutorships = serializers.TutorshipSerializer(
             tutorships, many=True)
         res = {
@@ -313,7 +314,6 @@ class JoinSchoolView(APIView):
             return HttpResponse(status=status.HTTP_404_NOT_FOUND)
 
 
-
 class ZoomMeetingView(APIView):
     def get(self, request, format=None):
         data = request.query_params
@@ -328,3 +328,45 @@ class ZoomMeetingView(APIView):
     # The only thing we want to change is the  num occurrences
     def patch(self, request, format=None):
         pass
+
+
+class MessageView(APIView):
+    def get(self, request, format=None):
+        data = request.query_params
+        print(data)
+        message_id = data.get('id', None)
+        tutorship_id = data.get('tutorship__id', None)
+        if not message_id or not tutorship_id:
+            # bad request
+            print('Did not get the right stuff')
+            return HttpResponse(status=status.HTTP_400_BAD_REQUEST)
+        # try:
+        print('Tutorship: ', tutorship_id)
+        print('Message:', message_id)
+        message = Message.objects.get(
+            tutorship__id=tutorship_id, id=message_id)
+        serialized_message = serializers.MessageSerializer(message)
+        res = JSONRenderer().render(serialized_message.data)
+        return HttpResponse(res, content_type='application/json', status=status.HTTP_200_OK)
+        # except Exception as e:
+        #     print(e)
+
+    def post(self, request, format=None):
+        data = request.POST
+        tutorship_id = data.get('tutorship__id', None)
+        if not tutorship_id:
+            return HttpResponse(status=status.HTTP_400_BAD_REQUEST)
+        try:
+            tutorship = Tutorship.objects.get(id=tutorship_id)
+        except Exception as e:
+            print(e)
+            return HttpResponse(status=status.HTTP_404_NOT_FOUND)
+        data = request.POST.copy()
+        data['tutorship'] = tutorship
+        serializer = serializers.MessageSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            res = JSONRenderer().render(serializer.data)
+            return HttpResponse(res, content_type='application/json', status=status.HTTP_200_OK)
+        else:
+            return HttpResponse(serializer.errors, content_type='application/json', status=status.HTTP_400_BAD_REQUEST)
