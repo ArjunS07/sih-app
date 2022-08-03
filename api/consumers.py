@@ -1,5 +1,7 @@
 from channels.generic.websocket import WebsocketConsumer
 import json
+from rest_framework.renderers import JSONRenderer
+
 
 from . import models, serializers
 
@@ -25,10 +27,10 @@ class WSConsumer(WebsocketConsumer):
         }
         serializer = serializers.MessageSerializer(data=data)
         if serializer.is_valid():
+            print(serializer.validated_data)
             serializer.save()
-            self.send(json.dumps({
-                'message': serializer.data
-            }))
+            print('Rendered json', serializer.data)
+            self.send(json.dumps({'message': serializer.data}))
         else:
             print(serializer.errors)
             self.send(json.dumps({
