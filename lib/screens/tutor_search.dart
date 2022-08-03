@@ -27,6 +27,7 @@ class _TutorSearchState extends State<TutorSearch> {
   late List<String> _selectedLanguagesIds = [];
   late List<Choice> _subjectChoices = [];
   late List<String> _selectedSubjectIds = [];
+  late List<String> _selectedSubjectDisplays = [];
 
   //API interfacing
   Future<void> _loadTutors() async {
@@ -69,9 +70,6 @@ class _TutorSearchState extends State<TutorSearch> {
   }
 
   Future<void> confirmRequestToTutor(Tutor tutor, Student student) async {
-    var selectedSubjectsDisplay = _selectedSubjectIds.map((subjectId) async {
-      return await decodeChoice(subjectId, 'subjects');
-    }).toList();
 
     showDialog<void>(
       context: context,
@@ -82,7 +80,7 @@ class _TutorSearchState extends State<TutorSearch> {
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
-                Text('Ask ${tutor.name} to you with $selectedSubjectsDisplay'),
+                Text('Ask ${tutor.name} to help you with ${_selectedSubjectDisplays.join(', ')}?'),
               ],
             ),
           ),
@@ -98,14 +96,18 @@ class _TutorSearchState extends State<TutorSearch> {
                     backgroundColor:
                         MaterialStateProperty.all<Color>(Colors.green)),
                 onPressed: () {
-                  tutorship_api_utils
-                      .createTutorship(
-                          tutor, widget.student, _selectedSubjectIds)
-                      .then((value) {
-                    Navigator.of(context).pop();
-                    _showTutorRequestSnackBar(tutor.name);
-                    _loadTutors(); // reload tutors list which will exclude tutors you already have a tutorship with
-                  });
+                  if (_selectedSubjectIds.isNotEmpty) {
+                    tutorship_api_utils
+                        .createTutorship(
+                            tutor, widget.student, _selectedSubjectIds)
+                        .then((value) {
+                      Navigator.of(context).pop();
+                      _showTutorRequestSnackBar(tutor.name);
+                      _loadTutors(); // reload tutors list which will exclude tutors you already have a tutorship with
+                    });
+                  } else {
+
+                  }
                 },
                 child: const Text(
                   'Yes',
@@ -157,11 +159,13 @@ class _TutorSearchState extends State<TutorSearch> {
             .map((subject) => MultiSelectItem(subject.id, subject.name))
             .toList(),
         listType: MultiSelectListType.CHIP,
-        onConfirm: (values) {
+        onConfirm: (values) async {
           _selectedSubjectIds = [];
           for (var value in values) {
             print(value);
             _selectedSubjectIds.add(value.toString());
+            var decoded = await decodeChoice(value.toString(), 'subjects');
+            _selectedSubjectDisplays.add(decoded!);
           }
           _loadTutors();
         });
@@ -212,7 +216,8 @@ class _TutorSearchState extends State<TutorSearch> {
                   //     backgroundImage: NetworkImage(
                   //         "https://images.unsplash.com/photo-1547721064-da6cfb341d50")),
                   trailing: IconButton(
-                      onPressed: () => {
+                    
+                      onPressed: _selectedSubjectIds.isEmpty ? null: () => {
                             confirmRequestToTutor(
                                 _tutors[index], widget.student)
                           },
