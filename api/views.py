@@ -334,7 +334,7 @@ class MessageView(APIView):
     def get(self, request, format=None):
         data = request.query_params
         print(data)
-        message_id = data.get('id', None)
+        message_id = data.get('uuid', None)
         tutorship_id = data.get('tutorship__id', None)
         if not message_id or not tutorship_id:
             # bad request
