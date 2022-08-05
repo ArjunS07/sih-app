@@ -99,7 +99,7 @@ class Tutorship(models.Model):
    
     @property
     def tutorship_firebase_folder_path(self):
-        pass
+        return f'tutorships/{self.id}/'
 
     def __str__(self) -> str:
         return f'Room with {self.tutor} and {self.student}'
