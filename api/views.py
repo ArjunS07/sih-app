@@ -263,12 +263,12 @@ class MyTutorshipsView(APIView):
         if student_uuid:
             try:
                 student = Student.objects.get(uuid=student_uuid)
-                tutorships = tutorships.filter(student=student)
             except Exception as e:
                 print(e)
                 print('Could not find student')
                 return HttpResponse(status=status.HTTP_404_NOT_FOUND)
 
+        tutorships = Tutorship.objects.filter(student=student)
         if status_code:
             tutorships = tutorships.filter(status=status_code)
 
@@ -334,39 +334,22 @@ class MessageView(APIView):
     def get(self, request, format=None):
         data = request.query_params
         print(data)
-        message_id = data.get('uuid', None)
+        message_uuid = data.get('uuid', None)
         tutorship_id = data.get('tutorship__id', None)
-        if not message_id or not tutorship_id:
+        if not message_uuid or not tutorship_id:
             # bad request
             print('Did not get the right stuff')
             return HttpResponse(status=status.HTTP_400_BAD_REQUEST)
         # try:
         print('Tutorship: ', tutorship_id)
-        print('Message:', message_id)
-        message = Message.objects.get(
-            tutorship__id=tutorship_id, id=message_id)
+        print('Message:', message_uuid)
+        try:
+            message = Message.objects.get(
+                tutorship__id=tutorship_id, uuid=message_uuid)
+        except Exception as e:
+            print(e)
+            print('Could not find message')
+            return HttpResponse(status=status.HTTP_404_NOT_FOUND)
         serialized_message = serializers.MessageSerializer(message)
         res = JSONRenderer().render(serialized_message.data)
         return HttpResponse(res, content_type='application/json', status=status.HTTP_200_OK)
-        # except Exception as e:
-        #     print(e)
-
-    def post(self, request, format=None):
-        data = request.POST
-        tutorship_id = data.get('tutorship__id', None)
-        if not tutorship_id:
-            return HttpResponse(status=status.HTTP_400_BAD_REQUEST)
-        try:
-            tutorship = Tutorship.objects.get(id=tutorship_id)
-        except Exception as e:
-            print(e)
-            return HttpResponse(status=status.HTTP_404_NOT_FOUND)
-        data = request.POST.copy()
-        data['tutorship'] = tutorship
-        serializer = serializers.MessageSerializer(data=data)
-        if serializer.is_valid():
-            serializer.save()
-            res = JSONRenderer().render(serializer.data)
-            return HttpResponse(res, content_type='application/json', status=status.HTTP_200_OK)
-        else:
-            return HttpResponse(serializer.errors, content_type='application/json', status=status.HTTP_400_BAD_REQUEST)
