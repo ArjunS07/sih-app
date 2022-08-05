@@ -602,6 +602,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "web_socket_channel",
+      "rootUri": "file:///Users/arjunsharma/.pub-cache/hosted/pub.dartlang.org/web_socket_channel-2.2.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "win32",
       "rootUri": "file:///Users/arjunsharma/.pub-cache/hosted/pub.dartlang.org/win32-2.6.1",
       "packageUri": "lib/",
@@ -620,7 +626,7 @@
       "languageVersion": "2.17"
     }
   ],
-  "generated": "2022-08-03T15:48:41.584599Z",
+  "generated": "2022-08-03T18:09:41.196309Z",
   "generator": "pub",
   "generatorVersion": "2.17.6"
 }
