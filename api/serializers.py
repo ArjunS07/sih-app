@@ -114,7 +114,7 @@ class TutorshipSerializer(serializers.ModelSerializer):
     tutor = TutorSerializer(read_only=True)
     tutorship_subjects = serializers.ListField(
         child=serializers.CharField(max_length=1024))
-    zoom_meeting__meeting_id = serializers.CharField(read_only=True)
+    zoom_meeting__meeting_id = serializers.CharField(read_only=True, source='zoom_meeting.meeting_id')
     status = serializers.CharField(max_length=32)
     created = serializers.DateTimeField(read_only=True)
 

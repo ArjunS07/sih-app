@@ -24,7 +24,8 @@ from dotenv import load_dotenv
 load_dotenv()
 
 SECRET_KEY = os.getenv('SECRET_KEY')
-DEBUG = os.getenv('DEBUG', False)
+print(os.getenv('DEBUG'))
+DEBUG = os.getenv('DEBUG', None) == 'True'
 ALLOWED_HOSTS = []
 
 if DEBUG:

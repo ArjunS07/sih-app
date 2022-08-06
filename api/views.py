@@ -278,6 +278,7 @@ class MyTutorshipsView(APIView):
             'num_results': len(tutorships),
             'tutorships': serialized_tutorships.data
         }
+        print(serialized_tutorships.data)
         return HttpResponse(JSONRenderer().render(res), content_type='application/json', status=status.HTTP_200_OK)
 
 
