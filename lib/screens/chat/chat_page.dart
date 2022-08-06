@@ -1,19 +1,18 @@
 import 'dart:convert';
 
 import 'dart:math';
-import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:flutter_chat_ui/flutter_chat_ui.dart';
-import 'package:file_picker/file_picker.dart';
+
 
 import 'package:sih_app/models/platform_user.dart';
 import 'package:sih_app/models/tutorship.dart';
 import 'package:sih_app/models/api_message.dart';
 
-import 'package:sih_app/utils/base_api_utils.dart';
+
 
 class ChatPage extends StatefulWidget {
   final Tutorship tutorship;
@@ -82,6 +81,10 @@ class _ChatPageState extends State<ChatPage> {
               final doc = change.doc;
               addFirebaseMessageDoc(doc);
               break;
+            case DocumentChangeType.removed:
+              print('Detected deletion');
+              _messages.removeWhere((message) => message.id == change.doc.id);
+              break;
             default:
               break;
           }
@@ -131,7 +134,10 @@ class _ChatPageState extends State<ChatPage> {
           title: Text(otherUser.name),
           actions: [
             IconButton(
-                onPressed: _showZoomPopUp, icon: const Icon(Icons.video_call))
+              icon: const Icon(Icons.video_call),
+              iconSize: 28.0,
+              onPressed: _showZoomPopUp,
+            )
           ],
         ),
         body: Chat(
@@ -155,7 +161,7 @@ class _ChatPageState extends State<ChatPage> {
 
   // Zoom methods
   void _showZoomPopUp() {
-
+    print('Showing zoom pop up');
   }
 
   String randomString() {
