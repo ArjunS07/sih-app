@@ -11,6 +11,7 @@ import 'package:file_picker/file_picker.dart';
 
 import 'package:sih_app/models/platform_user.dart';
 import 'package:sih_app/models/tutorship.dart';
+import 'package:sih_app/models/api_message.dart';
 
 import 'package:sih_app/utils/base_api_utils.dart';
 
@@ -33,41 +34,51 @@ class ChatPage extends StatefulWidget {
 
 class _ChatPageState extends State<ChatPage> {
   FirebaseFirestore db = FirebaseFirestore.instance;
-  late CollectionReference messagesCollection = db.collection('messages');
+  late CollectionReference messagesCollection = db
+      .collection('messages')
+      .withConverter<APIMessage>(
+        fromFirestore: (snapshot, _) => APIMessage.fromJson(snapshot.data()!),
+        toFirestore: (model, _) => model.toJson(),
+      );
   final List<types.Message> _messages = [];
 
   late types.User _loggedInChatTypeUser;
-  late types.User _chatTypeOtherUser;
+  late types.User _otherChatTypeUser;
 
   late PlatformUser otherUser;
   late String _loggedInUserUuid; // convenience variable
   late String _otherUserUuid;
 
-  void loadInitialFirebaseMessagesForTutorship() {
-    final query =
-        messagesCollection.where("tutorship", isEqualTo: widget.tutorship.id);
-    query.get().then(
-        (res) => {
-              print(
-                  'Successfully queried collection for messages in tutorship ${widget.tutorship.id}'),
-              print(res),
-            },
-        onError: (e) => print('Error querying: $e'));
+
+  void addSnapshotListener() {
+    messagesCollection.snapshots().listen(
+      (event) {
+        final docs = event.docs;
+        for (var messageDoc in docs) {
+          addFirebaseMessageDoc(messageDoc);
+        }
+      },
+      onError: (error) => print("Listen failed: $error"),
+    );
   }
 
   @override
   void initState() {
     super.initState();
     _loggedInUserUuid = widget.loggedInUser.uuid;
-    otherUser = widget.isLoggedInStudent ? widget.tutorship.tutor : widget.tutorship.student;
+    otherUser = widget.isLoggedInStudent
+        ? widget.tutorship.tutor
+        : widget.tutorship.student;
     _otherUserUuid = otherUser.uuid;
 
     _loggedInChatTypeUser = types.User(id: _loggedInUserUuid);
     if (widget.isLoggedInStudent) {
-      _chatTypeOtherUser = types.User(id: widget.tutorship.tutor.uuid);
+      _otherChatTypeUser = types.User(id: widget.tutorship.tutor.uuid);
     } else {
-      _chatTypeOtherUser = types.User(id: widget.tutorship.student.uuid);
+      _otherChatTypeUser = types.User(id: widget.tutorship.student.uuid);
     }
+
+    addSnapshotListener();
   }
 
   @override
@@ -88,7 +99,6 @@ class _ChatPageState extends State<ChatPage> {
         id: randomString() // we dont care about this very much
         );
 
-    _addMessage(textMessage);
     _sendMessage(textMessage);
   }
 
@@ -99,16 +109,27 @@ class _ChatPageState extends State<ChatPage> {
     });
   }
 
-  void _sendMessage(types.TextMessage message) {
-    final messageData = <String, dynamic>{
-      'text_content': message.text,
-      'time_sent': DateTime.now().millisecondsSinceEpoch,
-      'sender_uuid': _loggedInUserUuid,
-      'tutorship': widget.tutorship.id,
-      'has_media': false,
-    };
-    db.collection('messages').add(messageData).then((DocumentReference doc) =>
-        {print('DocumentSnapshot added with ID: ${doc.id}')});
+  void _sendMessage(types.TextMessage message) async {
+    final APIMessage apiMessage = APIMessage(
+        senderUuid: _loggedInUserUuid,
+        textContent: message.text,
+        type: APIMessageType.text,
+        timeSent: DateTime.fromMillisecondsSinceEpoch(message.createdAt!),
+        tutorshipId: widget.tutorship.id);
+    await messagesCollection.add(apiMessage);
+  }
+
+  void addFirebaseMessageDoc(doc) {
+    final message = doc.data() as APIMessage;
+    if (message.type == APIMessageType.text) {
+      bool wasSentByLoggedIn = message.senderUuid == _loggedInUserUuid;
+      final id = doc.id;
+      _addMessage(types.TextMessage(
+        author: wasSentByLoggedIn ? _loggedInChatTypeUser : _otherChatTypeUser,
+        id: id,
+        text: message.textContent!,
+      ));
+    }
   }
 
   // helpers
