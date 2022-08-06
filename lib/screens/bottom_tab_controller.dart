@@ -68,13 +68,16 @@ class _BottomTabControllerState extends State<BottomTabController> {
 
   @override
   void initState() {
+    super.initState();
     setUpUserState();
     print('Is student: $isStudent');
-    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    if (loggedInUser == null ) {
+      return const CircularProgressIndicator();
+    }
     Widget child = TutorshipChats();
     if (isStudent) {
       switch (_index) {
