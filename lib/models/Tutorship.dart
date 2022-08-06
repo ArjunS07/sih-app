@@ -10,6 +10,7 @@ class Tutorship {
   String status = 'PNDG';
   List<String> subjects;
   final DateTime createdTime; // iso 8601 native datetime
+  final String zoomMeetingId;
 
   Tutorship(
       {required this.id,
@@ -17,7 +18,8 @@ class Tutorship {
       required this.tutor,
       required this.status,
       required this.subjects,
-      required this.createdTime});
+      required this.createdTime,
+      required this.zoomMeetingId});
 
   factory Tutorship.fromJson(Map<String, dynamic> json) {
     print('Received json $json');
@@ -29,7 +31,8 @@ class Tutorship {
             .map((subject) => subject as String)
             .toList(),
         status: json['status'],
-        createdTime: DateTime.parse(json['created']));
+        createdTime: DateTime.parse(json['created']),
+        zoomMeetingId: json['zoom_meeting__meeting_id']);
   }
 
   String get relativeTimeSinceCreated {
