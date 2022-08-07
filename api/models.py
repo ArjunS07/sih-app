@@ -94,6 +94,7 @@ class Tutorship(models.Model):
         PENDING = 'PNDG', _('Pending')
         ACCEPTED = 'ACPT', _('Accepted')
         REJECTED = 'RJCT', _('Rejected')
+        SUSPENDED = 'SUSPND', _('Suspended')
 
     status = models.CharField(choices=TutorshipStatus.choices, default=TutorshipStatus.PENDING, max_length=8)
    
@@ -117,3 +118,25 @@ class Tutorship(models.Model):
             zoom_meeting.save()
             self.zoom_meeting = zoom_meeting
         super(Tutorship, self).save(*args, **kwargs)
+
+class TutorshipReport(models.Model):
+    tutorship = models.ForeignKey(Tutorship, on_delete=models.CASCADE)
+    sender_uuid = models.CharField(max_length=36, default=None, null=True)
+    description = models.TextField(default=None, null=True)
+    created = models.DateTimeField(auto_now_add=True, null=True, editable=False)
+
+    def __str__(self):
+        return f'{self.description} by {self.sender_uuid}'
+    
+    def save(self, *args, **kwargs):
+        if not self.pk:
+            # send an email to the student's school
+            student_school = self.tutorship.student.school
+            student_school_email = student_school.account.email
+            pass
+
+            # suspend the tutorship
+            self.tutorship.status = 'SUSPND'
+            self.tutorship.save()
+            print('updated tutorship status')
+        super(TutorshipReport, self).save(*args, **kwargs)

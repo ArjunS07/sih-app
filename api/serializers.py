@@ -137,3 +137,8 @@ class TutorshipSerializer(serializers.ModelSerializer):
         instance.status = validated_data['status']
         instance.save()
         return instance
+
+class TutorshipReportSerializer(serializers.ModelSerializer):
+    class Meta:
+        fields = '__all__'
+        model = models.TutorshipReport

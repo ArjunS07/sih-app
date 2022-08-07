@@ -109,7 +109,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'volunteertutoring.wsgi.application'
 ASGI_APPLICATION = 'volunteertutoring.asgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 

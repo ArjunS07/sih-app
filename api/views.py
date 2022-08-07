@@ -14,7 +14,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.parsers import JSONParser
 
-from .models import School, Student, Tutor, Tutorship, ZoomMeeting, Message
+from .models import School, Student, Tutor, Tutorship, ZoomMeeting, TutorshipReport
 from . import serializers
 from .choices import SUBJECT_CHOICES, LANGUAGE_MEDIUM_CHOICES, GRADE_CHOICES, BOARD_CHOICES, all_choices
 
@@ -144,7 +144,6 @@ class TutorListView(APIView):
             q_objects = []
             for subject in subjects:
                 q_objects.append(Q(subjects__contains=subject))
-            # This is the only filter for which we want the tutors to teach _all_ of the subjects in the query
             combined = reduce(operator.and_, q_objects)
             print(combined)
             q.append(combined)
@@ -245,9 +244,9 @@ class MyTutorshipsView(APIView):
 
         tutor_uuid = data.get('tutor_uuid', None)
         student_uuid = data.get('student_uuid', None)
-        status_code = data.get('status', None)
+        status_codes = data.get('statuses', None)
 
-        if (not tutor_uuid and not student_uuid and not status_code):
+        if (not tutor_uuid and not student_uuid and not status_codes):
             # bad request
             return HttpResponse(status=status.HTTP_400_BAD_REQUEST)
 
@@ -269,8 +268,10 @@ class MyTutorshipsView(APIView):
                 print('Could not find student')
                 return HttpResponse(status=status.HTTP_404_NOT_FOUND)
 
-        if status_code:
-            tutorships = tutorships.filter(status=status_code)
+        if status_codes:
+            split_codes = status.codes.split(',')
+            for status_code in split_codes:
+                tutorships = tutorships.filter(status=status_code)
 
         serialized_tutorships = serializers.TutorshipSerializer(
             tutorships, many=True)
@@ -330,3 +331,22 @@ class ZoomMeetingView(APIView):
     def patch(self, request, format=None):
         pass
 
+class ReportTutorshipView(APIView):
+    def post(self, request, tutorship_id, format=None):
+        print(self.kwargs)
+        tutorship_id = self.kwargs.get('tutorship_id', None)
+        print(tutorship_id)
+        data = request.POST
+        sender_uuid = data['sender_uuid']
+        description = data['description']
+        try:
+            tutorship = Tutorship.objects.get(id=tutorship_id)
+            
+        except Exception as e:
+            print(e)
+            return HttpResponse(status=status.HTTP_404_NOT_FOUND)
+        report = TutorshipReport(tutorship=tutorship, sender_uuid=sender_uuid, description=description)
+        report.save()
+        serialized_report = serializers.TutorshipReportSerializer(report)
+        res = JSONRenderer().render(serialized_report.data)
+        return HttpResponse(res, content_type='application/json', status=status.HTTP_200_OK)

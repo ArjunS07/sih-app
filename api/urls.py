@@ -10,5 +10,6 @@ urlpatterns = [
     path('tutorships', views.TutorshipView.as_view(), name='tutorships'),
     path('mytutorshipslist', views.MyTutorshipsView.as_view(), name='mytutorshipslist'),
     path('meetings', views.ZoomMeetingView.as_view(), name='zoommeeting'),
+    path('report/<int:tutorship_id>', views.ReportTutorshipView.as_view(), name='report'),
 
 ]

@@ -91,7 +91,7 @@ class PlatformUser(models.Model):
         return f"{self.account.first_name} {self.account.last_name}"
 
     def __str__(self) -> str:
-        return str(self.uuid)
+        return f'{str(self.uuid)} - {self.account.first_name} {self.account.last_name}'
 
     class Meta:
         abstract = True
