@@ -137,26 +137,3 @@ class TutorshipSerializer(serializers.ModelSerializer):
         instance.status = validated_data['status']
         instance.save()
         return instance
-
-class MessageSerializer(serializers.ModelSerializer):
-    tutorship = TutorshipSerializer(read_only=True)
-    text = serializers.CharField(max_length=128)
-    time_sent = serializers.DateTimeField(read_only=True)
-    sender_uuid = serializers.CharField()
-    folder_path = serializers.CharField(max_length=128, read_only=True)
-    uuid = serializers.CharField()
-
-    class Meta:
-        model = models.Message
-        fields = ('tutorship', 'text', 'time_sent', 'sender_uuid', 'folder_path', 'uuid') # add id
-
-    def create(self, validated_data):
-        data = self.initial_data
-        print(f'Data: {data}')
-        tutorship_id = data['tutorship__id']
-        try:
-            tutorship = models.Tutorship.objects.get(id=tutorship_id)
-        except Exception as e:
-            print(e)
-            return None
-        return models.Message.objects.create(tutorship=tutorship, **validated_data)

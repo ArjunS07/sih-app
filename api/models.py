@@ -117,17 +117,3 @@ class Tutorship(models.Model):
             zoom_meeting.save()
             self.zoom_meeting = zoom_meeting
         super(Tutorship, self).save(*args, **kwargs)
-
-class Message(models.Model):
-    uuid = models.UUIDField(auto_created=True, default=uuid.uuid4, editable=False, null=True)
-    tutorship = models.ForeignKey(Tutorship, on_delete=models.CASCADE)
-    text = models.CharField(max_length=128, null=True)
-    time_sent = models.DateTimeField(auto_created=True, auto_now_add=True)
-    sender_uuid = models.CharField(max_length=64)
-
-    @property
-    def folder_path(self):
-        return f'{self.tutorship.tutorship_firebase_folder_path}/chats/{self.uuid}'
-    
-    def __str__(self) -> str:
-        return f'{self.text}'

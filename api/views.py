@@ -330,27 +330,3 @@ class ZoomMeetingView(APIView):
     def patch(self, request, format=None):
         pass
 
-
-class MessageView(APIView):
-    def get(self, request, format=None):
-        data = request.query_params
-        print(data)
-        message_uuid = data.get('uuid', None)
-        tutorship_id = data.get('tutorship__id', None)
-        if not message_uuid or not tutorship_id:
-            # bad request
-            print('Did not get the right stuff')
-            return HttpResponse(status=status.HTTP_400_BAD_REQUEST)
-        # try:
-        print('Tutorship: ', tutorship_id)
-        print('Message:', message_uuid)
-        try:
-            message = Message.objects.get(
-                tutorship__id=tutorship_id, uuid=message_uuid)
-        except Exception as e:
-            print(e)
-            print('Could not find message')
-            return HttpResponse(status=status.HTTP_404_NOT_FOUND)
-        serialized_message = serializers.MessageSerializer(message)
-        res = JSONRenderer().render(serialized_message.data)
-        return HttpResponse(res, content_type='application/json', status=status.HTTP_200_OK)
