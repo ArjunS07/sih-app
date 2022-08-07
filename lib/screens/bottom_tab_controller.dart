@@ -93,7 +93,7 @@ class _BottomTabControllerState extends State<BottomTabController> {
           onTap: (newIndex) => setState(() => _index = newIndex),
           currentIndex: _index,
           items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(icon: Icon(Icons.people), label: "My volunteers"),
+            BottomNavigationBarItem(icon: Icon(Icons.people), label: "Volunteers"),
             BottomNavigationBarItem(icon: Icon(Icons.search), label: "Find"),
             BottomNavigationBarItem(
                 icon: Icon(Icons.settings), label: "Settings"),

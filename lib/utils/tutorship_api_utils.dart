@@ -1,6 +1,7 @@
 // ignore_for_file: avoid_print
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:sih_app/models/platform_user.dart';
 
 import 'package:sih_app/models/student.dart';
 import 'package:sih_app/models/tutor.dart';
@@ -103,7 +104,7 @@ Future<List<Tutorship>> getMyTutorships(
   if (student != null) {
     queryParams['student_uuid'] = student.uuid;
   }
-  queryParams['status'] = 'ACPT';
+  queryParams['status'] = ['ACPT', 'SUSPND'].join(',');
 
   var headers = {'Content-Type': 'application/json'};
   final myTutorshipsUri = Uri.parse('$ROOT_URL/api/mytutorshipslist')
@@ -130,8 +131,7 @@ Future<List<Tutorship>> getMyTutorships(
 }
 
 Future<ZoomMeeting> getZoomMeetingFromId(String id) async {
-  var request = http.Request(
-      'GET', Uri.parse('http://localhost:8000/api/meetings?id=$id'));
+  var request = http.Request('GET', Uri.parse('$ROOT_URL/api/meetings?id=$id'));
 
   http.StreamedResponse response = await request.send();
   Map<String, dynamic> body =
@@ -143,4 +143,25 @@ Future<ZoomMeeting> getZoomMeetingFromId(String id) async {
   }
 
   return ZoomMeeting.fromJson(body);
+}
+
+Future<void> reportTutorship(
+    Tutorship tutorship, PlatformUser sender, String description) async {
+  var headers = {'Content-Type': 'application/x-www-form-urlencoded'};
+  var request =
+      http.Request('POST', Uri.parse('$ROOT_URL/api/report/${tutorship.id}'));
+  request.bodyFields = {'sender_uuid': sender.uuid, 'description': description};
+  request.headers.addAll(headers);
+
+  http.StreamedResponse response = await request.send();
+
+  Map<String, dynamic> body =
+      json.decode(await response.stream.bytesToString());
+
+
+  if (response.statusCode == 200) {
+    print(body);
+  } else {
+    print(response.reasonPhrase);
+  }
 }

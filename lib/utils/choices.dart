@@ -31,8 +31,6 @@ jsonToChoices(data) async {
 }
 
 loadChoices(String choiceType) async {
-  print('Loading choices for $choiceType');
     final data = await readJson('assets/choices/$choiceType.json');
-    print('Read data $data');
     return jsonToChoices(data);
 }

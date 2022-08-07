@@ -141,7 +141,7 @@ class _JoinSchoolState extends State<JoinSchool> {
                 style: TextStyle(fontSize: 28.0, fontWeight: FontWeight.w600)),
             const SizedBox(height: 10),
             const Text(
-                'Your school should have provided you a unique 6-letter code. Ask your school administrators if you have not received it.',
+                'Your school should have provided you a unique 6-letter code. Ask your school administrators if you do not have it.',
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w400)),
             const SizedBox(height: 45.0),
@@ -150,7 +150,7 @@ class _JoinSchoolState extends State<JoinSchool> {
               onSubmitted: (code) => _submitSchoolJoinCode(code, context),
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
-                labelText: 'Enter your school join code',
+                labelText: 'Enter your school code',
               ),
               keyboardType: TextInputType.visiblePassword,
               enableSuggestions: false,
@@ -167,7 +167,7 @@ class _JoinSchoolState extends State<JoinSchool> {
                   ? () => _submitSchoolJoinCode(
                       joinCodeFieldController.text, context)
                   : null,
-              child: const Text('Join'),
+              child: const Text('Submit'),
             ),
             const SizedBox(height: 15.0),
             Text(errorText,
@@ -222,59 +222,71 @@ class _ConfirmSchoolState extends State<ConfirmSchool> {
       body: Center(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 32.0, vertical: 24.0),
-          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: <
-              Widget>[
-            const Text(
-              'Is this your school?',
-              style: TextStyle(fontSize: 28.0, fontWeight: FontWeight.w600),
-            ),
-            const SizedBox(height: 50),
-            Container(
-              padding: const EdgeInsets.all(40),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(200),
-                  border: Border.all(width: 2, color: Colors.grey.shade400)),
-              child: const Image(
-                image: AssetImage('assets/images/school_color.png'),
-                width: 150,
-                height: 150,
-              ),
-            ),
-            const SizedBox(height: 35),
-            Text(
-              widget.school.name,
-              style: const TextStyle(fontSize: 32, fontWeight: FontWeight.w600),
-            ),
-            const SizedBox(height: 10.0),
-            Text(
-              schoolCity,
-              style: const TextStyle(fontSize: 24),
-            ),
-            const Spacer(),
-            ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  minimumSize: const Size.fromHeight(50),
-                  primary: Colors.black,
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                const Align(
+                  alignment: Alignment.center,
+                  child: Text(
+                    'Is this your school?',
+                    style:
+                        TextStyle(fontSize: 28.0, fontWeight: FontWeight.w600),
+                  ),
                 ),
-                onPressed: () => {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => AccountSignup(
-                                isStudent: true, school: widget.school),
-                          ))
-                    },
-                child: const Text('Yes', style: TextStyle(fontSize: 17.0))),
-            const SizedBox(height: 10.0),
-            ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  minimumSize: const Size.fromHeight(50),
-                  primary: Colors.grey.shade700,
+                const SizedBox(height: 50),
+                Container(
+                  padding: const EdgeInsets.all(40),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(200),
+                      border:
+                          Border.all(width: 2, color: Colors.grey.shade400)),
+                  child: const Image(
+                    image: AssetImage('assets/images/school_color.png'),
+                    width: 150,
+                    height: 150,
+                  ),
                 ),
-                onPressed: () => {Navigator.of(context).pop()},
-                child: const Text('No', style: TextStyle(fontSize: 17.0))),
-            const SizedBox(height: 25.0)
-          ]),
+                const SizedBox(height: 35),
+                Align(
+                  alignment: Alignment.center,
+                  child: Text(
+                    textAlign: TextAlign.center,
+                    widget.school.name,
+                    style: const TextStyle(
+                        fontSize: 32, fontWeight: FontWeight.w600),
+                  ),
+                ),
+                const SizedBox(height: 10.0),
+                Text(
+                  schoolCity,
+                  style: const TextStyle(fontSize: 24),
+                ),
+                const Spacer(),
+                ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      minimumSize: const Size.fromHeight(50),
+                      primary: Colors.black,
+                    ),
+                    onPressed: () => {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => AccountSignup(
+                                    isStudent: true, school: widget.school),
+                              ))
+                        },
+                    child: const Text('Yes', style: TextStyle(fontSize: 17.0))),
+                const SizedBox(height: 10.0),
+                ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      minimumSize: const Size.fromHeight(50),
+                      primary: Colors.grey.shade700,
+                    ),
+                    onPressed: () => {Navigator.of(context).pop()},
+                    child: const Text('No', style: TextStyle(fontSize: 17.0))),
+                const SizedBox(height: 25.0)
+              ]),
         ),
       ),
     );
@@ -444,7 +456,7 @@ class StudentDetailsState extends State<StudentDetails> {
                       alignment: Alignment.centerLeft,
                       child: Text('What city do you live in?',
                           style: TextStyle(
-                            fontSize: 16.0, color: Colors.grey.shade900))),
+                              fontSize: 16.0, color: Colors.grey.shade900))),
                   SearchChoices.single(
                     icon: const Icon(Icons.pin_drop),
                     items: _cityChoices

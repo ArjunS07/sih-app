@@ -58,6 +58,7 @@ class TutorshipChatsState extends State<TutorshipChats> {
   // UI stuff
   Widget _buildRow(int index) {
     var tutorship = _tutorships[index];
+    final isSuspended = tutorship.status == 'SUSPND';
 
     return FutureBuilder(
         future: _decodeTutorshipData(tutorship),
@@ -69,7 +70,7 @@ class TutorshipChatsState extends State<TutorshipChats> {
             print(snapshot.data);
             Map data = snapshot.data as Map;
             return ListTile(
-              onTap: () {
+              onTap: isSuspended ? null : () {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -85,7 +86,25 @@ class TutorshipChatsState extends State<TutorshipChats> {
               title: isLoggedInStudent
                   ? Text(tutorship.tutor.name)
                   : Text(tutorship.student.name),
-              subtitle: Text(data['subjects']),
+              subtitle: Padding(
+                  padding: const EdgeInsets.only(top: 16.0),
+                  child: RichText(
+                      text: TextSpan(
+                          style: const TextStyle(
+                            color: Colors.black,
+                          ),
+                          children: [
+                        TextSpan(text: data['subjects']),
+                        TextSpan(
+                            style: isSuspended
+                                ? TextStyle(
+                                    color: Colors.red.shade300,
+                                    fontWeight: FontWeight.bold)
+                                : const TextStyle(color: Colors.black),
+                            text: isSuspended
+                                ? '\nSUSPENDED'
+                                : '\nActive since ${tutorship.relativeTimeSinceCreated}')
+                      ]))),
               leading: const CircleAvatar(
                   //TODO
                   backgroundImage: NetworkImage(
@@ -101,7 +120,7 @@ class TutorshipChatsState extends State<TutorshipChats> {
     return Scaffold(
       appBar: AppBar(
         title: widget.loggedinStudent != null
-            ? const Text('My tutors')
+            ? const Text('My volunteers')
             : const Text('My students'),
         automaticallyImplyLeading: false,
       ),
@@ -116,20 +135,19 @@ class TutorshipChatsState extends State<TutorshipChats> {
                     child: Padding(
                       padding: const EdgeInsets.all(16.0),
                       child: Center(
-                        child: widget.loggedinStudent != null
-                            ? Text(
-                                "You have no volunteers teaching you yet. Go to the 'Find' tab to find volunteers.",
-                                style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w300,
-                                    color: Colors.grey.shade600))
-                            : Text(
-                                "You are not teaching any students currently.\n\nOnce a student sends you a request and you accept it, you'll be able to see them here.",
-                                style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w300,
-                                    color: Colors.grey.shade600))
-                      ),
+                          child: widget.loggedinStudent != null
+                              ? Text(
+                                  "You have no volunteers teaching you yet. Go to the 'Find' tab to find volunteers.",
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w300,
+                                      color: Colors.grey.shade600))
+                              : Text(
+                                  "You are not teaching any students currently.\n\nOnce a student sends you a request and you accept it, you'll be able to see them here.",
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w300,
+                                      color: Colors.grey.shade600))),
                     ),
                   )
                 : Expanded(
