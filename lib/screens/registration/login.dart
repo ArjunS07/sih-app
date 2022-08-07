@@ -28,7 +28,6 @@ class _LoginState extends State<Login> {
     });
   }
 
-
   void _login(context) async {
     if (_formKey.currentState!.validate()) {
       print('valid form state');
@@ -44,7 +43,6 @@ class _LoginState extends State<Login> {
                         builder: (context) =>
                             BottomTabController(prefs: prefs))),
               });
-
         } else {
           print('No account found');
           setState(() {
@@ -99,16 +97,22 @@ class _LoginState extends State<Login> {
                         textCapitalization: TextCapitalization.none,
                         controller: _passController,
                         decoration: InputDecoration(
-                          border: const OutlineInputBorder(),
-                          labelText: 'Enter your password',
-                          suffixIcon: _obscurePassword ? Padding(
-                            padding: const EdgeInsets.all(0.0),
-                            child: GestureDetector(onTap: _togglePasswordVisibility, child: const Icon(Icons.visibility)),
-                          ) : Padding(
-                            padding: const EdgeInsets.all(0.0),
-                            child: GestureDetector(onTap: _togglePasswordVisibility, child: const Icon(Icons.visibility_off)),
-                          )
-                        ),
+                            border: const OutlineInputBorder(),
+                            labelText: 'Enter your password',
+                            suffixIcon: _obscurePassword
+                                ? Padding(
+                                    padding: const EdgeInsets.all(0.0),
+                                    child: GestureDetector(
+                                        onTap: _togglePasswordVisibility,
+                                        child: const Icon(Icons.visibility)),
+                                  )
+                                : Padding(
+                                    padding: const EdgeInsets.all(0.0),
+                                    child: GestureDetector(
+                                        onTap: _togglePasswordVisibility,
+                                        child:
+                                            const Icon(Icons.visibility_off)),
+                                  )),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'Please enter your password';
@@ -121,6 +125,10 @@ class _LoginState extends State<Login> {
                     ),
                     const Spacer(),
                     ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          minimumSize: const Size.fromHeight(50),
+                          primary: Colors.black,
+                        ),
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
                             // If the form is valid, display a snackbar. In the real world,

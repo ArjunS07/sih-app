@@ -26,8 +26,8 @@ class _TutorSearchState extends State<TutorSearch> {
   late List<Choice> _languageChoices = [];
 
   late List<Choice> _subjectChoices = [];
-  late String? _selectedSubjectId = null;
-  late String? _selectedSubjectDisplay;
+  late List<String> _selectedSubjectIds = [];
+  late List<String> _selectedSubjectDisplays = [];
 
   //API interfacing
   Future<void> _loadTutors() async {
@@ -37,7 +37,7 @@ class _TutorSearchState extends State<TutorSearch> {
         widget.student.uuid,
         boards: [widget.student.board],
         grades: [widget.student.grade],
-        subjects: [_selectedSubjectId!]);
+        subjects: _selectedSubjectIds);
     setState(() {
       _tutors = loadedTutors;
     });
@@ -65,7 +65,6 @@ class _TutorSearchState extends State<TutorSearch> {
       'grades': await tutor.decodedGrades,
       'boards': await tutor.decodedBoards
     };
-    print('Data: $data');
     return data;
   }
 
@@ -80,7 +79,7 @@ class _TutorSearchState extends State<TutorSearch> {
             child: ListBody(
               children: <Widget>[
                 Text(
-                    'Ask ${tutor.name} to help you with $_selectedSubjectDisplay?'),
+                    'Ask ${tutor.name} to help you with ${_selectedSubjectDisplays.join(', ')}?'),
               ],
             ),
           ),
@@ -126,32 +125,10 @@ class _TutorSearchState extends State<TutorSearch> {
   // search widgets
 
   _subjectSelectionField() {
-    return SearchChoices.single(
-                    icon: const Icon(Icons.pin),
-                    items: _subjectChoices
-                        .map((subject) => DropdownMenuItem(
-                            value: subject.id, child: Text(subject.name)))
-                        .toList(),
-                    value: _selectedGradeId,
-                    padding: 0.0,
-                    style: const TextStyle(
-                        fontSize: 16.0,
-                        color: Colors.black,
-                        fontWeight: FontWeight.w500),
-                    hint: "Select your school grade",
-                    searchHint: "Select your school grade",
-                    onChanged: (value) {
-                      print(value);
-                      setState(() {
-                        _selectedGradeId = value;
-                      });
-                    },
-                    isExpanded: true,
-                  )
     return MultiSelectDialogField(
         buttonText: const Text('What subjects do you want to learn?',
             style: TextStyle(color: Colors.grey, fontSize: 16)),
-        buttonIcon: const Icon(Icons.science),
+        buttonIcon: const Icon(Icons.language),
         title: const Text('Subjects'),
         selectedColor: Colors.black,
         searchable: true,
@@ -176,7 +153,7 @@ class _TutorSearchState extends State<TutorSearch> {
         'Automatically filtering by volunteers who speak your language, and also teach your grade and board',
         textAlign: TextAlign.left,
         style: TextStyle(
-          fontSize: 16,
+          fontSize: 15,
           color: Colors.grey.shade600,
         ));
   }
@@ -222,7 +199,7 @@ class _TutorSearchState extends State<TutorSearch> {
                                 confirmRequestToTutor(
                                     _tutors[index], widget.student)
                               },
-                      icon: const Icon(Icons.person_add, color: Colors.indigo)),
+                      icon: const Icon(Icons.send, color: Colors.indigo)),
                 ),
               ));
             }

@@ -109,7 +109,7 @@ class TutorshipChatsState extends State<TutorshipChats> {
                   //TODO
                   backgroundImage: NetworkImage(
                       "https://images.unsplash.com/photo-1547721064-da6cfb341d50")),
-              trailing: const Icon(Icons.arrow_forward_ios),
+              trailing: isSuspended ? null : const Icon(Icons.arrow_forward_ios),
             );
           }
         });
