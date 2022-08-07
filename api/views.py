@@ -75,6 +75,36 @@ class TutorView(APIView):
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    def patch(self, request, format=None):
+        data = request.POST
+        json_data = json.dumps(data.dict()).encode('utf-8')
+        stream = io.BytesIO(json_data)
+        data = JSONParser().parse(stream)
+        
+        if data.get('languages', None):
+            languages = data['languages'].split(',')
+            data['languages'] = languages
+        if data.get('boards', None):
+            boards = data['boards'].split(',')
+            data['boards'] = boards
+        if data.get('subjects', None):
+            subjects = data['subjects'].split(',')
+            data['subjects'] = subjects
+        if data.get('grades', None):
+            grades = data['grades'].split(',')
+            data['grades'] = grades
+
+        uuid = data['uuid']
+        student = Tutor.objects.get(uuid=uuid)
+        
+        serializer = serializers.TutorSerializer(
+            student, data=data,  partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 class StudentView(APIView):
     def get(self, request, format=None):
@@ -104,6 +134,7 @@ class StudentView(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
     def patch(self, request, format=None):
         data = request.data
         json_data = json.dumps(data.dict()).encode('utf-8')
@@ -116,12 +147,14 @@ class StudentView(APIView):
             return Response(status=status.HTTP_400_BAD_REQUEST)
         data['languages'] = languages
         student = Student.objects.get(uuid=uuid)
-        serializer = serializers.StudentSerializer(student, data=data,  partial=True)
+        serializer = serializers.StudentSerializer(
+            student, data=data,  partial=True)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_200_OK)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 class TutorListView(APIView):
     def get(self, request, format=None):
