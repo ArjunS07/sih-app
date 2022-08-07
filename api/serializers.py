@@ -9,8 +9,8 @@ from accounts import serializers as accounts_serializers
 
 class PlatformUserSerializer(serializers.ModelSerializer):
     account = accounts_serializers.UserModelSerializer(read_only=True)
-    account__first_name = serializers.CharField(max_length=128, source='account.first_name')
-    account__last_name = serializers.CharField(max_length=128, source='account.last_name')
+    account__first_name = serializers.CharField(max_length=128, source='account.first_name', read_only=True)
+    account__last_name = serializers.CharField(max_length=128, source='account.last_name', read_only=True)
     uuid = serializers.UUIDField()
     city = serializers.CharField(max_length=8)
     languages = serializers.ListField(

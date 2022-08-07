@@ -263,12 +263,12 @@ class MyTutorshipsView(APIView):
         if student_uuid:
             try:
                 student = Student.objects.get(uuid=student_uuid)
+                tutorships = Tutorship.objects.filter(student=student)
             except Exception as e:
                 print(e)
                 print('Could not find student')
                 return HttpResponse(status=status.HTTP_404_NOT_FOUND)
 
-        tutorships = Tutorship.objects.filter(student=student)
         if status_code:
             tutorships = tutorships.filter(status=status_code)
 
