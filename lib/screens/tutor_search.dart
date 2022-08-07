@@ -26,8 +26,8 @@ class _TutorSearchState extends State<TutorSearch> {
   late List<Choice> _languageChoices = [];
 
   late List<Choice> _subjectChoices = [];
-  late List<String> _selectedSubjectIds = [];
-  late List<String> _selectedSubjectDisplays = [];
+  late String? _selectedSubjectId = null;
+  late String? _selectedSubjectDisplay;
 
   //API interfacing
   Future<void> _loadTutors() async {
@@ -37,7 +37,7 @@ class _TutorSearchState extends State<TutorSearch> {
         widget.student.uuid,
         boards: [widget.student.board],
         grades: [widget.student.grade],
-        subjects: _selectedSubjectIds);
+        subjects: [_selectedSubjectId!]);
     setState(() {
       _tutors = loadedTutors;
     });
@@ -80,7 +80,7 @@ class _TutorSearchState extends State<TutorSearch> {
             child: ListBody(
               children: <Widget>[
                 Text(
-                    'Ask ${tutor.name} to help you with ${_selectedSubjectDisplays.join(', ')}?'),
+                    'Ask ${tutor.name} to help you with $_selectedSubjectDisplay?'),
               ],
             ),
           ),
@@ -126,11 +126,33 @@ class _TutorSearchState extends State<TutorSearch> {
   // search widgets
 
   _subjectSelectionField() {
+    return SearchChoices.single(
+                    icon: const Icon(Icons.pin),
+                    items: _subjectChoices
+                        .map((subject) => DropdownMenuItem(
+                            value: subject.id, child: Text(subject.name)))
+                        .toList(),
+                    value: _selectedGradeId,
+                    padding: 0.0,
+                    style: const TextStyle(
+                        fontSize: 16.0,
+                        color: Colors.black,
+                        fontWeight: FontWeight.w500),
+                    hint: "Select your school grade",
+                    searchHint: "Select your school grade",
+                    onChanged: (value) {
+                      print(value);
+                      setState(() {
+                        _selectedGradeId = value;
+                      });
+                    },
+                    isExpanded: true,
+                  )
     return MultiSelectDialogField(
-        buttonText: const Text('What do you want to learn?',
+        buttonText: const Text('What subjects do you want to learn?',
             style: TextStyle(color: Colors.grey, fontSize: 16)),
-        buttonIcon: const Icon(Icons.language),
-        title: const Text('Your languages'),
+        buttonIcon: const Icon(Icons.science),
+        title: const Text('Subjects'),
         selectedColor: Colors.black,
         searchable: true,
         items: _subjectChoices.map((subject) => MultiSelectItem(subject.id, subject.name))
@@ -154,7 +176,7 @@ class _TutorSearchState extends State<TutorSearch> {
         'Automatically filtering by volunteers who speak your language, and also teach your grade and board',
         textAlign: TextAlign.left,
         style: TextStyle(
-          fontSize: 15,
+          fontSize: 16,
           color: Colors.grey.shade600,
         ));
   }
