@@ -10,7 +10,7 @@ class Tutorship {
   String status = 'PNDG';
   List<String> subjects;
   final DateTime createdTime; // iso 8601 native datetime
-  final String zoomMeetingId;
+  String? zoomMeetingId;
 
   Tutorship(
       {required this.id,
@@ -19,11 +19,12 @@ class Tutorship {
       required this.status,
       required this.subjects,
       required this.createdTime,
-      required this.zoomMeetingId});
+      this.zoomMeetingId});
 
   factory Tutorship.fromJson(Map<String, dynamic> json) {
-    print('Received json $json');
-    return Tutorship(
+    print(json);
+    print('Tutorship status in API: ${json['status']}');
+    var tutorship = Tutorship(
         id: json['id'],
         student: Student.fromJson(json['student']),
         tutor: Tutor.fromJson(json['tutor']),
@@ -31,8 +32,12 @@ class Tutorship {
             .map((subject) => subject as String)
             .toList(),
         status: json['status'],
-        createdTime: DateTime.parse(json['created']),
-        zoomMeetingId: json['zoom_meeting__meeting_id']);
+        createdTime: DateTime.parse(json['created']));
+    print(tutorship.status);
+    if (tutorship.status == 'ACPT') {
+      tutorship.zoomMeetingId = json['zoom_meeting__meeting_id'];
+    }
+    return tutorship;
   }
 
   String get relativeTimeSinceCreated {

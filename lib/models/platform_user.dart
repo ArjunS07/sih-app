@@ -18,8 +18,8 @@ class PlatformUser {
       required this.city,
       required this.languages});
 
-  String get profileImageS3Path {
-    return 's3_url/profile_images/$uuid.jpg';
+  String get profileImageUrl {
+    return '/profile_images/$uuid.jpg';
   }
 
   Future<Account> get account async {

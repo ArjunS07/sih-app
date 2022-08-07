@@ -1,3 +1,5 @@
+import 'package:sih_app/utils/choices.dart';
+
 class School {
   final int accountId;
   final String name;
@@ -19,4 +21,9 @@ class School {
       joinCode: json['join_code'] as String,
     );
   }
+
+  Future<String?> get decodedCity async {
+    return await decodeChoice(city, 'cities');
+  }
+
 }

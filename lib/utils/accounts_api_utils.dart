@@ -71,9 +71,6 @@ Future<Account?> registerNewAccount(
     'last_name': lastName
   };
   request.headers.addAll(headers);
-  print(request);
-  print(request.bodyFields);
-  print(request.headers);
 
   http.StreamedResponse response = await request.send();
   Map<String, dynamic> body =
@@ -115,8 +112,7 @@ Future<Student?> createStudent(
     'uuid': studentUuid
   };
   studentCreationRequest.headers.addAll(studentCreationHeaders);
-  print(studentCreationRequest.bodyFields);
-  print(studentCreationRequest.headers);
+
 
   http.StreamedResponse studentCreationResponse =
       await studentCreationRequest.send();
@@ -145,8 +141,6 @@ Future<Student?> createStudent(
 
   if (joinSchoolResponse.statusCode != 200) {
     print(joinSchoolResponse.reasonPhrase);
-    print(joinSchoolResponse.reasonPhrase);
-    print(joinSchoolBody);
     throw Exception(joinSchoolBody);
   }
 
@@ -240,7 +234,6 @@ getUserFromAccount(Account account) async {
 
   if (response.statusCode == 200) {
     bool isStudent = body['type'] == 'student';
-    print(body);
     Map<String, dynamic> userDetails = body['user'];
     if (isStudent) {
       return Student.fromJson(userDetails);

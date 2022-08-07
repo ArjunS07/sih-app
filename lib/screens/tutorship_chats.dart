@@ -9,7 +9,6 @@ import 'package:sih_app/utils/tutor_api_utils.dart';
 import 'package:sih_app/utils/tutorship_api_utils.dart';
 import 'chat/chat_page.dart';
 
-
 class TutorshipChats extends StatefulWidget {
   Tutor? loggedinTutor;
   Student? loggedinStudent;
@@ -72,14 +71,16 @@ class TutorshipChatsState extends State<TutorshipChats> {
             return ListTile(
               onTap: () {
                 Navigator.push(
-                  context, MaterialPageRoute(
-                    builder: (context) => ChatPage(
-                      tutorship: tutorship,
-                      loggedInUser: widget.loggedinStudent != null ? widget.loggedinStudent! : widget.loggedinTutor!,
-                      isLoggedInStudent: widget.loggedinStudent != null,
-                    ),
-                  )
-                );
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ChatPage(
+                        tutorship: tutorship,
+                        loggedInUser: widget.loggedinStudent != null
+                            ? widget.loggedinStudent!
+                            : widget.loggedinTutor!,
+                        isLoggedInStudent: widget.loggedinStudent != null,
+                      ),
+                    ));
               },
               title: isLoggedInStudent
                   ? Text(tutorship.tutor.name)
@@ -112,10 +113,23 @@ class TutorshipChatsState extends State<TutorshipChats> {
           children: <Widget>[
             _tutorships.isEmpty
                 ? Expanded(
-                    child: Center(
-                      child: widget.loggedinStudent != null
-                          ? const Text('No tutors')
-                          : const Text('No students'),
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Center(
+                        child: widget.loggedinStudent != null
+                            ? Text(
+                                "You have no volunteers teaching you yet. Go to the 'Find' tab to find volunteers.",
+                                style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w300,
+                                    color: Colors.grey.shade600))
+                            : Text(
+                                "You are not teaching any students currently.\n\nOnce a student sends you a request and you accept it, you'll be able to see them here.",
+                                style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w300,
+                                    color: Colors.grey.shade600))
+                      ),
                     ),
                   )
                 : Expanded(

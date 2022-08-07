@@ -28,13 +28,6 @@ class _LoginState extends State<Login> {
     });
   }
 
-  Widget _decideIcon() {
-    if (_obscurePassword) {
-      return const Icon(Icons.visibility);
-    } else {
-      return const Icon(Icons.visibility_off);
-    }
-  }
 
   void _login(context) async {
     if (_formKey.currentState!.validate()) {
@@ -50,21 +43,7 @@ class _LoginState extends State<Login> {
                     MaterialPageRoute(
                         builder: (context) =>
                             BottomTabController(prefs: prefs))),
-                showDialog(
-                    context: context,
-                    builder: (BuildContext context) => AlertDialog(
-                          title: const Text('Success'),
-                          actions: <Widget>[
-                            TextButton(
-                              child: const Text('OK'),
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                            ),
-                          ],
-                        ))
               });
-          // TODO: Remove dialog and redirect to home screen instead
 
         } else {
           print('No account found');

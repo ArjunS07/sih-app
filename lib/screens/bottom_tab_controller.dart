@@ -35,7 +35,6 @@ class _BottomTabControllerState extends State<BottomTabController> {
     print('Prefs id: $id');
     if (id != null) {
       var account = await auth_api_utils.getAccountFromId(id);
-      print('Got account from prefs id: $account');
       return account;
     }
     return null;
@@ -45,7 +44,6 @@ class _BottomTabControllerState extends State<BottomTabController> {
     var account = await _loadLoggedinAccountFromPrefs();
     if (account != null) {
       var user = await auth_api_utils.getUserFromAccount(account);
-      print('Got user from account: $user');
       return user;
     } else {
       print("Error finding user for logged in account");
@@ -60,8 +58,6 @@ class _BottomTabControllerState extends State<BottomTabController> {
         print('Setting state...');
         loggedInUser = user;
         isStudent = user is Student;
-        print('Logged in user: $loggedInUser');
-        print('Is student: $isStudent');
       });
     }
   }
@@ -70,13 +66,13 @@ class _BottomTabControllerState extends State<BottomTabController> {
   void initState() {
     super.initState();
     setUpUserState();
-    print('Is student: $isStudent');
   }
 
   @override
   Widget build(BuildContext context) {
-    if (loggedInUser == null ) {
-      return const CircularProgressIndicator();
+    if (loggedInUser == null) {
+      return const SizedBox(
+          width: 100.0, child: Center(child: CircularProgressIndicator()));
     }
     Widget child = TutorshipChats();
     if (isStudent) {
@@ -97,7 +93,7 @@ class _BottomTabControllerState extends State<BottomTabController> {
           onTap: (newIndex) => setState(() => _index = newIndex),
           currentIndex: _index,
           items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(icon: Icon(Icons.school), label: "Tutors"),
+            BottomNavigationBarItem(icon: Icon(Icons.people), label: "My volunteers"),
             BottomNavigationBarItem(icon: Icon(Icons.search), label: "Find"),
             BottomNavigationBarItem(
                 icon: Icon(Icons.settings), label: "Settings"),

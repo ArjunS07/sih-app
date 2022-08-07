@@ -37,6 +37,13 @@ class _MyTutorRequestsState extends State<MyTutorRequests> {
     return data;
   }
 
+  _rejectTutorshipRequest(Tutorship tutorship) async {
+    updateTutorshipStatus('RJCT', tutorship.id).then((tutorship) => {
+          _showAcceptedRequestSnackBar(tutorship),
+          _loadRequests()
+        });
+  }
+
   _acceptTutorshipRequest(Tutorship tutorship) async {
     var decodedData = await _decodeTutorshipData(tutorship);
     showDialog<void>(
@@ -114,7 +121,7 @@ class _MyTutorRequestsState extends State<MyTutorRequests> {
                       child: RichText(
                           text: TextSpan(
                               style: const TextStyle(
-                                  fontSize: 14.0, color: Colors.black),
+                                  fontSize: 16.0, color: Colors.black),
                               children: <TextSpan>[
                             TextSpan(
                                 text: '${data['city']}',
@@ -139,9 +146,18 @@ class _MyTutorRequestsState extends State<MyTutorRequests> {
                   //   //TODO
                   //     backgroundImage: NetworkImage(
                   //         "https://images.unsplash.com/photo-1547721064-da6cfb341d50")),
-                  trailing: IconButton(
-                      onPressed: () => {_acceptTutorshipRequest(request)},
-                      icon: const Icon(Icons.check, color: Colors.indigo)),
+                  trailing: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      IconButton(
+                          onPressed: () => {_rejectTutorshipRequest(request)},
+                          icon: Icon(Icons.close, color: Colors.red.shade300)),
+                      IconButton(
+                          onPressed: () => {_acceptTutorshipRequest(request)},
+                          icon: const Icon(Icons.check, color: Colors.indigo)),
+                    ],
+                  ),
+                   
                 ),
               ));
             }
@@ -174,9 +190,17 @@ class _MyTutorRequestsState extends State<MyTutorRequests> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             _requests.isEmpty
-                ? const Expanded(
-                    child: Center(
-                      child: Text('No incoming requests from students'),
+                ? Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Center(
+                        child: Text(
+                            "No pending requests from students.\n\nWhen a student asks to learn from you, you'll see them here.",
+                            style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w300,
+                                color: Colors.grey.shade600)),
+                      ),
                     ),
                   )
                 : Expanded(

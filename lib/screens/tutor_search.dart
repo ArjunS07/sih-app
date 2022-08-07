@@ -24,7 +24,7 @@ class _TutorSearchState extends State<TutorSearch> {
   var _tutors = <dynamic>[];
 
   late List<Choice> _languageChoices = [];
-  late List<String> _selectedLanguagesIds = [];
+
   late List<Choice> _subjectChoices = [];
   late List<String> _selectedSubjectIds = [];
   late List<String> _selectedSubjectDisplays = [];
@@ -37,7 +37,6 @@ class _TutorSearchState extends State<TutorSearch> {
         widget.student.uuid,
         boards: [widget.student.board],
         grades: [widget.student.grade],
-        languages: _selectedLanguagesIds,
         subjects: _selectedSubjectIds);
     setState(() {
       _tutors = loadedTutors;
@@ -49,6 +48,7 @@ class _TutorSearchState extends State<TutorSearch> {
   void _getChoices() async {
     _languageChoices = await loadChoices('languages');
     _subjectChoices = await loadChoices('subjects');
+    _subjectChoices.sort((a, b) => a.name.compareTo(b.name));
 
     setState(() {
       _languageChoices = _languageChoices;
@@ -70,7 +70,6 @@ class _TutorSearchState extends State<TutorSearch> {
   }
 
   Future<void> confirmRequestToTutor(Tutor tutor, Student student) async {
-
     showDialog<void>(
       context: context,
       barrierDismissible: false, // user must tap button!
@@ -80,7 +79,8 @@ class _TutorSearchState extends State<TutorSearch> {
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
-                Text('Ask ${tutor.name} to help you with ${_selectedSubjectDisplays.join(', ')}?'),
+                Text(
+                    'Ask ${tutor.name} to help you with ${_selectedSubjectDisplays.join(', ')}?'),
               ],
             ),
           ),
@@ -105,9 +105,7 @@ class _TutorSearchState extends State<TutorSearch> {
                       _showTutorRequestSnackBar(tutor.name);
                       _loadTutors(); // reload tutors list which will exclude tutors you already have a tutorship with
                     });
-                  } else {
-
-                  }
+                  } else {}
                 },
                 child: const Text(
                   'Yes',
@@ -127,38 +125,17 @@ class _TutorSearchState extends State<TutorSearch> {
 
   // search widgets
 
-  _languageSelectionField() {
-    return MultiSelectDialogField(
-        title: const Text('Filter tutors by languages'),
-        buttonText: const Text('What language do you speak?',
-            style: TextStyle(color: Colors.grey)),
-        buttonIcon: const Icon(Icons.language),
-        separateSelectedItems: true,
-        items: _languageChoices
-            .map((language) => MultiSelectItem(language.id, language.name))
-            .toList(),
-        listType: MultiSelectListType.CHIP,
-        onConfirm: (values) {
-          _selectedLanguagesIds = [];
-          for (var value in values) {
-            print(value);
-            _selectedLanguagesIds.add(value.toString());
-          }
-          _loadTutors();
-        });
-  }
-
   _subjectSelectionField() {
     return MultiSelectDialogField(
         buttonText: const Text('What do you want to learn?',
-            style: TextStyle(color: Colors.grey)),
-        title: const Text('Filter tutors by subjects'),
-        buttonIcon: Icon(Icons.class_),
-        separateSelectedItems: true,
-        items: _subjectChoices
-            .map((subject) => MultiSelectItem(subject.id, subject.name))
+            style: TextStyle(color: Colors.grey, fontSize: 16)),
+        buttonIcon: const Icon(Icons.language),
+        title: const Text('Your languages'),
+        selectedColor: Colors.black,
+        searchable: true,
+        items: _subjectChoices.map((subject) => MultiSelectItem(subject.id, subject.name))
             .toList(),
-        listType: MultiSelectListType.CHIP,
+        listType: MultiSelectListType.LIST,
         onConfirm: (values) async {
           _selectedSubjectIds = [];
           for (var value in values) {
@@ -174,9 +151,10 @@ class _TutorSearchState extends State<TutorSearch> {
   // General Widgets
   _generalFilterInfoLabel() {
     return Text(
-        'Automatically filtering by tutors who teach your grade and board',
+        'Automatically filtering by volunteers who speak your language, and also teach your grade and board',
         textAlign: TextAlign.left,
         style: TextStyle(
+          fontSize: 15,
           color: Colors.grey.shade600,
         ));
   }
@@ -189,7 +167,7 @@ class _TutorSearchState extends State<TutorSearch> {
       Expanded(
         child: FutureBuilder(
           future: tutorData(tutor),
-          initialData: 'Loading tutor data...',
+          initialData: 'Loading volunteer data...',
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Text('Data is loading...');
@@ -216,11 +194,12 @@ class _TutorSearchState extends State<TutorSearch> {
                   //     backgroundImage: NetworkImage(
                   //         "https://images.unsplash.com/photo-1547721064-da6cfb341d50")),
                   trailing: IconButton(
-                    
-                      onPressed: _selectedSubjectIds.isEmpty || _selectedLanguagesIds.isEmpty ? null: () => {
-                            confirmRequestToTutor(
-                                _tutors[index], widget.student)
-                          },
+                      onPressed: _selectedSubjectIds.isEmpty
+                          ? null
+                          : () => {
+                                confirmRequestToTutor(
+                                    _tutors[index], widget.student)
+                              },
                       icon: const Icon(Icons.person_add, color: Colors.indigo)),
                 ),
               ));
@@ -244,32 +223,34 @@ class _TutorSearchState extends State<TutorSearch> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Search for tutors'),
+        title: const Text('Search for volunteers'),
         automaticallyImplyLeading: false,
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(24.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            const Text('Filter tutors',
-                style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w600)),
+            const Text('Filter volunteers',
+                style: TextStyle(fontSize: 21.0, fontWeight: FontWeight.w700)),
             const SizedBox(height: 10.0),
-            _languageSelectionField(),
-            const SizedBox(height: 5.0),
             _subjectSelectionField(),
             const SizedBox(height: 20),
             _generalFilterInfoLabel(),
             const SizedBox(height: 35.0),
-            const Text('Matching tutors',
-                style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w600)),
+            const Text('Matching volunteers',
+                style: TextStyle(fontSize: 21.0, fontWeight: FontWeight.w700)),
             const SizedBox(height: 10),
             _tutors.isEmpty
-                ? const Expanded(
+                ? Expanded(
                     child: Center(
                       child: Text(
-                          'No matching tutors found. Try reducing the number of search requirements you set.'),
+                          'No matching volunteers found. Try reducing the number of search requirements you set.',
+                          style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w300,
+                              color: Colors.grey.shade600)),
                     ),
                   )
                 : Expanded(
