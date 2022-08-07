@@ -104,7 +104,24 @@ class StudentView(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
+    def patch(self, request, format=None):
+        data = request.data
+        json_data = json.dumps(data.dict()).encode('utf-8')
+        stream = io.BytesIO(json_data)
+        data = JSONParser().parse(stream)
+        uuid = data['uuid']
+        try:
+            languages = data['languages'].split(',')
+        except:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+        data['languages'] = languages
+        student = Student.objects.get(uuid=uuid)
+        serializer = serializers.StudentSerializer(student, data=data,  partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class TutorListView(APIView):
     def get(self, request, format=None):
@@ -331,6 +348,7 @@ class ZoomMeetingView(APIView):
     def patch(self, request, format=None):
         pass
 
+
 class ReportTutorshipView(APIView):
     def post(self, request, tutorship_id, format=None):
         print(self.kwargs)
@@ -341,11 +359,12 @@ class ReportTutorshipView(APIView):
         description = data['description']
         try:
             tutorship = Tutorship.objects.get(id=tutorship_id)
-            
+
         except Exception as e:
             print(e)
             return HttpResponse(status=status.HTTP_404_NOT_FOUND)
-        report = TutorshipReport(tutorship=tutorship, sender_uuid=sender_uuid, description=description)
+        report = TutorshipReport(
+            tutorship=tutorship, sender_uuid=sender_uuid, description=description)
         report.save()
         serialized_report = serializers.TutorshipReportSerializer(report)
         res = JSONRenderer().render(serialized_report.data)
