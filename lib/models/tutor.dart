@@ -10,13 +10,13 @@ class Tutor extends PlatformUser {
   Tutor({
     required super.firstName,
     required super.lastName,
-    required this.grades,
-    required this.boards,
-    required this.subjects,
     required super.accountId,
     required super.uuid,
     required super.city,
     required super.languages,
+    required this.grades,
+    required this.boards,
+    required this.subjects,
   });
 
   factory Tutor.fromJson(Map<String, dynamic> json) {

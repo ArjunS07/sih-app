@@ -8,6 +8,7 @@ import 'package:sih_app/models/account.dart';
 import 'package:sih_app/models/School.dart';
 import 'package:sih_app/models/student.dart';
 import 'package:sih_app/models/tutor.dart';
+import 'package:sih_app/utils/student_api_utils.dart';
 
 import 'base_api_utils.dart';
 
@@ -87,6 +88,7 @@ Future<Account?> registerNewAccount(
   }
 }
 
+
 Future<Student?> createStudent(
     Account account,
     String city,
@@ -113,7 +115,6 @@ Future<Student?> createStudent(
   };
   studentCreationRequest.headers.addAll(studentCreationHeaders);
 
-
   http.StreamedResponse studentCreationResponse =
       await studentCreationRequest.send();
   Map<String, dynamic> studentCreationBody =
@@ -125,27 +126,7 @@ Future<Student?> createStudent(
   }
 
   // 2. Make the student join the school
-  final Uri joinSchoolUri = Uri.parse('$ROOT_URL/api/joinschool');
-  var joinSchoolRequest = http.Request('POST', joinSchoolUri);
-
-  var joinSchoolheaders = {'Content-Type': 'application/x-www-form-urlencoded'};
-  joinSchoolRequest.bodyFields = {
-    'join_code': studentSchool.joinCode,
-    'student_uuid': studentUuid
-  };
-  joinSchoolRequest.headers.addAll(joinSchoolheaders);
-
-  http.StreamedResponse joinSchoolResponse = await joinSchoolRequest.send();
-  Map<String, dynamic> joinSchoolBody =
-      json.decode(await joinSchoolResponse.stream.bytesToString());
-
-  if (joinSchoolResponse.statusCode != 200) {
-    print(joinSchoolResponse.reasonPhrase);
-    throw Exception(joinSchoolBody);
-  }
-
-  print('Joined student to school');
-
+  joinStudentToSchool(studentUuid, studentSchool.joinCode);
   Student student = Student(
       firstName: account.firstName,
       lastName: account.lastName,
@@ -156,7 +137,6 @@ Future<Student?> createStudent(
       board: board,
       grade: grade,
       uuid: studentUuid);
-
   return student;
 }
 
@@ -247,4 +227,34 @@ getUserFromAccount(Account account) async {
   } else {
     throw (response.reasonPhrase.toString());
   }
+}
+
+Future<Account> updateAccountDetails(int accountId,
+    {String? firstName, String? lastName}) async {
+  Map<String, String> queryParams = {'id': accountId.toString()};
+
+  if (firstName != null && firstName != '') {
+    queryParams['first_name'] = firstName;
+  }
+  if (lastName != null && lastName != '') {
+    queryParams['last_name'] = lastName;
+  }
+
+  var headers = {'Content-Type': 'application/x-www-form-urlencoded'};
+  var request = http.Request(
+      'PATCH',
+      Uri.parse('$ROOT_URL/accounts/users')
+          .replace(queryParameters: queryParams));
+  request.headers.addAll(headers);
+
+  http.StreamedResponse response = await request.send();
+
+  Map<String, dynamic> body =
+      json.decode(await response.stream.bytesToString());
+  if (response.statusCode != 200) {
+    print(response.reasonPhrase);
+    throw Exception(body);
+  }
+
+  return Account.fromJson(body);
 }

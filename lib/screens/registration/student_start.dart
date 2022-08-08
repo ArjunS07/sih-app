@@ -10,7 +10,7 @@ import 'package:multi_select_flutter/multi_select_flutter.dart';
 import 'package:search_choices/search_choices.dart';
 
 import 'package:sih_app/utils/persistence_utils.dart' as persistence_utils;
-
+import 'package:sih_app/utils/student_api_utils.dart';
 import 'package:sih_app/models/School.dart';
 import 'package:sih_app/utils/accounts_api_utils.dart';
 import 'package:sih_app/utils/choices.dart';
@@ -58,26 +58,12 @@ class _JoinSchoolState extends State<JoinSchool> {
     );
   }
 
-  Future<School?> _getSchoolFromJoinCode(String joinCode) async {
-    final uri =
-        Uri.parse('http://localhost:8000/api/joinschool?join_code=${joinCode}');
-    final response = await http.get(uri);
-    final code = response.statusCode;
-    if (code == 404) {
-      return null;
-    }
-    final json = jsonDecode(response.body);
-    final school = School.fromJson(json);
-    print(school);
-    return school;
-  }
-
   void _submitSchoolJoinCode(String joinCode, BuildContext context) {
     if (joinCode == '') {
       return;
     }
     showAlertDialog(context);
-    _getSchoolFromJoinCode(joinCode).then((school) {
+    getSchoolFromJoinCode(joinCode).then((school) {
       Future.delayed(const Duration(milliseconds: 1500), () {
         Navigator.pop(context);
         if (school != null) {
@@ -104,7 +90,6 @@ class _JoinSchoolState extends State<JoinSchool> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     joinCodeFieldController.addListener(() {
       setState(() {

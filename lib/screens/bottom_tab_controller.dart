@@ -51,7 +51,8 @@ class _BottomTabControllerState extends State<BottomTabController> {
     }
   }
 
-  void setUpUserState() async {
+  // export
+  void loadUserState() async {
     var user = await _loadLoggedinUserFromAccount();
     if (user != null) {
       setState(() {
@@ -65,7 +66,7 @@ class _BottomTabControllerState extends State<BottomTabController> {
   @override
   void initState() {
     super.initState();
-    setUpUserState();
+    loadUserState();
   }
 
   @override
@@ -84,7 +85,7 @@ class _BottomTabControllerState extends State<BottomTabController> {
           child = TutorSearch(student: loggedInUser as Student);
           break;
         case 2:
-          child = Settings();
+          child = Settings(notifyParentReload: loadUserState);
           break;
       }
       return Scaffold(
@@ -109,7 +110,7 @@ class _BottomTabControllerState extends State<BottomTabController> {
           child = MyTutorRequests(loggedInTutor: loggedInUser as Tutor);
           break;
         case 2:
-          child = Settings();
+          child = Settings(notifyParentReload: loadUserState);
           break;
       }
       return Scaffold(
