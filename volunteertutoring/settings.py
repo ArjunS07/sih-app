@@ -198,3 +198,7 @@ AUTH_USER_MODEL = 'accounts.User'
 REST_AUTH_REGISTER_SERIALIZERS = {
     'REGISTER_SERIALIZER': 'accounts.serializers.CustomRegisterSerializer'
 }
+
+LOGIN_REDIRECT_URL = '/dasjboard'
+LOGIN_URL = '/login'
+LOGOUT_REDIRECT_URL = '/'

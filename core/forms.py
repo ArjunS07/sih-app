@@ -30,3 +30,20 @@ class SchoolCreationForm(forms.ModelForm):
         if User.objects.filter(email=email).exists():
             raise forms.ValidationError('Email already exists')
         return email
+
+class SchoolLoginForm(forms.ModelForm):
+    account__email = forms.EmailField(required=True, widget = forms.EmailInput(
+        attrs={'placeholder': 'Email', 'class': 'input'}))
+    account__password = forms.CharField(
+        widget=forms.PasswordInput(attrs = {'placeholder': 'Password', 'class': 'input'}), required=True)
+
+    class Meta:
+        fields = 'account__email', 'account__password'
+        model = User
+    
+    def clean(self):
+        email = self.cleaned_data['account__email']
+        password = self.cleaned_data['account__password']
+        if not authenticate(email=email, password=password):
+            raise forms.ValidationError('Invalid email or password')
+        return self.cleaned_data
