@@ -66,8 +66,8 @@ class _TutorDetailsState extends State<TutorDetails> {
 
   @override
   void initState() {
-    getChoices();
     super.initState();
+      getChoices();
   }
 
   void _submitRegistration(context) async {

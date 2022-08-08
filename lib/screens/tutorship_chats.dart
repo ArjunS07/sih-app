@@ -69,48 +69,55 @@ class TutorshipChatsState extends State<TutorshipChats> {
           } else {
             print(snapshot.data);
             Map data = snapshot.data as Map;
-            return ListTile(
-              onTap: isSuspended ? null : () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => ChatPage(
-                        tutorship: tutorship,
-                        loggedInUser: widget.loggedinStudent != null
-                            ? widget.loggedinStudent!
-                            : widget.loggedinTutor!,
-                        isLoggedInStudent: widget.loggedinStudent != null,
-                      ),
-                    ));
-              },
-              title: isLoggedInStudent
-                  ? Text(tutorship.tutor.name)
-                  : Text(tutorship.student.name),
-              subtitle: Padding(
-                  padding: const EdgeInsets.only(top: 16.0),
-                  child: RichText(
+            return Opacity(
+                opacity: isSuspended ? 0.75 : 1,
+                child: ListTile(
+                  onTap: isSuspended
+                      ? null
+                      : () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ChatPage(
+                                  tutorship: tutorship,
+                                  loggedInUser: widget.loggedinStudent != null
+                                      ? widget.loggedinStudent!
+                                      : widget.loggedinTutor!,
+                                  isLoggedInStudent:
+                                      widget.loggedinStudent != null,
+                                ),
+                              ));
+                        },
+                  title: isLoggedInStudent
+                      ? Text(tutorship.tutor.name)
+                      : Text(tutorship.student.name),
+                  subtitle: RichText(
                       text: TextSpan(
                           style: const TextStyle(
                             color: Colors.black,
                           ),
                           children: [
-                        TextSpan(text: data['subjects']),
+                        TextSpan(
+                            text: data['subjects'],
+                            style: TextStyle(
+                                color: Colors.grey.shade800, height: 2)),
                         TextSpan(
                             style: isSuspended
                                 ? TextStyle(
-                                    color: Colors.red.shade300,
+                                    color: Colors.red.shade200,
                                     fontWeight: FontWeight.bold)
                                 : const TextStyle(color: Colors.black),
                             text: isSuspended
                                 ? '\nSUSPENDED'
                                 : '\nActive since ${tutorship.relativeTimeSinceCreated}')
-                      ]))),
-              leading: const CircleAvatar(
-                  //TODO
-                  backgroundImage: NetworkImage(
-                      "https://images.unsplash.com/photo-1547721064-da6cfb341d50")),
-              trailing: isSuspended ? null : const Icon(Icons.arrow_forward_ios),
-            );
+                      ])),
+                  leading: const CircleAvatar(
+                      //TODO
+                      backgroundImage: NetworkImage(
+                          "https://images.unsplash.com/photo-1547721064-da6cfb341d50")),
+                  trailing:
+                      isSuspended ? null : const Icon(Icons.arrow_forward_ios),
+                ));
           }
         });
   }

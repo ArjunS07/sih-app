@@ -1,7 +1,7 @@
 import 'account.dart';
 import 'package:sih_app/utils/accounts_api_utils.dart' as accounts_api_utils;
 import 'package:sih_app/utils/choices.dart';
-
+import 'package:sih_app/utils/extensions/list_extension.dart';
 class PlatformUser {
   final String firstName;
   final String lastName;
@@ -39,10 +39,7 @@ class PlatformUser {
     // https://stackoverflow.com/questions/38015671/asynchronous-iterable-mapping-in-dart
     List decodedProperty = await Future.wait(
         property.map((property) async => await decodeChoice(property, type)));
-    String message =
-        decodedProperty.sublist(0, decodedProperty.length - 1).join(', ');
-    message = '$message and ${decodedProperty[decodedProperty.length - 1]}';
-    return message;
+    return decodedProperty.joinedWithAnd();
   }
 
   Future<String?> get decodedLanguagesDisplay async {

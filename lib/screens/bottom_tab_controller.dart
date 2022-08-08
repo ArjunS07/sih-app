@@ -85,7 +85,7 @@ class _BottomTabControllerState extends State<BottomTabController> {
           child = TutorSearch(student: loggedInUser as Student);
           break;
         case 2:
-          child = Settings(notifyParentReload: loadUserState);
+          child = Settings(notifyParentReload: loadUserState, loggedInStudent: loggedInUser as Student,);
           break;
       }
       return Scaffold(
@@ -102,6 +102,7 @@ class _BottomTabControllerState extends State<BottomTabController> {
         ),
       );
     } else {
+
       switch (_index) {
         case 0:
           child = TutorshipChats(loggedinTutor: loggedInUser as Tutor);
@@ -110,7 +111,7 @@ class _BottomTabControllerState extends State<BottomTabController> {
           child = MyTutorRequests(loggedInTutor: loggedInUser as Tutor);
           break;
         case 2:
-          child = Settings(notifyParentReload: loadUserState);
+          child = Settings(notifyParentReload: loadUserState, loggedInTutor: loggedInUser as Tutor);
           break;
       }
       return Scaffold(

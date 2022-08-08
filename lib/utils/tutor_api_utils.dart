@@ -12,8 +12,7 @@ import 'package:sih_app/models/tutor.dart';
 import 'base_api_utils.dart';
 import 'accounts_api_utils.dart' as accounts_api_utils;
 
-Future<List<Tutor>> loadTutorsFromParams(
-  String studentUuid,
+Future<List<Tutor>> loadTutorsFromParams(String studentUuid,
     {List<String>? languages,
     List<String>? grades,
     List<String>? boards,
@@ -39,8 +38,8 @@ Future<List<Tutor>> loadTutorsFromParams(
   queryParams['student_uuid'] = studentUuid;
 
   var headers = {'Content-Type': 'application/json'};
-  final tutorSearchUri =
-      Uri.parse('$ROOT_URL/api/tutorslist').replace(queryParameters: queryParams);
+  final tutorSearchUri = Uri.parse('$ROOT_URL/api/tutorslist')
+      .replace(queryParameters: queryParams);
   print(tutorSearchUri);
 
   var request = http.Request('GET', tutorSearchUri);
@@ -64,4 +63,42 @@ Future<List<Tutor>> loadTutorsFromParams(
   }).toList();
 
   return tutors;
+}
+
+Future<Tutor> updateTutorDetails(Tutor tutor,
+    {List? boards, List? grades, List? subjects, List? languages, String? city}) async {
+  
+  Map<String, String> queryParams = {'uuid': tutor.uuid};
+  if (grades != null && grades.isNotEmpty) {
+    queryParams['grades'] = grades.join(',');
+  }
+  if (boards != null && boards.isNotEmpty) {
+    queryParams['boards'] = boards.join(',');
+  }
+  if (subjects != null && subjects.isNotEmpty) {
+    String joined = subjects.join(',');
+    queryParams['subjects'] = joined;
+  }
+
+  if (languages != null && languages.isNotEmpty) {
+    queryParams['languages'] = languages.join(',');
+  }
+  if (city != null) {
+    queryParams['city'] = city;
+  }
+
+  var headers = {'Content-Type': 'application/x-www-form-urlencoded'};
+  var request = http.Request('PATCH', Uri.parse('$ROOT_URL/api/tutors').replace(queryParameters: queryParams));
+  request.headers.addAll(headers);
+
+  http.StreamedResponse response = await request.send();
+
+  Map<String, dynamic> body =
+      json.decode(await response.stream.bytesToString());
+  if (response.statusCode != 200) {
+    print(response.reasonPhrase);
+    throw Exception(body);
+  }
+
+  return Tutor.fromJson(body);
 }
