@@ -24,3 +24,9 @@ class SchoolCreationForm(forms.ModelForm):
     class Meta:
         fields = 'account__email', 'account__password1', 'account__password2', 'school_name', 'school_city'
         model = School
+    
+    def clean_account__email(self):
+        email = self.cleaned_data['account__email']
+        if User.objects.filter(email=email).exists():
+            raise forms.ValidationError('Email already exists')
+        return email
