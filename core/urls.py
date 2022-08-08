@@ -4,5 +4,6 @@ from django.urls import path, include
 from . import views
 
 urlpatterns = [
-    # path('', TemplateView.as_view(template_name='core/index.html'), name='index'),
+    path('signup', views.SchoolSignUp.as_view(), name='school_signup'),
+    path('dashboard', views.SchoolDashboard.as_view(), name='school_dashboard'),
 ]

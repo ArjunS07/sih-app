@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% block title %}
+School sign up
+{% endblock title %}
+
+{% block content %}
+
+<section class="section container">
+    <div class="columns">
+        <div class="column is-one-quarter-desktop"></div>
+        <div class="column">
+            <div class="box border-radius">
+                <h1 class="title is-3">Register your school on appname</h1>
+
+                <form action="{{ request.path }}" method="post" class="form-group" enctype= multipart/form-data>
+                    {% csrf_token %}
+                    {{ form.non_field_errors }}
+
+                    <div class="field">
+                        {{ form.school_name.errors }}
+                        <label for="{{ form.school_name.id_for_school_name }}" class="label">School name</label>
+                        {{ form.school_name }}
+                    </div>
+
+                    <div class="field">
+                        {{ form.school_city.errors }}
+                        <label for="{{ form.school_city.id_for_school_city}}" class="label">School city</label>
+                        {{ form.school_city }}
+                    </div>
+                    <hr class="my-5">
+                    <div class="field">
+                        {{ form.account__email.errors }}
+                        <label for="{{ form.account__email.id_for_account__email }}" class="label">School administrator
+                            email</label>
+                        {{ form.account__email }}
+                    </div>
+                    <div class="field">
+                        {{ form.account__password1.errors }}
+                        <label for="{{ form.account__password1.id_for_account__password1 }}"
+                            class="label">Password</label>
+                        {{ form.account__password1 }}
+                    </div>
+                    <div class="field">
+                        {{ form.account__password2.errors }}
+                        <label for="{{ form.account__password2.id_for_account__password2 }}"
+                            class="label">Password</label>
+                        {{ form.account__password2 }}
+                    </div>
+                    <div class="mt-5 field is-grouped">
+                        <div class="control is-fullwidth">
+                            <button type="submit" class="button is-black is-fullwidth border-radius">Submit</button>
+                        </div>
+
+                    </div>
+                </form>
+
+            </div>
+
+
+        </div>
+        <div class="column is-one-quarter-desktop"></div>
+    </div>
+
+</section>
+
+<script>
+    function onChange() {
+        console.log('Calling on change function');
+        const password = document.querySelector('#password1');
+        console.log(password.value);
+        const confirm = document.querySelector('#password1');
+        console.log(confirm.value);
+        if (confirm.value === password.value) {
+            confirm.setCustomValidity('');
+        } else {
+            console.log('not equal');
+            confirm.setCustomValidity('Passwords do not match');
+        }
+    }
+</script>
+
+{% endblock content %}
