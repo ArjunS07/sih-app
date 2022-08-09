@@ -1,0 +1,18 @@
+[
+    {
+      "id": "10S",
+      "name": "10th standard"
+    },
+    {
+      "id": "12S",
+      "name": "12th standard"
+    },
+    {
+      "id": "BACH",
+      "name": "Bachelor's"
+    },
+    {
+      "id": "MSPLUS",
+      "name": "Master's or above"
+    }
+  ]
