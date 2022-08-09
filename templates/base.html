@@ -7,7 +7,7 @@
     <title>APPNAME | {% block title %} {% endblock title %}</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
     <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
-    <script src="https://kit.fontawesome.com/a1b8a3d47a.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/a1b8a3d47a.js" crossorigin="anonymous"></script> 
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
     {% block imports %}
@@ -66,12 +66,18 @@
               <div class="navbar-end">
                 <div class="navbar-item">
                   <div class="buttons">
+                    {% if request.user.is_authenticated %}
+                    <a class="button is-light" href="{% url 'logout' %}">
+                      <strong>Logout</strong>
+                    </a>
+                    {% else %}
                     <a class="button is-primary" href="{% url 'school_signup' %}">
                       <strong>Sign up</strong>
                     </a>
                     <a class="button is-light" href="{% url 'school_login' %}">
                       Log in
                     </a>
+                    {% endif %}
                   </div>
                 </div>
               </div>
