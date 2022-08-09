@@ -199,6 +199,6 @@ REST_AUTH_REGISTER_SERIALIZERS = {
     'REGISTER_SERIALIZER': 'accounts.serializers.CustomRegisterSerializer'
 }
 
-LOGIN_REDIRECT_URL = '/dasjboard'
-LOGIN_URL = '/login'
+LOGIN_REDIRECT_URL = '/dashboard'
+LOGIN_URL = 'app/login'
 LOGOUT_REDIRECT_URL = '/'

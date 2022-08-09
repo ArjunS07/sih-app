@@ -31,11 +31,14 @@ class TutorSerializer(PlatformUserSerializer):
     subjects = serializers.ListField(
         child=serializers.CharField(max_length=1024))
     grades = serializers.ListField(child=serializers.CharField(max_length=128))
+    age = serializers.IntegerField()
+    highest_educational_level = serializers.CharField(max_length=12)
+
 
     class Meta:
         model = models.Tutor
         fields = ('account__id', 'account__first_name', 'account__last_name', 'uuid', 'city', 'languages', 'profile_image_firebase_path',
-                  'boards', 'subjects', 'grades')
+                  'boards', 'subjects', 'grades', 'age', 'highest_educational_level')
 
     def create(self, validated_data):
         account_id = int(validated_data['account']['id'])

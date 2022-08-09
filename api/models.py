@@ -6,10 +6,12 @@ from django.db import models
 from django.urls import reverse
 
 from django.utils.translation import gettext_lazy as _
+from django.core.validators import MaxValueValidator, MinValueValidator
+
 from multiselectfield import MultiSelectField
 
 from accounts.models import User, PlatformUser
-from .choices import LANGUAGE_MEDIUM_CHOICES, GRADE_CHOICES, CITY_CHOICES, BOARD_CHOICES, SUBJECT_CHOICES, decode_choice
+from .choices import GRADE_CHOICES, CITY_CHOICES, BOARD_CHOICES, SUBJECT_CHOICES, EDUCATIONAL_LEVEL_CHOICES, decode_choice
 
 from .utils.zoom_utils import generate_zoom_meeting
 
@@ -76,6 +78,9 @@ class Tutor(PlatformUser):
         choices=BOARD_CHOICES, max_length=128, default=None, null=True, blank=True)
     subjects = MultiSelectField(
         choices=SUBJECT_CHOICES, max_length=1024, default=None, null=True)
+    age = models.PositiveIntegerField(default=None, null=True, validators=[MinValueValidator(15), MaxValueValidator(100)])
+    highest_educational_level = models.CharField(choices=EDUCATIONAL_LEVEL_CHOICES,max_length=12, default=None, null=True)
+
 
     @property
     def active_tutorships(self):
@@ -115,7 +120,7 @@ class ZoomMeeting(models.Model):
 class Tutorship(models.Model):
     tutor = models.ForeignKey(Tutor, null=True, on_delete=models.SET_NULL)
     student = models.ForeignKey(Student, null=True, on_delete=models.SET_NULL)
-    zoom_meeting = models.ForeignKey(
+    zoom_meeting = models.OneToOneField(
         ZoomMeeting, editable=False, null=True, default=None, on_delete=models.SET_NULL)
     tutorship_subjects = MultiSelectField(
         choices=SUBJECT_CHOICES, max_length=1024, default=None, null=True)
