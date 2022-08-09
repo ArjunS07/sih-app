@@ -88,7 +88,6 @@ class _MyTutorRequestsState extends State<MyTutorRequests> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _loadRequests();
   }
@@ -141,11 +140,6 @@ class _MyTutorRequestsState extends State<MyTutorRequests> {
                                     fontWeight: FontWeight.bold,
                                     color: Colors.grey))
                           ]))),
-
-                  // leading: const CircleAvatar(
-                  //   //TODO
-                  //     backgroundImage: NetworkImage(
-                  //         "https://images.unsplash.com/photo-1547721064-da6cfb341d50")),
                   trailing: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [

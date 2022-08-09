@@ -187,11 +187,6 @@ class _TutorSearchState extends State<TutorSearch> {
                         'City: ${data['city']}\nSpeaks ${data['languages']}\n\nSubjects: ${data['subjects']}',
                         style: const TextStyle(fontSize: 16.0)),
                   ),
-
-                  // leading: const CircleAvatar(
-                  //   //TODO
-                  //     backgroundImage: NetworkImage(
-                  //         "https://images.unsplash.com/photo-1547721064-da6cfb341d50")),
                   trailing: IconButton(
                       onPressed: _selectedSubjectIds.isEmpty
                           ? null

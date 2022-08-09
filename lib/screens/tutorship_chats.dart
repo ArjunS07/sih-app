@@ -40,7 +40,6 @@ class TutorshipChatsState extends State<TutorshipChats> {
   // state
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     if (widget.loggedinStudent != null) {
       isLoggedInStudent = true;
