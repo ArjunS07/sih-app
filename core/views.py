@@ -12,7 +12,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import user_passes_test
 
 from accounts.models import User
-from api.models import School
+from api.models import School, Student
 from api.choices import CITY_CHOICES, GRADE_CHOICES
 
 from .forms import SchoolCreationForm, SchoolLoginForm
@@ -110,3 +110,16 @@ class SchoolDashboard(View):
             'students': students
         }
         return render(request, 'core/school_dashboard.html', context)
+
+class StudentDetailView(View):
+    @method_decorator(login_required())
+    def get(self, request, student_uuid):
+        try:
+            student = Student.objects.get(uuid=student_uuid)
+        except Student.DoesNotExist:
+            return HttpResponseRedirect(reverse('school_dashboard'))
+
+        context = {
+            'student': student
+        }
+        return render(request, 'core/student_detail.html', context)

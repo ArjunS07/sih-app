@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ school.name }}
+{% endblock title %}
+
+{% block imports %}
+{% load static %}
+{% endblock imports %}
+
+{% block content %}
+
+
+<section class="section container">
+    <h3 class="title is-3">{{ student.name }}'s volunteers</h3>
+    {% for tutorship in student.tutorships %}
+
+    <div class="card has-background-light mb-5">
+        <div class="card-header">
+            <div class="card-header-title is-flex is-align-items-center is-justify-content-center">
+                <span class="has-text-weight-bold is-flex-grow-1 is-size-4">{{ tutorship.tutor.name }} </span>
+                <button class="button has-text-white has-background-black-bis">
+                    <span> Download complete message logs </span>
+                    <span class="icon is-small">
+                        <i class="fa-solid fa-circle-arrow-down"></i>
+                    </span>
+                </button>
+            </div>
+        </div>
+        <div class="card-content">
+            <div class="content has-text-weight-medium">
+                <div class="block">
+                    Since <span class="has-text-weight-bold">{{ tutorship.created|date:"jS F o" }}</span> <br>
+                    Subjects: <span class="has-text-weight-bold">{{ tutorship.tutorship_subjects }} </span>
+                </div>
+                <div class="block">
+                    Zoom meeting ID: <span class="has-text-weight-bold">{{ tutorship.zoom_meeting.meeting_id_display }}
+                    </span> <br>
+                    Zoom meeting password: <span class="has-text-weight-bold">{{ tutorship.zoom_meeting.meeting_password}} </span>
+                    <br>
+
+                    <a  href="{{ tutorship.zoom_meeting }}" class="mt-2 button  has-background-grey-lighter" target="_blank">
+                        <span>Join zoom meeting</span>
+                        <span class="icon is-small">
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                        </span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+</section>
+
+<script>
+
+</script>
+
+{% endblock content %}

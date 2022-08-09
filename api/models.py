@@ -3,7 +3,8 @@ from email.policy import default
 import uuid
 
 from django.db import models
-from django.db.models import F, Q, When
+from django.urls import reverse
+
 from django.utils.translation import gettext_lazy as _
 from multiselectfield import MultiSelectField
 
@@ -56,12 +57,16 @@ class Student(PlatformUser):
         return decode_choice(GRADE_CHOICES, self.grade)
 
     @property
-    def active_tutorships(self):
+    def tutorships(self):
         return Tutorship.objects.filter(student=self)
 
     @property
-    def num_active_tutorships(self) -> int:
-        return len(self.active_tutorships)
+    def num_tutorships(self) -> int:
+        return len(self.tutorships)
+    
+    @property
+    def detail_url(self) -> str:
+        return reverse('student_detail', kwargs={'student_uuid': self.uuid})
 
 
 class Tutor(PlatformUser):
@@ -74,7 +79,7 @@ class Tutor(PlatformUser):
 
     @property
     def active_tutorships(self):
-        return Tutorship.objects.filter(tutor=self)
+        return Tutorship.objects.filter(tutor=self).exclude(status='RJCT')
 
     @property
     def num_active_tutorships(self) -> int:
@@ -98,6 +103,10 @@ class ZoomMeeting(models.Model):
         max_length=1024, default=None, null=True)
     meeting_encrypted_password = models.CharField(
         max_length=1024, default=None, null=True)
+    
+    @property
+    def meeting_id_display(self):
+        return f'{self.meeting_id[:3]} {self.meeting_id[3:7]} {self.meeting_id[7:]}'
 
     def __str__(self) -> str:
         return self.join_url
@@ -116,7 +125,7 @@ class Tutorship(models.Model):
 
     class TutorshipStatus(models.TextChoices):
         PENDING = 'PNDG', _('Pending')
-        ACCEPTED = 'ACPT', _('Accepted')
+        ACCEPTED = 'ACPT', _('Active')
         REJECTED = 'RJCT', _('Rejected')
         SUSPENDED = 'SUSPND', _('Suspended')
 
@@ -127,8 +136,9 @@ class Tutorship(models.Model):
     def tutorship_firebase_folder_path(self):
         return f'tutorships/{self.id}/'
 
+
     def __str__(self) -> str:
-        return f'Room with {self.tutor} and {self.student}'
+        return f'Room with {self.tutor} and {self.student} and subjects {self.tutorship_subjects}'
 
     def save(self, *args, **kwargs):
         if self.status == 'ACPT' and self.zoom_meeting is None:

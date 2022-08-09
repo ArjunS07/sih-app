@@ -7,5 +7,6 @@ urlpatterns = [
     path('signup', views.SchoolSignUp.as_view(), name='school_signup'),
     path('login', views.LoginView.as_view(), name='school_login'),
     path('dashboard', views.SchoolDashboard.as_view(), name='school_dashboard'),
+    path('dashboard/student/<student_uuid>', views.StudentDetailView.as_view(), name='student_detail'),
     path('logout', views.logout_view, name='logout'),
 ]

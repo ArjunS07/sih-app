@@ -26,16 +26,16 @@
                 </div>
                 <div class="card-content">
                     <div class="content">
-                        {% if student.num_active_tutorships == 0 %}
-                        <p class="has-text-grey"> {{ student.num_active_tutorships }} volunteers </p>
+                        {% if student.num_tutorships == 0 %}
+                        <p class="has-text-grey"> {{ student.num_tutorships }} volunteers </p>
                         {% else %}
-                        <p class="has-text-weight-semibold"> {{ student.num_active_tutorships }} volunteers </p>
-                        <button class="button has-text-white has-background-black-bis">
+                        <p class="has-text-weight-semibold"> {{ student.num_tutorships }} volunteers </p>
+                        <a href="{{ student.detail_url }}" class="button has-text-white has-background-black-bis">
                             <span> See volunteers </span>
                             <span class="icon is-small">
                                 <i class="fa-solid fa-circle-arrow-right"></i>
                             </span>
-                        </button>
+                        </a>
                         {% endif %}
 
                     </div>
