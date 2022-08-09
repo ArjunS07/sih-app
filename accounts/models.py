@@ -8,7 +8,6 @@ from django.utils.translation import gettext_lazy as _
 from multiselectfield import MultiSelectField
 
 from api.choices import LANGUAGE_MEDIUM_CHOICES, GRADE_CHOICES, CITY_CHOICES, BOARD_CHOICES, SUBJECT_CHOICES
-from api.utils.firebase_info import TUTORSHIP_ROOT_DIRNAME
 
 
 class UserManager(BaseUserManager):

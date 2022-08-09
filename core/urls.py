@@ -9,4 +9,5 @@ urlpatterns = [
     path('dashboard', views.SchoolDashboard.as_view(), name='school_dashboard'),
     path('dashboard/student/<student_uuid>', views.StudentDetailView.as_view(), name='student_detail'),
     path('logout', views.logout_view, name='logout'),
+    path('messageslog/<tutorship_id>', views.MessageLogView.as_view(), name='messageslog')
 ]

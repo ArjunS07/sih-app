@@ -1,9 +1,10 @@
+from datetime import datetime
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.db.models import Case, Value, When
 
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound
 from django.shortcuts import render
 from django.views.generic import View
 from django.urls import reverse
@@ -12,10 +13,11 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import user_passes_test
 
 from accounts.models import User
-from api.models import School, Student
+from api.models import School, Student, Tutorship
 from api.choices import CITY_CHOICES, GRADE_CHOICES
 
 from .forms import SchoolCreationForm, SchoolLoginForm
+from .utils.firebase_utils import get_tutorship_message_log
 
 def unauthenticated_required(view_func=None):
     actual_decorator = user_passes_test(
@@ -123,3 +125,16 @@ class StudentDetailView(View):
             'student': student
         }
         return render(request, 'core/student_detail.html', context)
+
+class MessageLogView(View):
+    @method_decorator(login_required())
+    def get(self, request, tutorship_id):
+        try:
+            tutorship = Tutorship.objects.get(id=tutorship_id)
+        except Exception as e:
+            return HttpResponseNotFound('Not found')
+        filename = f'{tutorship.student.name}_{tutorship.tutor.name}_log_{datetime.now()}.txt'
+        content = get_tutorship_message_log(tutorship)
+        response = HttpResponse(content, content_type='text/plain')
+        response['Content-Disposition'] = 'attachment; filename={0}'.format(filename)
+        return response

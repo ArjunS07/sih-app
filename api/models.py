@@ -136,6 +136,9 @@ class Tutorship(models.Model):
     def tutorship_firebase_folder_path(self):
         return f'tutorships/{self.id}/'
 
+    @property
+    def messages_log(self):
+        return reverse('messageslog', kwargs={'tutorship_id': self.id})
 
     def __str__(self) -> str:
         return f'Room with {self.tutor} and {self.student} and subjects {self.tutorship_subjects}'
@@ -157,7 +160,7 @@ class Tutorship(models.Model):
 
 
 class TutorshipReport(models.Model):
-    tutorship = models.ForeignKey(Tutorship, on_delete=models.CASCADE)
+    tutorship = models.OneToOneField(Tutorship, on_delete=models.CASCADE)
     sender_uuid = models.CharField(max_length=36, default=None, null=True)
     description = models.TextField(default=None, null=True)
     created = models.DateTimeField(
