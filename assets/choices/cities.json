@@ -1,2402 +1,2402 @@
 [
-    {
-      "name": "ADILA",
-      "id": "Adilabad"
-    },
-    {
-      "name": "AGRA",
-      "id": "Agra"
-    },
-    {
-      "name": "AHMED",
-      "id": "Ahmedabad"
-    },
-    {
-      "name": "AHMED",
-      "id": "Ahmednagar"
-    },
-    {
-      "name": "AIZAW",
-      "id": "Aizawl"
-    },
-    {
-      "name": "AJITG",
-      "id": "Ajitgarh (Mohali)"
-    },
-    {
-      "name": "AJMER",
-      "id": "Ajmer"
-    },
-    {
-      "name": "AKOLA",
-      "id": "Akola"
-    },
-    {
-      "name": "ALAPP",
-      "id": "Alappuzha"
-    },
-    {
-      "name": "ALIGA",
-      "id": "Aligarh"
-    },
-    {
-      "name": "ALIRA",
-      "id": "Alirajpur"
-    },
-    {
-      "name": "ALLAH",
-      "id": "Allahabad"
-    },
-    {
-      "name": "ALMOR",
-      "id": "Almora"
-    },
-    {
-      "name": "ALWAR",
-      "id": "Alwar"
-    },
-    {
-      "name": "AMBAL",
-      "id": "Ambala"
-    },
-    {
-      "name": "AMBED",
-      "id": "Ambedkar Nagar"
-    },
-    {
-      "name": "AMRAV",
-      "id": "Amravati"
-    },
-    {
-      "name": "AMREL",
-      "id": "Amreli district"
-    },
-    {
-      "name": "AMRIT",
-      "id": "Amritsar"
-    },
-    {
-      "name": "ANAND",
-      "id": "Anand"
-    },
-    {
-      "name": "ANANTP",
-      "id": "Anantapur"
-    },
-    {
-      "name": "ANANTG",
-      "id": "Anantnag"
-    },
-    {
-      "name": "ANGUL",
-      "id": "Angul"
-    },
-    {
-      "name": "ANJAW",
-      "id": "Anjaw"
-    },
-    {
-      "name": "ANUPP",
-      "id": "Anuppur"
-    },
-    {
-      "name": "ARARI",
-      "id": "Araria"
-    },
-    {
-      "name": "ARIYA",
-      "id": "Ariyalur"
-    },
-    {
-      "name": "ARWAL",
-      "id": "Arwal"
-    },
-    {
-      "name": "ASHOK",
-      "id": "Ashok Nagar"
-    },
-    {
-      "name": "AURAI",
-      "id": "Auraiya"
-    },
-    {
-      "name": "AURAN",
-      "id": "Aurangabad"
-    },
-    {
-      "name": "AZAMG",
-      "id": "Azamgarh"
-    },
-    {
-      "name": "BADGA",
-      "id": "Badgam"
-    },
-    {
-      "name": "BAGAL",
-      "id": "Bagalkot"
-    },
-    {
-      "name": "BAGES",
-      "id": "Bageshwar"
-    },
-    {
-      "name": "BAGPA",
-      "id": "Bagpat"
-    },
-    {
-      "name": "BAHRA",
-      "id": "Bahraich"
-    },
-    {
-      "name": "BAKSA",
-      "id": "Baksa"
-    },
-    {
-      "name": "BALAG",
-      "id": "Balaghat"
-    },
-    {
-      "name": "BALAN",
-      "id": "Balangir"
-    },
-    {
-      "name": "BALAS",
-      "id": "Balasore"
-    },
-    {
-      "name": "BALLI",
-      "id": "Ballia"
-    },
-    {
-      "name": "BALRA",
-      "id": "Balrampur"
-    },
-    {
-      "name": "BANAS",
-      "id": "Banaskantha"
-    },
-    {
-      "name": "BANDA",
-      "id": "Banda"
-    },
-    {
-      "name": "BANDI",
-      "id": "Bandipora"
-    },
-    {
-      "name": "BANGA",
-      "id": "Bangalore"
-    },
-    {
-      "name": "BANKA",
-      "id": "Banka"
-    },
-    {
-      "name": "BANKU",
-      "id": "Bankura"
-    },
-    {
-      "name": "BANSW",
-      "id": "Banswara"
-    },
-    {
-      "name": "BARAB",
-      "id": "Barabanki"
-    },
-    {
-      "name": "BARAM",
-      "id": "Baramulla"
-    },
-    {
-      "name": "BARAN",
-      "id": "Baran"
-    },
-    {
-      "name": "BARDH",
-      "id": "Bardhaman"
-    },
-    {
-      "name": "BAREI",
-      "id": "Bareilly"
-    },
-    {
-      "name": "BARGA",
-      "id": "Bargarh (Baragarh)"
-    },
-    {
-      "name": "BARME",
-      "id": "Barmer"
-    },
-    {
-      "name": "BARNA",
-      "id": "Barnala"
-    },
-    {
-      "name": "BARPE",
-      "id": "Barpeta"
-    },
-    {
-      "name": "BARWA",
-      "id": "Barwani"
-    },
-    {
-      "name": "BASTA",
-      "id": "Bastar"
-    },
-    {
-      "name": "BASTI",
-      "id": "Basti"
-    },
-    {
-      "name": "BATHI",
-      "id": "Bathinda"
-    },
-    {
-      "name": "BEED",
-      "id": "Beed"
-    },
-    {
-      "name": "BEGUS",
-      "id": "Begusarai"
-    },
-    {
-      "name": "BELGA",
-      "id": "Belgaum"
-    },
-    {
-      "name": "BELLA",
-      "id": "Bellary"
-    },
-    {
-      "name": "BETUL",
-      "id": "Betul"
-    },
-    {
-      "name": "BHADR",
-      "id": "Bhadrak"
-    },
-    {
-      "name": "BHAGA",
-      "id": "Bhagalpur"
-    },
-    {
-      "name": "BHAND",
-      "id": "Bhandara"
-    },
-    {
-      "name": "BHARA",
-      "id": "Bharatpur"
-    },
-    {
-      "name": "BHARU",
-      "id": "Bharuch"
-    },
-    {
-      "name": "BHAVN",
-      "id": "Bhavnagar"
-    },
-    {
-      "name": "BHILW",
-      "id": "Bhilwara"
-    },
-    {
-      "name": "BHIND",
-      "id": "Bhind"
-    },
-    {
-      "name": "BHIWA",
-      "id": "Bhiwani"
-    },
-    {
-      "name": "BHOJP",
-      "id": "Bhojpur"
-    },
-    {
-      "name": "BHOPA",
-      "id": "Bhopal"
-    },
-    {
-      "name": "BIDAR",
-      "id": "Bidar"
-    },
-    {
-      "name": "BIJAP",
-      "id": "Bijapur"
-    },
-    {
-      "name": "BIJNO",
-      "id": "Bijnor"
-    },
-    {
-      "name": "BIKAN",
-      "id": "Bikaner"
-    },
-    {
-      "name": "BILAS",
-      "id": "Bilaspur"
-    },
-    {
-      "name": "BIRBH",
-      "id": "Birbhum"
-    },
-    {
-      "name": "BISHN",
-      "id": "Bishnupur"
-    },
-    {
-      "name": "BOKAR",
-      "id": "Bokaro"
-    },
-    {
-      "name": "BONGA",
-      "id": "Bongaigaon"
-    },
-    {
-      "name": "BOUDH",
-      "id": "Boudh (Bauda)"
-    },
-    {
-      "name": "BUDAU",
-      "id": "Budaun"
-    },
-    {
-      "name": "BULAN",
-      "id": "Bulandshahr"
-    },
-    {
-      "name": "BULDH",
-      "id": "Buldhana"
-    },
-    {
-      "name": "BUNDI",
-      "id": "Bundi"
-    },
-    {
-      "name": "BURHA",
-      "id": "Burhanpur"
-    },
-    {
-      "name": "BUXAR",
-      "id": "Buxar"
-    },
-    {
-      "name": "CACHA",
-      "id": "Cachar"
-    },
-    {
-      "name": "CHAMA",
-      "id": "Chamarajnagar"
-    },
-    {
-      "name": "CHAMB",
-      "id": "Chamba"
-    },
-    {
-      "name": "CHAMO",
-      "id": "Chamoli"
-    },
-    {
-      "name": "CHAMPA",
-      "id": "Champawat"
-    },
-    {
-      "name": "CHAMPH",
-      "id": "Champhai"
-    },
-    {
-      "name": "CHANDAU",
-      "id": "Chandauli"
-    },
-    {
-      "name": "CHANDEL",
-      "id": "Chandel"
-    },
-    {
-      "name": "CHANDI",
-      "id": "Chandigarh"
-    },
-    {
-      "name": "CHANDRA",
-      "id": "Chandrapur"
-    },
-    {
-      "name": "CHANG",
-      "id": "Changlang"
-    },
-    {
-      "name": "CHATR",
-      "id": "Chatra"
-    },
-    {
-      "name": "CHENN",
-      "id": "Chennai"
-    },
-    {
-      "name": "CHHAT",
-      "id": "Chhatarpur"
-    },
-    {
-      "name": "CHHIN",
-      "id": "Chhindwara"
-    },
-    {
-      "name": "CHIKK",
-      "id": "Chikkaballapur"
-    },
-    {
-      "name": "CHIKK",
-      "id": "Chikkamagaluru"
-    },
-    {
-      "name": "CHIRA",
-      "id": "Chirang"
-    },
-    {
-      "name": "CHITRDR",
-      "id": "Chitradurga"
-    },
-    {
-      "name": "CHITRKO",
-      "id": "Chitrakoot"
-    },
-    {
-      "name": "CHITTOOR",
-      "id": "Chittoor"
-    },
-    {
-      "name": "CHITTGR",
-      "id": "Chittorgarh"
-    },
-    {
-      "name": "CHURA",
-      "id": "Churachandpur"
-    },
-    {
-      "name": "CHURU",
-      "id": "Churu"
-    },
-    {
-      "name": "COIMB",
-      "id": "Coimbatore"
-    },
-    {
-      "name": "COOCH",
-      "id": "Cooch Behar"
-    },
-    {
-      "name": "CUDDA",
-      "id": "Cuddalore"
-    },
-    {
-      "name": "CUTTA",
-      "id": "Cuttack"
-    },
-    {
-      "name": "DADRA",
-      "id": "Dadra and Nagar Haveli"
-    },
-    {
-      "name": "DAHOD",
-      "id": "Dahod"
-    },
-    {
-      "name": "DAKSHDINA",
-      "id": "Dakshin Dinajpur"
-    },
-    {
-      "name": "DAKSHKANNA",
-      "id": "Dakshina Kannada"
-    },
-    {
-      "name": "DAMAN",
-      "id": "Daman"
-    },
-    {
-      "name": "DAMOH",
-      "id": "Damoh"
-    },
-    {
-      "name": "DANTE",
-      "id": "Dantewada"
-    },
-    {
-      "name": "DARBH",
-      "id": "Darbhanga"
-    },
-    {
-      "name": "DARJE",
-      "id": "Darjeeling"
-    },
-    {
-      "name": "DARRA",
-      "id": "Darrang"
-    },
-    {
-      "name": "DATIA",
-      "id": "Datia"
-    },
-    {
-      "name": "DAUSA",
-      "id": "Dausa"
-    },
-    {
-      "name": "DAVAN",
-      "id": "Davanagere"
-    },
-    {
-      "name": "DEBAG",
-      "id": "Debagarh (Deogarh)"
-    },
-    {
-      "name": "DEHRA",
-      "id": "Dehradun"
-    },
-    {
-      "name": "DEOGH",
-      "id": "Deoghar"
-    },
-    {
-      "name": "DEORI",
-      "id": "Deoria"
-    },
-    {
-      "name": "DEWAS",
-      "id": "Dewas"
-    },
-    {
-      "name": "DHALA",
-      "id": "Dhalai"
-    },
-    {
-      "name": "DHAMT",
-      "id": "Dhamtari"
-    },
-    {
-      "name": "DHANB",
-      "id": "Dhanbad"
-    },
-    {
-      "name": "DHAR",
-      "id": "Dhar"
-    },
-    {
-      "name": "DHARM",
-      "id": "Dharmapuri"
-    },
-    {
-      "name": "DHARW",
-      "id": "Dharwad"
-    },
-    {
-      "name": "DHEMA",
-      "id": "Dhemaji"
-    },
-    {
-      "name": "DHENK",
-      "id": "Dhenkanal"
-    },
-    {
-      "name": "DHOLP",
-      "id": "Dholpur"
-    },
-    {
-      "name": "DHUBR",
-      "id": "Dhubri"
-    },
-    {
-      "name": "DHULE",
-      "id": "Dhule"
-    },
-    {
-      "name": "DIBAN",
-      "id": "Dibang Valley"
-    },
-    {
-      "name": "DIBRU",
-      "id": "Dibrugarh"
-    },
-    {
-      "name": "DIMA",
-      "id": "Dima Hasao"
-    },
-    {
-      "name": "DIMAP",
-      "id": "Dimapur"
-    },
-    {
-      "name": "DINDI",
-      "id": "Dindigul"
-    },
-    {
-      "name": "DINDO",
-      "id": "Dindori"
-    },
-    {
-      "name": "DIU",
-      "id": "Diu"
-    },
-    {
-      "name": "DODA",
-      "id": "Doda"
-    },
-    {
-      "name": "DUMKA",
-      "id": "Dumka"
-    },
-    {
-      "name": "DUNGA",
-      "id": "Dungapur"
-    },
-    {
-      "name": "DURG",
-      "id": "Durg"
-    },
-    {
-      "name": "ECHAMPA",
-      "id": "East Champaran"
-    },
-    {
-      "name": "EGARO",
-      "id": "East Garo Hills"
-    },
-    {
-      "name": "EKHASI",
-      "id": "East Khasi Hills"
-    },
-    {
-      "name": "ESIANG",
-      "id": "East Siang"
-    },
-    {
-      "name": "ESIKKIM",
-      "id": "East Sikkim"
-    },
-    {
-      "name": "ESINGH",
-      "id": "East Singhbhum"
-    },
-    {
-      "name": "ELURU",
-      "id": "Eluru"
-    },
-    {
-      "name": "ERNAK",
-      "id": "Ernakulam"
-    },
-    {
-      "name": "ERODE",
-      "id": "Erode"
-    },
-    {
-      "name": "ETAH",
-      "id": "Etah"
-    },
-    {
-      "name": "ETAWA",
-      "id": "Etawah"
-    },
-    {
-      "name": "FAIZA",
-      "id": "Faizabad"
-    },
-    {
-      "name": "FARIDBD",
-      "id": "Faridabad"
-    },
-    {
-      "name": "FARIDKT",
-      "id": "Faridkot"
-    },
-    {
-      "name": "FARRU",
-      "id": "Farrukhabad"
-    },
-    {
-      "name": "FATEH",
-      "id": "Fatehabad"
-    },
-    {
-      "name": "FATEH",
-      "id": "Fatehgarh Sahib"
-    },
-    {
-      "name": "FATEH",
-      "id": "Fatehpur"
-    },
-    {
-      "name": "FAZIL",
-      "id": "Fazilka"
-    },
-    {
-      "name": "FIROZBD",
-      "id": "Firozabad"
-    },
-    {
-      "name": "FIROZPR",
-      "id": "Firozpur"
-    },
-    {
-      "name": "GADAG",
-      "id": "Gadag"
-    },
-    {
-      "name": "GADCH",
-      "id": "Gadchiroli"
-    },
-    {
-      "name": "GAJAP",
-      "id": "Gajapati"
-    },
-    {
-      "name": "GANDE",
-      "id": "Ganderbal"
-    },
-    {
-      "name": "GANDH",
-      "id": "Gandhinagar"
-    },
-    {
-      "name": "GANGA",
-      "id": "Ganganagar"
-    },
-    {
-      "name": "GANJA",
-      "id": "Ganjam"
-    },
-    {
-      "name": "GARHW",
-      "id": "Garhwa"
-    },
-    {
-      "name": "GAUTA",
-      "id": "Gautam Buddh Nagar"
-    },
-    {
-      "name": "GAYA",
-      "id": "Gaya"
-    },
-    {
-      "name": "GHAZIA",
-      "id": "Ghaziabad"
-    },
-    {
-      "name": "GHAZIPR",
-      "id": "Ghazipur"
-    },
-    {
-      "name": "GIRID",
-      "id": "Giridih"
-    },
-    {
-      "name": "GOALP",
-      "id": "Goalpara"
-    },
-    {
-      "name": "GODDA",
-      "id": "Godda"
-    },
-    {
-      "name": "GOLAG",
-      "id": "Golaghat"
-    },
-    {
-      "name": "GONDA",
-      "id": "Gonda"
-    },
-    {
-      "name": "GONDI",
-      "id": "Gondia"
-    },
-    {
-      "name": "GOPAL",
-      "id": "Gopalganj"
-    },
-    {
-      "name": "GORAK",
-      "id": "Gorakhpur"
-    },
-    {
-      "name": "GULBA",
-      "id": "Gulbarga"
-    },
-    {
-      "name": "GUMLA",
-      "id": "Gumla"
-    },
-    {
-      "name": "GUNA",
-      "id": "Guna"
-    },
-    {
-      "name": "GUNTU",
-      "id": "Guntur"
-    },
-    {
-      "name": "GURDA",
-      "id": "Gurdaspur"
-    },
-    {
-      "name": "GURGA",
-      "id": "Gurgaon"
-    },
-    {
-      "name": "GWALI",
-      "id": "Gwalior"
-    },
-    {
-      "name": "HAILA",
-      "id": "Hailakandi"
-    },
-    {
-      "name": "HAMIR",
-      "id": "Hamirpur"
-    },
-    {
-      "name": "HAMIR",
-      "id": "Hamirpur"
-    },
-    {
-      "name": "HANUM",
-      "id": "Hanumangarh"
-    },
-    {
-      "name": "HARDA",
-      "id": "Harda"
-    },
-    {
-      "name": "HARDO",
-      "id": "Hardoi"
-    },
-    {
-      "name": "HARID",
-      "id": "Haridwar"
-    },
-    {
-      "name": "HASSA",
-      "id": "Hassan"
-    },
-    {
-      "name": "HAVER",
-      "id": "Haveri district"
-    },
-    {
-      "name": "HAZAR",
-      "id": "Hazaribag"
-    },
-    {
-      "name": "HINGO",
-      "id": "Hingoli"
-    },
-    {
-      "name": "HISSA",
-      "id": "Hissar"
-    },
-    {
-      "name": "HOOGH",
-      "id": "Hooghly"
-    },
-    {
-      "name": "HOSHA",
-      "id": "Hoshangabad"
-    },
-    {
-      "name": "HOSHI",
-      "id": "Hoshiarpur"
-    },
-    {
-      "name": "HOWRA",
-      "id": "Howrah"
-    },
-    {
-      "name": "HYDER",
-      "id": "Hyderabad"
-    },
-    {
-      "name": "IDUKK",
-      "id": "Idukki"
-    },
-    {
-      "name": "IMPHA",
-      "id": "Imphal East"
-    },
-    {
-      "name": "IMPHA",
-      "id": "Imphal West"
-    },
-    {
-      "name": "INDOR",
-      "id": "Indore"
-    },
-    {
-      "name": "JABAL",
-      "id": "Jabalpur"
-    },
-    {
-      "name": "JAGAT",
-      "id": "Jagatsinghpur"
-    },
-    {
-      "name": "JAINT",
-      "id": "Jaintia Hills"
-    },
-    {
-      "name": "JAIPU",
-      "id": "Jaipur"
-    },
-    {
-      "name": "JAISA",
-      "id": "Jaisalmer"
-    },
-    {
-      "name": "JAJPU",
-      "id": "Jajpur"
-    },
-    {
-      "name": "JALAN",
-      "id": "Jalandhar"
-    },
-    {
-      "name": "JALAU",
-      "id": "Jalaun"
-    },
-    {
-      "name": "JALGA",
-      "id": "Jalgaon"
-    },
-    {
-      "name": "JALNA",
-      "id": "Jalna"
-    },
-    {
-      "name": "JALOR",
-      "id": "Jalore"
-    },
-    {
-      "name": "JALPA",
-      "id": "Jalpaiguri"
-    },
-    {
-      "name": "JAMMU",
-      "id": "Jammu"
-    },
-    {
-      "name": "JAMNA",
-      "id": "Jamnagar"
-    },
-    {
-      "name": "JAMTA",
-      "id": "Jamtara"
-    },
-    {
-      "name": "JAMUI",
-      "id": "Jamui"
-    },
-    {
-      "name": "JANJG",
-      "id": "Janjgir-Champa"
-    },
-    {
-      "name": "JASHP",
-      "id": "Jashpur"
-    },
-    {
-      "name": "JAUNP",
-      "id": "Jaunpur district"
-    },
-    {
-      "name": "JEHAN",
-      "id": "Jehanabad"
-    },
-    {
-      "name": "JHABU",
-      "id": "Jhabua"
-    },
-    {
-      "name": "JHAJJ",
-      "id": "Jhajjar"
-    },
-    {
-      "name": "JHALA",
-      "id": "Jhalawar"
-    },
-    {
-      "name": "JHANS",
-      "id": "Jhansi"
-    },
-    {
-      "name": "JHARS",
-      "id": "Jharsuguda"
-    },
-    {
-      "name": "JHUNJ",
-      "id": "Jhunjhunu"
-    },
-    {
-      "name": "JIND",
-      "id": "Jind"
-    },
-    {
-      "name": "JODHP",
-      "id": "Jodhpur"
-    },
-    {
-      "name": "JORHA",
-      "id": "Jorhat"
-    },
-    {
-      "name": "JUNAG",
-      "id": "Junagadh"
-    },
-    {
-      "name": "JYOTI",
-      "id": "Jyotiba Phule Nagar"
-    },
-    {
-      "name": "KABIR",
-      "id": "Kabirdham (formerly Kawardha)"
-    },
-    {
-      "name": "KADAP",
-      "id": "Kadapa"
-    },
-    {
-      "name": "KAIMU",
-      "id": "Kaimur"
-    },
-    {
-      "name": "KAITH",
-      "id": "Kaithal"
-    },
-    {
-      "name": "KAKIN",
-      "id": "Kakinada"
-    },
-    {
-      "name": "KALAH",
-      "id": "Kalahandi"
-    },
-    {
-      "name": "KAMRU",
-      "id": "Kamrup"
-    },
-    {
-      "name": "KANCH",
-      "id": "Kanchipuram"
-    },
-    {
-      "name": "KANDH",
-      "id": "Kandhamal"
-    },
-    {
-      "name": "KANGR",
-      "id": "Kangra"
-    },
-    {
-      "name": "KANKE",
-      "id": "Kanker"
-    },
-    {
-      "name": "KANNA",
-      "id": "Kannauj"
-    },
-    {
-      "name": "KANNU",
-      "id": "Kannur"
-    },
-    {
-      "name": "KANPU",
-      "id": "Kanpur"
-    },
-    {
-      "name": "KANSH",
-      "id": "Kanshi Ram Nagar"
-    },
-    {
-      "name": "KANYA",
-      "id": "Kanyakumari"
-    },
-    {
-      "name": "KAPUR",
-      "id": "Kapurthala"
-    },
-    {
-      "name": "KARAI",
-      "id": "Karaikal"
-    },
-    {
-      "name": "KARAU",
-      "id": "Karauli"
-    },
-    {
-      "name": "KARBI",
-      "id": "Karbi Anglong"
-    },
-    {
-      "name": "KARGI",
-      "id": "Kargil"
-    },
-    {
-      "name": "KARIMGN",
-      "id": "Karimganj"
-    },
-    {
-      "name": "KARIMNG",
-      "id": "Karimnagar"
-    },
-    {
-      "name": "KARNA",
-      "id": "Karnal"
-    },
-    {
-      "name": "KARUR",
-      "id": "Karur"
-    },
-    {
-      "name": "KASAR",
-      "id": "Kasaragod"
-    },
-    {
-      "name": "KATHU",
-      "id": "Kathua"
-    },
-    {
-      "name": "KATIH",
-      "id": "Katihar"
-    },
-    {
-      "name": "KATNI",
-      "id": "Katni"
-    },
-    {
-      "name": "KAUSH",
-      "id": "Kaushambi"
-    },
-    {
-      "name": "KENDR",
-      "id": "Kendrapara"
-    },
-    {
-      "name": "KENDU",
-      "id": "Kendujhar (Keonjhar)"
-    },
-    {
-      "name": "KHAGA",
-      "id": "Khagaria"
-    },
-    {
-      "name": "KHAMM",
-      "id": "Khammam"
-    },
-    {
-      "name": "KHAND",
-      "id": "Khandwa (East Nimar)"
-    },
-    {
-      "name": "KHARG",
-      "id": "Khargone (West Nimar)"
-    },
-    {
-      "name": "KHEDA",
-      "id": "Kheda"
-    },
-    {
-      "name": "KHORD",
-      "id": "Khordha"
-    },
-    {
-      "name": "KHOWA",
-      "id": "Khowai"
-    },
-    {
-      "name": "KHUNT",
-      "id": "Khunti"
-    },
-    {
-      "name": "KINNA",
-      "id": "Kinnaur"
-    },
-    {
-      "name": "KISHA",
-      "id": "Kishanganj"
-    },
-    {
-      "name": "KISHT",
-      "id": "Kishtwar"
-    },
-    {
-      "name": "KODAG",
-      "id": "Kodagu"
-    },
-    {
-      "name": "KODER",
-      "id": "Koderma"
-    },
-    {
-      "name": "KOHIM",
-      "id": "Kohima"
-    },
-    {
-      "name": "KOKRA",
-      "id": "Kokrajhar"
-    },
-    {
-      "name": "KOLAR",
-      "id": "Kolar"
-    },
-    {
-      "name": "KOLAS",
-      "id": "Kolasib"
-    },
-    {
-      "name": "KOLHA",
-      "id": "Kolhapur"
-    },
-    {
-      "name": "KOLKA",
-      "id": "Kolkata"
-    },
-    {
-      "name": "KOLLA",
-      "id": "Kollam"
-    },
-    {
-      "name": "KOPPA",
-      "id": "Koppal"
-    },
-    {
-      "name": "KORAP",
-      "id": "Koraput"
-    },
-    {
-      "name": "KORBA",
-      "id": "Korba"
-    },
-    {
-      "name": "KORIY",
-      "id": "Koriya"
-    },
-    {
-      "name": "KOTA",
-      "id": "Kota"
-    },
-    {
-      "name": "KOTTA",
-      "id": "Kottayam"
-    },
-    {
-      "name": "KOZHI",
-      "id": "Kozhikode"
-    },
-    {
-      "name": "KRISH",
-      "id": "Krishna"
-    },
-    {
-      "name": "KULGA",
-      "id": "Kulgam"
-    },
-    {
-      "name": "KULLU",
-      "id": "Kullu"
-    },
-    {
-      "name": "KUPWA",
-      "id": "Kupwara"
-    },
-    {
-      "name": "KURNO",
-      "id": "Kurnool"
-    },
-    {
-      "name": "KURUK",
-      "id": "Kurukshetra"
-    },
-    {
-      "name": "KURUN",
-      "id": "Kurung Kumey"
-    },
-    {
-      "name": "KUSHI",
-      "id": "Kushinagar"
-    },
-    {
-      "name": "KUTCH",
-      "id": "Kutch"
-    },
-    {
-      "name": "LAHAU",
-      "id": "Lahaul and Spiti"
-    },
-    {
-      "name": "LAKHI",
-      "id": "Lakhimpur"
-    },
-    {
-      "name": "LAKHISR",
-      "id": "Lakhisarai"
-    },
-    {
-      "name": "LALIT",
-      "id": "Lalitpur"
-    },
-    {
-      "name": "LATEH",
-      "id": "Latehar"
-    },
-    {
-      "name": "LATUR",
-      "id": "Latur"
-    },
-    {
-      "name": "LAWNG",
-      "id": "Lawngtlai"
-    },
-    {
-      "name": "LEH",
-      "id": "Leh"
-    },
-    {
-      "name": "LOHAR",
-      "id": "Lohardaga"
-    },
-    {
-      "name": "LOHIT",
-      "id": "Lohit"
-    },
-    {
-      "name": "LOWER",
-      "id": "Lower Dibang Valley"
-    },
-    {
-      "name": "LOWER",
-      "id": "Lower Subansiri"
-    },
-    {
-      "name": "LUCKN",
-      "id": "Lucknow"
-    },
-    {
-      "name": "LUDHI",
-      "id": "Ludhiana"
-    },
-    {
-      "name": "LUNGL",
-      "id": "Lunglei"
-    },
-    {
-      "name": "MADHE",
-      "id": "Madhepura"
-    },
-    {
-      "name": "MADHU",
-      "id": "Madhubani"
-    },
-    {
-      "name": "MADUR",
-      "id": "Madurai"
-    },
-    {
-      "name": "MAHAM",
-      "id": "Mahamaya Nagar"
-    },
-    {
-      "name": "MAHAR",
-      "id": "Maharajganj"
-    },
-    {
-      "name": "MAHAS",
-      "id": "Mahasamund"
-    },
-    {
-      "name": "MAHBU",
-      "id": "Mahbubnagar"
-    },
-    {
-      "name": "MAHE",
-      "id": "Mahe"
-    },
-    {
-      "name": "MAHEN",
-      "id": "Mahendragarh"
-    },
-    {
-      "name": "MAHOB",
-      "id": "Mahoba"
-    },
-    {
-      "name": "MAINP",
-      "id": "Mainpuri"
-    },
-    {
-      "name": "MALAP",
-      "id": "Malappuram"
-    },
-    {
-      "name": "MALDA",
-      "id": "Maldah"
-    },
-    {
-      "name": "MALKA",
-      "id": "Malkangiri"
-    },
-    {
-      "name": "MAMIT",
-      "id": "Mamit"
-    },
-    {
-      "name": "MANDI",
-      "id": "Mandi"
-    },
-    {
-      "name": "MANDL",
-      "id": "Mandla"
-    },
-    {
-      "name": "MANDS",
-      "id": "Mandsaur"
-    },
-    {
-      "name": "MANDY",
-      "id": "Mandya"
-    },
-    {
-      "name": "MANSA",
-      "id": "Mansa"
-    },
-    {
-      "name": "MARIG",
-      "id": "Marigaon"
-    },
-    {
-      "name": "MATHU",
-      "id": "Mathura"
-    },
-    {
-      "name": "MAU",
-      "id": "Mau"
-    },
-    {
-      "name": "MAYUR",
-      "id": "Mayurbhanj"
-    },
-    {
-      "name": "MEDAK",
-      "id": "Medak"
-    },
-    {
-      "name": "MEERU",
-      "id": "Meerut"
-    },
-    {
-      "name": "MEHSA",
-      "id": "Mehsana"
-    },
-    {
-      "name": "MEWAT",
-      "id": "Mewat"
-    },
-    {
-      "name": "MIRZA",
-      "id": "Mirzapur"
-    },
-    {
-      "name": "MOGA",
-      "id": "Moga"
-    },
-    {
-      "name": "MOKOK",
-      "id": "Mokokchung"
-    },
-    {
-      "name": "MON",
-      "id": "Mon"
-    },
-    {
-      "name": "MORAD",
-      "id": "Moradabad"
-    },
-    {
-      "name": "MOREN",
-      "id": "Morena"
-    },
-    {
-      "name": "MUMBA",
-      "id": "Mumbai"
-    },
-    {
-      "name": "MUNGE",
-      "id": "Munger"
-    },
-    {
-      "name": "MURSH",
-      "id": "Murshidabad"
-    },
-    {
-      "name": "MUZAFNG",
-      "id": "Muzaffarnagar"
-    },
-    {
-      "name": "MUZAFPR",
-      "id": "Muzaffarpur"
-    },
-    {
-      "name": "MYSOR",
-      "id": "Mysore"
-    },
-    {
-      "name": "NABAR",
-      "id": "Nabarangpur"
-    },
-    {
-      "name": "NADIA",
-      "id": "Nadia"
-    },
-    {
-      "name": "NAGAO",
-      "id": "Nagaon"
-    },
-    {
-      "name": "NAGAP",
-      "id": "Nagapattinam"
-    },
-    {
-      "name": "NAGAU",
-      "id": "Nagaur"
-    },
-    {
-      "name": "NAGPU",
-      "id": "Nagpur"
-    },
-    {
-      "name": "NAINI",
-      "id": "Nainital"
-    },
-    {
-      "name": "NALAN",
-      "id": "Nalanda"
-    },
-    {
-      "name": "NALBA",
-      "id": "Nalbari"
-    },
-    {
-      "name": "NALGO",
-      "id": "Nalgonda"
-    },
-    {
-      "name": "NAMAK",
-      "id": "Namakkal"
-    },
-    {
-      "name": "NANDE",
-      "id": "Nanded"
-    },
-    {
-      "name": "NANDU",
-      "id": "Nandurbar"
-    },
-    {
-      "name": "NARAY",
-      "id": "Narayanpur"
-    },
-    {
-      "name": "NARMA",
-      "id": "Narmada"
-    },
-    {
-      "name": "NARSI",
-      "id": "Narsinghpur"
-    },
-    {
-      "name": "NASHI",
-      "id": "Nashik"
-    },
-    {
-      "name": "NAVSA",
-      "id": "Navsari"
-    },
-    {
-      "name": "NAWAD",
-      "id": "Nawada"
-    },
-    {
-      "name": "NAWAN",
-      "id": "Nawanshahr"
-    },
-    {
-      "name": "NAYAG",
-      "id": "Nayagarh"
-    },
-    {
-      "name": "NEEMU",
-      "id": "Neemuch"
-    },
-    {
-      "name": "NELLO",
-      "id": "Nellore"
-    },
-    {
-      "name": "DELHI",
-      "id": "Delhi"
-    },
-    {
-      "name": "NILGI",
-      "id": "Nilgiris"
-    },
-    {
-      "name": "NIZAM",
-      "id": "Nizamabad"
-    },
-    {
-      "name": "NUAPA",
-      "id": "Nuapada"
-    },
-    {
-      "name": "ONGOL",
-      "id": "Ongole"
-    },
-    {
-      "name": "OSMAN",
-      "id": "Osmanabad"
-    },
-    {
-      "name": "PAKUR",
-      "id": "Pakur"
-    },
-    {
-      "name": "PALAK",
-      "id": "Palakkad"
-    },
-    {
-      "name": "PALAM",
-      "id": "Palamu"
-    },
-    {
-      "name": "PALI",
-      "id": "Pali"
-    },
-    {
-      "name": "PALWA",
-      "id": "Palwal"
-    },
-    {
-      "name": "PANCH",
-      "id": "Panchkula"
-    },
-    {
-      "name": "PANCH",
-      "id": "Panchmahal"
-    },
-    {
-      "name": "PANCH",
-      "id": "Panchsheel Nagar district (Hapur)"
-    },
-    {
-      "name": "PANIP",
-      "id": "Panipat"
-    },
-    {
-      "name": "PANNA",
-      "id": "Panna"
-    },
-    {
-      "name": "PAPUM",
-      "id": "Papum Pare"
-    },
-    {
-      "name": "PARBH",
-      "id": "Parbhani"
-    },
-    {
-      "name": "PASCH",
-      "id": "Paschim Medinipur"
-    },
-    {
-      "name": "PATAN",
-      "id": "Patan"
-    },
-    {
-      "name": "PATHANM",
-      "id": "Pathanamthitta"
-    },
-    {
-      "name": "PATHANK",
-      "id": "Pathankot"
-    },
-    {
-      "name": "PATIA",
-      "id": "Patiala"
-    },
-    {
-      "name": "PATNA",
-      "id": "Patna"
-    },
-    {
-      "name": "PAURI",
-      "id": "Pauri Garhwal"
-    },
-    {
-      "name": "PERAM",
-      "id": "Perambalur"
-    },
-    {
-      "name": "PHEK",
-      "id": "Phek"
-    },
-    {
-      "name": "PILIB",
-      "id": "Pilibhit"
-    },
-    {
-      "name": "PITHO",
-      "id": "Pithoragarh"
-    },
-    {
-      "name": "PONDI",
-      "id": "Pondicherry"
-    },
-    {
-      "name": "POONC",
-      "id": "Poonch"
-    },
-    {
-      "name": "PORBA",
-      "id": "Porbandar"
-    },
-    {
-      "name": "PRATA",
-      "id": "Pratapgarh"
-    },
-    {
-      "name": "PRATA",
-      "id": "Pratapgarh"
-    },
-    {
-      "name": "PUDUK",
-      "id": "Pudukkottai"
-    },
-    {
-      "name": "PULWA",
-      "id": "Pulwama"
-    },
-    {
-      "name": "PUNE",
-      "id": "Pune"
-    },
-    {
-      "name": "PURBA",
-      "id": "Purba Medinipur"
-    },
-    {
-      "name": "PURI",
-      "id": "Puri"
-    },
-    {
-      "name": "PURNI",
-      "id": "Purnia"
-    },
-    {
-      "name": "PURUL",
-      "id": "Purulia"
-    },
-    {
-      "name": "RAEBA",
-      "id": "Raebareli"
-    },
-    {
-      "name": "RAICH",
-      "id": "Raichur"
-    },
-    {
-      "name": "RAIGAD",
-      "id": "Raigad"
-    },
-    {
-      "name": "RAIGAR",
-      "id": "Raigarh"
-    },
-    {
-      "name": "RAIPU",
-      "id": "Raipur"
-    },
-    {
-      "name": "RAISE",
-      "id": "Raisen"
-    },
-    {
-      "name": "RAJAU",
-      "id": "Rajauri"
-    },
-    {
-      "name": "RAJGA",
-      "id": "Rajgarh"
-    },
-    {
-      "name": "RAJKO",
-      "id": "Rajkot"
-    },
-    {
-      "name": "RAJNA",
-      "id": "Rajnandgaon"
-    },
-    {
-      "name": "RAJSA",
-      "id": "Rajsamand"
-    },
-    {
-      "name": "RAMAB",
-      "id": "Ramabai Nagar (Kanpur Dehat)"
-    },
-    {
-      "name": "RAMANGR",
-      "id": "Ramanagara"
-    },
-    {
-      "name": "RAMANTHA",
-      "id": "Ramanathapuram"
-    },
-    {
-      "name": "RAMBA",
-      "id": "Ramban"
-    },
-    {
-      "name": "RAMGA",
-      "id": "Ramgarh"
-    },
-    {
-      "name": "RAMPU",
-      "id": "Rampur"
-    },
-    {
-      "name": "RANCH",
-      "id": "Ranchi"
-    },
-    {
-      "name": "RATLA",
-      "id": "Ratlam"
-    },
-    {
-      "name": "RATNA",
-      "id": "Ratnagiri"
-    },
-    {
-      "name": "RAYAG",
-      "id": "Rayagada"
-    },
-    {
-      "name": "REASI",
-      "id": "Reasi"
-    },
-    {
-      "name": "REWA",
-      "id": "Rewa"
-    },
-    {
-      "name": "REWAR",
-      "id": "Rewari"
-    },
-    {
-      "name": "RI BH",
-      "id": "Ri Bhoi"
-    },
-    {
-      "name": "ROHTAK",
-      "id": "Rohtak"
-    },
-    {
-      "name": "ROHTAS",
-      "id": "Rohtas"
-    },
-    {
-      "name": "RUDRA",
-      "id": "Rudraprayag"
-    },
-    {
-      "name": "RUPNA",
-      "id": "Rupnagar"
-    },
-    {
-      "name": "SABAR",
-      "id": "Sabarkantha"
-    },
-    {
-      "name": "SAGAR",
-      "id": "Sagar"
-    },
-    {
-      "name": "SAHAR",
-      "id": "Saharanpur"
-    },
-    {
-      "name": "SAHAR",
-      "id": "Saharsa"
-    },
-    {
-      "name": "SAHIB",
-      "id": "Sahibganj"
-    },
-    {
-      "name": "SAIHA",
-      "id": "Saiha"
-    },
-    {
-      "name": "SALEM",
-      "id": "Salem"
-    },
-    {
-      "name": "SAMAS",
-      "id": "Samastipur"
-    },
-    {
-      "name": "SAMBA",
-      "id": "Samba"
-    },
-    {
-      "name": "SAMBLPR",
-      "id": "Sambalpur"
-    },
-    {
-      "name": "SANGL",
-      "id": "Sangli"
-    },
-    {
-      "name": "SANGR",
-      "id": "Sangrur"
-    },
-    {
-      "name": "SNTKBRNGR",
-      "id": "Sant Kabir Nagar"
-    },
-    {
-      "name": "SANTRVNG",
-      "id": "Sant Ravidas Nagar"
-    },
-    {
-      "name": "SARAN",
-      "id": "Saran"
-    },
-    {
-      "name": "SATAR",
-      "id": "Satara"
-    },
-    {
-      "name": "SATNA",
-      "id": "Satna"
-    },
-    {
-      "name": "SAWAI",
-      "id": "Sawai Madhopur"
-    },
-    {
-      "name": "SEHOR",
-      "id": "Sehore"
-    },
-    {
-      "name": "SENAP",
-      "id": "Senapati"
-    },
-    {
-      "name": "SEONI",
-      "id": "Seoni"
-    },
-    {
-      "name": "SERAI",
-      "id": "Seraikela Kharsawan"
-    },
-    {
-      "name": "SERCH",
-      "id": "Serchhip"
-    },
-    {
-      "name": "SHAHD",
-      "id": "Shahdol"
-    },
-    {
-      "name": "SHAHJ",
-      "id": "Shahjahanpur"
-    },
-    {
-      "name": "SHAJA",
-      "id": "Shajapur"
-    },
-    {
-      "name": "SHAML",
-      "id": "Shamli"
-    },
-    {
-      "name": "SHEIK",
-      "id": "Sheikhpura"
-    },
-    {
-      "name": "SHEOH",
-      "id": "Sheohar"
-    },
-    {
-      "name": "SHEOP",
-      "id": "Sheopur"
-    },
-    {
-      "name": "SHIML",
-      "id": "Shimla"
-    },
-    {
-      "name": "SHIMO",
-      "id": "Shimoga"
-    },
-    {
-      "name": "SHIVP",
-      "id": "Shivpuri"
-    },
-    {
-      "name": "SHOPI",
-      "id": "Shopian"
-    },
-    {
-      "name": "SHRAV",
-      "id": "Shravasti"
-    },
-    {
-      "name": "SIBSA",
-      "id": "Sibsagar"
-    },
-    {
-      "name": "SIDDH",
-      "id": "Siddharthnagar"
-    },
-    {
-      "name": "SIDHI",
-      "id": "Sidhi"
-    },
-    {
-      "name": "SIKAR",
-      "id": "Sikar"
-    },
-    {
-      "name": "SIMDE",
-      "id": "Simdega"
-    },
-    {
-      "name": "SINDH",
-      "id": "Sindhudurg"
-    },
-    {
-      "name": "SINGR",
-      "id": "Singrauli"
-    },
-    {
-      "name": "SIRMA",
-      "id": "Sirmaur"
-    },
-    {
-      "name": "SIROH",
-      "id": "Sirohi"
-    },
-    {
-      "name": "SIRSA",
-      "id": "Sirsa"
-    },
-    {
-      "name": "SITAM",
-      "id": "Sitamarhi"
-    },
-    {
-      "name": "SITAP",
-      "id": "Sitapur"
-    },
-    {
-      "name": "SIVAG",
-      "id": "Sivaganga"
-    },
-    {
-      "name": "SIWAN",
-      "id": "Siwan"
-    },
-    {
-      "name": "SOLAN",
-      "id": "Solan"
-    },
-    {
-      "name": "SOLAP",
-      "id": "Solapur"
-    },
-    {
-      "name": "SONBH",
-      "id": "Sonbhadra"
-    },
-    {
-      "name": "SONIP",
-      "id": "Sonipat"
-    },
-    {
-      "name": "SONIT",
-      "id": "Sonitpur"
-    },
-    {
-      "name": "SRI M",
-      "id": "Sri Muktsar Sahib"
-    },
-    {
-      "name": "SRIKA",
-      "id": "Srikakulam"
-    },
-    {
-      "name": "SRINA",
-      "id": "Srinagar"
-    },
-    {
-      "name": "SUBAR",
-      "id": "Subarnapur (Sonepur)"
-    },
-    {
-      "name": "SULTA",
-      "id": "Sultanpur"
-    },
-    {
-      "name": "SUNDE",
-      "id": "Sundergarh"
-    },
-    {
-      "name": "SUPAU",
-      "id": "Supaul"
-    },
-    {
-      "name": "SURAT",
-      "id": "Surat"
-    },
-    {
-      "name": "SUREN",
-      "id": "Surendranagar"
-    },
-    {
-      "name": "SURGU",
-      "id": "Surguja"
-    },
-    {
-      "name": "TAMEN",
-      "id": "Tamenglong"
-    },
-    {
-      "name": "TARN",
-      "id": "Tarn Taran"
-    },
-    {
-      "name": "TAWAN",
-      "id": "Tawang"
-    },
-    {
-      "name": "TEHRI",
-      "id": "Tehri Garhwal"
-    },
-    {
-      "name": "THANE",
-      "id": "Thane"
-    },
-    {
-      "name": "THANJ",
-      "id": "Thanjavur"
-    },
-    {
-      "name": "THE D",
-      "id": "The Dangs"
-    },
-    {
-      "name": "THENI",
-      "id": "Theni"
-    },
-    {
-      "name": "THIRU",
-      "id": "Thiruvananthapuram"
-    },
-    {
-      "name": "THOOT",
-      "id": "Thoothukudi"
-    },
-    {
-      "name": "THOUB",
-      "id": "Thoubal"
-    },
-    {
-      "name": "THRIS",
-      "id": "Thrissur"
-    },
-    {
-      "name": "TIKAM",
-      "id": "Tikamgarh"
-    },
-    {
-      "name": "TINSU",
-      "id": "Tinsukia"
-    },
-    {
-      "name": "TIRAP",
-      "id": "Tirap"
-    },
-    {
-      "name": "TIRUC",
-      "id": "Tiruchirappalli"
-    },
-    {
-      "name": "TIRUN",
-      "id": "Tirunelveli"
-    },
-    {
-      "name": "TIRUP",
-      "id": "Tirupur"
-    },
-    {
-      "name": "TIRUVLL",
-      "id": "Tiruvallur"
-    },
-    {
-      "name": "TIRUVNN",
-      "id": "Tiruvannamalai"
-    },
-    {
-      "name": "TIRUVARU",
-      "id": "Tiruvarur"
-    },
-    {
-      "name": "TONK",
-      "id": "Tonk"
-    },
-    {
-      "name": "TUENS",
-      "id": "Tuensang"
-    },
-    {
-      "name": "TUMKU",
-      "id": "Tumkur"
-    },
-    {
-      "name": "UDAIP",
-      "id": "Udaipur"
-    },
-    {
-      "name": "UDALG",
-      "id": "Udalguri"
-    },
-    {
-      "name": "UDHAM",
-      "id": "Udham Singh Nagar"
-    },
-    {
-      "name": "UDHAM",
-      "id": "Udhampur"
-    },
-    {
-      "name": "UDUPI",
-      "id": "Udupi"
-    },
-    {
-      "name": "UJJAI",
-      "id": "Ujjain"
-    },
-    {
-      "name": "UKHRU",
-      "id": "Ukhrul"
-    },
-    {
-      "name": "UMARI",
-      "id": "Umaria"
-    },
-    {
-      "name": "UNA",
-      "id": "Una"
-    },
-    {
-      "name": "UNNAO",
-      "id": "Unnao"
-    },
-    {
-      "name": "UTTAR",
-      "id": "Uttara Kannada"
-    },
-    {
-      "name": "UTTAR",
-      "id": "Uttarkashi"
-    },
-    {
-      "name": "VADOD",
-      "id": "Vadodara"
-    },
-    {
-      "name": "VAISH",
-      "id": "Vaishali"
-    },
-    {
-      "name": "VALSA",
-      "id": "Valsad"
-    },
-    {
-      "name": "VARAN",
-      "id": "Varanasi"
-    },
-    {
-      "name": "VELLO",
-      "id": "Vellore"
-    },
-    {
-      "name": "VIDIS",
-      "id": "Vidisha"
-    },
-    {
-      "name": "VILUP",
-      "id": "Viluppuram"
-    },
-    {
-      "name": "VIRUD",
-      "id": "Virudhunagar"
-    },
-    {
-      "name": "VISAK",
-      "id": "Visakhapatnam"
-    },
-    {
-      "name": "VIZIA",
-      "id": "Vizianagaram"
-    },
-    {
-      "name": "VYARA",
-      "id": "Vyara"
-    },
-    {
-      "name": "WARAN",
-      "id": "Warangal"
-    },
-    {
-      "name": "WARDH",
-      "id": "Wardha"
-    },
-    {
-      "name": "WASHI",
-      "id": "Washim"
-    },
-    {
-      "name": "WAYAN",
-      "id": "Wayanad"
-    },
-    {
-      "name": "WOKHA",
-      "id": "Wokha"
-    },
-    {
-      "name": "YADGI",
-      "id": "Yadgir"
-    },
-    {
-      "name": "YAMUN",
-      "id": "Yamuna Nagar"
-    },
-    {
-      "name": "YANAM",
-      "id": "Yanam"
-    },
-    {
-      "name": "YAVAT",
-      "id": "Yavatmal"
-    },
-    {
-      "name": "ZUNHE",
-      "id": "Zunheboto"
-    }
-  ]
+  {
+    "id": "ADILA",
+    "name": "Adilabad"
+  },
+  {
+    "id": "AGRA",
+    "name": "Agra"
+  },
+  {
+    "id": "AHMED",
+    "name": "Ahmedabad"
+  },
+  {
+    "id": "AHMED",
+    "name": "Ahmednagar"
+  },
+  {
+    "id": "AIZAW",
+    "name": "Aizawl"
+  },
+  {
+    "id": "AJITG",
+    "name": "Ajitgarh (Mohali)"
+  },
+  {
+    "id": "AJMER",
+    "name": "Ajmer"
+  },
+  {
+    "id": "AKOLA",
+    "name": "Akola"
+  },
+  {
+    "id": "ALAPP",
+    "name": "Alappuzha"
+  },
+  {
+    "id": "ALIGA",
+    "name": "Aligarh"
+  },
+  {
+    "id": "ALIRA",
+    "name": "Alirajpur"
+  },
+  {
+    "id": "ALLAH",
+    "name": "Allahabad"
+  },
+  {
+    "id": "ALMOR",
+    "name": "Almora"
+  },
+  {
+    "id": "ALWAR",
+    "name": "Alwar"
+  },
+  {
+    "id": "AMBAL",
+    "name": "Ambala"
+  },
+  {
+    "id": "AMBED",
+    "name": "Ambedkar Nagar"
+  },
+  {
+    "id": "AMRAV",
+    "name": "Amravati"
+  },
+  {
+    "id": "AMREL",
+    "name": "Amreli district"
+  },
+  {
+    "id": "AMRIT",
+    "name": "Amritsar"
+  },
+  {
+    "id": "ANAND",
+    "name": "Anand"
+  },
+  {
+    "id": "ANANTP",
+    "name": "Anantapur"
+  },
+  {
+    "id": "ANANTG",
+    "name": "Anantnag"
+  },
+  {
+    "id": "ANGUL",
+    "name": "Angul"
+  },
+  {
+    "id": "ANJAW",
+    "name": "Anjaw"
+  },
+  {
+    "id": "ANUPP",
+    "name": "Anuppur"
+  },
+  {
+    "id": "ARARI",
+    "name": "Araria"
+  },
+  {
+    "id": "ARIYA",
+    "name": "Ariyalur"
+  },
+  {
+    "id": "ARWAL",
+    "name": "Arwal"
+  },
+  {
+    "id": "ASHOK",
+    "name": "Ashok Nagar"
+  },
+  {
+    "id": "AURAI",
+    "name": "Auraiya"
+  },
+  {
+    "id": "AURAN",
+    "name": "Aurangabad"
+  },
+  {
+    "id": "AZAMG",
+    "name": "Azamgarh"
+  },
+  {
+    "id": "BADGA",
+    "name": "Badgam"
+  },
+  {
+    "id": "BAGAL",
+    "name": "Bagalkot"
+  },
+  {
+    "id": "BAGES",
+    "name": "Bageshwar"
+  },
+  {
+    "id": "BAGPA",
+    "name": "Bagpat"
+  },
+  {
+    "id": "BAHRA",
+    "name": "Bahraich"
+  },
+  {
+    "id": "BAKSA",
+    "name": "Baksa"
+  },
+  {
+    "id": "BALAG",
+    "name": "Balaghat"
+  },
+  {
+    "id": "BALAN",
+    "name": "Balangir"
+  },
+  {
+    "id": "BALAS",
+    "name": "Balasore"
+  },
+  {
+    "id": "BALLI",
+    "name": "Ballia"
+  },
+  {
+    "id": "BALRA",
+    "name": "Balrampur"
+  },
+  {
+    "id": "BANAS",
+    "name": "Banaskantha"
+  },
+  {
+    "id": "BANDA",
+    "name": "Banda"
+  },
+  {
+    "id": "BANDI",
+    "name": "Bandipora"
+  },
+  {
+    "id": "BANGA",
+    "name": "Bangalore"
+  },
+  {
+    "id": "BANKA",
+    "name": "Banka"
+  },
+  {
+    "id": "BANKU",
+    "name": "Bankura"
+  },
+  {
+    "id": "BANSW",
+    "name": "Banswara"
+  },
+  {
+    "id": "BARAB",
+    "name": "Barabanki"
+  },
+  {
+    "id": "BARAM",
+    "name": "Baramulla"
+  },
+  {
+    "id": "BARAN",
+    "name": "Baran"
+  },
+  {
+    "id": "BARDH",
+    "name": "Bardhaman"
+  },
+  {
+    "id": "BAREI",
+    "name": "Bareilly"
+  },
+  {
+    "id": "BARGA",
+    "name": "Bargarh (Baragarh)"
+  },
+  {
+    "id": "BARME",
+    "name": "Barmer"
+  },
+  {
+    "id": "BARNA",
+    "name": "Barnala"
+  },
+  {
+    "id": "BARPE",
+    "name": "Barpeta"
+  },
+  {
+    "id": "BARWA",
+    "name": "Barwani"
+  },
+  {
+    "id": "BASTA",
+    "name": "Bastar"
+  },
+  {
+    "id": "BASTI",
+    "name": "Basti"
+  },
+  {
+    "id": "BATHI",
+    "name": "Bathinda"
+  },
+  {
+    "id": "BEED",
+    "name": "Beed"
+  },
+  {
+    "id": "BEGUS",
+    "name": "Begusarai"
+  },
+  {
+    "id": "BELGA",
+    "name": "Belgaum"
+  },
+  {
+    "id": "BELLA",
+    "name": "Bellary"
+  },
+  {
+    "id": "BETUL",
+    "name": "Betul"
+  },
+  {
+    "id": "BHADR",
+    "name": "Bhadrak"
+  },
+  {
+    "id": "BHAGA",
+    "name": "Bhagalpur"
+  },
+  {
+    "id": "BHAND",
+    "name": "Bhandara"
+  },
+  {
+    "id": "BHARA",
+    "name": "Bharatpur"
+  },
+  {
+    "id": "BHARU",
+    "name": "Bharuch"
+  },
+  {
+    "id": "BHAVN",
+    "name": "Bhavnagar"
+  },
+  {
+    "id": "BHILW",
+    "name": "Bhilwara"
+  },
+  {
+    "id": "BHIND",
+    "name": "Bhind"
+  },
+  {
+    "id": "BHIWA",
+    "name": "Bhiwani"
+  },
+  {
+    "id": "BHOJP",
+    "name": "Bhojpur"
+  },
+  {
+    "id": "BHOPA",
+    "name": "Bhopal"
+  },
+  {
+    "id": "BIDAR",
+    "name": "Bidar"
+  },
+  {
+    "id": "BIJAP",
+    "name": "Bijapur"
+  },
+  {
+    "id": "BIJNO",
+    "name": "Bijnor"
+  },
+  {
+    "id": "BIKAN",
+    "name": "Bikaner"
+  },
+  {
+    "id": "BILAS",
+    "name": "Bilaspur"
+  },
+  {
+    "id": "BIRBH",
+    "name": "Birbhum"
+  },
+  {
+    "id": "BISHN",
+    "name": "Bishnupur"
+  },
+  {
+    "id": "BOKAR",
+    "name": "Bokaro"
+  },
+  {
+    "id": "BONGA",
+    "name": "Bongaigaon"
+  },
+  {
+    "id": "BOUDH",
+    "name": "Boudh (Bauda)"
+  },
+  {
+    "id": "BUDAU",
+    "name": "Budaun"
+  },
+  {
+    "id": "BULAN",
+    "name": "Bulandshahr"
+  },
+  {
+    "id": "BULDH",
+    "name": "Buldhana"
+  },
+  {
+    "id": "BUNDI",
+    "name": "Bundi"
+  },
+  {
+    "id": "BURHA",
+    "name": "Burhanpur"
+  },
+  {
+    "id": "BUXAR",
+    "name": "Buxar"
+  },
+  {
+    "id": "CACHA",
+    "name": "Cachar"
+  },
+  {
+    "id": "CHAMA",
+    "name": "Chamarajnagar"
+  },
+  {
+    "id": "CHAMB",
+    "name": "Chamba"
+  },
+  {
+    "id": "CHAMO",
+    "name": "Chamoli"
+  },
+  {
+    "id": "CHAMPA",
+    "name": "Champawat"
+  },
+  {
+    "id": "CHAMPH",
+    "name": "Champhai"
+  },
+  {
+    "id": "CHANDAU",
+    "name": "Chandauli"
+  },
+  {
+    "id": "CHANDEL",
+    "name": "Chandel"
+  },
+  {
+    "id": "CHANDI",
+    "name": "Chandigarh"
+  },
+  {
+    "id": "CHANDRA",
+    "name": "Chandrapur"
+  },
+  {
+    "id": "CHANG",
+    "name": "Changlang"
+  },
+  {
+    "id": "CHATR",
+    "name": "Chatra"
+  },
+  {
+    "id": "CHENN",
+    "name": "Chennai"
+  },
+  {
+    "id": "CHHAT",
+    "name": "Chhatarpur"
+  },
+  {
+    "id": "CHHIN",
+    "name": "Chhindwara"
+  },
+  {
+    "id": "CHIKK",
+    "name": "Chikkaballapur"
+  },
+  {
+    "id": "CHIKK",
+    "name": "Chikkamagaluru"
+  },
+  {
+    "id": "CHIRA",
+    "name": "Chirang"
+  },
+  {
+    "id": "CHITRDR",
+    "name": "Chitradurga"
+  },
+  {
+    "id": "CHITRKO",
+    "name": "Chitrakoot"
+  },
+  {
+    "id": "CHITTOOR",
+    "name": "Chittoor"
+  },
+  {
+    "id": "CHITTGR",
+    "name": "Chittorgarh"
+  },
+  {
+    "id": "CHURA",
+    "name": "Churachandpur"
+  },
+  {
+    "id": "CHURU",
+    "name": "Churu"
+  },
+  {
+    "id": "COIMB",
+    "name": "Coimbatore"
+  },
+  {
+    "id": "COOCH",
+    "name": "Cooch Behar"
+  },
+  {
+    "id": "CUDDA",
+    "name": "Cuddalore"
+  },
+  {
+    "id": "CUTTA",
+    "name": "Cuttack"
+  },
+  {
+    "id": "DADRA",
+    "name": "Dadra and Nagar Haveli"
+  },
+  {
+    "id": "DAHOD",
+    "name": "Dahod"
+  },
+  {
+    "id": "DAKSHDINA",
+    "name": "Dakshin Dinajpur"
+  },
+  {
+    "id": "DAKSHKANNA",
+    "name": "Dakshina Kannada"
+  },
+  {
+    "id": "DAMAN",
+    "name": "Daman"
+  },
+  {
+    "id": "DAMOH",
+    "name": "Damoh"
+  },
+  {
+    "id": "DANTE",
+    "name": "Dantewada"
+  },
+  {
+    "id": "DARBH",
+    "name": "Darbhanga"
+  },
+  {
+    "id": "DARJE",
+    "name": "Darjeeling"
+  },
+  {
+    "id": "DARRA",
+    "name": "Darrang"
+  },
+  {
+    "id": "DATIA",
+    "name": "Datia"
+  },
+  {
+    "id": "DAUSA",
+    "name": "Dausa"
+  },
+  {
+    "id": "DAVAN",
+    "name": "Davanagere"
+  },
+  {
+    "id": "DEBAG",
+    "name": "Debagarh (Deogarh)"
+  },
+  {
+    "id": "DEHRA",
+    "name": "Dehradun"
+  },
+  {
+    "id": "DEOGH",
+    "name": "Deoghar"
+  },
+  {
+    "id": "DEORI",
+    "name": "Deoria"
+  },
+  {
+    "id": "DEWAS",
+    "name": "Dewas"
+  },
+  {
+    "id": "DHALA",
+    "name": "Dhalai"
+  },
+  {
+    "id": "DHAMT",
+    "name": "Dhamtari"
+  },
+  {
+    "id": "DHANB",
+    "name": "Dhanbad"
+  },
+  {
+    "id": "DHAR",
+    "name": "Dhar"
+  },
+  {
+    "id": "DHARM",
+    "name": "Dharmapuri"
+  },
+  {
+    "id": "DHARW",
+    "name": "Dharwad"
+  },
+  {
+    "id": "DHEMA",
+    "name": "Dhemaji"
+  },
+  {
+    "id": "DHENK",
+    "name": "Dhenkanal"
+  },
+  {
+    "id": "DHOLP",
+    "name": "Dholpur"
+  },
+  {
+    "id": "DHUBR",
+    "name": "Dhubri"
+  },
+  {
+    "id": "DHULE",
+    "name": "Dhule"
+  },
+  {
+    "id": "DIBAN",
+    "name": "Dibang Valley"
+  },
+  {
+    "id": "DIBRU",
+    "name": "Dibrugarh"
+  },
+  {
+    "id": "DIMA",
+    "name": "Dima Hasao"
+  },
+  {
+    "id": "DIMAP",
+    "name": "Dimapur"
+  },
+  {
+    "id": "DINDI",
+    "name": "Dindigul"
+  },
+  {
+    "id": "DINDO",
+    "name": "Dindori"
+  },
+  {
+    "id": "DIU",
+    "name": "Diu"
+  },
+  {
+    "id": "DODA",
+    "name": "Doda"
+  },
+  {
+    "id": "DUMKA",
+    "name": "Dumka"
+  },
+  {
+    "id": "DUNGA",
+    "name": "Dungapur"
+  },
+  {
+    "id": "DURG",
+    "name": "Durg"
+  },
+  {
+    "id": "ECHAMPA",
+    "name": "East Champaran"
+  },
+  {
+    "id": "EGARO",
+    "name": "East Garo Hills"
+  },
+  {
+    "id": "EKHASI",
+    "name": "East Khasi Hills"
+  },
+  {
+    "id": "ESIANG",
+    "name": "East Siang"
+  },
+  {
+    "id": "ESIKKIM",
+    "name": "East Sikkim"
+  },
+  {
+    "id": "ESINGH",
+    "name": "East Singhbhum"
+  },
+  {
+    "id": "ELURU",
+    "name": "Eluru"
+  },
+  {
+    "id": "ERNAK",
+    "name": "Ernakulam"
+  },
+  {
+    "id": "ERODE",
+    "name": "Erode"
+  },
+  {
+    "id": "ETAH",
+    "name": "Etah"
+  },
+  {
+    "id": "ETAWA",
+    "name": "Etawah"
+  },
+  {
+    "id": "FAIZA",
+    "name": "Faizabad"
+  },
+  {
+    "id": "FARIDBD",
+    "name": "Faridabad"
+  },
+  {
+    "id": "FARIDKT",
+    "name": "Faridkot"
+  },
+  {
+    "id": "FARRU",
+    "name": "Farrukhabad"
+  },
+  {
+    "id": "FATEH",
+    "name": "Fatehabad"
+  },
+  {
+    "id": "FATEH",
+    "name": "Fatehgarh Sahib"
+  },
+  {
+    "id": "FATEH",
+    "name": "Fatehpur"
+  },
+  {
+    "id": "FAZIL",
+    "name": "Fazilka"
+  },
+  {
+    "id": "FIROZBD",
+    "name": "Firozabad"
+  },
+  {
+    "id": "FIROZPR",
+    "name": "Firozpur"
+  },
+  {
+    "id": "GADAG",
+    "name": "Gadag"
+  },
+  {
+    "id": "GADCH",
+    "name": "Gadchiroli"
+  },
+  {
+    "id": "GAJAP",
+    "name": "Gajapati"
+  },
+  {
+    "id": "GANDE",
+    "name": "Ganderbal"
+  },
+  {
+    "id": "GANDH",
+    "name": "Gandhinagar"
+  },
+  {
+    "id": "GANGA",
+    "name": "Ganganagar"
+  },
+  {
+    "id": "GANJA",
+    "name": "Ganjam"
+  },
+  {
+    "id": "GARHW",
+    "name": "Garhwa"
+  },
+  {
+    "id": "GAUTA",
+    "name": "Gautam Buddh Nagar"
+  },
+  {
+    "id": "GAYA",
+    "name": "Gaya"
+  },
+  {
+    "id": "GHAZIA",
+    "name": "Ghaziabad"
+  },
+  {
+    "id": "GHAZIPR",
+    "name": "Ghazipur"
+  },
+  {
+    "id": "GIRID",
+    "name": "Giridih"
+  },
+  {
+    "id": "GOALP",
+    "name": "Goalpara"
+  },
+  {
+    "id": "GODDA",
+    "name": "Godda"
+  },
+  {
+    "id": "GOLAG",
+    "name": "Golaghat"
+  },
+  {
+    "id": "GONDA",
+    "name": "Gonda"
+  },
+  {
+    "id": "GONDI",
+    "name": "Gondia"
+  },
+  {
+    "id": "GOPAL",
+    "name": "Gopalganj"
+  },
+  {
+    "id": "GORAK",
+    "name": "Gorakhpur"
+  },
+  {
+    "id": "GULBA",
+    "name": "Gulbarga"
+  },
+  {
+    "id": "GUMLA",
+    "name": "Gumla"
+  },
+  {
+    "id": "GUNA",
+    "name": "Guna"
+  },
+  {
+    "id": "GUNTU",
+    "name": "Guntur"
+  },
+  {
+    "id": "GURDA",
+    "name": "Gurdaspur"
+  },
+  {
+    "id": "GURGA",
+    "name": "Gurgaon"
+  },
+  {
+    "id": "GWALI",
+    "name": "Gwalior"
+  },
+  {
+    "id": "HAILA",
+    "name": "Hailakandi"
+  },
+  {
+    "id": "HAMIR",
+    "name": "Hamirpur"
+  },
+  {
+    "id": "HAMIR",
+    "name": "Hamirpur"
+  },
+  {
+    "id": "HANUM",
+    "name": "Hanumangarh"
+  },
+  {
+    "id": "HARDA",
+    "name": "Harda"
+  },
+  {
+    "id": "HARDO",
+    "name": "Hardoi"
+  },
+  {
+    "id": "HARID",
+    "name": "Haridwar"
+  },
+  {
+    "id": "HASSA",
+    "name": "Hassan"
+  },
+  {
+    "id": "HAVER",
+    "name": "Haveri district"
+  },
+  {
+    "id": "HAZAR",
+    "name": "Hazaribag"
+  },
+  {
+    "id": "HINGO",
+    "name": "Hingoli"
+  },
+  {
+    "id": "HISSA",
+    "name": "Hissar"
+  },
+  {
+    "id": "HOOGH",
+    "name": "Hooghly"
+  },
+  {
+    "id": "HOSHA",
+    "name": "Hoshangabad"
+  },
+  {
+    "id": "HOSHI",
+    "name": "Hoshiarpur"
+  },
+  {
+    "id": "HOWRA",
+    "name": "Howrah"
+  },
+  {
+    "id": "HYDER",
+    "name": "Hyderabad"
+  },
+  {
+    "id": "IDUKK",
+    "name": "Idukki"
+  },
+  {
+    "id": "IMPHA",
+    "name": "Imphal East"
+  },
+  {
+    "id": "IMPHA",
+    "name": "Imphal West"
+  },
+  {
+    "id": "INDOR",
+    "name": "Indore"
+  },
+  {
+    "id": "JABAL",
+    "name": "Jabalpur"
+  },
+  {
+    "id": "JAGAT",
+    "name": "Jagatsinghpur"
+  },
+  {
+    "id": "JAINT",
+    "name": "Jaintia Hills"
+  },
+  {
+    "id": "JAIPU",
+    "name": "Jaipur"
+  },
+  {
+    "id": "JAISA",
+    "name": "Jaisalmer"
+  },
+  {
+    "id": "JAJPU",
+    "name": "Jajpur"
+  },
+  {
+    "id": "JALAN",
+    "name": "Jalandhar"
+  },
+  {
+    "id": "JALAU",
+    "name": "Jalaun"
+  },
+  {
+    "id": "JALGA",
+    "name": "Jalgaon"
+  },
+  {
+    "id": "JALNA",
+    "name": "Jalna"
+  },
+  {
+    "id": "JALOR",
+    "name": "Jalore"
+  },
+  {
+    "id": "JALPA",
+    "name": "Jalpaiguri"
+  },
+  {
+    "id": "JAMMU",
+    "name": "Jammu"
+  },
+  {
+    "id": "JAMNA",
+    "name": "Jamnagar"
+  },
+  {
+    "id": "JAMTA",
+    "name": "Jamtara"
+  },
+  {
+    "id": "JAMUI",
+    "name": "Jamui"
+  },
+  {
+    "id": "JANJG",
+    "name": "Janjgir-Champa"
+  },
+  {
+    "id": "JASHP",
+    "name": "Jashpur"
+  },
+  {
+    "id": "JAUNP",
+    "name": "Jaunpur district"
+  },
+  {
+    "id": "JEHAN",
+    "name": "Jehanabad"
+  },
+  {
+    "id": "JHABU",
+    "name": "Jhabua"
+  },
+  {
+    "id": "JHAJJ",
+    "name": "Jhajjar"
+  },
+  {
+    "id": "JHALA",
+    "name": "Jhalawar"
+  },
+  {
+    "id": "JHANS",
+    "name": "Jhansi"
+  },
+  {
+    "id": "JHARS",
+    "name": "Jharsuguda"
+  },
+  {
+    "id": "JHUNJ",
+    "name": "Jhunjhunu"
+  },
+  {
+    "id": "JIND",
+    "name": "Jind"
+  },
+  {
+    "id": "JODHP",
+    "name": "Jodhpur"
+  },
+  {
+    "id": "JORHA",
+    "name": "Jorhat"
+  },
+  {
+    "id": "JUNAG",
+    "name": "Junagadh"
+  },
+  {
+    "id": "JYOTI",
+    "name": "Jyotiba Phule Nagar"
+  },
+  {
+    "id": "KABIR",
+    "name": "Kabirdham (formerly Kawardha)"
+  },
+  {
+    "id": "KADAP",
+    "name": "Kadapa"
+  },
+  {
+    "id": "KAIMU",
+    "name": "Kaimur"
+  },
+  {
+    "id": "KAITH",
+    "name": "Kaithal"
+  },
+  {
+    "id": "KAKIN",
+    "name": "Kakinada"
+  },
+  {
+    "id": "KALAH",
+    "name": "Kalahandi"
+  },
+  {
+    "id": "KAMRU",
+    "name": "Kamrup"
+  },
+  {
+    "id": "KANCH",
+    "name": "Kanchipuram"
+  },
+  {
+    "id": "KANDH",
+    "name": "Kandhamal"
+  },
+  {
+    "id": "KANGR",
+    "name": "Kangra"
+  },
+  {
+    "id": "KANKE",
+    "name": "Kanker"
+  },
+  {
+    "id": "KANNA",
+    "name": "Kannauj"
+  },
+  {
+    "id": "KANNU",
+    "name": "Kannur"
+  },
+  {
+    "id": "KANPU",
+    "name": "Kanpur"
+  },
+  {
+    "id": "KANSH",
+    "name": "Kanshi Ram Nagar"
+  },
+  {
+    "id": "KANYA",
+    "name": "Kanyakumari"
+  },
+  {
+    "id": "KAPUR",
+    "name": "Kapurthala"
+  },
+  {
+    "id": "KARAI",
+    "name": "Karaikal"
+  },
+  {
+    "id": "KARAU",
+    "name": "Karauli"
+  },
+  {
+    "id": "KARBI",
+    "name": "Karbi Anglong"
+  },
+  {
+    "id": "KARGI",
+    "name": "Kargil"
+  },
+  {
+    "id": "KARIMGN",
+    "name": "Karimganj"
+  },
+  {
+    "id": "KARIMNG",
+    "name": "Karimnagar"
+  },
+  {
+    "id": "KARNA",
+    "name": "Karnal"
+  },
+  {
+    "id": "KARUR",
+    "name": "Karur"
+  },
+  {
+    "id": "KASAR",
+    "name": "Kasaragod"
+  },
+  {
+    "id": "KATHU",
+    "name": "Kathua"
+  },
+  {
+    "id": "KATIH",
+    "name": "Katihar"
+  },
+  {
+    "id": "KATNI",
+    "name": "Katni"
+  },
+  {
+    "id": "KAUSH",
+    "name": "Kaushambi"
+  },
+  {
+    "id": "KENDR",
+    "name": "Kendrapara"
+  },
+  {
+    "id": "KENDU",
+    "name": "Kendujhar (Keonjhar)"
+  },
+  {
+    "id": "KHAGA",
+    "name": "Khagaria"
+  },
+  {
+    "id": "KHAMM",
+    "name": "Khammam"
+  },
+  {
+    "id": "KHAND",
+    "name": "Khandwa (East Nimar)"
+  },
+  {
+    "id": "KHARG",
+    "name": "Khargone (West Nimar)"
+  },
+  {
+    "id": "KHEDA",
+    "name": "Kheda"
+  },
+  {
+    "id": "KHORD",
+    "name": "Khordha"
+  },
+  {
+    "id": "KHOWA",
+    "name": "Khowai"
+  },
+  {
+    "id": "KHUNT",
+    "name": "Khunti"
+  },
+  {
+    "id": "KINNA",
+    "name": "Kinnaur"
+  },
+  {
+    "id": "KISHA",
+    "name": "Kishanganj"
+  },
+  {
+    "id": "KISHT",
+    "name": "Kishtwar"
+  },
+  {
+    "id": "KODAG",
+    "name": "Kodagu"
+  },
+  {
+    "id": "KODER",
+    "name": "Koderma"
+  },
+  {
+    "id": "KOHIM",
+    "name": "Kohima"
+  },
+  {
+    "id": "KOKRA",
+    "name": "Kokrajhar"
+  },
+  {
+    "id": "KOLAR",
+    "name": "Kolar"
+  },
+  {
+    "id": "KOLAS",
+    "name": "Kolasib"
+  },
+  {
+    "id": "KOLHA",
+    "name": "Kolhapur"
+  },
+  {
+    "id": "KOLKA",
+    "name": "Kolkata"
+  },
+  {
+    "id": "KOLLA",
+    "name": "Kollam"
+  },
+  {
+    "id": "KOPPA",
+    "name": "Koppal"
+  },
+  {
+    "id": "KORAP",
+    "name": "Koraput"
+  },
+  {
+    "id": "KORBA",
+    "name": "Korba"
+  },
+  {
+    "id": "KORIY",
+    "name": "Koriya"
+  },
+  {
+    "id": "KOTA",
+    "name": "Kota"
+  },
+  {
+    "id": "KOTTA",
+    "name": "Kottayam"
+  },
+  {
+    "id": "KOZHI",
+    "name": "Kozhikode"
+  },
+  {
+    "id": "KRISH",
+    "name": "Krishna"
+  },
+  {
+    "id": "KULGA",
+    "name": "Kulgam"
+  },
+  {
+    "id": "KULLU",
+    "name": "Kullu"
+  },
+  {
+    "id": "KUPWA",
+    "name": "Kupwara"
+  },
+  {
+    "id": "KURNO",
+    "name": "Kurnool"
+  },
+  {
+    "id": "KURUK",
+    "name": "Kurukshetra"
+  },
+  {
+    "id": "KURUN",
+    "name": "Kurung Kumey"
+  },
+  {
+    "id": "KUSHI",
+    "name": "Kushinagar"
+  },
+  {
+    "id": "KUTCH",
+    "name": "Kutch"
+  },
+  {
+    "id": "LAHAU",
+    "name": "Lahaul and Spiti"
+  },
+  {
+    "id": "LAKHI",
+    "name": "Lakhimpur"
+  },
+  {
+    "id": "LAKHISR",
+    "name": "Lakhisarai"
+  },
+  {
+    "id": "LALIT",
+    "name": "Lalitpur"
+  },
+  {
+    "id": "LATEH",
+    "name": "Latehar"
+  },
+  {
+    "id": "LATUR",
+    "name": "Latur"
+  },
+  {
+    "id": "LAWNG",
+    "name": "Lawngtlai"
+  },
+  {
+    "id": "LEH",
+    "name": "Leh"
+  },
+  {
+    "id": "LOHAR",
+    "name": "Lohardaga"
+  },
+  {
+    "id": "LOHIT",
+    "name": "Lohit"
+  },
+  {
+    "id": "LOWER",
+    "name": "Lower Dibang Valley"
+  },
+  {
+    "id": "LOWER",
+    "name": "Lower Subansiri"
+  },
+  {
+    "id": "LUCKN",
+    "name": "Lucknow"
+  },
+  {
+    "id": "LUDHI",
+    "name": "Ludhiana"
+  },
+  {
+    "id": "LUNGL",
+    "name": "Lunglei"
+  },
+  {
+    "id": "MADHE",
+    "name": "Madhepura"
+  },
+  {
+    "id": "MADHU",
+    "name": "Madhubani"
+  },
+  {
+    "id": "MADUR",
+    "name": "Madurai"
+  },
+  {
+    "id": "MAHAM",
+    "name": "Mahamaya Nagar"
+  },
+  {
+    "id": "MAHAR",
+    "name": "Maharajganj"
+  },
+  {
+    "id": "MAHAS",
+    "name": "Mahasamund"
+  },
+  {
+    "id": "MAHBU",
+    "name": "Mahbubnagar"
+  },
+  {
+    "id": "MAHE",
+    "name": "Mahe"
+  },
+  {
+    "id": "MAHEN",
+    "name": "Mahendragarh"
+  },
+  {
+    "id": "MAHOB",
+    "name": "Mahoba"
+  },
+  {
+    "id": "MAINP",
+    "name": "Mainpuri"
+  },
+  {
+    "id": "MALAP",
+    "name": "Malappuram"
+  },
+  {
+    "id": "MALDA",
+    "name": "Maldah"
+  },
+  {
+    "id": "MALKA",
+    "name": "Malkangiri"
+  },
+  {
+    "id": "MAMIT",
+    "name": "Mamit"
+  },
+  {
+    "id": "MANDI",
+    "name": "Mandi"
+  },
+  {
+    "id": "MANDL",
+    "name": "Mandla"
+  },
+  {
+    "id": "MANDS",
+    "name": "Mandsaur"
+  },
+  {
+    "id": "MANDY",
+    "name": "Mandya"
+  },
+  {
+    "id": "MANSA",
+    "name": "Mansa"
+  },
+  {
+    "id": "MARIG",
+    "name": "Marigaon"
+  },
+  {
+    "id": "MATHU",
+    "name": "Mathura"
+  },
+  {
+    "id": "MAU",
+    "name": "Mau"
+  },
+  {
+    "id": "MAYUR",
+    "name": "Mayurbhanj"
+  },
+  {
+    "id": "MEDAK",
+    "name": "Medak"
+  },
+  {
+    "id": "MEERU",
+    "name": "Meerut"
+  },
+  {
+    "id": "MEHSA",
+    "name": "Mehsana"
+  },
+  {
+    "id": "MEWAT",
+    "name": "Mewat"
+  },
+  {
+    "id": "MIRZA",
+    "name": "Mirzapur"
+  },
+  {
+    "id": "MOGA",
+    "name": "Moga"
+  },
+  {
+    "id": "MOKOK",
+    "name": "Mokokchung"
+  },
+  {
+    "id": "MON",
+    "name": "Mon"
+  },
+  {
+    "id": "MORAD",
+    "name": "Moradabad"
+  },
+  {
+    "id": "MOREN",
+    "name": "Morena"
+  },
+  {
+    "id": "MUMBA",
+    "name": "Mumbai"
+  },
+  {
+    "id": "MUNGE",
+    "name": "Munger"
+  },
+  {
+    "id": "MURSH",
+    "name": "Murshidabad"
+  },
+  {
+    "id": "MUZAFNG",
+    "name": "Muzaffarnagar"
+  },
+  {
+    "id": "MUZAFPR",
+    "name": "Muzaffarpur"
+  },
+  {
+    "id": "MYSOR",
+    "name": "Mysore"
+  },
+  {
+    "id": "NABAR",
+    "name": "Nabarangpur"
+  },
+  {
+    "id": "NADIA",
+    "name": "Nadia"
+  },
+  {
+    "id": "NAGAO",
+    "name": "Nagaon"
+  },
+  {
+    "id": "NAGAP",
+    "name": "Nagapattinam"
+  },
+  {
+    "id": "NAGAU",
+    "name": "Nagaur"
+  },
+  {
+    "id": "NAGPU",
+    "name": "Nagpur"
+  },
+  {
+    "id": "NAINI",
+    "name": "Nainital"
+  },
+  {
+    "id": "NALAN",
+    "name": "Nalanda"
+  },
+  {
+    "id": "NALBA",
+    "name": "Nalbari"
+  },
+  {
+    "id": "NALGO",
+    "name": "Nalgonda"
+  },
+  {
+    "id": "NAMAK",
+    "name": "Namakkal"
+  },
+  {
+    "id": "NANDE",
+    "name": "Nanded"
+  },
+  {
+    "id": "NANDU",
+    "name": "Nandurbar"
+  },
+  {
+    "id": "NARAY",
+    "name": "Narayanpur"
+  },
+  {
+    "id": "NARMA",
+    "name": "Narmada"
+  },
+  {
+    "id": "NARSI",
+    "name": "Narsinghpur"
+  },
+  {
+    "id": "NASHI",
+    "name": "Nashik"
+  },
+  {
+    "id": "NAVSA",
+    "name": "Navsari"
+  },
+  {
+    "id": "NAWAD",
+    "name": "Nawada"
+  },
+  {
+    "id": "NAWAN",
+    "name": "Nawanshahr"
+  },
+  {
+    "id": "NAYAG",
+    "name": "Nayagarh"
+  },
+  {
+    "id": "NEEMU",
+    "name": "Neemuch"
+  },
+  {
+    "id": "NELLO",
+    "name": "Nellore"
+  },
+  {
+    "id": "DELHI",
+    "name": "Delhi"
+  },
+  {
+    "id": "NILGI",
+    "name": "Nilgiris"
+  },
+  {
+    "id": "NIZAM",
+    "name": "Nizamabad"
+  },
+  {
+    "id": "NUAPA",
+    "name": "Nuapada"
+  },
+  {
+    "id": "ONGOL",
+    "name": "Ongole"
+  },
+  {
+    "id": "OSMAN",
+    "name": "Osmanabad"
+  },
+  {
+    "id": "PAKUR",
+    "name": "Pakur"
+  },
+  {
+    "id": "PALAK",
+    "name": "Palakkad"
+  },
+  {
+    "id": "PALAM",
+    "name": "Palamu"
+  },
+  {
+    "id": "PALI",
+    "name": "Pali"
+  },
+  {
+    "id": "PALWA",
+    "name": "Palwal"
+  },
+  {
+    "id": "PANCH",
+    "name": "Panchkula"
+  },
+  {
+    "id": "PANCH",
+    "name": "Panchmahal"
+  },
+  {
+    "id": "PANCH",
+    "name": "Panchsheel Nagar district (Hapur)"
+  },
+  {
+    "id": "PANIP",
+    "name": "Panipat"
+  },
+  {
+    "id": "PANNA",
+    "name": "Panna"
+  },
+  {
+    "id": "PAPUM",
+    "name": "Papum Pare"
+  },
+  {
+    "id": "PARBH",
+    "name": "Parbhani"
+  },
+  {
+    "id": "PASCH",
+    "name": "Paschim Medinipur"
+  },
+  {
+    "id": "PATAN",
+    "name": "Patan"
+  },
+  {
+    "id": "PATHANM",
+    "name": "Pathanamthitta"
+  },
+  {
+    "id": "PATHANK",
+    "name": "Pathankot"
+  },
+  {
+    "id": "PATIA",
+    "name": "Patiala"
+  },
+  {
+    "id": "PATNA",
+    "name": "Patna"
+  },
+  {
+    "id": "PAURI",
+    "name": "Pauri Garhwal"
+  },
+  {
+    "id": "PERAM",
+    "name": "Perambalur"
+  },
+  {
+    "id": "PHEK",
+    "name": "Phek"
+  },
+  {
+    "id": "PILIB",
+    "name": "Pilibhit"
+  },
+  {
+    "id": "PITHO",
+    "name": "Pithoragarh"
+  },
+  {
+    "id": "PONDI",
+    "name": "Pondicherry"
+  },
+  {
+    "id": "POONC",
+    "name": "Poonch"
+  },
+  {
+    "id": "PORBA",
+    "name": "Porbandar"
+  },
+  {
+    "id": "PRATA",
+    "name": "Pratapgarh"
+  },
+  {
+    "id": "PRATA",
+    "name": "Pratapgarh"
+  },
+  {
+    "id": "PUDUK",
+    "name": "Pudukkottai"
+  },
+  {
+    "id": "PULWA",
+    "name": "Pulwama"
+  },
+  {
+    "id": "PUNE",
+    "name": "Pune"
+  },
+  {
+    "id": "PURBA",
+    "name": "Purba Medinipur"
+  },
+  {
+    "id": "PURI",
+    "name": "Puri"
+  },
+  {
+    "id": "PURNI",
+    "name": "Purnia"
+  },
+  {
+    "id": "PURUL",
+    "name": "Purulia"
+  },
+  {
+    "id": "RAEBA",
+    "name": "Raebareli"
+  },
+  {
+    "id": "RAICH",
+    "name": "Raichur"
+  },
+  {
+    "id": "RAIGAD",
+    "name": "Raigad"
+  },
+  {
+    "id": "RAIGAR",
+    "name": "Raigarh"
+  },
+  {
+    "id": "RAIPU",
+    "name": "Raipur"
+  },
+  {
+    "id": "RAISE",
+    "name": "Raisen"
+  },
+  {
+    "id": "RAJAU",
+    "name": "Rajauri"
+  },
+  {
+    "id": "RAJGA",
+    "name": "Rajgarh"
+  },
+  {
+    "id": "RAJKO",
+    "name": "Rajkot"
+  },
+  {
+    "id": "RAJNA",
+    "name": "Rajnandgaon"
+  },
+  {
+    "id": "RAJSA",
+    "name": "Rajsamand"
+  },
+  {
+    "id": "RAMAB",
+    "name": "Ramabai Nagar (Kanpur Dehat)"
+  },
+  {
+    "id": "RAMANGR",
+    "name": "Ramanagara"
+  },
+  {
+    "id": "RAMANTHA",
+    "name": "Ramanathapuram"
+  },
+  {
+    "id": "RAMBA",
+    "name": "Ramban"
+  },
+  {
+    "id": "RAMGA",
+    "name": "Ramgarh"
+  },
+  {
+    "id": "RAMPU",
+    "name": "Rampur"
+  },
+  {
+    "id": "RANCH",
+    "name": "Ranchi"
+  },
+  {
+    "id": "RATLA",
+    "name": "Ratlam"
+  },
+  {
+    "id": "RATNA",
+    "name": "Ratnagiri"
+  },
+  {
+    "id": "RAYAG",
+    "name": "Rayagada"
+  },
+  {
+    "id": "REASI",
+    "name": "Reasi"
+  },
+  {
+    "id": "REWA",
+    "name": "Rewa"
+  },
+  {
+    "id": "REWAR",
+    "name": "Rewari"
+  },
+  {
+    "id": "RI BH",
+    "name": "Ri Bhoi"
+  },
+  {
+    "id": "ROHTAK",
+    "name": "Rohtak"
+  },
+  {
+    "id": "ROHTAS",
+    "name": "Rohtas"
+  },
+  {
+    "id": "RUDRA",
+    "name": "Rudraprayag"
+  },
+  {
+    "id": "RUPNA",
+    "name": "Rupnagar"
+  },
+  {
+    "id": "SABAR",
+    "name": "Sabarkantha"
+  },
+  {
+    "id": "SAGAR",
+    "name": "Sagar"
+  },
+  {
+    "id": "SAHAR",
+    "name": "Saharanpur"
+  },
+  {
+    "id": "SAHAR",
+    "name": "Saharsa"
+  },
+  {
+    "id": "SAHIB",
+    "name": "Sahibganj"
+  },
+  {
+    "id": "SAIHA",
+    "name": "Saiha"
+  },
+  {
+    "id": "SALEM",
+    "name": "Salem"
+  },
+  {
+    "id": "SAMAS",
+    "name": "Samastipur"
+  },
+  {
+    "id": "SAMBA",
+    "name": "Samba"
+  },
+  {
+    "id": "SAMBLPR",
+    "name": "Sambalpur"
+  },
+  {
+    "id": "SANGL",
+    "name": "Sangli"
+  },
+  {
+    "id": "SANGR",
+    "name": "Sangrur"
+  },
+  {
+    "id": "SNTKBRNGR",
+    "name": "Sant Kabir Nagar"
+  },
+  {
+    "id": "SANTRVNG",
+    "name": "Sant Ravidas Nagar"
+  },
+  {
+    "id": "SARAN",
+    "name": "Saran"
+  },
+  {
+    "id": "SATAR",
+    "name": "Satara"
+  },
+  {
+    "id": "SATNA",
+    "name": "Satna"
+  },
+  {
+    "id": "SAWAI",
+    "name": "Sawai Madhopur"
+  },
+  {
+    "id": "SEHOR",
+    "name": "Sehore"
+  },
+  {
+    "id": "SENAP",
+    "name": "Senapati"
+  },
+  {
+    "id": "SEONI",
+    "name": "Seoni"
+  },
+  {
+    "id": "SERAI",
+    "name": "Seraikela Kharsawan"
+  },
+  {
+    "id": "SERCH",
+    "name": "Serchhip"
+  },
+  {
+    "id": "SHAHD",
+    "name": "Shahdol"
+  },
+  {
+    "id": "SHAHJ",
+    "name": "Shahjahanpur"
+  },
+  {
+    "id": "SHAJA",
+    "name": "Shajapur"
+  },
+  {
+    "id": "SHAML",
+    "name": "Shamli"
+  },
+  {
+    "id": "SHEIK",
+    "name": "Sheikhpura"
+  },
+  {
+    "id": "SHEOH",
+    "name": "Sheohar"
+  },
+  {
+    "id": "SHEOP",
+    "name": "Sheopur"
+  },
+  {
+    "id": "SHIML",
+    "name": "Shimla"
+  },
+  {
+    "id": "SHIMO",
+    "name": "Shimoga"
+  },
+  {
+    "id": "SHIVP",
+    "name": "Shivpuri"
+  },
+  {
+    "id": "SHOPI",
+    "name": "Shopian"
+  },
+  {
+    "id": "SHRAV",
+    "name": "Shravasti"
+  },
+  {
+    "id": "SIBSA",
+    "name": "Sibsagar"
+  },
+  {
+    "id": "SIDDH",
+    "name": "Siddharthnagar"
+  },
+  {
+    "id": "SIDHI",
+    "name": "Sidhi"
+  },
+  {
+    "id": "SIKAR",
+    "name": "Sikar"
+  },
+  {
+    "id": "SIMDE",
+    "name": "Simdega"
+  },
+  {
+    "id": "SINDH",
+    "name": "Sindhudurg"
+  },
+  {
+    "id": "SINGR",
+    "name": "Singrauli"
+  },
+  {
+    "id": "SIRMA",
+    "name": "Sirmaur"
+  },
+  {
+    "id": "SIROH",
+    "name": "Sirohi"
+  },
+  {
+    "id": "SIRSA",
+    "name": "Sirsa"
+  },
+  {
+    "id": "SITAM",
+    "name": "Sitamarhi"
+  },
+  {
+    "id": "SITAP",
+    "name": "Sitapur"
+  },
+  {
+    "id": "SIVAG",
+    "name": "Sivaganga"
+  },
+  {
+    "id": "SIWAN",
+    "name": "Siwan"
+  },
+  {
+    "id": "SOLAN",
+    "name": "Solan"
+  },
+  {
+    "id": "SOLAP",
+    "name": "Solapur"
+  },
+  {
+    "id": "SONBH",
+    "name": "Sonbhadra"
+  },
+  {
+    "id": "SONIP",
+    "name": "Sonipat"
+  },
+  {
+    "id": "SONIT",
+    "name": "Sonitpur"
+  },
+  {
+    "id": "SRI M",
+    "name": "Sri Muktsar Sahib"
+  },
+  {
+    "id": "SRIKA",
+    "name": "Srikakulam"
+  },
+  {
+    "id": "SRINA",
+    "name": "Srinagar"
+  },
+  {
+    "id": "SUBAR",
+    "name": "Subarnapur (Sonepur)"
+  },
+  {
+    "id": "SULTA",
+    "name": "Sultanpur"
+  },
+  {
+    "id": "SUNDE",
+    "name": "Sundergarh"
+  },
+  {
+    "id": "SUPAU",
+    "name": "Supaul"
+  },
+  {
+    "id": "SURAT",
+    "name": "Surat"
+  },
+  {
+    "id": "SUREN",
+    "name": "Surendranagar"
+  },
+  {
+    "id": "SURGU",
+    "name": "Surguja"
+  },
+  {
+    "id": "TAMEN",
+    "name": "Tamenglong"
+  },
+  {
+    "id": "TARN",
+    "name": "Tarn Taran"
+  },
+  {
+    "id": "TAWAN",
+    "name": "Tawang"
+  },
+  {
+    "id": "TEHRI",
+    "name": "Tehri Garhwal"
+  },
+  {
+    "id": "THANE",
+    "name": "Thane"
+  },
+  {
+    "id": "THANJ",
+    "name": "Thanjavur"
+  },
+  {
+    "id": "THE D",
+    "name": "The Dangs"
+  },
+  {
+    "id": "THENI",
+    "name": "Theni"
+  },
+  {
+    "id": "THIRU",
+    "name": "Thiruvananthapuram"
+  },
+  {
+    "id": "THOOT",
+    "name": "Thoothukudi"
+  },
+  {
+    "id": "THOUB",
+    "name": "Thoubal"
+  },
+  {
+    "id": "THRIS",
+    "name": "Thrissur"
+  },
+  {
+    "id": "TIKAM",
+    "name": "Tikamgarh"
+  },
+  {
+    "id": "TINSU",
+    "name": "Tinsukia"
+  },
+  {
+    "id": "TIRAP",
+    "name": "Tirap"
+  },
+  {
+    "id": "TIRUC",
+    "name": "Tiruchirappalli"
+  },
+  {
+    "id": "TIRUN",
+    "name": "Tirunelveli"
+  },
+  {
+    "id": "TIRUP",
+    "name": "Tirupur"
+  },
+  {
+    "id": "TIRUVLL",
+    "name": "Tiruvallur"
+  },
+  {
+    "id": "TIRUVNN",
+    "name": "Tiruvannamalai"
+  },
+  {
+    "id": "TIRUVARU",
+    "name": "Tiruvarur"
+  },
+  {
+    "id": "TONK",
+    "name": "Tonk"
+  },
+  {
+    "id": "TUENS",
+    "name": "Tuensang"
+  },
+  {
+    "id": "TUMKU",
+    "name": "Tumkur"
+  },
+  {
+    "id": "UDAIP",
+    "name": "Udaipur"
+  },
+  {
+    "id": "UDALG",
+    "name": "Udalguri"
+  },
+  {
+    "id": "UDHAM",
+    "name": "Udham Singh Nagar"
+  },
+  {
+    "id": "UDHAM",
+    "name": "Udhampur"
+  },
+  {
+    "id": "UDUPI",
+    "name": "Udupi"
+  },
+  {
+    "id": "UJJAI",
+    "name": "Ujjain"
+  },
+  {
+    "id": "UKHRU",
+    "name": "Ukhrul"
+  },
+  {
+    "id": "UMARI",
+    "name": "Umaria"
+  },
+  {
+    "id": "UNA",
+    "name": "Una"
+  },
+  {
+    "id": "UNNAO",
+    "name": "Unnao"
+  },
+  {
+    "id": "UTTAR",
+    "name": "Uttara Kannada"
+  },
+  {
+    "id": "UTTAR",
+    "name": "Uttarkashi"
+  },
+  {
+    "id": "VADOD",
+    "name": "Vadodara"
+  },
+  {
+    "id": "VAISH",
+    "name": "Vaishali"
+  },
+  {
+    "id": "VALSA",
+    "name": "Valsad"
+  },
+  {
+    "id": "VARAN",
+    "name": "Varanasi"
+  },
+  {
+    "id": "VELLO",
+    "name": "Vellore"
+  },
+  {
+    "id": "VIDIS",
+    "name": "Vidisha"
+  },
+  {
+    "id": "VILUP",
+    "name": "Viluppuram"
+  },
+  {
+    "id": "VIRUD",
+    "name": "Virudhunagar"
+  },
+  {
+    "id": "VISAK",
+    "name": "Visakhapatnam"
+  },
+  {
+    "id": "VIZIA",
+    "name": "Vizianagaram"
+  },
+  {
+    "id": "VYARA",
+    "name": "Vyara"
+  },
+  {
+    "id": "WARAN",
+    "name": "Warangal"
+  },
+  {
+    "id": "WARDH",
+    "name": "Wardha"
+  },
+  {
+    "id": "WASHI",
+    "name": "Washim"
+  },
+  {
+    "id": "WAYAN",
+    "name": "Wayanad"
+  },
+  {
+    "id": "WOKHA",
+    "name": "Wokha"
+  },
+  {
+    "id": "YADGI",
+    "name": "Yadgir"
+  },
+  {
+    "id": "YAMUN",
+    "name": "Yamuna Nagar"
+  },
+  {
+    "id": "YANAM",
+    "name": "Yanam"
+  },
+  {
+    "id": "YAVAT",
+    "name": "Yavatmal"
+  },
+  {
+    "id": "ZUNHE",
+    "name": "Zunheboto"
+  }
+]

@@ -6,7 +6,9 @@ import 'package:flutter/services.dart';
 import 'package:sih_app/models/choice.dart';
 
 Future<String?> decodeChoice(String choiceCode, String choiceType) async {
+  print('Decoding choice');
   final data = await readJson('assets/choices/$choiceType.json');
+  print(data);
   for (var choiceData in data) {
     Choice choice = Choice.fromJson(choiceData);
     if (choice.id == choiceCode) {

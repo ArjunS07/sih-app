@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:multi_select_flutter/multi_select_flutter.dart';
-import 'package:search_choices/search_choices.dart';
+import 'package:sih_app/utils/extensions/list_extension.dart';
 
 import 'package:sih_app/models/tutor.dart';
 import 'package:sih_app/models/student.dart';
@@ -63,7 +63,8 @@ class _TutorSearchState extends State<TutorSearch> {
       'city': await tutor.decodedCity,
       'subjects': await tutor.decodedSubjects,
       'grades': await tutor.decodedGrades,
-      'boards': await tutor.decodedBoards
+      'boards': await tutor.decodedBoards,
+      'highestEducationalLevel': await tutor.decodedHighestEducationalLevel
     };
     return data;
   }
@@ -79,7 +80,7 @@ class _TutorSearchState extends State<TutorSearch> {
             child: ListBody(
               children: <Widget>[
                 Text(
-                    'Ask ${tutor.name} to help you with ${_selectedSubjectDisplays.join(', ')}?'),
+                    'Ask ${tutor.name} to help you with ${_selectedSubjectDisplays.joinedWithAnd()}?'),
               ],
             ),
           ),
@@ -93,7 +94,7 @@ class _TutorSearchState extends State<TutorSearch> {
             ElevatedButton(
                 style: ButtonStyle(
                     backgroundColor:
-                        MaterialStateProperty.all<Color>(Colors.green)),
+                        MaterialStateProperty.all<Color>(Colors.black)),
                 onPressed: () {
                   if (_selectedSubjectIds.isNotEmpty) {
                     tutorship_api_utils
@@ -132,7 +133,8 @@ class _TutorSearchState extends State<TutorSearch> {
         title: const Text('Subjects'),
         selectedColor: Colors.black,
         searchable: true,
-        items: _subjectChoices.map((subject) => MultiSelectItem(subject.id, subject.name))
+        items: _subjectChoices
+            .map((subject) => MultiSelectItem(subject.id, subject.name))
             .toList(),
         listType: MultiSelectListType.LIST,
         onConfirm: (values) async {
@@ -182,11 +184,26 @@ class _TutorSearchState extends State<TutorSearch> {
                           fontWeight: FontWeight.bold, fontSize: 21.0)),
                   isThreeLine: true,
                   subtitle: Padding(
-                    padding: const EdgeInsets.only(top: 16.0),
-                    child: Text(
-                        'City: ${data['city']}\nSpeaks ${data['languages']}\n\nSubjects: ${data['subjects']}',
-                        style: const TextStyle(fontSize: 16.0)),
-                  ),
+                      padding: const EdgeInsets.only(top: 16.0),
+                      child: RichText(
+                          text: TextSpan(
+                              style: const TextStyle(
+                                color: Colors.black,
+                                fontSize: 16.0,
+                              ),
+                              children: <TextSpan>[
+                            TextSpan(
+                                text: data['city'],
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold)),
+                            TextSpan(text: '\n${tutor.age} years old'),
+                            TextSpan(text: '\nSpeaks ${data['languages']}'),
+                            TextSpan(
+                                text:
+                                    '\n\nEducation: ${data['highestEducationalLevel']}'),
+                            TextSpan(text: '\n\nTeaches'),
+                            TextSpan(text: ' ${data['subjects']}', style: TextStyle(fontWeight: FontWeight.bold)),
+                          ]))),
                   trailing: IconButton(
                       onPressed: _selectedSubjectIds.isEmpty
                           ? null

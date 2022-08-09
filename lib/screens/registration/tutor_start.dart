@@ -9,8 +9,10 @@ import 'package:sih_app/utils/accounts_api_utils.dart';
 import 'package:sih_app/utils/choices.dart';
 import 'package:sih_app/models/choice.dart';
 import 'package:sih_app/utils/persistence_utils.dart' as persistence_utils;
+import 'package:sih_app/utils/extensions/numeric_range_formatter.dart';
 
 import 'package:sih_app/screens/bottom_tab_controller.dart';
+import 'package:sih_app/utils/widgets/standard_alert_dialog.dart';
 
 class TutorDetails extends StatefulWidget {
   final String email;
@@ -45,12 +47,18 @@ class _TutorDetailsState extends State<TutorDetails> {
   late List<Choice> _subjectChoices = [];
   late List<String> _selectedSubjectIds = [];
 
+  late List<Choice> _highestEducationalLevelChoices = [];
+  String _selectedEducationalLevel = '';
+
+  var _ageTextController = TextEditingController();
+
   void getChoices() async {
     _languageChoices = await loadChoices('languages');
     _boardChoices = await loadChoices('boards');
     _cityChoices = await loadChoices('cities');
     _gradeChoices = await loadChoices('grades');
     _subjectChoices = await loadChoices('subjects');
+    _highestEducationalLevelChoices = await loadChoices('educational_level');
 
     setState(() {
       _languageChoices = _languageChoices;
@@ -58,6 +66,7 @@ class _TutorDetailsState extends State<TutorDetails> {
       _cityChoices = _cityChoices;
       _gradeChoices = _gradeChoices;
       _subjectChoices = _subjectChoices;
+      _highestEducationalLevelChoices = _highestEducationalLevelChoices;
     });
     // _languageChoices = await getChoicesMap('languages').values.toList();
     // _cityChoices = await getChoicesMap('cities');
@@ -67,10 +76,52 @@ class _TutorDetailsState extends State<TutorDetails> {
   @override
   void initState() {
     super.initState();
-      getChoices();
+    getChoices();
   }
 
   void _submitRegistration(context) async {
+    // Check that none of the selected lists are empty
+    print('Board IDs: $_selectedBoardIds');
+    print('Language IDs: $_selectedLanguagesIds');
+    print('Grade IDs: $_selectedGradeIds');
+    print('Subject IDs: $_selectedSubjectIds');
+    print('Highest Educational Level: $_selectedEducationalLevel');
+    print('City ID: $_selectedCityId');
+
+    if (_selectedBoardIds == [] ||
+        _selectedLanguagesIds == [] ||
+        _selectedGradeIds == [] ||
+        _selectedSubjectIds == [] ||
+        _selectedEducationalLevel == '' ||
+        _ageTextController.text == '') {
+          print('Missing field');
+      return;
+    }
+    // AlertDialog alert = AlertDialog(
+    //   content: SizedBox(
+    //     width: 100.0,
+    //     height: 100.0,
+    //     child: Center(
+    //       child: Column(
+    //         mainAxisAlignment: MainAxisAlignment.center,
+    //         crossAxisAlignment: CrossAxisAlignment.center,
+    //         children: const [
+    //           CircularProgressIndicator(),
+    //           SizedBox(height: 20),
+    //           Text('Creating your account...')
+    //         ],
+    //       ),
+    //     ),
+    //   ),
+    // );
+    // showDialog(
+    //   barrierDismissible: true,
+    //   context: context,
+    //   builder: (BuildContext context) {
+    //     return alert;
+    //   },
+    // );
+
     print('Email: ${widget.email}');
     var account = await registerNewAccount(
             widget.email, widget.password, widget.firstName, widget.lastName)
@@ -95,17 +146,25 @@ class _TutorDetailsState extends State<TutorDetails> {
       persistence_utils.upDateSharedPreferences(
           account.authToken!, account.accountId);
       print('Creating tutor account');
-      createTutor(account, _selectedCityId, _selectedLanguagesIds,
-              _selectedBoardIds, _selectedGradeIds, _selectedSubjectIds)
-          .then((tutor) => {
-                persistence_utils.getPrefs().then((prefs) => {
-                      Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  BottomTabController(prefs: prefs)))
-                    })
-              });
+      createTutor(
+              account,
+              _selectedCityId,
+              _selectedLanguagesIds,
+              _selectedBoardIds,
+              _selectedGradeIds,
+              _selectedSubjectIds,
+              _selectedEducationalLevel,
+              _ageTextController.text)
+          .then((tutor) {
+        // close the popup dialog
+        Navigator.pop(context);
+        persistence_utils.getPrefs().then((prefs) => {
+              Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => BottomTabController(prefs: prefs)))
+            });
+      });
     }
   }
 
@@ -185,7 +244,63 @@ class _TutorDetailsState extends State<TutorDetails> {
                       )
                     ]),
                   ),
-                  const SizedBox(height: 40.0),
+                  const SizedBox(height: 30.0),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 4.0),
+                    child: Column(children: [
+                      const Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text('How old are you?',
+                              style: TextStyle(
+                                  fontSize: 16.0,
+                                  fontWeight: FontWeight.bold))),
+                      TextField(
+                        controller: _ageTextController,
+                        keyboardType: TextInputType.number,
+                        autocorrect: false,
+                        decoration: InputDecoration(
+                            suffixIcon: Icon(Icons.cake) //Icon at the end
+                            ),
+                      )
+                    ]),
+                  ),
+                  const SizedBox(height: 40),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 4.0),
+                    child: Column(children: [
+                      const Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                              'What is your highest educational qualification?',
+                              style: TextStyle(
+                                  fontSize: 16.0,
+                                  fontWeight: FontWeight.bold))),
+                      SearchChoices.single(
+                        icon: const Icon(Icons.school),
+                        items: _highestEducationalLevelChoices
+                            .map((educationalLevel) => DropdownMenuItem(
+                                value: educationalLevel.id,
+                                child: Text(educationalLevel.name)))
+                            .toList(),
+                        value: _selectedEducationalLevel,
+                        padding: 0.0,
+                        style: const TextStyle(
+                            fontSize: 16.0,
+                            color: Colors.black,
+                            fontWeight: FontWeight.w500),
+                        hint: "Select your city",
+                        searchHint: "Select your city",
+                        onChanged: (value) {
+                          setState(() {
+                            _selectedEducationalLevel = value;
+                          });
+                          print(_selectedEducationalLevel);
+                        },
+                        isExpanded: true,
+                      )
+                    ]),
+                  ),
+                  const SizedBox(height: 30),
                   Padding(
                     padding: const EdgeInsets.only(left: 4.0),
                     child: Column(children: [
@@ -201,7 +316,7 @@ class _TutorDetailsState extends State<TutorDetails> {
                             style: TextStyle(
                                 fontSize: 16.0, color: Colors.grey.shade900),
                           ),
-                          buttonIcon: const Icon(Icons.school),
+                          buttonIcon: const Icon(Icons.meeting_room),
                           title: const Text('Your boards'),
                           selectedColor: Colors.black,
                           searchable: true,
@@ -254,10 +369,10 @@ class _TutorDetailsState extends State<TutorDetails> {
                   const SizedBox(height: 40.0),
                   Column(children: [
                     const Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text('What subjects can you teach?',
-                          style: TextStyle(
-                              fontSize: 16.0, fontWeight: FontWeight.bold))),
+                        alignment: Alignment.centerLeft,
+                        child: Text('What subjects can you teach?',
+                            style: TextStyle(
+                                fontSize: 16.0, fontWeight: FontWeight.bold))),
                     MultiSelectDialogField(
                         buttonText: Text(
                           'Select subjects',
@@ -282,6 +397,10 @@ class _TutorDetailsState extends State<TutorDetails> {
                   const SizedBox(height: 25.0),
                   const Spacer(),
                   ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        minimumSize: const Size.fromHeight(50),
+                        primary: Colors.black,
+                      ),
                       onPressed: () => {
                             // Check that none of the values are empty
                             if (_selectedLanguagesIds.isNotEmpty &&

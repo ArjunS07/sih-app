@@ -88,7 +88,6 @@ Future<Account?> registerNewAccount(
   }
 }
 
-
 Future<Student?> createStudent(
     Account account,
     String city,
@@ -126,22 +125,21 @@ Future<Student?> createStudent(
   }
 
   // 2. Make the student join the school
-  joinStudentToSchool(studentUuid, studentSchool.joinCode);
-  Student student = Student(
-      firstName: account.firstName,
-      lastName: account.lastName,
-      accountId: account.accountId,
-      city: city,
-      languages: languages,
-      school: studentSchool,
-      board: board,
-      grade: grade,
-      uuid: studentUuid);
-  return student;
+  await joinStudentToSchool(studentUuid, studentSchool.joinCode)
+      .then((student) {
+    return student;
+  });
 }
 
-Future<Tutor> createTutor(Account account, String city, List<String> languages,
-    List<String> boards, List<String> grades, List<String> subjects) async {
+Future<Tutor> createTutor(
+    Account account,
+    String city,
+    List<String> languages,
+    List<String> boards,
+    List<String> grades,
+    List<String> subjects,
+    String highestEducationalLevelId,
+    String age) async {
   final String parsedLanguages = languages.join(',');
   final String parsedBoards = boards.join(',');
   final String parsedGrades = grades.join(',');
@@ -162,7 +160,9 @@ Future<Tutor> createTutor(Account account, String city, List<String> languages,
     'boards': parsedBoards,
     'subjects': parsedSubjects,
     'grades': parsedGrades,
-    'account__id': account.accountId.toString()
+    'account__id': account.accountId.toString(),
+    'age': age,
+    'highest_educational_level': highestEducationalLevelId
   };
   request.headers.addAll(headers);
 
@@ -174,16 +174,7 @@ Future<Tutor> createTutor(Account account, String city, List<String> languages,
     throw Exception(body);
   }
 
-  Tutor tutor = Tutor(
-      firstName: account.firstName,
-      lastName: account.lastName,
-      accountId: account.accountId,
-      city: city,
-      languages: languages,
-      boards: boards,
-      grades: grades,
-      subjects: subjects,
-      uuid: tutorUuid);
+  Tutor tutor = Tutor.fromJson(body);
   return tutor;
 }
 

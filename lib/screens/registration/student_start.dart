@@ -9,6 +9,8 @@ import 'package:dio/dio.dart' as dio;
 import 'package:multi_select_flutter/multi_select_flutter.dart';
 import 'package:search_choices/search_choices.dart';
 
+import 'package:sih_app/utils/widgets/standard_alert_dialog.dart';
+
 import 'package:sih_app/utils/persistence_utils.dart' as persistence_utils;
 import 'package:sih_app/utils/student_api_utils.dart';
 import 'package:sih_app/models/School.dart';
@@ -31,38 +33,36 @@ class _JoinSchoolState extends State<JoinSchool> {
   String errorText = '';
   var isLoading = false;
 
-  showAlertDialog(BuildContext context) {
-    AlertDialog alert = AlertDialog(
-      content: SizedBox(
-        width: 100.0,
-        height: 100.0,
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: const [
-              CircularProgressIndicator(),
-              SizedBox(height: 20),
-              Text('Finding your school...')
-            ],
-          ),
-        ),
-      ),
-    );
-    showDialog(
-      barrierDismissible: false,
-      context: context,
-      builder: (BuildContext context) {
-        return alert;
-      },
-    );
-  }
+
 
   void _submitSchoolJoinCode(String joinCode, BuildContext context) {
     if (joinCode == '') {
       return;
     }
-    showAlertDialog(context);
+    // AlertDialog alert = AlertDialog(
+    //   content: SizedBox(
+    //     width: 100.0,
+    //     height: 100.0,
+    //     child: Center(
+    //       child: Column(
+    //         mainAxisAlignment: MainAxisAlignment.center,
+    //         crossAxisAlignment: CrossAxisAlignment.center,
+    //         children: const [
+    //           CircularProgressIndicator(),
+    //           SizedBox(height: 20),
+    //           Text('Finding your school...')
+    //         ],
+    //       ),
+    //     ),
+    //   ),
+    // );
+    // showDialog(
+    //   barrierDismissible: true,
+    //   context: context,
+    //   builder: (BuildContext context) {
+    //     return alert;
+    //   },
+    // );
     getSchoolFromJoinCode(joinCode).then((school) {
       Future.delayed(const Duration(milliseconds: 1500), () {
         Navigator.pop(context);
@@ -358,14 +358,14 @@ class StudentDetailsState extends State<StudentDetails> {
       persistence_utils.upDateSharedPreferences(
           account.authToken!, account.accountId);
 
-      var student = await createStudent(
+      await createStudent(
               account,
               _selectedCityId!,
               _selectedLanguagesIds,
               widget.school,
               _selectedBoardId!,
               _selectedGradeId!)
-          .then((tutor) => {
+          .then((student) => {
                 persistence_utils.getPrefs().then((prefs) => {
                       Navigator.pushReplacement(
                           context,
@@ -472,7 +472,7 @@ class StudentDetailsState extends State<StudentDetails> {
                           style: TextStyle(
                               fontSize: 16.0, fontWeight: FontWeight.bold))),
                   SearchChoices.single(
-                    icon: const Icon(Icons.school),
+                    icon: const Icon(Icons.meeting_room),
                     items: _boardChoices
                         .map((board) => DropdownMenuItem(
                             value: board.id, child: Text(board.name)))

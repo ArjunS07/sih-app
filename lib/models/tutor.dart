@@ -1,4 +1,4 @@
-import 'package:sih_app/utils/accounts_api_utils.dart';
+import 'package:sih_app/utils/choices.dart';
 
 import 'platform_user.dart';
 
@@ -7,6 +7,9 @@ class Tutor extends PlatformUser {
   List<String> boards = [];
   List<String> subjects = [];
 
+  int age;
+  String highestEducationalLevel;
+
   Tutor({
     required super.firstName,
     required super.lastName,
@@ -14,9 +17,12 @@ class Tutor extends PlatformUser {
     required super.uuid,
     required super.city,
     required super.languages,
+
     required this.grades,
     required this.boards,
     required this.subjects,
+    required this.age,
+    required this.highestEducationalLevel
   });
 
   factory Tutor.fromJson(Map<String, dynamic> json) {
@@ -34,6 +40,8 @@ class Tutor extends PlatformUser {
       languages: (json['languages'] as List)
           .map((language) => language as String)
           .toList(),
+      age: json['age'],
+      highestEducationalLevel: json['highest_educational_level']
     );
   }
 
@@ -47,5 +55,9 @@ class Tutor extends PlatformUser {
 
   Future<String?> get decodedBoards async {
     return displayListProperty(boards, 'boards');
+  }
+
+  Future<String?> get decodedHighestEducationalLevel async {
+    return decodeChoice(highestEducationalLevel, 'educational_level');
   }
 }
