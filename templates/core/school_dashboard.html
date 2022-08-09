@@ -12,6 +12,34 @@
 
 
 <section class="section container">
+    <div class="columns is-multline is-tablet">
+        {% for student in students %}
+
+        <div class="column is-one-quarter">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-header-title is-flex is-align-items-center is-justify-content-center">
+                        <span class="has-text-weight-bold is-flex-grow-1">{{ student.name }} </span>
+                        <span class="has-text-weight-medium">{{ student.decoded_grade }} </span>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <div class="content">
+                        <p> Working with {{ student.num_active_tutorships }} volunteers </p>
+                        <button class="button has-text-white has-background-black-bis">
+                            <span> See volunteers </span>
+                            <span class="icon is-small">
+                                <i class="fa-solid fa-circle-arrow-right"></i>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+
+    </div>
 
 </section>
 

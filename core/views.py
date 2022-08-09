@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
+from django.db.models import Case, Value, When
 
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
@@ -12,7 +13,7 @@ from django.contrib.auth.decorators import user_passes_test
 
 from accounts.models import User
 from api.models import School
-from api.choices import CITY_CHOICES
+from api.choices import CITY_CHOICES, GRADE_CHOICES
 
 from .forms import SchoolCreationForm, SchoolLoginForm
 
@@ -92,4 +93,20 @@ def logout_view(request):
 class SchoolDashboard(View):
     @method_decorator(login_required())
     def get(self, request):
-        return HttpResponse('Hello')
+        school = School.objects.get(account=request.user)
+        students = school.students
+        # Sort  by choice field
+        whens = [
+            When(grade=Value(value), then=i)
+            for i, (value, label) in enumerate(GRADE_CHOICES)
+        ]
+        students = (
+            students
+            .annotate(_order=Case(*whens))
+            .order_by('_order')
+        )
+        context = {
+            'school': school,
+            'students': students
+        }
+        return render(request, 'core/school_dashboard.html', context)

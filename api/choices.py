@@ -36,3 +36,9 @@ subject_path = os.path.join(base_path, 'api', 'resources', 'subjects.csv')
 with open(subject_path, 'r') as f:
     csv_reader = reader(f)
     SUBJECT_CHOICES = list(map(tuple, csv_reader))
+
+def decode_choice(choice_set, choice_id):
+    for choice in choice_set:
+        if choice[0] == choice_id:
+            return choice[1]
+    return None

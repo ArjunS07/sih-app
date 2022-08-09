@@ -3,11 +3,12 @@ from email.policy import default
 import uuid
 
 from django.db import models
+from django.db.models import F, Q, When
 from django.utils.translation import gettext_lazy as _
 from multiselectfield import MultiSelectField
 
 from accounts.models import User, PlatformUser
-from .choices import LANGUAGE_MEDIUM_CHOICES, GRADE_CHOICES, CITY_CHOICES, BOARD_CHOICES, SUBJECT_CHOICES
+from .choices import LANGUAGE_MEDIUM_CHOICES, GRADE_CHOICES, CITY_CHOICES, BOARD_CHOICES, SUBJECT_CHOICES, decode_choice
 
 from .utils.zoom_utils import generate_zoom_meeting
 
@@ -27,12 +28,12 @@ class School(models.Model):
         super(School, self).save(*args, **kwargs)
 
     @property
-    def num_school_students(self) -> int:
+    def num__students(self) -> int:
         return (Student.objects.filter(school=self, is_active=True).count())
 
     @property
-    def school_students(self) -> int:
-        return (Student.objects.filter(school=self, is_active=True))
+    def students(self) -> int:
+        return (Student.objects.filter(school=self))
 
     @property
     def email(self) -> str:
@@ -45,6 +46,19 @@ class Student(PlatformUser):
                              max_length=8, default=None, null=True, blank=True)
     grade = models.CharField(choices=GRADE_CHOICES,
                              max_length=8, default=None, null=True)
+    @property
+    def decoded_grade(self):
+        return decode_choice(GRADE_CHOICES, self.grade)
+        
+    @property
+    def active_tutorships(self):
+        return Tutorship.objects.filter(student=self)
+
+    @property
+    def num_active_tutorships(self) -> int:
+        return len(self.active_tutorships)
+    
+
 
 class Tutor(PlatformUser):
     grades = MultiSelectField(choices=GRADE_CHOICES,
