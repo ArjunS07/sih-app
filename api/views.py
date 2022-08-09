@@ -294,7 +294,7 @@ class MyTutorshipsView(APIView):
 
         tutor_uuid = data.get('tutor_uuid', None)
         student_uuid = data.get('student_uuid', None)
-        status_codes = data.get('statuses', None)
+        status_codes = data.get('status', None)
 
         if (not tutor_uuid and not student_uuid and not status_codes):
             # bad request
@@ -319,9 +319,12 @@ class MyTutorshipsView(APIView):
                 return HttpResponse(status=status.HTTP_404_NOT_FOUND)
 
         if status_codes:
-            split_codes = status.codes.split(',')
+            q = []
+            split_codes = status_codes.split(',')
             for status_code in split_codes:
-                tutorships = tutorships.filter(status=status_code)
+                q.append(Q(status=status_code))
+            combined = reduce(operator.or_, q)
+            tutorships = tutorships.filter(combined)
 
         serialized_tutorships = serializers.TutorshipSerializer(
             tutorships, many=True)

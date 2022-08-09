@@ -138,7 +138,3 @@ class MessageLogView(View):
         response = HttpResponse(content, content_type='text/plain')
         response['Content-Disposition'] = 'attachment; filename={0}'.format(filename)
         return response
-
-class SchoolInstructionView(APIView):
-    def get(self, request, school_id):
-        pass
