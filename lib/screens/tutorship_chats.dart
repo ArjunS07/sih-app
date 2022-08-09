@@ -88,8 +88,8 @@ class TutorshipChatsState extends State<TutorshipChats> {
                               ));
                         },
                   title: isLoggedInStudent
-                      ? Text(tutorship.tutor.name)
-                      : Text(tutorship.student.name),
+                      ? Text(tutorship.tutor.name, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18))
+                      : Text(tutorship.student.name, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
                   subtitle: RichText(
                       text: TextSpan(
                           style: const TextStyle(
@@ -110,10 +110,11 @@ class TutorshipChatsState extends State<TutorshipChats> {
                                 ? '\nSUSPENDED'
                                 : '\nActive since ${tutorship.relativeTimeSinceCreated}')
                       ])),
-                  leading: const CircleAvatar(
-                      //TODO
-                      backgroundImage: NetworkImage(
-                          "https://images.unsplash.com/photo-1547721064-da6cfb341d50")),
+                  /// The image that is displayed on the left side of the chat.
+                  // leading: const CircleAvatar(
+                  //     //TODO
+                  //     backgroundImage: NetworkImage(
+                  //         "https://images.unsplash.com/photo-1547721064-da6cfb341d50")),
                   trailing:
                       isSuspended ? null : const Icon(Icons.arrow_forward_ios),
                 ));
