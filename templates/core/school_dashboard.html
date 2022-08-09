@@ -6,6 +6,7 @@
 
 {% block imports %}
 {% load static %}
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
 {% endblock imports %}
 
 {% block content %}
@@ -15,7 +16,7 @@
     <div class="columns is-multline is-tablet">
         {% for student in students %}
 
-        <div class="column is-one-quarter">
+        <div class="column is-one-quarter-desktop is-one-third-tablet">
             <div class="card">
                 <div class="card-header">
                     <div class="card-header-title is-flex is-align-items-center is-justify-content-center">
@@ -25,13 +26,18 @@
                 </div>
                 <div class="card-content">
                     <div class="content">
-                        <p> Working with {{ student.num_active_tutorships }} volunteers </p>
+                        {% if student.num_active_tutorships == 0 %}
+                        <p class="has-text-grey"> {{ student.num_active_tutorships }} volunteers </p>
+                        {% else %}
+                        <p class="has-text-weight-semibold"> {{ student.num_active_tutorships }} volunteers </p>
                         <button class="button has-text-white has-background-black-bis">
                             <span> See volunteers </span>
                             <span class="icon is-small">
                                 <i class="fa-solid fa-circle-arrow-right"></i>
                             </span>
                         </button>
+                        {% endif %}
+
                     </div>
                 </div>
             </div>
