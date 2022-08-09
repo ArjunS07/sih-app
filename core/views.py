@@ -51,7 +51,7 @@ class SchoolSignUp(View):
                 city=data['school_city']
             )
             school.save()
-            return HttpResponseRedirect(reverse('dashboard'))
+            return HttpResponseRedirect(reverse('school_dashboard'))
         else:
             return render(request, 'core/school_signup.html', context={'form': form}) 
 
@@ -138,3 +138,7 @@ class MessageLogView(View):
         response = HttpResponse(content, content_type='text/plain')
         response['Content-Disposition'] = 'attachment; filename={0}'.format(filename)
         return response
+
+class SchoolInstructionView(APIView):
+    def get(self, request, school_id):
+        pass
