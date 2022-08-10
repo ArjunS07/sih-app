@@ -25,6 +25,7 @@ load_dotenv()
 
 SECRET_KEY = os.getenv('SECRET_KEY')
 print(os.getenv('DEBUG'))
+# DEBUG = False
 DEBUG = os.getenv('DEBUG', None) == 'True'
 ALLOWED_HOSTS = []
 
@@ -159,8 +160,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-
-STATIC_ROOT = BASE_DIR / 'static'
+STATICFILES_DIRS = [ #TODO: Comment this when running collectstatic
+    os.path.join(BASE_DIR, 'static'),
+]
+# STATIC_ROOT = BASE_DIR / 'static' #TODO: Uncomment this during collectstatic
 STATIC_URL = '/static/'
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
