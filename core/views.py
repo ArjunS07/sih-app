@@ -56,6 +56,7 @@ class SchoolSignUp(View):
             return render(request, 'core/school_signup.html', context={'form': form}) 
 
     def get(self, request):
+        
         if request.user.is_authenticated:
             return HttpResponseRedirect(reverse('school_dashboard'))
         form = SchoolCreationForm()
@@ -93,8 +94,9 @@ def logout_view(request):
     return HttpResponseRedirect(reverse('school_login'))
 
 class SchoolDashboard(View):
-    @method_decorator(login_required())
     def get(self, request):
+        if not request.user.is_authenticated:
+            return HttpResponseRedirect(reverse('school_login'))
         school = School.objects.get(account=request.user)
         students = school.students
         # Sort  by choice field
@@ -116,10 +118,16 @@ class SchoolDashboard(View):
 class StudentDetailView(View):
     @method_decorator(login_required())
     def get(self, request, student_uuid):
+        account = request.user
+        if not account.is_authenticated:
+            return HttpResponseRedirect(reverse('school_login'))
         try:
             student = Student.objects.get(uuid=student_uuid)
         except Student.DoesNotExist:
             return HttpResponseRedirect(reverse('school_dashboard'))
+        school = School.objects.get(account=account)        
+        if student.school != school:
+            return HttpResponseNotFound('Not found')
 
         context = {
             'student': student
@@ -127,11 +135,17 @@ class StudentDetailView(View):
         return render(request, 'core/student_detail.html', context)
 
 class MessageLogView(View):
-    @method_decorator(login_required())
+    # @method_decorator(login_required())
     def get(self, request, tutorship_id):
+        account = request.user
+        if not account.is_authenticated:
+            return HttpResponseRedirect(reverse('school_login'))
         try:
             tutorship = Tutorship.objects.get(id=tutorship_id)
         except Exception as e:
+            return HttpResponseNotFound('Not found')
+        school = School.objects.get(account=account)        
+        if tutorship.student.school != school:
             return HttpResponseNotFound('Not found')
         filename = f'{tutorship.student.name}_{tutorship.tutor.name}_log_{datetime.now()}.txt'
         content = get_tutorship_message_log(tutorship)

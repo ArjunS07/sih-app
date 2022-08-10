@@ -24,3 +24,7 @@ main {
 .is-fullheight {
     height: 100%;
 }
+
+.has-text-weight-black {
+  font-weight: 900;
+}
