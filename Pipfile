@@ -23,6 +23,7 @@ pyjwt = "*"
 pyrebase4 = "*"
 channels = "*"
 firebase-admin = "*"
+sentry-sdk = "*"
 
 [dev-packages]
 

@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "9b0b201e1a63404c67f1b9008ba99ff2c4cb981f4c3f5e4024859c074698e754"
+            "sha256": "46fd6ce41592fba0fdaa6c4e4bb768ddc2c906095b58b5a8ec71fde0cd47be7a"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -913,6 +913,14 @@
             ],
             "version": "==0.4.2"
         },
+        "sentry-sdk": {
+            "hashes": [
+                "sha256:75643a8c656ffd61ea0a37bf4b0b9463825d6043d4fbfd7c80872ab66e4fa06e",
+                "sha256:baac8e9426b7927f95792b1f38c83ae743a62471e92b72fa3ec2d5987609abeb"
+            ],
+            "index": "pypi",
+            "version": "==1.9.3"
+        },
         "service-identity": {
             "hashes": [
                 "sha256:6e6c6086ca271dc11b033d17c3a8bea9f24ebff920c587da090afc9519419d34",
@@ -984,7 +992,7 @@
                 "sha256:c33ccba33c819596124764c23a97d25f32b28433ba0dedeb77d873a38722c9bc",
                 "sha256:ea6e8fb210b19d950fab93b60c9009226c63a28808bc8386e05301e25883ac0a"
             ],
-            "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3, 3.4, 3.5' and python_version < '4'",
+            "markers": "python_version >= '3.6'",
             "version": "==1.26.11"
         },
         "whitenoise": {
