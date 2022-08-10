@@ -32,7 +32,7 @@ if DEBUG:
     ALLOWED_HOSTS += '*'
 else:
     ALLOWED_HOSTS = [
-        'volunteertutoring.herokuapp.com'
+        'edudaan.herokuapp.com'
     ]
 
 
