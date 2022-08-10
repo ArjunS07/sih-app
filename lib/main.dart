@@ -7,11 +7,22 @@ import 'package:sih_app/screens/welcome.dart';
 import 'package:sih_app/screens/bottom_tab_controller.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-void main() {
+import 'package:sentry_flutter/sentry_flutter.dart';
+
+
+void main() async{
   WidgetsFlutterBinding.ensureInitialized();
-  SharedPreferences.getInstance().then((prefs) {
-    Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform)
-        .then((value) => {runApp(MyApp(prefs: prefs))});
+  SharedPreferences.getInstance().then((prefs) async{
+    await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+    await SentryFlutter.init(
+    (options) {
+      options.dsn = 'https://7e25af76e0bb42f99b1d91e875d1b675@o879237.ingest.sentry.io/6638117';
+      // Set tracesSampleRate to 1.0 to capture 100% of transactions for performance monitoring.
+      // We recommend adjusting this value in production.
+      options.tracesSampleRate = 1.0;
+    },
+    appRunner: () => runApp(MyApp(prefs: prefs)),
+  );
   });
 }
 

@@ -23,7 +23,7 @@ class _WelcomePageState extends State<WelcomePage> {
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
-        title: const Text('Welcome to APPNAME'),
+        title: const Text('Welcome to EduDaan'),
         backgroundColor: Colors.black,
       ),
       body: Center(
@@ -41,7 +41,7 @@ class _WelcomePageState extends State<WelcomePage> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: Text(
-                    'APPNAME connects students to volunteers across the country who want to help them learn',
+                    'EduDaan connects students to volunteers across the country who want to help them learn',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         fontSize: 17.5,
