@@ -1,22 +1,22 @@
 [
   {
-    "name": "CBSE",
-    "id": "CBSE"
+    "id": "CBSE",
+    "name": "CBSE"
   },
   {
-    "name": "STATE",
-    "id": "State board"
+    "id": "STATE",
+    "name": "State board"
   },
   {
-    "name": "ICSE",
-    "id": "CISCE"
+    "id": "ICSE",
+    "name": "CISCE"
   },
   {
-    "name": "INTL",
-    "id": "IGCSE/IB"
+    "id": "INTL",
+    "name": "IGCSE/IB"
   },
   {
-    "name": "OTHER",
-    "id": "Other"
+    "id": "OTHER",
+    "name": "Other"
   }
 ]
