@@ -381,8 +381,7 @@ class StudentDetailsState extends State<StudentDetails> {
     }
   }
 
-  @override
-  Widget build(BuildContext context) {
+  Widget _bodyWidget() {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Enter your details'),
@@ -555,4 +554,9 @@ class StudentDetailsState extends State<StudentDetails> {
       ),
     );
   }
+
+  @override
+  Widget build(BuildContext context) {
+    return ModalProgressHUD(inAsyncCall: _isLoading, child: _bodyWidget());
+    }
 }
