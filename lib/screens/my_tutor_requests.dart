@@ -18,13 +18,18 @@ class MyTutorRequests extends StatefulWidget {
 class _MyTutorRequestsState extends State<MyTutorRequests> {
   var _requests =
       <dynamic>[]; // array of tutorships each of which contain a student
+  bool _isLoadingRequests = false;
 
   // api stuff
   Future<void> _loadRequests() async {
+    setState(() {
+      _isLoadingRequests = true;
+    });
     final tutorshipRequests =
         await getMyTutorshipRequests(widget.loggedInTutor, 'PNDG');
     setState(() {
       _requests = tutorshipRequests;
+      _isLoadingRequests = false;
     });
   }
 
@@ -38,10 +43,8 @@ class _MyTutorRequestsState extends State<MyTutorRequests> {
   }
 
   _rejectTutorshipRequest(Tutorship tutorship) async {
-    updateTutorshipStatus('RJCT', tutorship.id).then((tutorship) => {
-          _showAcceptedRequestSnackBar(tutorship),
-          _loadRequests()
-        });
+    updateTutorshipStatus('RJCT', tutorship.id).then((tutorship) =>
+        {_showAcceptedRequestSnackBar(tutorship), _loadRequests()});
   }
 
   _acceptTutorshipRequest(Tutorship tutorship) async {
@@ -79,7 +82,7 @@ class _MyTutorRequestsState extends State<MyTutorRequests> {
                 child: const Text('Yes'),
                 style: ButtonStyle(
                     backgroundColor:
-                        MaterialStateProperty.all<Color>(Colors.green)))
+                        MaterialStateProperty.all<Color>(Colors.black)))
           ],
         );
       },
@@ -151,7 +154,6 @@ class _MyTutorRequestsState extends State<MyTutorRequests> {
                           icon: const Icon(Icons.check, color: Colors.indigo)),
                     ],
                   ),
-                   
                 ),
               ));
             }
@@ -183,27 +185,32 @@ class _MyTutorRequestsState extends State<MyTutorRequests> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            _requests.isEmpty
-                ? Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Center(
-                        child: Text(
-                            "No pending requests from students.\n\nWhen a student asks to learn from you, you'll see them here.",
-                            style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.w300,
-                                color: Colors.grey.shade600)),
-                      ),
-                    ),
+            _isLoadingRequests ? const Expanded(
+                    child: SizedBox(
+                        height: 100,
+                        child: Center(child: CircularProgressIndicator())),
                   )
-                : Expanded(
-                    child: ListView.builder(
-                    itemCount: _requests.length,
-                    itemBuilder: (BuildContext context, int position) {
-                      return _buildRow(position);
-                    },
-                  )),
+                : _requests.isEmpty
+                    ? Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Center(
+                            child: Text(
+                                "No pending requests from students.\n\nWhen a student asks to learn from you, you'll see them here.",
+                                style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w300,
+                                    color: Colors.grey.shade600)),
+                          ),
+                        ),
+                      )
+                    : Expanded(
+                        child: ListView.builder(
+                        itemCount: _requests.length,
+                        itemBuilder: (BuildContext context, int position) {
+                          return _buildRow(position);
+                        },
+                      )),
           ],
         ),
       ),

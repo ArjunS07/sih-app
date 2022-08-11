@@ -9,7 +9,7 @@ import 'package:dio/dio.dart' as dio;
 import 'package:multi_select_flutter/multi_select_flutter.dart';
 import 'package:search_choices/search_choices.dart';
 
-import 'package:sih_app/utils/widgets/standard_alert_dialog.dart';
+import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 import 'package:sih_app/utils/persistence_utils.dart' as persistence_utils;
 import 'package:sih_app/utils/student_api_utils.dart';
@@ -31,54 +31,31 @@ class _JoinSchoolState extends State<JoinSchool> {
   final joinCodeFieldController = TextEditingController();
   var canSubmitJoinCode = false;
   String errorText = '';
-  var isLoading = false;
-
-
+  var _isLoading = false;
 
   void _submitSchoolJoinCode(String joinCode, BuildContext context) {
     if (joinCode == '') {
       return;
     }
-    // AlertDialog alert = AlertDialog(
-    //   content: SizedBox(
-    //     width: 100.0,
-    //     height: 100.0,
-    //     child: Center(
-    //       child: Column(
-    //         mainAxisAlignment: MainAxisAlignment.center,
-    //         crossAxisAlignment: CrossAxisAlignment.center,
-    //         children: const [
-    //           CircularProgressIndicator(),
-    //           SizedBox(height: 20),
-    //           Text('Finding your school...')
-    //         ],
-    //       ),
-    //     ),
-    //   ),
-    // );
-    // showDialog(
-    //   barrierDismissible: true,
-    //   context: context,
-    //   builder: (BuildContext context) {
-    //     return alert;
-    //   },
-    // );
+    setState(() {
+      _isLoading = true;
+    });
     getSchoolFromJoinCode(joinCode).then((school) {
-      Future.delayed(const Duration(milliseconds: 1500), () {
-        Navigator.pop(context);
-        if (school != null) {
-          print('Joining school ${school.name}');
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => ConfirmSchool(school: school),
-              ));
-        } else {
-          setState(() {
-            errorText = 'No school found with this join code';
-          });
-        }
+      setState(() {
+        _isLoading = false;
       });
+      if (school != null) {
+        print('Joining school ${school.name}');
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ConfirmSchool(school: school),
+            ));
+      } else {
+        setState(() {
+          errorText = 'No school found with this join code';
+        });
+      }
     });
   }
 
@@ -99,72 +76,75 @@ class _JoinSchoolState extends State<JoinSchool> {
     });
   }
 
+  Widget _bodyWidget() {
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.all(24.0),
+        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: <
+            Widget>[
+          Container(
+            padding: const EdgeInsets.all(25),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(200),
+                border: Border.all(width: 2, color: Colors.grey.shade400)),
+            child: const Image(
+              image: AssetImage('assets/images/school.png'),
+              width: 75,
+              height: 77.985,
+            ),
+          ),
+          const SizedBox(height: 45.0),
+          const Text('Enter your school code ',
+              style: TextStyle(fontSize: 28.0, fontWeight: FontWeight.w600)),
+          const SizedBox(height: 10),
+          const Text(
+              'Your school should have provided you a unique 6-letter code. Ask your school administrators if you do not have it.',
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w400)),
+          const SizedBox(height: 45.0),
+          TextField(
+            controller: joinCodeFieldController,
+            onSubmitted: (code) => _submitSchoolJoinCode(code, context),
+            decoration: const InputDecoration(
+              border: OutlineInputBorder(),
+              labelText: 'Enter your school code',
+            ),
+            keyboardType: TextInputType.visiblePassword,
+            enableSuggestions: false,
+            autocorrect: false,
+            textCapitalization: TextCapitalization.sentences,
+          ),
+          const SizedBox(height: 15.0),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              minimumSize: const Size.fromHeight(50),
+              primary: Colors.black,
+            ),
+            onPressed: canSubmitJoinCode
+                ? () =>
+                    _submitSchoolJoinCode(joinCodeFieldController.text, context)
+                : null,
+            child: const Text('Submit'),
+          ),
+          const SizedBox(height: 15.0),
+          Text(errorText,
+              textAlign: TextAlign.left,
+              style: TextStyle(
+                  fontWeight: FontWeight.w600,
+                  color: Colors.red.shade900,
+                  fontSize: 16.0)),
+        ]),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Set up your account'),
-      ),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(24.0),
-          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: <
-              Widget>[
-            Container(
-              padding: const EdgeInsets.all(25),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(200),
-                  border: Border.all(width: 2, color: Colors.grey.shade400)),
-              child: const Image(
-                image: AssetImage('assets/images/school.png'),
-                width: 75,
-                height: 77.985,
-              ),
-            ),
-            const SizedBox(height: 45.0),
-            const Text('Enter your school code ',
-                style: TextStyle(fontSize: 28.0, fontWeight: FontWeight.w600)),
-            const SizedBox(height: 10),
-            const Text(
-                'Your school should have provided you a unique 6-letter code. Ask your school administrators if you do not have it.',
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w400)),
-            const SizedBox(height: 45.0),
-            TextField(
-              controller: joinCodeFieldController,
-              onSubmitted: (code) => _submitSchoolJoinCode(code, context),
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Enter your school code',
-              ),
-              keyboardType: TextInputType.visiblePassword,
-              enableSuggestions: false,
-              autocorrect: false,
-              textCapitalization: TextCapitalization.sentences,
-            ),
-            const SizedBox(height: 15.0),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                minimumSize: const Size.fromHeight(50),
-                primary: Colors.black,
-              ),
-              onPressed: canSubmitJoinCode
-                  ? () => _submitSchoolJoinCode(
-                      joinCodeFieldController.text, context)
-                  : null,
-              child: const Text('Submit'),
-            ),
-            const SizedBox(height: 15.0),
-            Text(errorText,
-                textAlign: TextAlign.left,
-                style: TextStyle(
-                    fontWeight: FontWeight.w600,
-                    color: Colors.red.shade900,
-                    fontSize: 16.0)),
-          ]),
+        appBar: AppBar(
+          title: const Text('Set up your account'),
         ),
-      ),
-    );
+        body: ModalProgressHUD(inAsyncCall: _isLoading, child: _bodyWidget()));
   }
 }
 
@@ -310,6 +290,8 @@ class StudentDetailsState extends State<StudentDetails> {
   late List<Choice> _gradeChoices = [];
   late String? _selectedGradeId = null;
 
+  var _isLoading = false;
+
   void getChoices() async {
     _languageChoices = await loadChoices('languages');
     _boardChoices = await loadChoices('boards');
@@ -334,9 +316,15 @@ class StudentDetailsState extends State<StudentDetails> {
   }
 
   void _submitRegistration(context) async {
+    setState(() {
+      _isLoading = true;
+    });
     var account = await registerNewAccount(
             widget.email, widget.password, widget.firstName, widget.lastName)
         .catchError((error) {
+      setState(() {
+        _isLoading = false;
+      });
       showDialog(
           context: context,
           builder: (BuildContext context) => AlertDialog(
@@ -358,23 +346,22 @@ class StudentDetailsState extends State<StudentDetails> {
       persistence_utils.upDateSharedPreferences(
           account.authToken!, account.accountId);
 
-      await createStudent(
-              account,
-              _selectedCityId!,
-              _selectedLanguagesIds,
-              widget.school,
-              _selectedBoardId!,
-              _selectedGradeId!)
-          .then((student) => {
-                persistence_utils.getPrefs().then((prefs) => {
-                      Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  BottomTabController(prefs: prefs)))
-                    })
-              })
-          .catchError((error) {
+      await createStudent(account, _selectedCityId!, _selectedLanguagesIds,
+              widget.school, _selectedBoardId!, _selectedGradeId!)
+          .then((student) {
+        persistence_utils.getPrefs().then((prefs) {
+          setState(() {
+            _isLoading = false;
+          });
+          Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => BottomTabController(prefs: prefs)));
+        });
+      }).catchError((error) {
+        setState(() {
+          _isLoading = false;
+        });
         print(error);
         showDialog(
             context: context,
@@ -430,6 +417,7 @@ class StudentDetailsState extends State<StudentDetails> {
                           .toList(),
                       listType: MultiSelectListType.LIST,
                       onConfirm: (values) {
+                        _selectedLanguagesIds = [];
                         for (var value in values) {
                           _selectedLanguagesIds.add(value.toString());
                         }

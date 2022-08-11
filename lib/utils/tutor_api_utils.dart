@@ -66,8 +66,11 @@ Future<List<Tutor>> loadTutorsFromParams(String studentUuid,
 }
 
 Future<Tutor> updateTutorDetails(Tutor tutor,
-    {List? boards, List? grades, List? subjects, List? languages, String? city}) async {
-  
+    {List? boards,
+    List? grades,
+    List? subjects,
+    List? languages,
+    String? city}) async {
   Map<String, String> queryParams = {'uuid': tutor.uuid};
   if (grades != null && grades.isNotEmpty) {
     queryParams['grades'] = grades.join(',');
@@ -88,7 +91,8 @@ Future<Tutor> updateTutorDetails(Tutor tutor,
   }
 
   var headers = {'Content-Type': 'application/x-www-form-urlencoded'};
-  var request = http.Request('PATCH', Uri.parse('$ROOT_URL/api/tutors').replace(queryParameters: queryParams));
+  var request = http.Request('PATCH',
+      Uri.parse('$ROOT_URL/api/tutors').replace(queryParameters: queryParams));
   request.headers.addAll(headers);
 
   http.StreamedResponse response = await request.send();

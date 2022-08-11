@@ -1,130 +1,130 @@
 [
-    {
-      "id": "HIN",
-      "name": "Hindi"
-    },
-    {
-      "id": "ENG",
-      "name": "English"
-    },
-    {
-      "id": "BENG",
-      "name": "Bengali"
-    },
-    {
-      "id": "MAR",
-      "name": "Marathi"
-    },
-    {
-      "id": "TEL",
-      "name": "Telugu"
-    },
-    {
-      "id": "TAM",
-      "name": "Tamil"
-    },
-    {
-      "id": "GUJ",
-      "name": "Gujarati"
-    },
-    {
-      "id": "URDU",
-      "name": "Urdu"
-    },
-    {
-      "id": "KAN",
-      "name": "Kannada"
-    },
-    {
-      "id": "ODI",
-      "name": "Odia"
-    },
-    {
-      "id": "MAL",
-      "name": "Malayalam"
-    },
-    {
-      "id": "PUNJ",
-      "name": "Punjabi"
-    },
-    {
-      "id": "ASSM",
-      "name": "Assamese"
-    },
-    {
-      "id": "MAI",
-      "name": "Maithili"
-    },
-    {
-      "id": "BHI",
-      "name": "Bhili/Bhilodi"
-    },
-    {
-      "id": "SAN",
-      "name": "Santali"
-    },
-    {
-      "id": "KASH",
-      "name": "Kashmiri"
-    },
-    {
-      "id": "GON",
-      "name": "Gondi"
-    },
-    {
-      "id": "NEP",
-      "name": "Nepali"
-    },
-    {
-      "id": "SINDH",
-      "name": "Sindhi"
-    },
-    {
-      "id": "DOGRI",
-      "name": "Dogri"
-    },
-    {
-      "id": "KON",
-      "name": "Konkani"
-    },
-    {
-      "id": "KUR",
-      "name": "Kurukh"
-    },
-    {
-      "id": "KHA",
-      "name": "Khandeshi"
-    },
-    {
-      "id": "TULU",
-      "name": "Tulu"
-    },
-    {
-      "id": "MEI",
-      "name": "Meitei (Manipuri)"
-    },
-    {
-      "id": "BOD",
-      "name": "Bodo"
-    },
-    {
-      "id": "KHA",
-      "name": "Khasi"
-    },
-    {
-      "id": "HO",
-      "name": "Ho"
-    },
-    {
-      "id": "GAR",
-      "name": "Garo"
-    },
-    {
-      "id": "Mundari",
-      "name": "Mundari"
-    },
-    {
-      "id": "TRIP",
-      "name": "Tripuri"
-    }
-  ]
+  {
+    "id": "HIN",
+    "name": "Hindi"
+  },
+  {
+    "id": "ENG",
+    "name": "English"
+  },
+  {
+    "id": "BENG",
+    "name": "Bengali"
+  },
+  {
+    "id": "MAR",
+    "name": "Marathi"
+  },
+  {
+    "id": "TEL",
+    "name": "Telugu"
+  },
+  {
+    "id": "TAM",
+    "name": "Tamil"
+  },
+  {
+    "id": "GUJ",
+    "name": "Gujarati"
+  },
+  {
+    "id": "URDU",
+    "name": "Urdu"
+  },
+  {
+    "id": "KAN",
+    "name": "Kannada"
+  },
+  {
+    "id": "ODI",
+    "name": "Odia"
+  },
+  {
+    "id": "MAL",
+    "name": "Malayalam"
+  },
+  {
+    "id": "PUNJ",
+    "name": "Punjabi"
+  },
+  {
+    "id": "ASSM",
+    "name": "Assamese"
+  },
+  {
+    "id": "MAI",
+    "name": "Maithili"
+  },
+  {
+    "id": "BHI",
+    "name": "Bhili/Bhilodi"
+  },
+  {
+    "id": "SAN",
+    "name": "Santali"
+  },
+  {
+    "id": "KASH",
+    "name": "Kashmiri"
+  },
+  {
+    "id": "GON",
+    "name": "Gondi"
+  },
+  {
+    "id": "NEP",
+    "name": "Nepali"
+  },
+  {
+    "id": "SINDH",
+    "name": "Sindhi"
+  },
+  {
+    "id": "DOGRI",
+    "name": "Dogri"
+  },
+  {
+    "id": "KON",
+    "name": "Konkani"
+  },
+  {
+    "id": "KUR",
+    "name": "Kurukh"
+  },
+  {
+    "id": "KHA",
+    "name": "Khandeshi"
+  },
+  {
+    "id": "TULU",
+    "name": "Tulu"
+  },
+  {
+    "id": "MEI",
+    "name": "Meitei (Manipuri)"
+  },
+  {
+    "id": "BOD",
+    "name": "Bodo"
+  },
+  {
+    "id": "KHA",
+    "name": "Khasi"
+  },
+  {
+    "id": "HO",
+    "name": "Ho"
+  },
+  {
+    "id": "GAR",
+    "name": "Garo"
+  },
+  {
+    "id": "Mundari",
+    "name": "Mundari"
+  },
+  {
+    "id": "TRIP",
+    "name": "Tripuri"
+  }
+]

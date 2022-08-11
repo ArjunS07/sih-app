@@ -1,98 +1,98 @@
 [
-    {
-      "id": "MATH",
-      "name": "Mathematics"
-    },
-    {
-      "id": "ENGLISH",
-      "name": "English"
-    },
-    {
-      "id": "HIN",
-      "name": "Hindi"
-    },
-    {
-      "id": "SANSK",
-      "name": "Sanskrit"
-    },
-    {
-      "id": "SP",
-      "name": "Spanish"
-    },
-    {
-      "id": "FR",
-      "name": "French"
-    },
-    {
-      "id": "GR",
-      "name": "German"
-    },
-    {
-      "id": "EVS",
-      "name": "Environmental science (EVS)"
-    },
-    {
-      "id": "SCIENCE",
-      "name": "Science"
-    },
-    {
-      "id": "BIO",
-      "name": "Biology"
-    },
-    {
-      "id": "PHY",
-      "name": "Physics"
-    },
-    {
-      "id": "CHEM",
-      "name": "Chemistry"
-    },
-    {
-      "id": "CS",
-      "name": "Computer science"
-    },
-    {
-      "id": "PSYCH",
-      "name": "Psychology"
-    },
-    {
-      "id": "SST",
-      "name": "Social studies / Social science"
-    },
-    {
-      "id": "HIST",
-      "name": "History"
-    },
-    {
-      "id": "CIV",
-      "name": "Civics"
-    },
-    {
-      "id": "GEO",
-      "name": "Geography"
-    },
-    {
-      "id": "ECO",
-      "name": "Economics"
-    },
-    {
-      "id": "COM",
-      "name": "Commerce"
-    },
-    {
-      "id": "ACC",
-      "name": "Accounting"
-    },
-    {
-      "id": "SOC",
-      "name": "Sociology"
-    },
-    {
-      "id": "HOM",
-      "name": "Home science"
-    },
-    {
-      "id": "ART",
-      "name": "Art"
-    }
-  ]
+  {
+    "id": "MATH",
+    "name": "Mathematics"
+  },
+  {
+    "id": "ENGLISH",
+    "name": "English"
+  },
+  {
+    "id": "HIN",
+    "name": "Hindi"
+  },
+  {
+    "id": "SANSK",
+    "name": "Sanskrit"
+  },
+  {
+    "id": "SP",
+    "name": "Spanish"
+  },
+  {
+    "id": "FR",
+    "name": "French"
+  },
+  {
+    "id": "GR",
+    "name": "German"
+  },
+  {
+    "id": "EVS",
+    "name": "Environmental science (EVS)"
+  },
+  {
+    "id": "SCIENCE",
+    "name": "Science"
+  },
+  {
+    "id": "BIO",
+    "name": "Biology"
+  },
+  {
+    "id": "PHY",
+    "name": "Physics"
+  },
+  {
+    "id": "CHEM",
+    "name": "Chemistry"
+  },
+  {
+    "id": "CS",
+    "name": "Computer science"
+  },
+  {
+    "id": "PSYCH",
+    "name": "Psychology"
+  },
+  {
+    "id": "SST",
+    "name": "Social studies / Social science"
+  },
+  {
+    "id": "HIST",
+    "name": "History"
+  },
+  {
+    "id": "CIV",
+    "name": "Civics"
+  },
+  {
+    "id": "GEO",
+    "name": "Geography"
+  },
+  {
+    "id": "ECO",
+    "name": "Economics"
+  },
+  {
+    "id": "COM",
+    "name": "Commerce"
+  },
+  {
+    "id": "ACC",
+    "name": "Accounting"
+  },
+  {
+    "id": "SOC",
+    "name": "Sociology"
+  },
+  {
+    "id": "HOM",
+    "name": "Home science"
+  },
+  {
+    "id": "ART",
+    "name": "Art"
+  }
+]

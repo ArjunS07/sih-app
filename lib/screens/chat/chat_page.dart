@@ -364,19 +364,18 @@ class _ChatPageState extends State<ChatPage> {
           ),
           actions: <Widget>[
             TextButton(
-              child:
-                  Text('Close', style: TextStyle(color: Colors.grey.shade500)),
+              child: const Text('Close', style: TextStyle(color: Colors.black)),
               onPressed: () {
                 Navigator.of(context).pop();
               },
             ),
-            TextButton(
-              // style: ButtonStyle(
-              //     backgroundColor:
-              //         MaterialStateProperty.all<Color>(Colors.green)),
+            ElevatedButton(
+              style: ButtonStyle(
+                  backgroundColor:
+                      MaterialStateProperty.all<Color>(Colors.black)),
               child: const Text('Launch',
                   style: TextStyle(
-                      color: Colors.green, fontWeight: FontWeight.bold)),
+                      color: Colors.white, fontWeight: FontWeight.bold)),
               onPressed: () async {
                 final canLaunch =
                     await canLaunchUrlString(zoomMeeting.startUrl);
@@ -411,7 +410,6 @@ class _ChatPageState extends State<ChatPage> {
                   ),
                   minLines: 2, //Normal textInputField will be displayed
                   maxLines: 6, //
-                  
                 ),
                 const SizedBox(height: 25),
                 Text(

@@ -25,5 +25,4 @@ class School {
   Future<String?> get decodedCity async {
     return await decodeChoice(city, 'cities');
   }
-
 }

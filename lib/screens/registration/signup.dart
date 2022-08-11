@@ -66,152 +66,155 @@ class _AccountSignupState extends State<AccountSignup> {
     }
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Create your account'),
-      ),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(24.0),
-          child: Form(
-            key: _formKey,
-            autovalidateMode: AutovalidateMode.onUserInteraction,
-            child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  const Spacer(),
-                  TextFormField(
-                    controller: _firstNameController,
-                    keyboardType: TextInputType.text,
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'First name',
-                    ),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter your first name';
-                      }
-                      return null;
-                    },
+  Widget _bodyWidget() {
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.all(24.0),
+        child: Form(
+          key: _formKey,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                const Spacer(),
+                TextFormField(
+                  controller: _firstNameController,
+                  keyboardType: TextInputType.text,
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'First name',
                   ),
-                  const SizedBox(height: 25.0),
-                  TextFormField(
-                    controller: _lastNameController,
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Last name',
-                    ),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter your last name';
-                      }
-                      return null;
-                    },
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter your first name';
+                    }
+                    return null;
+                  },
+                ),
+                const SizedBox(height: 25.0),
+                TextFormField(
+                  controller: _lastNameController,
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Last name',
                   ),
-                  const SizedBox(height: 25.0),
-                  TextFormField(
-                    textCapitalization: TextCapitalization.none,
-                    autocorrect: false,
-                    controller: _emailController,
-                    keyboardType: TextInputType.emailAddress,
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Enter your email',
-                    ),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter your email';
-                      }
-                      return null;
-                    },
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter your last name';
+                    }
+                    return null;
+                  },
+                ),
+                const SizedBox(height: 25.0),
+                TextFormField(
+                  textCapitalization: TextCapitalization.none,
+                  autocorrect: false,
+                  controller: _emailController,
+                  keyboardType: TextInputType.emailAddress,
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Enter your email',
                   ),
-                  const SizedBox(height: 25.0),
-                  TextFormField(
-                    obscureText: _obscureMainPassword,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter your email';
+                    }
+                    return null;
+                  },
+                ),
+                const SizedBox(height: 25.0),
+                TextFormField(
+                  obscureText: _obscureMainPassword,
+                  enableSuggestions: false,
+                  autocorrect: false,
+                  textCapitalization: TextCapitalization.none,
+                  controller: _passController,
+                  decoration: InputDecoration(
+                    suffixIcon: _obscureMainPassword
+                        ? Padding(
+                            padding: const EdgeInsets.all(0.0),
+                            child: GestureDetector(
+                                onTap: _toggleMainPasswordVisibility,
+                                child: const Icon(Icons.visibility)),
+                          )
+                        : Padding(
+                            padding: const EdgeInsets.all(0.0),
+                            child: GestureDetector(
+                                onTap: _toggleMainPasswordVisibility,
+                                child: const Icon(Icons.visibility_off)),
+                          ),
+                    border: const OutlineInputBorder(),
+                    labelText: 'Enter your password',
+                  ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter your password';
+                    }
+                    return value.length < 8
+                        ? 'Password length must be greater than 8 characters'
+                        : null;
+                  },
+                ),
+                const SizedBox(height: 25.0),
+                TextFormField(
+                    obscureText: _obscureConfirmPassword,
                     enableSuggestions: false,
                     autocorrect: false,
                     textCapitalization: TextCapitalization.none,
-                    controller: _passController,
+                    controller: _passConfirmController,
                     decoration: InputDecoration(
-                      suffixIcon: _obscureMainPassword
+                      suffixIcon: _obscureConfirmPassword
                           ? Padding(
                               padding: const EdgeInsets.all(0.0),
                               child: GestureDetector(
-                                  onTap: _toggleMainPasswordVisibility,
+                                  onTap: _toggleConfirmPasswordVisibility,
                                   child: const Icon(Icons.visibility)),
                             )
                           : Padding(
                               padding: const EdgeInsets.all(0.0),
                               child: GestureDetector(
-                                  onTap: _toggleMainPasswordVisibility,
+                                  onTap: _toggleConfirmPasswordVisibility,
                                   child: const Icon(Icons.visibility_off)),
                             ),
                       border: const OutlineInputBorder(),
-                      labelText: 'Enter your password',
+                      labelText: 'Confirm your password',
                     ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Please enter your password';
+                        return 'Please verify your password';
                       }
-                      return value.length < 8
-                          ? 'Password length must be greater than 8 characters'
-                          : null;
-                    },
-                  ),
-                  const SizedBox(height: 25.0),
-                  TextFormField(
-                      obscureText: _obscureConfirmPassword,
-                      enableSuggestions: false,
-                      autocorrect: false,
-                      textCapitalization: TextCapitalization.none,
-                      controller: _passConfirmController,
-                      decoration: InputDecoration(
-                        suffixIcon: _obscureConfirmPassword
-                            ? Padding(
-                                padding: const EdgeInsets.all(0.0),
-                                child: GestureDetector(
-                                    onTap: _toggleConfirmPasswordVisibility,
-                                    child: const Icon(Icons.visibility)),
-                              )
-                            : Padding(
-                                padding: const EdgeInsets.all(0.0),
-                                child: GestureDetector(
-                                    onTap: _toggleConfirmPasswordVisibility,
-                                    child: const Icon(Icons.visibility_off)),
-                              ),
-                        border: const OutlineInputBorder(),
-                        labelText: 'Confirm your password',
-                      ),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please verify your password';
-                        }
-                        if (value != _passController.text) {
-                          return 'Passwords do not match';
-                        }
-                      }),
-                  const Spacer(),
-                  ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        minimumSize: const Size.fromHeight(50),
-                        primary: Colors.black,
-                      ),
-                      onPressed: () => {
-                            if (_formKey.currentState!.validate())
-                              {
-                                // If the form is valid, display a snackbar. In the real world,
-                                // you'd often call a server or save the information in a database.
-                                _submitRegistration(context)
-                              }
-                          },
-                      child: const Text('Sign up')),
-                  const Spacer(),
-                ]),
-          ),
+                      if (value != _passController.text) {
+                        return 'Passwords do not match';
+                      }
+                    }),
+                const Spacer(),
+                ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      minimumSize: const Size.fromHeight(50),
+                      primary: Colors.black,
+                    ),
+                    onPressed: () => {
+                          if (_formKey.currentState!.validate())
+                            {
+                              // If the form is valid, display a snackbar. In the real world,
+                              // you'd often call a server or save the information in a database.
+                              _submitRegistration(context)
+                            }
+                        },
+                    child: const Text('Sign up')),
+                const Spacer(),
+              ]),
         ),
       ),
     );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          title: const Text('Create your account'),
+        ),
+        body: _bodyWidget());
   }
 }

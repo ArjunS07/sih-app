@@ -8,7 +8,6 @@ class APIMessage {
   final String senderUuid;
   final int tutorshipId;
 
-
   final DateTime timeSent;
   String? textContent;
 

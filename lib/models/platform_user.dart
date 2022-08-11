@@ -2,6 +2,7 @@ import 'account.dart';
 import 'package:sih_app/utils/accounts_api_utils.dart' as accounts_api_utils;
 import 'package:sih_app/utils/choices.dart';
 import 'package:sih_app/utils/extensions/list_extension.dart';
+
 class PlatformUser {
   final String firstName;
   final String lastName;
@@ -43,6 +44,8 @@ class PlatformUser {
   }
 
   Future<String?> get decodedLanguagesDisplay async {
-    return displayListProperty(languages, 'languages');
+    final displayed = displayListProperty(languages, 'languages');
+    // print('Got decoded languages');
+    return displayed;
   }
 }

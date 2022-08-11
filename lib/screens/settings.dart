@@ -148,8 +148,6 @@ class _SettingsState extends State<Settings> {
         });
   }
 
-
-
   // Tutor dialogs
   _boardsMultiSelectDialog(Tutor tutor) async {
     await showDialog(
@@ -224,7 +222,7 @@ class _SettingsState extends State<Settings> {
 
   settings_ui.AbstractSettingsSection _studentSettings() {
     Student student = _loggedInUser as Student;
-    
+
     return settings_ui.SettingsSection(
         title: const Text('Learning information'),
         tiles: [

@@ -29,8 +29,13 @@ class _TutorSearchState extends State<TutorSearch> {
   late List<String> _selectedSubjectIds = [];
   late List<String> _selectedSubjectDisplays = [];
 
+  var _isLoadingTutors = false;
+
   //API interfacing
   Future<void> _loadTutors() async {
+    setState(() {
+      _isLoadingTutors = true;
+    });
     print("loading tutors from params");
     print('Student grade: ${widget.student.grade}');
     final loadedTutors = await tutor_api_utils.loadTutorsFromParams(
@@ -40,6 +45,7 @@ class _TutorSearchState extends State<TutorSearch> {
         subjects: _selectedSubjectIds);
     setState(() {
       _tutors = loadedTutors;
+      _isLoadingTutors = false;
     });
 
     print('Got tutors');
@@ -58,12 +64,31 @@ class _TutorSearchState extends State<TutorSearch> {
 
   Future<Map<String, dynamic>> tutorData(Tutor tutor) async {
     print('Calling tutordata function');
+    final languages = await tutor.decodedLanguagesDisplay;
+    print('Got languags $languages');
+
+    final grades = await tutor.decodedGrades;
+    print('Got grades $grades');
+
+    final subjects = await tutor.decodedSubjects;
+    print('Got subjects $subjects');
+
+    final city = await tutor.decodedCity;
+    print('Got city $city');
+
+    final boards = await tutor.decodedBoards;
+    print('Got boards $boards');
+
+    
+    final highestEducationalLevel = await tutor.decodedHighestEducationalLevel;
+    print('Got highest educational level $highestEducationalLevel');
+
     var data = {
       'languages': await tutor.decodedLanguagesDisplay,
       'city': await tutor.decodedCity,
       'subjects': await tutor.decodedSubjects,
-      'grades': await tutor.decodedGrades,
-      'boards': await tutor.decodedBoards,
+      // 'grades': await tutor.decodedGrades,
+      // 'boards': await tutor.decodedBoards,
       'highestEducationalLevel': await tutor.decodedHighestEducationalLevel
     };
     return data;
@@ -139,6 +164,7 @@ class _TutorSearchState extends State<TutorSearch> {
         listType: MultiSelectListType.LIST,
         onConfirm: (values) async {
           _selectedSubjectIds = [];
+          _selectedSubjectDisplays = [];
           for (var value in values) {
             print(value);
             _selectedSubjectIds.add(value.toString());
@@ -173,7 +199,7 @@ class _TutorSearchState extends State<TutorSearch> {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Text('Data is loading...');
             } else {
-              print(snapshot.data);
+              print('Snapshot data: ${snapshot.data} for tutor ${tutor.name}');
               Map data = snapshot.data as Map;
               return Card(
                   child: Padding(
@@ -202,7 +228,9 @@ class _TutorSearchState extends State<TutorSearch> {
                                 text:
                                     '\n\nEducation: ${data['highestEducationalLevel']}'),
                             TextSpan(text: '\n\nTeaches'),
-                            TextSpan(text: ' ${data['subjects']}', style: TextStyle(fontWeight: FontWeight.bold)),
+                            TextSpan(
+                                text: ' ${data['subjects']}',
+                                style: TextStyle(fontWeight: FontWeight.bold)),
                           ]))),
                   trailing: IconButton(
                       onPressed: _selectedSubjectIds.isEmpty
@@ -211,7 +239,7 @@ class _TutorSearchState extends State<TutorSearch> {
                                 confirmRequestToTutor(
                                     _tutors[index], widget.student)
                               },
-                      icon: const Icon(Icons.send, color: Colors.indigo)),
+                      icon: Icon(Icons.send, color: _selectedSubjectIds.isEmpty ? Colors.grey : Colors.indigo)),
                 ),
               ));
             }
@@ -253,24 +281,30 @@ class _TutorSearchState extends State<TutorSearch> {
             const Text('Matching volunteers',
                 style: TextStyle(fontSize: 21.0, fontWeight: FontWeight.w700)),
             const SizedBox(height: 10),
-            _tutors.isEmpty
-                ? Expanded(
-                    child: Center(
-                      child: Text(
-                          'No matching volunteers found. Try reducing the number of search requirements you set.',
-                          style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w300,
-                              color: Colors.grey.shade600)),
-                    ),
+            _isLoadingTutors
+                ? const Expanded(
+                    child: SizedBox(
+                        height: 100,
+                        child: Center(child: CircularProgressIndicator())),
                   )
-                : Expanded(
-                    child: ListView.builder(
-                    itemCount: _tutors.length,
-                    itemBuilder: (BuildContext context, int position) {
-                      return _buildRow(position);
-                    },
-                  )),
+                : _tutors.isEmpty
+                    ? Expanded(
+                        child: Center(
+                          child: Text(
+                              'No matching volunteers found. Try reducing the number of search requirements you set.',
+                              style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w300,
+                                  color: Colors.grey.shade600)),
+                        ),
+                      )
+                    : Expanded(
+                        child: ListView.builder(
+                        itemCount: _tutors.length,
+                        itemBuilder: (BuildContext context, int position) {
+                          return _buildRow(position);
+                        },
+                      )),
           ],
         ),
       ),

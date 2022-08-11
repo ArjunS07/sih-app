@@ -63,7 +63,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '489134100351',
     projectId: 'volunteertutoring-37dfa',
     storageBucket: 'volunteertutoring-37dfa.appspot.com',
-    iosClientId: '489134100351-7p4j9b5kciv1vqqsje2n1a99ipfu2p2a.apps.googleusercontent.com',
+    iosClientId:
+        '489134100351-7p4j9b5kciv1vqqsje2n1a99ipfu2p2a.apps.googleusercontent.com',
     iosBundleId: 'com.example.sihApp',
   );
 }

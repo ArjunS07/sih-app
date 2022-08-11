@@ -23,9 +23,14 @@ class TutorshipChats extends StatefulWidget {
 class TutorshipChatsState extends State<TutorshipChats> {
   bool isLoggedInStudent = false;
   var _tutorships = <dynamic>[];
+  bool _isLoadingTutorships = false;
 
   // API interfacing
   Future<void> _loadTutorships() async {
+    setState(() {
+      _isLoadingTutorships = true;
+    });
+    print("loading tutorships from params");
     List<Tutorship> tutorships = [];
     if (isLoggedInStudent) {
       tutorships = await getMyTutorships(student: widget.loggedinStudent);
@@ -34,6 +39,7 @@ class TutorshipChatsState extends State<TutorshipChats> {
     }
     setState(() {
       _tutorships = tutorships;
+      _isLoadingTutorships = false;
     });
   }
 
@@ -88,8 +94,12 @@ class TutorshipChatsState extends State<TutorshipChats> {
                               ));
                         },
                   title: isLoggedInStudent
-                      ? Text(tutorship.tutor.name, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18))
-                      : Text(tutorship.student.name, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+                      ? Text(tutorship.tutor.name,
+                          style: const TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 18))
+                      : Text(tutorship.student.name,
+                          style: const TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 18)),
                   subtitle: RichText(
                       text: TextSpan(
                           style: const TextStyle(
@@ -110,6 +120,7 @@ class TutorshipChatsState extends State<TutorshipChats> {
                                 ? '\nSUSPENDED'
                                 : '\nActive since ${tutorship.relativeTimeSinceCreated}')
                       ])),
+
                   /// The image that is displayed on the left side of the chat.
                   // leading: const CircleAvatar(
                   //     //TODO
@@ -137,35 +148,41 @@ class TutorshipChatsState extends State<TutorshipChats> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            _tutorships.isEmpty
-                ? Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Center(
-                          child: widget.loggedinStudent != null
-                              ? Text(
-                                  "You have no volunteers teaching you yet. Go to the 'Find' tab to find volunteers.",
-                                  style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w300,
-                                      color: Colors.grey.shade600))
-                              : Text(
-                                  "You are not teaching any students currently.\n\nOnce a student sends you a request and you accept it, you'll be able to see them here.",
-                                  style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w300,
-                                      color: Colors.grey.shade600))),
-                    ),
+            _isLoadingTutorships
+                ? const Expanded(
+                    child: SizedBox(
+                        height: 100,
+                        child: Center(child: CircularProgressIndicator())),
                   )
-                : Expanded(
-                    child: ListView.separated(
-                        itemCount: _tutorships.length,
-                        itemBuilder: (BuildContext context, int position) {
-                          return _buildRow(position);
-                        },
-                        separatorBuilder: (context, index) {
-                          return const Divider();
-                        })),
+                : _tutorships.isEmpty
+                    ? Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Center(
+                              child: widget.loggedinStudent != null
+                                  ? Text(
+                                      "You have no volunteers teaching you yet. Go to the 'Find' tab to find volunteers.",
+                                      style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w300,
+                                          color: Colors.grey.shade600))
+                                  : Text(
+                                      "You are not teaching any students currently.\n\nOnce a student sends you a request and you accept it, you'll be able to see them here.",
+                                      style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w300,
+                                          color: Colors.grey.shade600))),
+                        ),
+                      )
+                    : Expanded(
+                        child: ListView.separated(
+                            itemCount: _tutorships.length,
+                            itemBuilder: (BuildContext context, int position) {
+                              return _buildRow(position);
+                            },
+                            separatorBuilder: (context, index) {
+                              return const Divider();
+                            })),
           ],
         ),
       ),

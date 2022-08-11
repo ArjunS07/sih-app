@@ -1,26 +1,22 @@
 [
-    {
-      "id": "CBSE",
-      "name": "CBSE"
-    },
-    {
-      "id": "STATE",
-      "name": "State board"
-    },
-    {
-      "id": "ICSE",
-      "name": "ICSE / ISC"
-    },
-    {
-      "id": "IGCSE",
-      "name": "IGCSE"
-    },
-    {
-      "id": "IB",
-      "name": "IB"
-    },
-    {
-      "id": "OTHER",
-      "name": "Other"
-    }
-  ]
+  {
+    "name": "CBSE",
+    "id": "CBSE"
+  },
+  {
+    "name": "STATE",
+    "id": "State board"
+  },
+  {
+    "name": "ICSE",
+    "id": "CISCE"
+  },
+  {
+    "name": "INTL",
+    "id": "IGCSE/IB"
+  },
+  {
+    "name": "OTHER",
+    "id": "Other"
+  }
+]

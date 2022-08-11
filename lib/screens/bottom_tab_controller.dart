@@ -30,6 +30,8 @@ class _BottomTabControllerState extends State<BottomTabController> {
   var loggedInUser;
   bool isStudent = false;
 
+  bool _isLoading = false;
+
   Future<Account?> _loadLoggedinAccountFromPrefs() async {
     int? id = widget.prefs.getInt('id');
     print('Prefs id: $id');
@@ -59,76 +61,93 @@ class _BottomTabControllerState extends State<BottomTabController> {
         print('Setting state...');
         loggedInUser = user;
         isStudent = user is Student;
+        _isLoading = false;
       });
     }
   }
 
   @override
   void initState() {
+    setState(() {
+      _isLoading = true;
+    });
     super.initState();
     loadUserState();
   }
 
+  Widget _studentTabController() {
+    Widget child = TutorshipChats();
+    switch (_index) {
+      case 0:
+        child = TutorshipChats(loggedinStudent: loggedInUser as Student);
+        break;
+      case 1:
+        child = TutorSearch(student: loggedInUser as Student);
+        break;
+      case 2:
+        child = Settings(
+          notifyParentReload: loadUserState,
+          loggedInStudent: loggedInUser as Student,
+        );
+        break;
+    }
+    return Scaffold(
+      body: SizedBox.expand(child: child),
+      bottomNavigationBar: BottomNavigationBar(
+        onTap: (newIndex) => setState(() => _index = newIndex),
+        currentIndex: _index,
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+              icon: Icon(Icons.people), label: "Volunteers"),
+          BottomNavigationBarItem(icon: Icon(Icons.search), label: "Find"),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.settings), label: "Settings"),
+        ],
+      ),
+    );
+  }
+
+  Widget _tutorTabController() {
+    Widget child = TutorshipChats();
+    switch (_index) {
+      case 0:
+        child = TutorshipChats(loggedinTutor: loggedInUser as Tutor);
+        break;
+      case 1:
+        child = MyTutorRequests(loggedInTutor: loggedInUser as Tutor);
+        break;
+      case 2:
+        child = Settings(
+            notifyParentReload: loadUserState,
+            loggedInTutor: loggedInUser as Tutor);
+        break;
+    }
+    return Scaffold(
+      body: SizedBox.expand(child: child),
+      bottomNavigationBar: BottomNavigationBar(
+        onTap: (newIndex) => setState(() => _index = newIndex),
+        currentIndex: _index,
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(icon: Icon(Icons.school), label: "Students"),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.notifications), label: "Requests"),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.settings), label: "Settings"),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    if (loggedInUser == null) {
-      return const SizedBox(
-          width: 100.0, child: Center(child: CircularProgressIndicator()));
-    }
-    Widget child = TutorshipChats();
-    if (isStudent) {
-      switch (_index) {
-        case 0:
-          child = TutorshipChats(loggedinStudent: loggedInUser as Student);
-          break;
-        case 1:
-          child = TutorSearch(student: loggedInUser as Student);
-          break;
-        case 2:
-          child = Settings(notifyParentReload: loadUserState, loggedInStudent: loggedInUser as Student,);
-          break;
-      }
-      return Scaffold(
-        body: SizedBox.expand(child: child),
-        bottomNavigationBar: BottomNavigationBar(
-          onTap: (newIndex) => setState(() => _index = newIndex),
-          currentIndex: _index,
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(icon: Icon(Icons.people), label: "Volunteers"),
-            BottomNavigationBarItem(icon: Icon(Icons.search), label: "Find"),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.settings), label: "Settings"),
-          ],
-        ),
-      );
-    } else {
-
-      switch (_index) {
-        case 0:
-          child = TutorshipChats(loggedinTutor: loggedInUser as Tutor);
-          break;
-        case 1:
-          child = MyTutorRequests(loggedInTutor: loggedInUser as Tutor);
-          break;
-        case 2:
-          child = Settings(notifyParentReload: loadUserState, loggedInTutor: loggedInUser as Tutor);
-          break;
-      }
-      return Scaffold(
-        body: SizedBox.expand(child: child),
-        bottomNavigationBar: BottomNavigationBar(
-          onTap: (newIndex) => setState(() => _index = newIndex),
-          currentIndex: _index,
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-                icon: Icon(Icons.school), label: "Students"),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.notifications), label: "Requests"),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.settings), label: "Settings"),
-          ],
-        ),
-      );
-    }
+    return _isLoading
+        ? const Scaffold(
+          body: SizedBox.expand(child: 
+            Center(
+              child: CircularProgressIndicator(),
+            )))
+        : isStudent
+            ? _studentTabController()
+            : _tutorTabController();
   }
 }
