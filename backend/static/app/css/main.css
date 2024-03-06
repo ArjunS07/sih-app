@@ -1,0 +1,30 @@
+body {
+  font-family: "Inter";
+}
+
+
+
+main {
+  min-height: calc(100vh - 168px);
+}
+
+/* Utilities */
+.border-radius-percent {
+    border-radius: 2.5% !important;
+}
+
+.border-radius {
+    border-radius: 5px;
+}
+
+.is-fullwidth {
+    width: 100%;
+}
+
+.is-fullheight {
+    height: 100%;
+}
+
+.has-text-weight-black {
+  font-weight: 900;
+}

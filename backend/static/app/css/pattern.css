@@ -1,0 +1,9 @@
+.pattern {
+    position: fixed;
+    width: 100vw;
+    min-height: 100vh;
+    z-index: -1;
+    background-color: #dddddd;
+    opacity: 0.8;
+    background: linear-gradient(135deg, #f7f7f755 25%, transparent 25%) -15px 0/ 30px 30px, linear-gradient(225deg, #f7f7f7 25%, transparent 25%) -15px 0/ 30px 30px, linear-gradient(315deg, #f7f7f755 25%, transparent 25%) 0px 0/ 30px 30px, linear-gradient(45deg, #f7f7f7 25%, #dddddd 25%) 0px 0/ 30px 30px;
+}

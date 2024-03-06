@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Login
+{% endblock title %}
+
+{% block imports %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'app/css/forms.css' %}">
+<link rel="stylesheet" href="{% static 'app/css/pattern.css' %}">
+
+{% endblock imports %}
+
+{% block content %}
+
+
+<section class="section container">
+    <div class="columns">
+        <div class="column is-one-quarter-desktop"></div>
+        <div class="column">
+            <div class="box border-radius">
+                <h1 class="title is-3">Log in</h1>
+
+                <form action="{{ request.path }}" method="post" class="form-group" enctype=multipart/form-data>
+                    {% csrf_token %}
+
+                    <div class="field">
+                        <label for="{{ form.account__email.id_for_account__email }}" class="label">School administrator
+                            email</label>
+                        {{ form.account__email }}
+                        <p class="has-text-danger"> {{ form.account__email.errors }} </p>
+                    </div>
+                    <div class="field">
+                        {{ form.account__password.errors }}
+                        <label for="{{ form.account__password.id_for_account__password }}"
+                            class="label">Password</label>
+                        <p class="has-text-danger"> {{ form.account__password }} </p>
+                    </div>
+                    <div class="mt-5 field is-grouped">
+                        <div class="control is-fullwidth">
+                            <button type="submit" class="button is-black is-fullwidth border-radius">Log in</button>
+                        </div>
+
+                    </div>
+                </form>
+
+            </div>
+
+
+        </div>
+        <div class="column is-one-quarter-desktop"></div>
+    </div>
+
+</section>
+
+<script>
+    function onChange() {
+        console.log('Calling on change function');
+        const password = document.querySelector('#password1');
+        console.log(password.value);
+        const confirm = document.querySelector('#password1');
+        console.log(confirm.value);
+        if (confirm.value === password.value) {
+            confirm.setCustomValidity('');
+        } else {
+            console.log('not equal');
+            confirm.setCustomValidity('Passwords do not match');
+        }
+    }
+</script>
+
+{% endblock content %}

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EduDaan | {% block title %} {% endblock title %}</title>
+  {% load static %}
+
+  <link rel="apple-touch-icon" sizes="180x180" href="{% static 'assets/favicon/apple-touch-icon.png' %}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{% static 'assets/favicon/favicon-32x32.png' %}">
+  <link rel="icon" type="image/png" sizes="16x16" href="{% static 'assets/favicon/favicon-16x16.png' %}">
+  <link rel="manifest" href="{% static 'assets/favicon/site.webmanifest' %}">
+  <link rel="mask-icon" href="{% static 'assets/favicon/safari-pinned-tab.svg' %}" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a1b8a3d47a.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="{% static 'app/css/main.css' %}">
+  {% block imports %}
+  {% endblock imports %}
+</head>
+
+<body class="is-fullwidth">
+  <div class="pattern is-fullwidth"></div>
+  <main>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <a class="navbar-item mr-2" href="{% url 'index' %}">
+          <img src="{% static 'assets/icon.png' %}" style="height: 50px; max-height: 50px;" class="mr-2">
+          <span style="font-family: 'Poppins', sans-serif;"
+            class="has-text-weight-bold is-size-3 has-text-grey-darker">EduDaan</span>
+        </a>
+
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+
+      <div id="navbarBasicExample" class="navbar-menu">
+        {% if request.user.is_authenticated %}
+        <div class="navbar-start">
+          <a class="navbar-item" href = "{% url 'school_dashboard' %}">
+            My students
+          </a>
+          
+        </div>
+        {% endif %}
+
+
+        <div class="navbar-end">
+          <div class="navbar-item">
+            <div class="buttons">
+              {% if request.user.is_authenticated %}
+              <a class="button is-light" href="{% url 'logout' %}">
+                <strong>Logout</strong>
+              </a>
+              {% else %}
+              <a class="button has-background-black has-text-white" href="{% url 'school_signup' %}">
+                <strong>Sign up</strong>
+              </a>
+              <a class="button is-light" href="{% url 'school_login' %}">
+                Log in
+              </a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+
+      {% block content %} {% endblock content %}
+  </main>
+
+  <footer class="footer has-background-black-ter">
+    <div class="content has-text-centered has-text-grey-light">
+      <p> Made for the <strong class="has-text-grey">Smart India Hackathon</strong> by <a href="https://github.com/ArjunS07">Arjun Sharma</a>
+      </p>
+    </div>
+  </footer>
+
+</body>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+
+    // Get all "navbar-burger" elements
+    const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+    // Check if there are any navbar burgers
+    if ($navbarBurgers.length > 0) {
+
+      // Add a click event on each of them
+      $navbarBurgers.forEach(el => {
+        el.addEventListener('click', () => {
+
+          // Get the target from the "data-target" attribute
+          const target = el.dataset.target;
+          const $target = document.getElementById(target);
+
+          // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+          el.classList.toggle('is-active');
+          $target.classList.toggle('is-active');
+
+        });
+      });
+    }
+
+  });
+</script>
+{% block script %} {% endblock script %}
+
+</html>

@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}
+Home
+
+{% endblock %}
+
+{% block imports %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'app/css/forms.css' %}">
+<link rel="stylesheet" href="{% static 'app/css/pattern.css' %}">
+{% endblock imports %}
+
+{% block content %}
+
+<section class="hero has-background-white has-text-black is-fullheight-with-navbar">
+    <div
+        class="hero-body is-fullheight is-flex is-flex-direction-column is-justify-content-center is-align-items-center">
+        <div
+            class="block is-flex is-align-items-center is-justify-content-center is-flex-direction-column has-text-black">
+            <p class="title is-size-1 has-text-weight-black mb-3">
+                Democratising education for India's students
+            </p>
+            <p class="has-text-weight-medium is-size-4">
+                EduDaan is an all-in-one platform for students to connect with and learn from volunteer educators
+            </p>
+        </div>
+        <div class="block is-flex is-flex-direction-row is-align-items-center is-justify-content-center">
+            <a href="{% url 'school_signup' %}" class="button is-medium has-background-black-bis has-text-white mr-3">
+                <span class="" >Get started</span>
+                <span class="icon">
+                    <i class="fa-solid fa-arrow-circle-right"></i>
+                </span>
+            </a>
+            <button class="button is-medium is-disabled has-background-grey-lighter has-text-grey-darker">
+                Mobile app coming soon
+            </button>
+        </div>
+
+    </div>
+
+
+    {% endblock %}
