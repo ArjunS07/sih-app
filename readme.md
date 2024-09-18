@@ -1,4 +1,4 @@
-# EduDaan: a secure volunteer peer tutoring platform for schools
+# EduDaan: a secure volunteer tutoring platform for schools and students
 
 An all-in-one platform for facilitating volunteer tutoring. At the grand finale of the Government of India Smart India Hackathon 2022, this app was declared one of five winners nationwide in the 'Smart Education' category, and one of fifty winners overall across 3000+ submissions.
 
